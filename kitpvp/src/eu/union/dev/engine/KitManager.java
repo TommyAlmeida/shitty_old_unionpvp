@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import eu.union.dev.utils.Lists;
 import eu.union.dev.utils.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -83,6 +84,8 @@ public class KitManager {
         for (PotionEffect pE : player.getActivePotionEffects()) {
             player.removePotionEffect(pE.getType());
         }
+
+        Lists.kit.remove(player);
     }
 
     /**
@@ -97,11 +100,18 @@ public class KitManager {
             return;
         }
 
-        readyPlayer(player);
-        kit.applyKit(player);
-        playerKit.put(player, kit);
+        if(Lists.kit.contains(player)){
+            player.sendMessage(Messages.PREFIX.toString() + " §7You already have a kit!");
+            return;
+        }else{
+            readyPlayer(player);
+            kit.applyKit(player);
 
-        player.sendMessage(Messages.PREFIX.toString() + " §7You are using kit: §a" + kit.getName());
+            playerKit.put(player, kit);
+
+
+            player.sendMessage(Messages.PREFIX.toString() + " §7You are using kit: §a" + kit.getName());
+        }
     }
 
     /**
