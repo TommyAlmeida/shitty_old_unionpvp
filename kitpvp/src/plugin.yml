@@ -1,0 +1,7 @@
+main: eu.union.dev.Main
+version: 1.0-SNAPSHOT
+name: UnionPvP
+
+commands:
+  kit:
+  kits:

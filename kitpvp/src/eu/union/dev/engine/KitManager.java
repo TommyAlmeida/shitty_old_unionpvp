@@ -100,6 +100,8 @@ public class KitManager {
         readyPlayer(player);
         kit.applyKit(player);
         playerKit.put(player, kit);
+
+        player.sendMessage(Messages.PREFIX.toString() + " §7You are using kit: §a" + kit.getName());
     }
 
     /**
@@ -115,7 +117,15 @@ public class KitManager {
 
         readyPlayer(player);
         playerKit.remove(player);
+        player.sendMessage(Messages.PREFIX.toString() + " §cYou are no longer using a kit.");
+    }
 
+    /**
+     * Get a list of kits
+     * @return
+     */
+    public List<Kit> getKits() {
+        return kits;
     }
 
 }
