@@ -25,8 +25,10 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
+        KitManager km = KitManager.getManager();
 
         e.setJoinMessage(null);
+        km.readyPlayer(p);
 
         p.sendMessage("§m§7§l-------------------------------------------------");
         p.sendMessage(Util.fixFontSize("§eUnionPvP",31/2));

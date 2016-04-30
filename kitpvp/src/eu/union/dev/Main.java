@@ -23,7 +23,7 @@ public class Main extends JavaPlugin {
     }
 
     /**
-     * Register all kits in the main thread
+     * Register all kits
      */
     private void registerKits(){
         KitManager km = KitManager.getManager();
