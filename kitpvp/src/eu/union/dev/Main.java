@@ -13,14 +13,22 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
+    private static Main instance;
+
     public void onEnable(){
         registerKits();
+
+        instance = this;
 
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new PlayerListeners(), this);
 
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
+    }
+
+    public static Main getInstance() {
+        return instance;
     }
 
     /**
