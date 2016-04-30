@@ -3,6 +3,7 @@ package eu.union.dev;
 import eu.union.dev.commands.KitCMD;
 import eu.union.dev.commands.ListKitsCMD;
 import eu.union.dev.engine.KitManager;
+import eu.union.dev.kits.Archer;
 import eu.union.dev.kits.Grandpa;
 import eu.union.dev.kits.PvP;
 import eu.union.dev.listeners.PlayerListeners;
@@ -30,5 +31,6 @@ public class Main extends JavaPlugin {
 
         km.registerKit(new PvP());
         km.registerKit(new Grandpa());
+        km.registerKit(new Archer());
     }
 }

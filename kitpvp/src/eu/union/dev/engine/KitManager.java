@@ -6,6 +6,7 @@ import java.util.List;
 
 import eu.union.dev.utils.Lists;
 import eu.union.dev.utils.Messages;
+import eu.union.dev.utils.Util;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -107,6 +108,8 @@ public class KitManager {
             kit.applyKit(player);
 
             playerKit.put(player, kit);
+
+            Util.giveSoups(player);
 
             player.sendMessage(Messages.PREFIX.toString() + " §7You are using kit: §a" + kit.getName());
         }

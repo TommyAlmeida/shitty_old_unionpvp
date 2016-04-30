@@ -15,7 +15,7 @@ public class Grandpa extends Kit {
     @Override
     public void applyKit(Player player) {
         Lists.kit.add(player);
-        
+
         Weapon.giveWeapon(player,Weapon.GRANDPA_STICK, Enchantment.KNOCKBACK, 2);
     }
 }

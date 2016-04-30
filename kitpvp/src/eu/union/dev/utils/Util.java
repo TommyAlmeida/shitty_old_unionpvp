@@ -1,5 +1,9 @@
 package eu.union.dev.utils;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 public class Util {
 
     public static String fixFontSize (String s, int size) {
@@ -23,5 +27,13 @@ public class Util {
         }
 
         return (ret);
+    }
+
+    public static void giveSoups(Player player) {
+
+        for(int i=0; i < 50; i++) {
+            player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
+        }
+
     }
 }

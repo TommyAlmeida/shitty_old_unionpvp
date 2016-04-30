@@ -9,7 +9,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 public enum Weapon {
 
     DEFAULT_SWORD(Material.WOOD_SWORD, "§aDefault Sword"),
-    GRANDPA_STICK(Material.STICK, "§aGrandPa Cane");
+    GRANDPA_STICK(Material.STICK, "§aGrandPa Cane"),
+    DEFAULT_BOW(Material.BOW, "§aDefault Bow");
 
     Material mat;
     String name;
