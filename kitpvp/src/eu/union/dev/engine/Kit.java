@@ -47,6 +47,7 @@ public abstract class Kit {
         return about;
     }
 
+
     public String getPermission() {
         return permission;
     }

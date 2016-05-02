@@ -10,12 +10,14 @@ public class KitLayout implements Layout {
 
     private static KitLayout layout = new KitLayout();
 
+    String regex = "\\[|\\]";
+
     @Override
     public ItemStack design(Icon icon, Kit kit) {
         icon = new Icon(icon.getMaterial(), "§6" + kit.getName(),
                 " ",
                 "§7About",
-                "§c" + Arrays.toString(kit.getAbout()),
+                "§c" + Arrays.asList(kit.getAbout()),
                 " ",
                 "§7Difficulty: §e" + kit.getDifficulty(),
                 " "

@@ -39,11 +39,12 @@ public class KitMenu implements Listener {
             return;
         }
 
-        if(!(item.getItemMeta().getDisplayName() == Messages.ICON_KITS.toString())){
+        if(!(item.getItemMeta().getDisplayName() == "§aKits §7(Right-Click)")){
             return;
         }
 
         e.setCancelled(true);
+        setItems(p);
         p.openInventory(Inv.getInstance().kits);
     }
 

@@ -31,21 +31,21 @@ public class PlayerListeners implements Listener {
         km.readyPlayer(p);
 
         welcomeMessage(p);
-        Util.buildJoinIcons(p);
+        Util.getInstance().buildJoinIcons(p);
     }
 
 
     void welcomeMessage(Player p){
-        p.sendMessage("§m§7§l-------------------------------");
-        p.sendMessage(Util.fixFontSize("§eUnionPvP",0));
-        p.sendMessage(Util.fixFontSize("§bPowered by UnionNetwork",0));
+        p.sendMessage("§m§7§l----------------------");
+        p.sendMessage("§eUnionPvP");
+        p.sendMessage("§bPowered by UnionNetwork");
         p.sendMessage(" ");
-        p.sendMessage(Util.fixFontSize("§7Are you ready? if yes, go ahead and choose your kit.",0));
+        p.sendMessage("§7Are you ready? if yes, go ahead and choose your kit.");
         p.sendMessage(" ");
-        p.sendMessage(Util.fixFontSize("§aCommands:",0));
-        p.sendMessage(Util.fixFontSize("§e/kits §7- to list all kits available",0));
-        p.sendMessage(Util.fixFontSize("§e/kit <name> §7- to select your kit",0));
-        p.sendMessage("§m§7§l--------------------------------");
+        p.sendMessage("§aCommands:");
+        p.sendMessage("§e/kits §7- to list all kits available");
+        p.sendMessage("§e/kit <name> §7- to select your kit");
+        p.sendMessage("§m§7§l-------------------");
     }
 
 }

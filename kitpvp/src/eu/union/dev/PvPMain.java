@@ -9,6 +9,7 @@ import eu.union.dev.kits.Grandpa;
 import eu.union.dev.kits.PvP;
 import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
+import eu.union.dev.listeners.mechanics.SoupListener;
 import eu.union.dev.listeners.menus.KitMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -27,6 +28,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new PlayerListeners(), this);
         pm.registerEvents(new ServerListeners(), this);
         pm.registerEvents(new KitMenu(), this);
+        pm.registerEvents(new SoupListener(), this);
 
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
