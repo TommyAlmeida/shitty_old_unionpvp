@@ -1,8 +1,9 @@
 package eu.union.dev.listeners;
 
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.KitManager;
-import eu.union.dev.utils.Lists;
 import eu.union.dev.utils.Util;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +18,6 @@ public class PlayerListeners implements Listener {
         KitManager km = KitManager.getManager();
 
         km.getKits().remove(player);
-        Lists.kit.remove(player);
 
         e.setQuitMessage(null);
     }
@@ -30,6 +30,12 @@ public class PlayerListeners implements Listener {
         e.setJoinMessage(null);
         km.readyPlayer(p);
 
+        welcomeMessage(p);
+        Util.buildJoinIcons(p);
+    }
+
+
+    void welcomeMessage(Player p){
         p.sendMessage("§m§7§l-------------------------------------------------");
         p.sendMessage(Util.fixFontSize("§eUnionPvP",31/2));
         p.sendMessage(Util.fixFontSize("§bPowered by UnionNetwork",31/2));
@@ -41,4 +47,5 @@ public class PlayerListeners implements Listener {
         p.sendMessage(Util.fixFontSize("§e/kit <name> §7- to select your kit",31/2));
         p.sendMessage("§m§7§l-------------------------------------------------");
     }
+
 }

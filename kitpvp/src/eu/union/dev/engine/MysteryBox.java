@@ -1,6 +1,6 @@
 package eu.union.dev.engine;
 
-import eu.union.dev.Main;
+import eu.union.dev.PvPMain;
 import eu.union.dev.utils.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -61,7 +61,7 @@ public class MysteryBox implements Listener {
 
         Location lb = new Location(block.getWorld(), block.getLocation().getX(), block.getLocation().getY(), block.getLocation().getZ());
 
-        TimerID = Bukkit.getScheduler().scheduleSyncRepeatingTask((Plugin) Main.getInstance(), new Runnable() {
+        TimerID = Bukkit.getScheduler().scheduleSyncRepeatingTask((Plugin) PvPMain.getInstance(), new Runnable() {
 
             int timer = 10;
 

@@ -12,6 +12,7 @@ public enum Weapon {
     GRANDPA_STICK(Material.STICK, "§aGrandPa Cane"),
     DEFAULT_BOW(Material.BOW, "§aDefault Bow");
 
+
     Material mat;
     String name;
 

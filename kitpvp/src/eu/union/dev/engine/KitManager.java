@@ -4,24 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import eu.union.dev.utils.Lists;
 import eu.union.dev.utils.Messages;
 import eu.union.dev.utils.Util;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
 public class KitManager {
 
-    public static KitManager km;
+    public static KitManager km = new KitManager();
 
     /**
      * Método que sempre retornará o mesmo KitManager.
      * @return
      */
     public static KitManager getManager() {
-        if (km == null)
-            km = new KitManager();
         return km;
     }
 
@@ -71,6 +67,14 @@ public class KitManager {
         return null;
     }
 
+    public boolean getUsingKit(Player player){
+        if(playerKit.containsKey(player)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     /**
      * Reset all player values to default
      * @param player
@@ -82,11 +86,12 @@ public class KitManager {
         player.setExhaustion(0f);
         player.setFallDistance(0f);
         player.setFireTicks(0);
+
         for (PotionEffect pE : player.getActivePotionEffects()) {
             player.removePotionEffect(pE.getType());
         }
 
-        Lists.kit.remove(player);
+        playerKit.remove(player);
     }
 
     /**
@@ -101,7 +106,7 @@ public class KitManager {
             return;
         }
 
-        if(Lists.kit.contains(player)){
+        if(getUsingKit(player)){
             player.sendMessage(Messages.PREFIX.toString() + " §7You already have a kit!");
         }else{
             readyPlayer(player);
@@ -113,6 +118,7 @@ public class KitManager {
 
             player.sendMessage(Messages.PREFIX.toString() + " §7You are using kit: §a" + kit.getName());
         }
+
     }
 
     /**
