@@ -12,7 +12,8 @@ public enum Perms {
     /**
      * KITS
      */
-    KIT_FREE("unkit.free");
+    KIT_FREE("unkit.free"),
+    KIT_EXPLODER("unkit.exploder");
 
 
     String s;

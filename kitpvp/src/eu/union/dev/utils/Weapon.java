@@ -10,7 +10,8 @@ public enum Weapon {
 
     DEFAULT_SWORD(Material.WOOD_SWORD, "§aDefault Sword"),
     GRANDPA_STICK(Material.STICK, "§aGrandPa Cane"),
-    DEFAULT_BOW(Material.BOW, "§aDefault Bow");
+    DEFAULT_BOW(Material.BOW, "§aDefault Bow"),
+    EXPLODER_TNT(Material.BOW, "§aExploder TnT");
 
 
     Material mat;
