@@ -1,4 +1,4 @@
-package eu.union.dev.engine;
+package eu.union.dev.listeners;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.utils.Messages;
@@ -16,10 +16,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 import java.util.HashMap;
-
-/**
- * Created by Samuel on 30/04/2016.
- */
 
 public class MysteryBox implements Listener {
 

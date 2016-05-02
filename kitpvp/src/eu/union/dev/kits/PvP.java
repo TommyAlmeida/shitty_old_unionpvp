@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class PvP extends Kit {
 
     public PvP() {
-        super("pvp", Perms.KIT_FREE.toString());
+        super("pvp", Perms.KIT_FREE.toString(), Difficulty.LOW, "The simple kit with just a wooden sword");
     }
 
     @Override

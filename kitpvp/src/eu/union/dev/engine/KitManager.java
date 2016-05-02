@@ -138,6 +138,15 @@ public class KitManager {
     }
 
     /**
+     * Returns the difficulty of the kit
+     * @param kit
+     * @return
+     */
+    public String getKitDifficulty(Kit kit){
+        return kit.difficulty.value();
+    }
+
+    /**
      * Get a list of kits
      * @return
      */

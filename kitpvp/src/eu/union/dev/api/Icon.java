@@ -1,12 +1,11 @@
 package eu.union.dev.api;
 
+import eu.union.dev.engine.Kit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Icon {
 
@@ -21,6 +20,12 @@ public class Icon {
         this.amount = 1;
         this.lore = lore;
     }
+
+    public Icon(Material mat){
+        this.mat = mat;
+        this.amount = 1;
+    }
+
 
     public int getAmount() {
         return amount;
@@ -45,6 +50,11 @@ public class Icon {
     public String getName(){
         return name;
     }
+
+    public String[] getLore() {
+        return lore;
+    }
+
 
     public ItemStack build(){
         ItemStack item = new ItemStack(mat, amount);

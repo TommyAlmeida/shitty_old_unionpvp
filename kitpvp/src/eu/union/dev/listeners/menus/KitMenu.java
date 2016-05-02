@@ -1,6 +1,9 @@
 package eu.union.dev.listeners.menus;
 
 import eu.union.dev.api.Icon;
+import eu.union.dev.engine.KitManager;
+import eu.union.dev.engine.layouts.KitLayout;
+import eu.union.dev.kits.PvP;
 import eu.union.dev.utils.Inv;
 import eu.union.dev.utils.Messages;
 import org.bukkit.Bukkit;
@@ -45,11 +48,13 @@ public class KitMenu implements Listener {
     }
 
     void setItems(Player p){
+        KitManager km = KitManager.getManager();
+
         Inventory inv = Inv.getInstance().kits;
 
         {
-            Icon icon = new Icon(Material.WOOD_SWORD, "§ePvP", "§7Teste", "§7Teste");
-            inv.setItem(0, icon.build());
+            Icon icon = new Icon(Material.WOOD_SWORD);
+            inv.setItem(0, KitLayout.getLayout().design(icon, km.getKitByName("pvp")));
         }
     }
 

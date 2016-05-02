@@ -36,16 +36,16 @@ public class PlayerListeners implements Listener {
 
 
     void welcomeMessage(Player p){
-        p.sendMessage("§m§7§l-------------------------------------------------");
-        p.sendMessage(Util.fixFontSize("§eUnionPvP",31/2));
-        p.sendMessage(Util.fixFontSize("§bPowered by UnionNetwork",31/2));
+        p.sendMessage("§m§7§l-------------------------------");
+        p.sendMessage(Util.fixFontSize("§eUnionPvP",0));
+        p.sendMessage(Util.fixFontSize("§bPowered by UnionNetwork",0));
         p.sendMessage(" ");
-        p.sendMessage(Util.fixFontSize("§7Are you ready? if yes, go ahead and choose your kit.",31/2));
+        p.sendMessage(Util.fixFontSize("§7Are you ready? if yes, go ahead and choose your kit.",0));
         p.sendMessage(" ");
-        p.sendMessage(Util.fixFontSize("§aCommands:",31/2));
-        p.sendMessage(Util.fixFontSize("§e/kits §7- to list all kits available",31/2));
-        p.sendMessage(Util.fixFontSize("§e/kit <name> §7- to select your kit",31/2));
-        p.sendMessage("§m§7§l-------------------------------------------------");
+        p.sendMessage(Util.fixFontSize("§aCommands:",0));
+        p.sendMessage(Util.fixFontSize("§e/kits §7- to list all kits available",0));
+        p.sendMessage(Util.fixFontSize("§e/kit <name> §7- to select your kit",0));
+        p.sendMessage("§m§7§l--------------------------------");
     }
 
 }
