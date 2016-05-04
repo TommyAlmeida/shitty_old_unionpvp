@@ -5,6 +5,8 @@ import org.bukkit.block.Chest;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.player.PlayerChatTabCompleteEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -53,5 +55,15 @@ public class ServerListeners implements Listener {
     @EventHandler
     public void onTabComplete(PlayerChatTabCompleteEvent e){
         e.getTabCompletions().clear();
+    }
+
+    @EventHandler
+    public void onBlockMelt(BlockFadeEvent e){
+        e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent e){
+        e.setCancelled(true);
     }
 }

@@ -1,9 +1,11 @@
-package eu.union.dev.engine;
+package eu.union.dev.engine.managers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import eu.union.dev.engine.KPlayer;
+import eu.union.dev.engine.Kit;
 import eu.union.dev.utils.Messages;
 import eu.union.dev.utils.Util;
 import org.bukkit.entity.Player;
@@ -67,14 +69,6 @@ public class KitManager {
         return null;
     }
 
-    public boolean getUsingKit(Player player){
-        if(playerKit.containsKey(player)){
-            return false;
-        }else{
-            return true;
-        }
-    }
-
     /**
      * Reset all player values to default
      * @param player
@@ -100,13 +94,19 @@ public class KitManager {
      * @param kit
      */
     public void applyKit(Player player, Kit kit) {
+        KPlayer kPlayer = PlayerManager.getPlayer(player.getUniqueId());
 
         if (!player.hasPermission(kit.getPermission())) {
             player.sendMessage(Messages.NO_PERM.toString());
             return;
         }
 
-        if(getUsingKit(player)){
+        if(!hasEnoughLevel(kPlayer, kit)){
+            player.sendMessage(Messages.PREFIX.toString() + " §7You dont have enough §alevel");
+            return;
+        }
+
+        if(playerKit.containsKey(kit)){
             player.sendMessage(Messages.PREFIX.toString() + " §7You already have a kit!");
         }else{
             readyPlayer(player);
@@ -143,9 +143,23 @@ public class KitManager {
      * @return
      */
     public String getKitDifficulty(Kit kit){
-        return kit.difficulty.value();
+        return kit.getDifficulty().value();
     }
 
+    /**
+     * Check if the player have the level required
+     * to use the selected kit
+     * @param kPlayer
+     * @param kitm
+     * @return
+     */
+    public boolean hasEnoughLevel(KPlayer kPlayer, Kit kitm){
+        if(kPlayer.getLevel() >= kitm.getLevel()){
+            return true;
+        }else{
+            return false;
+        }
+    }
     /**
      * Get a list of kits
      * @return

@@ -1,14 +1,19 @@
 package eu.union.dev.listeners;
 
-import eu.union.dev.api.Icon;
-import eu.union.dev.engine.KitManager;
+import eu.union.dev.PvPMain;
+import eu.union.dev.engine.KPlayer;
+import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.utils.Util;
-import org.bukkit.Material;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class PlayerListeners implements Listener {
 
@@ -28,6 +33,8 @@ public class PlayerListeners implements Listener {
         KitManager km = KitManager.getManager();
 
         e.setJoinMessage(null);
+        PvPMain.getInstance().getSQL().createPlayerProfile(p.getUniqueId());
+
         km.readyPlayer(p);
 
         welcomeMessage(p);
@@ -36,7 +43,7 @@ public class PlayerListeners implements Listener {
 
 
     void welcomeMessage(Player p){
-        p.sendMessage("§m§7§l----------------------");
+        p.sendMessage("§m§7§l--------------------");
         p.sendMessage("§eUnionPvP");
         p.sendMessage("§bPowered by UnionNetwork");
         p.sendMessage(" ");
@@ -46,6 +53,15 @@ public class PlayerListeners implements Listener {
         p.sendMessage("§e/kits §7- to list all kits available");
         p.sendMessage("§e/kit <name> §7- to select your kit");
         p.sendMessage("§m§7§l-------------------");
+    }
+
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent e){
+        String prefix = PermissionsEx.getUser(e.getPlayer()).getGroups()[0].getPrefix();
+        KPlayer kPlayer = PlayerManager.getPlayer(e.getPlayer().getUniqueId());
+
+        e.setCancelled(true);
+        Bukkit.broadcastMessage("§c" + kPlayer.getLevel() + " §8: " + prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
     }
 
 }

@@ -1,11 +1,10 @@
 package eu.union.dev.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import eu.union.dev.engine.Kit;
-import eu.union.dev.engine.KitManager;
+import eu.union.dev.engine.managers.KitManager;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

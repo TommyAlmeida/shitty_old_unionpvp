@@ -14,12 +14,13 @@ public class KitLayout implements Layout {
 
     @Override
     public ItemStack design(Icon icon, Kit kit) {
-        icon = new Icon(icon.getMaterial(), "§6" + kit.getName(),
+        icon = new Icon(icon.getMaterial(), kit.getRarity().getColor() + kit.getName(),
                 " ",
                 "§7About",
-                "§c" + Arrays.asList(kit.getAbout()),
+                "§c" + Arrays.toString(kit.getAbout()).replaceAll(regex, ""),
                 " ",
-                "§7Difficulty: §e" + kit.getDifficulty(),
+                "§7Difficulty: §e" + kit.getDifficulty().value(),
+                "§7Level Required: §b" + kit.getLevel(),
                 " "
         );
 

@@ -10,6 +10,7 @@ public class Archer extends Kit {
 
     public Archer() {
         super("archer", Perms.KIT_FREE.toString(), Difficulty.LOW,
+                Rarity.COMMON, 0,
                 "You always wanted to be an marksman?",
                 "this is your oportunity."
         );

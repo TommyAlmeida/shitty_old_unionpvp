@@ -1,12 +1,9 @@
 package eu.union.dev.listeners.menus;
 
 import eu.union.dev.api.Icon;
-import eu.union.dev.engine.KitManager;
+import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.layouts.KitLayout;
-import eu.union.dev.kits.PvP;
 import eu.union.dev.utils.Inv;
-import eu.union.dev.utils.Messages;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -54,15 +51,27 @@ public class KitMenu implements Listener {
         Inventory inv = Inv.getInstance().kits;
 
         {
+            Icon icon = new Icon(Material.WOOD_SWORD, "");
+            inv.setItem(0, KitLayout.getLayout().design(icon, km.getKitByName("pvp")));
+        }
+
+        {
             Icon icon = new Icon(Material.WOOD_SWORD);
             inv.setItem(0, KitLayout.getLayout().design(icon, km.getKitByName("pvp")));
         }
+
+        {
+            Icon icon = new Icon(Material.STICK);
+            inv.setItem(0, KitLayout.getLayout().design(icon, km.getKitByName("pvp")));
+        }
+
     }
 
     @EventHandler
     public void onInvClick(InventoryClickEvent e){
         Player p = (Player) e.getWhoClicked();
         ItemStack item = e.getCurrentItem();
+        KitManager km = KitManager.getManager();
 
         if(e.getInventory().equals("Kits")){
             if(e.getSlot() < 0){
@@ -71,15 +80,15 @@ public class KitMenu implements Listener {
 
             switch(e.getSlot()){
                 case 0: //Kit PvP
-                    Bukkit.dispatchCommand(p, "kit pvp");
+                    km.getKitByName("pvp");
                     e.setCancelled(true);
                     break;
                 case 1: //Kit Archer
-                    Bukkit.dispatchCommand(p, "kit archer");
+                    km.getKitByName("archer");
                     e.setCancelled(true);
                     break;
                 case 2: //Kit GrandPa
-                    Bukkit.dispatchCommand(p, "kit grandpa");
+                    km.getKitByName("grandpa");
                     e.setCancelled(true);
                     break;
             }
