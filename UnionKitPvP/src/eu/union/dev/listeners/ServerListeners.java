@@ -1,5 +1,7 @@
 package eu.union.dev.listeners;
 
+import eu.union.dev.commands.staff.BuildCMD;
+import eu.union.dev.utils.Perms;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
 import org.bukkit.event.EventHandler;
@@ -7,7 +9,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockFadeEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerAchievementAwardedEvent;
 import org.bukkit.event.player.PlayerChatTabCompleteEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
@@ -37,7 +42,9 @@ public class ServerListeners implements Listener {
                 }
             }
 
-            cinv.addItem(new ItemStack(Material.MUSHROOM_SOUP));
+            for(int i = 0; i < cinv.getSize(); i++){
+                cinv.setItem(i,new ItemStack(Material.MUSHROOM_SOUP));
+            }
         }
     }
 
@@ -64,6 +71,37 @@ public class ServerListeners implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
+        if(Perms.isStaff(e.getPlayer())){
+            if(BuildCMD.build.contains(e.getPlayer())){
+                e.setCancelled(false);
+            }else{
+                e.setCancelled(true);
+            }
+        }else{
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent e){
+        if(Perms.isStaff(e.getPlayer())){
+            if(BuildCMD.build.contains(e.getPlayer())){
+                e.setCancelled(false);
+            }else{
+                e.setCancelled(true);
+            }
+        }else{
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onQuest(PlayerAchievementAwardedEvent e){
+        e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onFood(FoodLevelChangeEvent e){
         e.setCancelled(true);
     }
 }

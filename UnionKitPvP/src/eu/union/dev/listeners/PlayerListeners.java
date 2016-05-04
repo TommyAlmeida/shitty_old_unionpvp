@@ -4,25 +4,31 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
+import eu.union.dev.utils.Messages;
 import eu.union.dev.utils.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.*;
+import org.bukkit.inventory.ItemStack;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class PlayerListeners implements Listener {
+
+    KitManager km = KitManager.getManager();
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
         Player player = e.getPlayer();
         KitManager km = KitManager.getManager();
 
-        km.getKits().remove(player);
+        if (km.usingKit(player))
+            km.removeKit(player);
 
         e.setQuitMessage(null);
     }
@@ -35,12 +41,29 @@ public class PlayerListeners implements Listener {
         e.setJoinMessage(null);
         PvPMain.getInstance().getSQL().createPlayerProfile(p.getUniqueId());
 
+        if (km.usingKit(p))
+            km.removeKit(p);
+
         km.readyPlayer(p);
+
 
         welcomeMessage(p);
         Util.getInstance().buildJoinIcons(p);
     }
 
+    @EventHandler
+    public void onDeath(EntityDeathEvent e){
+        if (!(e.getEntity() instanceof Player))
+            return;
+
+        Player player = (Player) e.getEntity();
+
+        if (km.usingKit(player)) {
+            km.removeKit(player);
+            e.getDrops().clear();
+            e.setDroppedExp(0);
+        }
+    }
 
     void welcomeMessage(Player p){
         p.sendMessage("§m§7§l--------------------");
@@ -61,7 +84,30 @@ public class PlayerListeners implements Listener {
         KPlayer kPlayer = PlayerManager.getPlayer(e.getPlayer().getUniqueId());
 
         e.setCancelled(true);
-        Bukkit.broadcastMessage("§c" + kPlayer.getLevel() + " §8: " + prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
+        Bukkit.broadcastMessage("§8" + kPlayer.getLevel() + " " + prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
+    }
+
+    @EventHandler
+    void onDrop(final PlayerDropItemEvent event) {
+
+        Player player = event.getPlayer();
+        ItemStack i = event.getItemDrop().getItemStack();
+
+        if (!km.usingKit(player))
+            return;
+
+        if (i.getType() != Material.MUSHROOM_SOUP && i.getType() != Material.BOWL) {
+            player.sendMessage(Messages.PREFIX.toString() + " §7cYou cannot drop this item");
+            event.setCancelled(true);
+        } else {
+            Bukkit.getScheduler().runTaskLater(PvPMain.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    event.getItemDrop().remove();
+                }
+            }, 8L);
+        }
+
     }
 
 }

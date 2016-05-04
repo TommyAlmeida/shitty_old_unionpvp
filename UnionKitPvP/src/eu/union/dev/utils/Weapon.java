@@ -35,6 +35,7 @@ public enum Weapon {
         ItemStack item = new ItemStack(weapon.mat, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(weapon.name);
+        item.setDurability((short) 0);
         item.addEnchantment(enchant, level);
         item.setItemMeta(meta);
 

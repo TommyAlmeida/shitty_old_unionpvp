@@ -9,10 +9,10 @@ import org.bukkit.entity.Player;
 public class Archer extends Kit {
 
     public Archer() {
-        super("archer", Perms.KIT_FREE.toString(), Difficulty.LOW,
-                Rarity.COMMON, 0,
-                "You always wanted to be an marksman?",
-                "this is your oportunity."
+        super("archer", Perms.KIT_FREE.toString(), Difficulty.PRO,
+                Rarity.HEROIC, 0,
+                "You always wanted to be an marksman? \n",
+                "this is your opportunity."
         );
     }
 

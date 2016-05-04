@@ -2,6 +2,7 @@ package eu.union.dev;
 
 import eu.union.dev.commands.KitCMD;
 import eu.union.dev.commands.ListKitsCMD;
+import eu.union.dev.commands.staff.BuildCMD;
 import eu.union.dev.commands.staff.GameModeCMD;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.storage.Database;
@@ -39,6 +40,7 @@ public class PvPMain extends JavaPlugin {
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
         getCommand("gm").setExecutor(new GameModeCMD());
+        getCommand("build").setExecutor(new BuildCMD());
     }
 
     @Override

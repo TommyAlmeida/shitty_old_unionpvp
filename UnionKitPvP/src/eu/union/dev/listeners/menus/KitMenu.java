@@ -1,9 +1,14 @@
 package eu.union.dev.listeners.menus;
 
 import eu.union.dev.api.Icon;
+import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.layouts.KitLayout;
+import eu.union.dev.kits.Archer;
+import eu.union.dev.kits.Grandpa;
+import eu.union.dev.kits.PvP;
 import eu.union.dev.utils.Inv;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -56,13 +61,13 @@ public class KitMenu implements Listener {
         }
 
         {
-            Icon icon = new Icon(Material.WOOD_SWORD);
-            inv.setItem(0, KitLayout.getLayout().design(icon, km.getKitByName("pvp")));
+            Icon icon = new Icon(Material.STICK);
+            inv.setItem(1, KitLayout.getLayout().design(icon, km.getKitByName("grandpa")));
         }
 
         {
-            Icon icon = new Icon(Material.STICK);
-            inv.setItem(0, KitLayout.getLayout().design(icon, km.getKitByName("pvp")));
+            Icon icon = new Icon(Material.BOW);
+            inv.setItem(2, KitLayout.getLayout().design(icon, km.getKitByName("archer")));
         }
 
     }
@@ -80,18 +85,24 @@ public class KitMenu implements Listener {
 
             switch(e.getSlot()){
                 case 0: //Kit PvP
-                    km.getKitByName("pvp");
                     e.setCancelled(true);
+                    try{
+                        Kit kit = km.getKitByName("pvp");
+                        km.applyKit(p, kit);
+                    }catch (Exception ep){
+                        ep.printStackTrace();
+                    }
                     break;
                 case 1: //Kit Archer
-                    km.getKitByName("archer");
                     e.setCancelled(true);
+                    km.applyKit(p, new Archer());
                     break;
                 case 2: //Kit GrandPa
-                    km.getKitByName("grandpa");
+                    km.applyKit(p, new Grandpa());
                     e.setCancelled(true);
                     break;
             }
         }
     }
+
 }

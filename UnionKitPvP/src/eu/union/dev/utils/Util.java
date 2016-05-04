@@ -52,28 +52,24 @@ public class Util {
 
         {
             Icon kits = new Icon(Material.NETHER_STAR, "§aKits §7(Right-Click)", "§7Choose your kit");
-            inv.setItem(4,kits.build());
+            inv.setItem(0,kits.build());
         }
 
-        {
-            Icon config = new Icon(Material.TRIPWIRE_HOOK, "§cSettings §7(Right-Click)",
-                    "§eYou've a lot of top features:",
-                    "§7Disable your chat",
-                    "§7Change your chat tag",
-                    "§7more §bsoon..."
-            );
 
-            inv.setItem(8,config.build());
+        {
+            Icon warps = new Icon(Material.VINE, " ", " ");
+            inv.setItem(3,warps.build());
+            inv.setItem(5,warps.build());
         }
 
         {
             Icon warps = new Icon(Material.COMPASS, "§bWarps §7(Right-Click)", "§7Where do you wanna go?");
-            inv.setItem(0,warps.build());
+            inv.setItem(4,warps.build());
         }
 
         {
             Icon stats = new Icon(Material.IRON_SWORD, "§9Stats §7(Right-Click)", "§7Where do you wanna go?");
-            inv.setItem(0,stats.build());
+            inv.setItem(8,stats.build());
         }
     }
 

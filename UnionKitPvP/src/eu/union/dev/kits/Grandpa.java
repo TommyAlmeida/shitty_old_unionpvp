@@ -11,7 +11,7 @@ public class Grandpa extends Kit {
     public Grandpa() {
         super("grandpa", Perms.KIT_FREE.toString(), Difficulty.LOW,
                 Rarity.COMMON, 0,
-                "Do you wanna become a angry grandpa?",
+                "Do you wanna become a angry grandpa? \n",
                 "grab your cane and lets kick some buts."
         );
     }

@@ -106,7 +106,7 @@ public class KitManager {
             return;
         }
 
-        if(playerKit.containsKey(kit)){
+        if(usingKit(player)){
             player.sendMessage(Messages.PREFIX.toString() + " §7You already have a kit!");
         }else{
             readyPlayer(player);
@@ -160,6 +160,11 @@ public class KitManager {
             return false;
         }
     }
+
+    public boolean usingKit(Player player) {
+        return playerKit.containsKey(player);
+    }
+
     /**
      * Get a list of kits
      * @return

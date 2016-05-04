@@ -16,7 +16,7 @@ public class KitCMD implements CommandExecutor {
         KitManager km = KitManager.getManager();
 
         if (!(sender instanceof Player)) {
-            return true; //Retorna
+            return false; //Retorna
         }
 
         Player player = (Player) sender;
