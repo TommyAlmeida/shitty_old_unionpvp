@@ -13,11 +13,12 @@ public class KitLayout implements Layout {
     String regex = "\\[|\\]";
 
     @Override
-    public ItemStack design(Icon icon, Kit kit) {
+    public ItemStack design(Icon icon, Kit kit, String... about) {
+
         icon = new Icon(icon.getMaterial(), kit.getRarity().getColor() + kit.getName(),
                 " ",
                 "§7About",
-                "§c" + Arrays.toString(kit.getAbout()).replaceAll(regex, ""),
+                "§c" + about,
                 " ",
                 "§7Difficulty: §e" + kit.getDifficulty().value(),
                 "§7Level Required: §b" + kit.getLevel(),
@@ -26,6 +27,7 @@ public class KitLayout implements Layout {
 
         return icon.build();
     }
+
 
 
     public static KitLayout getLayout() {

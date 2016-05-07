@@ -9,14 +9,20 @@ import eu.union.dev.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
+
+import java.util.Random;
 
 public class PlayerListeners implements Listener {
 
@@ -56,13 +62,16 @@ public class PlayerListeners implements Listener {
         if (!(e.getEntity() instanceof Player))
             return;
 
-        Player player = (Player) e.getEntity();
+        Player killed = (Player) e.getEntity();
+        Player killer = e.getEntity().getKiller();
 
-        if (km.usingKit(player)) {
-            km.removeKit(player);
+        if (km.usingKit(killed)) {
+            km.removeKit(killed);
             e.getDrops().clear();
             e.setDroppedExp(0);
         }
+
+
     }
 
     void welcomeMessage(Player p){
@@ -84,7 +93,7 @@ public class PlayerListeners implements Listener {
         KPlayer kPlayer = PlayerManager.getPlayer(e.getPlayer().getUniqueId());
 
         e.setCancelled(true);
-        Bukkit.broadcastMessage("§8" + kPlayer.getLevel() + " " + prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
+        Bukkit.broadcastMessage(prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
     }
 
     @EventHandler
@@ -108,6 +117,31 @@ public class PlayerListeners implements Listener {
             }, 8L);
         }
 
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e){
+        Player killed = e.getEntity();
+        Player killer = e.getEntity().getKiller();
+        KPlayer kPlayer_killed = PlayerManager.getPlayer(killed.getUniqueId());
+        KPlayer kPlayer_killer = PlayerManager.getPlayer(killer.getUniqueId());
+        Random rand = new Random();
+        int coins = rand.nextInt(7);
+
+        if(kPlayer_killed == null || kPlayer_killer == null){
+            killed.sendMessage(Messages.PREFIX.toString() + " §cReconnect to the server please.");
+            killer.sendMessage(Messages.PREFIX.toString() + " §cReconnect to the server please.");
+        }
+
+        kPlayer_killed.addDeaths(1);
+        kPlayer_killer.addKills(1);
+        kPlayer_killer.addCoins(coins);
+
+        e.setDeathMessage(null);
+
+        Bukkit.broadcastMessage("§a" + killer.getDisplayName() + " §chas been slained by §b" + killed.getDisplayName());
+        killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
+        killer.sendMessage("§6+%coins coins".replace("%coins",String.valueOf(coins)));
     }
 
 }

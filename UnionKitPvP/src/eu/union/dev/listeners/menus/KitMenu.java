@@ -21,27 +21,27 @@ import org.bukkit.inventory.ItemStack;
 public class KitMenu implements Listener {
 
     @EventHandler
-    public void onClick(PlayerInteractEvent e){
+    public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         ItemStack item = p.getItemInHand();
 
-        if(item == null){
+        if (item == null) {
             return;
         }
 
-        if(!(item.getType() == Material.NETHER_STAR)){
+        if (!(item.getType() == Material.NETHER_STAR)) {
             return;
         }
 
-        if(item.getItemMeta() == null){
+        if (item.getItemMeta() == null) {
             return;
         }
 
-        if(!(item.getItemMeta().hasDisplayName())){
+        if (!(item.getItemMeta().hasDisplayName())) {
             return;
         }
 
-        if(!(item.getItemMeta().getDisplayName() == "§aKits §7(Right-Click)")){
+        if (!(item.getItemMeta().getDisplayName() == "§aKits §7(Right-Click)")) {
             return;
         }
 
@@ -50,7 +50,7 @@ public class KitMenu implements Listener {
         p.openInventory(Inv.getInstance().kits);
     }
 
-    void setItems(Player p){
+    void setItems(Player p) {
         KitManager km = KitManager.getManager();
 
         Inventory inv = Inv.getInstance().kits;
@@ -73,36 +73,34 @@ public class KitMenu implements Listener {
     }
 
     @EventHandler
-    public void onInvClick(InventoryClickEvent e){
+    public void onInvClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         ItemStack item = e.getCurrentItem();
-        KitManager km = KitManager.getManager();
 
-        if(e.getInventory().equals("Kits")){
-            if(e.getSlot() < 0){
+        if (e.getInventory().getName().equalsIgnoreCase("Kits")) {
+            if (e.getSlot() < 0) {
                 return;
             }
 
-            switch(e.getSlot()){
+            switch (e.getSlot()) {
                 case 0: //Kit PvP
-                    e.setCancelled(true);
-                    try{
-                        Kit kit = km.getKitByName("pvp");
-                        km.applyKit(p, kit);
-                    }catch (Exception ep){
-                        ep.printStackTrace();
-                    }
+                    offerKit(p, "pvp");
+                    e.getView().close();
                     break;
                 case 1: //Kit Archer
-                    e.setCancelled(true);
-                    km.applyKit(p, new Archer());
+                    offerKit(p, "archer");
+                    e.getView().close();
                     break;
                 case 2: //Kit GrandPa
-                    km.applyKit(p, new Grandpa());
+                    offerKit(p, "grandpa");
+                    e.getView().close();
                     e.setCancelled(true);
                     break;
             }
         }
     }
 
+    public void offerKit(Player p, String kit) {
+        p.chat("/kit %kit".replace("%kit", kit.trim()));
+    }
 }

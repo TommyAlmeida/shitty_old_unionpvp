@@ -1,12 +1,18 @@
 package eu.union.dev.utils;
 
 import eu.union.dev.api.Icon;
+import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.Kit;
+import eu.union.dev.engine.managers.PlayerManager;
 import net.minecraft.server.v1_8_R3.AttributeModifier;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 
 public class Util {
 
@@ -49,6 +55,7 @@ public class Util {
 
     public void buildJoinIcons(Player player){
         Inventory inv = player.getInventory();
+        KPlayer profile = PlayerManager.getPlayer(player.getUniqueId());
 
         {
             Icon kits = new Icon(Material.NETHER_STAR, "§aKits §7(Right-Click)", "§7Choose your kit");
@@ -71,6 +78,11 @@ public class Util {
             Icon stats = new Icon(Material.IRON_SWORD, "§9Stats §7(Right-Click)", "§7Where do you wanna go?");
             inv.setItem(8,stats.build());
         }
+
+        Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
+        Objective obj = board.registerNewObjective("dummy","dummy");
+        obj.setDisplayName("§7Lv.§a" + profile.getLevel());
+        obj.setDisplaySlot(DisplaySlot.BELOW_NAME);
     }
 
 }

@@ -6,8 +6,7 @@ import org.bukkit.entity.Player;
 public class Stomper extends Kit {
 
     public Stomper() {
-        super("stomper", "unkit.stomper", Difficulty.MEDIUM, Rarity.HEROIC, 4,
-                "");
+        super("stomper", "unkit.stomper", Difficulty.MEDIUM, Rarity.HEROIC, 4);
     }
 
     @Override

@@ -26,6 +26,7 @@ public enum Weapon {
         ItemStack item = new ItemStack(weapon.mat, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(weapon.name);
+        meta.spigot().setUnbreakable(true);
         item.setItemMeta(meta);
 
         return item;
@@ -35,7 +36,7 @@ public enum Weapon {
         ItemStack item = new ItemStack(weapon.mat, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(weapon.name);
-        item.setDurability((short) 0);
+        meta.spigot().setUnbreakable(true);
         item.addEnchantment(enchant, level);
         item.setItemMeta(meta);
 

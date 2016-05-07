@@ -61,6 +61,7 @@ public class Icon {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(name);
         meta.setLore(Arrays.asList(lore));
+
         item.setItemMeta(meta);
 
         return item;

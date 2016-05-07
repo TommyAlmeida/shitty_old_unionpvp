@@ -6,13 +6,13 @@ import eu.union.dev.utils.Weapon;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+
 public class Grandpa extends Kit {
 
     public Grandpa() {
         super("grandpa", Perms.KIT_FREE.toString(), Difficulty.LOW,
-                Rarity.COMMON, 0,
-                "Do you wanna become a angry grandpa? \n",
-                "grab your cane and lets kick some buts."
+                Rarity.COMMON, 0
         );
     }
 
