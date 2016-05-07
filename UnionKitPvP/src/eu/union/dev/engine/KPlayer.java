@@ -2,6 +2,11 @@ package eu.union.dev.engine;
 
 import java.util.UUID;
 
+/**
+ * Level formula: L = (25 + sqrt(25 * 25 - 4 * 25 * (-X) ))/ (2 * 25)
+ *
+ * TODO: Transform level formula to actual exp system
+ */
 public class KPlayer {
 
     private UUID uuid;

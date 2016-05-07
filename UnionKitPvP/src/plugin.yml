@@ -7,3 +7,5 @@ commands:
   kits:
   gm:
   build:
+  setspawn:
+  spawn:

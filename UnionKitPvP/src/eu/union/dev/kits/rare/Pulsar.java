@@ -1,0 +1,67 @@
+package eu.union.dev.kits.rare;
+
+import eu.union.dev.engine.Kit;
+import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.Weapon;
+import org.bukkit.Material;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
+
+public class Pulsar extends Kit implements Listener{
+
+
+    public Pulsar() {
+        super("pulsar", "unkit.pulsar", Difficulty.MEDIUM, Rarity.RARE, 4);
+    }
+
+    @Override
+    public void applyKit(Player player) {
+        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
+        Weapon.giveWeapon(player, Weapon.PULSAR_SHOCK);
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event){
+        Player p = event.getPlayer();
+        ItemStack item = p.getItemInHand();
+
+        if (item == null) {
+            return;
+        }
+
+        if (!(item.getType() == Material.MAGMA_CREAM)) {
+            return;
+        }
+
+        if (item.getItemMeta() == null) {
+            return;
+        }
+
+        if (!(item.getItemMeta().hasDisplayName())) {
+            return;
+        }
+
+        if (!(item.getItemMeta().getDisplayName() == Weapon.PULSAR_SHOCK.getName())) {
+            return;
+        }
+
+        if(KitManager.getManager().usingKit(p)){
+            return;
+        }
+
+        for(Entity e : p.getNearbyEntities(5,5,5)){
+            if(e instanceof Player){
+                e.setVelocity(new Vector(0,1,0));
+                e.getWorld().strikeLightning(e.getLocation());
+                e.sendMessage(prefix + " §7Shi**, you have been pulsed and lifted by: §e" + p.getDisplayName());
+            }
+        }
+    }
+
+}

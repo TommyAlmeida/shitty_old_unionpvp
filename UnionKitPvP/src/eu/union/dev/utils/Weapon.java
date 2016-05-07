@@ -9,9 +9,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 public enum Weapon {
 
     DEFAULT_SWORD(Material.WOOD_SWORD, "§aDefault Sword"),
-    GRANDPA_STICK(Material.STICK, "§aGrandPa Cane"),
     DEFAULT_BOW(Material.BOW, "§aDefault Bow"),
-    EXPLODER_TNT(Material.BOW, "§aExploder TnT");
+    GRANDPA_STICK(Material.STICK, "§eGrandPa Cane"),
+    PULSAR_SHOCK(Material.MAGMA_CREAM, "§ePulsar Shock"),
+    EXPLODER_TNT(Material.BOW, "§eExploder TnT");
 
 
     Material mat;
@@ -51,6 +52,10 @@ public enum Weapon {
     public static void giveWeapon(Player p, Weapon weapon, Enchantment enchant, int level){
         ItemStack item = Weapon.makeWeapon(weapon, enchant, level);
         p.getInventory().setItem(0,item);
+    }
+
+    public String getName(){
+        return this.name;
     }
 
 

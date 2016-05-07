@@ -11,5 +11,5 @@ public interface Layout {
      * @param icon
      * @param kit
      */
-     ItemStack design(Icon icon, Kit kit, String... about);
+     ItemStack design(Icon icon, Kit kit);
 }

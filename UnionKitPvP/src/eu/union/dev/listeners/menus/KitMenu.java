@@ -1,14 +1,9 @@
 package eu.union.dev.listeners.menus;
 
 import eu.union.dev.api.Icon;
-import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.layouts.KitLayout;
-import eu.union.dev.kits.Archer;
-import eu.union.dev.kits.Grandpa;
-import eu.union.dev.kits.PvP;
 import eu.union.dev.utils.Inv;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -70,6 +65,16 @@ public class KitMenu implements Listener {
             inv.setItem(2, KitLayout.getLayout().design(icon, km.getKitByName("archer")));
         }
 
+        {
+            Icon icon = new Icon(Material.ANVIL);
+            inv.setItem(3, KitLayout.getLayout().design(icon, km.getKitByName("stomper")));
+        }
+
+        {
+            Icon icon = new Icon(Material.MAGMA_CREAM);
+            inv.setItem(4, KitLayout.getLayout().design(icon, km.getKitByName("pulsar")));
+        }
+
     }
 
     @EventHandler
@@ -93,6 +98,16 @@ public class KitMenu implements Listener {
                     break;
                 case 2: //Kit GrandPa
                     offerKit(p, "grandpa");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 3: //Kit Stomper
+                    offerKit(p, "stomper");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 4: //Kit Pulsar
+                    offerKit(p, "pulsar");
                     e.getView().close();
                     e.setCancelled(true);
                     break;

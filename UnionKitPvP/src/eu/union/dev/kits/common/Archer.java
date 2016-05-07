@@ -1,4 +1,4 @@
-package eu.union.dev.kits;
+package eu.union.dev.kits.common;
 
 import eu.union.dev.engine.Kit;
 import eu.union.dev.utils.Perms;
@@ -17,7 +17,7 @@ public class Archer extends Kit {
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player,Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player,Weapon.DEFAULT_BOW, Enchantment.ARROW_INFINITE, 1);
+        Weapon.giveWeapon(player,Weapon.DEFAULT_BOW);
     }
 
 }

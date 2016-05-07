@@ -1,4 +1,4 @@
-package eu.union.dev.kits;
+package eu.union.dev.kits.common;
 
 import eu.union.dev.engine.Kit;
 import eu.union.dev.utils.Perms;

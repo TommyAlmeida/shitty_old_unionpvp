@@ -58,6 +58,7 @@ public class KitManager {
         return null;
     }
 
+
     /**
      * Get the player kit that hes using
      * @param player
@@ -150,11 +151,11 @@ public class KitManager {
      * Check if the player have the level required
      * to use the selected kit
      * @param kPlayer
-     * @param kitm
+     * @param kit
      * @return
      */
-    public boolean hasEnoughLevel(KPlayer kPlayer, Kit kitm){
-        if(kPlayer.getLevel() >= kitm.getLevel()){
+    public boolean hasEnoughLevel(KPlayer kPlayer, Kit kit){
+        if(kPlayer.getLevel() >= kit.getLevel()){
             return true;
         }else{
             return false;
@@ -164,6 +165,7 @@ public class KitManager {
     public boolean usingKit(Player player) {
         return playerKit.containsKey(player);
     }
+
 
     /**
      * Get a list of kits

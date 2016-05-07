@@ -1,4 +1,4 @@
-package eu.union.dev.kits;
+package eu.union.dev.kits.common;
 
 import eu.union.dev.engine.Kit;
 import eu.union.dev.utils.Perms;
@@ -18,6 +18,7 @@ public class Grandpa extends Kit {
 
     @Override
     public void applyKit(Player player) {
-        Weapon.giveWeapon(player,Weapon.GRANDPA_STICK, Enchantment.KNOCKBACK, 2);
+        Weapon.giveWeapon(player,Weapon.DEFAULT_SWORD);
+        Weapon.giveWeapon(player,Weapon.GRANDPA_STICK, Enchantment.KNOCKBACK, 1);
     }
 }

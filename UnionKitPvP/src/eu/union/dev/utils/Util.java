@@ -51,6 +51,10 @@ public class Util {
             player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
         }
 
+        player.getInventory().setItem(31,new ItemStack(Material.RED_MUSHROOM, 64));
+        player.getInventory().setItem(32,new ItemStack(Material.BROWN_MUSHROOM, 64));
+        player.getInventory().setItem(33,new ItemStack(Material.BOWL, 64));
+
     }
 
     public void buildJoinIcons(Player player){

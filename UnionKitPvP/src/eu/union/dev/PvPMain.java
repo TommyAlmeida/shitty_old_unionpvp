@@ -2,13 +2,18 @@ package eu.union.dev;
 
 import eu.union.dev.commands.KitCMD;
 import eu.union.dev.commands.ListKitsCMD;
+import eu.union.dev.commands.location.SetSpawn;
+import eu.union.dev.commands.location.Spawn;
 import eu.union.dev.commands.staff.BuildCMD;
 import eu.union.dev.commands.staff.GameModeCMD;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.engine.storage.Database;
-import eu.union.dev.kits.Archer;
-import eu.union.dev.kits.Grandpa;
-import eu.union.dev.kits.PvP;
+import eu.union.dev.kits.common.Archer;
+import eu.union.dev.kits.common.Grandpa;
+import eu.union.dev.kits.common.PvP;
+import eu.union.dev.kits.heroic.Stomper;
+import eu.union.dev.kits.rare.Pulsar;
 import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
 import eu.union.dev.listeners.mechanics.SoupListener;
@@ -30,6 +35,7 @@ public class PvPMain extends JavaPlugin {
 
         instance = this;
         canConnect(true);
+        ConfigManager.getInstance().setup(this);
 
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new PlayerListeners(), this);
@@ -37,10 +43,18 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new KitMenu(), this);
         pm.registerEvents(new SoupListener(), this);
 
+        /**
+         * Kits with listeners
+         */
+        pm.registerEvents(new Stomper(), this);
+        pm.registerEvents(new Pulsar(), this);
+
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
         getCommand("gm").setExecutor(new GameModeCMD());
         getCommand("build").setExecutor(new BuildCMD());
+        getCommand("setspawn").setExecutor(new SetSpawn());
+        getCommand("spawn").setExecutor(new Spawn());
     }
 
     @Override
@@ -81,5 +95,7 @@ public class PvPMain extends JavaPlugin {
         km.registerKit(new PvP());
         km.registerKit(new Grandpa());
         km.registerKit(new Archer());
+        km.registerKit(new Stomper());
+        km.registerKit(new Pulsar());
     }
 }

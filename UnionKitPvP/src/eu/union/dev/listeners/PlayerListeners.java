@@ -4,12 +4,10 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
+import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.utils.Messages;
 import eu.union.dev.utils.Util;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -52,9 +50,18 @@ public class PlayerListeners implements Listener {
 
         km.readyPlayer(p);
 
+        Location loc = ConfigManager.getInstance().getLocation("Spawn");
+        p.teleport(loc);
 
         welcomeMessage(p);
         Util.getInstance().buildJoinIcons(p);
+
+    }
+
+    @EventHandler
+    public void onRespawn(PlayerRespawnEvent e){
+        Location loc = ConfigManager.getInstance().getLocation("Spawn");
+        e.setRespawnLocation(loc);
     }
 
     @EventHandler
@@ -76,14 +83,11 @@ public class PlayerListeners implements Listener {
 
     void welcomeMessage(Player p){
         p.sendMessage("§m§7§l--------------------");
-        p.sendMessage("§eUnionPvP");
-        p.sendMessage("§bPowered by UnionNetwork");
+        p.sendMessage("    §eUnionPvP");
+        p.sendMessage("   §bPowered by UnionNetwork");
         p.sendMessage(" ");
         p.sendMessage("§7Are you ready? if yes, go ahead and choose your kit.");
         p.sendMessage(" ");
-        p.sendMessage("§aCommands:");
-        p.sendMessage("§e/kits §7- to list all kits available");
-        p.sendMessage("§e/kit <name> §7- to select your kit");
         p.sendMessage("§m§7§l-------------------");
     }
 
@@ -114,7 +118,7 @@ public class PlayerListeners implements Listener {
                 public void run() {
                     event.getItemDrop().remove();
                 }
-            }, 8L);
+            }, 20*2);
         }
 
     }
@@ -135,6 +139,11 @@ public class PlayerListeners implements Listener {
 
         kPlayer_killed.addDeaths(1);
         kPlayer_killer.addKills(1);
+
+        if(coins <= 0){
+            coins++;
+        }
+
         kPlayer_killer.addCoins(coins);
 
         e.setDeathMessage(null);
@@ -142,6 +151,9 @@ public class PlayerListeners implements Listener {
         Bukkit.broadcastMessage("§a" + killer.getDisplayName() + " §chas been slained by §b" + killed.getDisplayName());
         killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
         killer.sendMessage("§6+%coins coins".replace("%coins",String.valueOf(coins)));
+
+        Location loc = ConfigManager.getInstance().getLocation("Spawn");
+        killed.teleport(loc);
     }
 
 }

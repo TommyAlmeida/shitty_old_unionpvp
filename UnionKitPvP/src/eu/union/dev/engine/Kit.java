@@ -1,5 +1,6 @@
 package eu.union.dev.engine;
 
+import eu.union.dev.utils.Messages;
 import org.bukkit.entity.Player;
 
 public abstract class Kit {
@@ -51,6 +52,7 @@ public abstract class Kit {
     private int level;
     Rarity rarity;
     Difficulty difficulty;
+    public String prefix = Messages.PREFIX.toString();
 
 
     public Kit(String name, String permission, Difficulty difficulty, Rarity rarity, int level, String... about) {
