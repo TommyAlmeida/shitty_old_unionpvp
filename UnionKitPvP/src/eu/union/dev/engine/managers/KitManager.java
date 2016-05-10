@@ -26,7 +26,7 @@ public class KitManager {
 
     List<Kit> kits = new ArrayList<>(); //Lista de Kits.
 
-    HashMap<Player, Kit> playerKit = new HashMap<>();
+    public HashMap<Player, Kit> playerKit = new HashMap<>();
 
 
     /**
@@ -58,6 +58,17 @@ public class KitManager {
         return null;
     }
 
+    public boolean getKitAmIUsing(Player p, String name){
+        if (playerKit.containsKey(p)){
+            if(playerKit.get(p).getName() == name){
+                return true;
+            }
+        }else{
+            return false;
+        }
+        return false;
+    }
+
 
     /**
      * Get the player kit that hes using
@@ -69,6 +80,8 @@ public class KitManager {
             return playerKit.get(player);
         return null;
     }
+
+
 
     /**
      * Reset all player values to default
@@ -165,6 +178,7 @@ public class KitManager {
     public boolean usingKit(Player player) {
         return playerKit.containsKey(player);
     }
+
 
 
     /**

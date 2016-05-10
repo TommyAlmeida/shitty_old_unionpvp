@@ -5,6 +5,7 @@ import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.engine.storage.ConfigManager;
+import eu.union.dev.kits.common.PvP;
 import eu.union.dev.utils.Messages;
 import eu.union.dev.utils.Util;
 import org.bukkit.*;
@@ -35,6 +36,7 @@ public class PlayerListeners implements Listener {
             km.removeKit(player);
 
         e.setQuitMessage(null);
+        Bukkit.broadcastMessage("§7[§c-§7] §7" + player.getDisplayName());
     }
 
     @EventHandler
@@ -61,30 +63,24 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onRespawn(PlayerRespawnEvent e){
         Location loc = ConfigManager.getInstance().getLocation("Spawn");
+        KitManager km = KitManager.getManager();
+
         e.setRespawnLocation(loc);
+        Util.getInstance().buildJoinIcons(e.getPlayer());
     }
 
     @EventHandler
-    public void onDeath(EntityDeathEvent e){
-        if (!(e.getEntity() instanceof Player))
-            return;
+    public void onMove(PlayerMoveEvent e){
+        KPlayer kPlayer = PlayerManager.getPlayer(e.getPlayer().getUniqueId());
 
-        Player killed = (Player) e.getEntity();
-        Player killer = e.getEntity().getKiller();
-
-        if (km.usingKit(killed)) {
-            km.removeKit(killed);
-            e.getDrops().clear();
-            e.setDroppedExp(0);
-        }
-
-
+        PvPMain.getInstance().getSQL().updatePlayerProfileSQL(kPlayer);
     }
+
 
     void welcomeMessage(Player p){
         p.sendMessage("§m§7§l--------------------");
-        p.sendMessage("    §eUnionPvP");
-        p.sendMessage("   §bPowered by UnionNetwork");
+        p.sendMessage(Util.getInstance().center("§eUnionPvP", 20));
+        p.sendMessage(Util.getInstance().center("§bPowered by UnionNetwork",20));
         p.sendMessage(" ");
         p.sendMessage("§7Are you ready? if yes, go ahead and choose your kit.");
         p.sendMessage(" ");
@@ -110,15 +106,10 @@ public class PlayerListeners implements Listener {
             return;
 
         if (i.getType() != Material.MUSHROOM_SOUP && i.getType() != Material.BOWL) {
-            player.sendMessage(Messages.PREFIX.toString() + " §7cYou cannot drop this item");
+            player.sendMessage(Messages.PREFIX.toString() + " §7You cannot drop this item");
             event.setCancelled(true);
         } else {
-            Bukkit.getScheduler().runTaskLater(PvPMain.getInstance(), new Runnable() {
-                @Override
-                public void run() {
-                    event.getItemDrop().remove();
-                }
-            }, 20*2);
+            event.getItemDrop().remove();
         }
 
     }
@@ -127,6 +118,7 @@ public class PlayerListeners implements Listener {
     public void onDeath(PlayerDeathEvent e){
         Player killed = e.getEntity();
         Player killer = e.getEntity().getKiller();
+
         KPlayer kPlayer_killed = PlayerManager.getPlayer(killed.getUniqueId());
         KPlayer kPlayer_killer = PlayerManager.getPlayer(killer.getUniqueId());
         Random rand = new Random();
@@ -135,16 +127,18 @@ public class PlayerListeners implements Listener {
         if(kPlayer_killed == null || kPlayer_killer == null){
             killed.sendMessage(Messages.PREFIX.toString() + " §cReconnect to the server please.");
             killer.sendMessage(Messages.PREFIX.toString() + " §cReconnect to the server please.");
+            return;
+        }else{
+            kPlayer_killed.addDeaths(1);
+            kPlayer_killer.addKills(1);
+
+            if(coins <= 0){
+                coins++;
+            }
+
+            kPlayer_killer.addCoins(coins);
         }
 
-        kPlayer_killed.addDeaths(1);
-        kPlayer_killer.addKills(1);
-
-        if(coins <= 0){
-            coins++;
-        }
-
-        kPlayer_killer.addCoins(coins);
 
         e.setDeathMessage(null);
 
@@ -152,8 +146,14 @@ public class PlayerListeners implements Listener {
         killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
         killer.sendMessage("§6+%coins coins".replace("%coins",String.valueOf(coins)));
 
-        Location loc = ConfigManager.getInstance().getLocation("Spawn");
-        killed.teleport(loc);
+        if (km.usingKit(killed)) {
+            km.removeKit(killed);
+            e.getDrops().clear();
+            e.setDroppedExp(0);
+        }
+
+        /*Location loc = ConfigManager.getInstance().getLocation("Spawn");
+        killed.teleport(loc);*/
     }
 
 }

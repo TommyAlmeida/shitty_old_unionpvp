@@ -2,6 +2,7 @@ package eu.union.dev;
 
 import eu.union.dev.commands.KitCMD;
 import eu.union.dev.commands.ListKitsCMD;
+import eu.union.dev.commands.StatsCMD;
 import eu.union.dev.commands.location.SetSpawn;
 import eu.union.dev.commands.location.Spawn;
 import eu.union.dev.commands.staff.BuildCMD;
@@ -16,8 +17,10 @@ import eu.union.dev.kits.heroic.Stomper;
 import eu.union.dev.kits.rare.Pulsar;
 import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
+import eu.union.dev.listeners.mechanics.JumpPad;
 import eu.union.dev.listeners.mechanics.SoupListener;
 import eu.union.dev.listeners.menus.KitMenu;
+import eu.union.dev.listeners.menus.MainMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,7 +44,9 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new PlayerListeners(), this);
         pm.registerEvents(new ServerListeners(), this);
         pm.registerEvents(new KitMenu(), this);
+        pm.registerEvents(new MainMenu(), this);
         pm.registerEvents(new SoupListener(), this);
+        pm.registerEvents(new JumpPad(), this);
 
         /**
          * Kits with listeners
@@ -55,6 +60,7 @@ public class PvPMain extends JavaPlugin {
         getCommand("build").setExecutor(new BuildCMD());
         getCommand("setspawn").setExecutor(new SetSpawn());
         getCommand("spawn").setExecutor(new Spawn());
+        getCommand("stats").setExecutor(new StatsCMD());
     }
 
     @Override

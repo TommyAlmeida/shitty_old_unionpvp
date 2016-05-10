@@ -29,10 +29,11 @@ public class Stomper extends Kit implements Listener {
         if (!(e.getEntity() instanceof Player)) {
             return;
         }
+
         Player p = (Player)e.getEntity();
         if (e.getCause() == EntityDamageEvent.DamageCause.FALL)
         {
-            if(km.usingKit(p)){
+            if(km.getKitAmIUsing(p, "stomper")){
                 for (Entity ent : p.getNearbyEntities(5.0D, 2.0D, 5.0D)) {
                     if ((ent instanceof Player))
                     {
@@ -54,6 +55,7 @@ public class Stomper extends Kit implements Listener {
                         }
                     }
                 }
+
                 e.setDamage(4.0D);
                 return;
             }

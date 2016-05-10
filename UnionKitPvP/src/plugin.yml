@@ -9,3 +9,4 @@ commands:
   build:
   setspawn:
   spawn:
+  stats:

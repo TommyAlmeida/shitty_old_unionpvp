@@ -22,27 +22,18 @@ public class Util {
         return instance;
     }
 
-    public static String fixFontSize (String s, int size) {
-
-        String ret = s.toUpperCase();
-
-        if ( s != null ) {
-
-            for (int i=0; i < s.length(); i++) {
-                if ( s.charAt(i) == 'I' || s.charAt(i) == ' ') {
-                    ret += " ";
-                }
-            }
-
-            int faltaEspacos = size - s.length();
-            faltaEspacos = (faltaEspacos * 2);
-
-            for (int i=0; i < faltaEspacos; i++) {
-                ret += " ";
-            }
+    public String center(String msg, int length)
+    {
+        StringBuilder b = new StringBuilder("");
+        int msglength = msg.length();
+        int numberspaces = Math.round(length / 2) - Math.round(msglength / 2);
+        for (int i = 0; i <= numberspaces; i++) {
+            b.append(" ");
         }
-
-        return (ret);
+        for (int i = 0; i < msglength; i++) {
+            b.append(msg.charAt(i));
+        }
+        return b.toString();
     }
 
     public static void giveSoups(Player player) {
@@ -73,9 +64,14 @@ public class Util {
             inv.setItem(5,warps.build());
         }
 
-        {
+        /*{
             Icon warps = new Icon(Material.COMPASS, "§bWarps §7(Right-Click)", "§7Where do you wanna go?");
             inv.setItem(4,warps.build());
+        }*/
+
+        {
+            Icon menu = new Icon(Material.COMPASS, "§bMenu §7(Right-Click)", "§7All you need.");
+            inv.setItem(4,menu.build());
         }
 
         {

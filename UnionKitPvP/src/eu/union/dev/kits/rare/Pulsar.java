@@ -1,5 +1,6 @@
 package eu.union.dev.kits.rare;
 
+import eu.union.dev.api.Ability;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
@@ -13,17 +14,21 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
+import java.util.concurrent.TimeUnit;
+
 public class Pulsar extends Kit implements Listener{
 
 
     public Pulsar() {
-        super("pulsar", "unkit.pulsar", Difficulty.MEDIUM, Rarity.RARE, 4);
+        super("pulsar", "unkit.pulsar", Difficulty.MEDIUM, Rarity.BEAST, 0);
     }
+
+    public Ability cooldown = new Ability(1,13, TimeUnit.SECONDS);
 
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.PULSAR_SHOCK);
+        Weapon.giveWeapon(player, Weapon.PULSAR_SHOCK,1);
     }
 
     @EventHandler
@@ -51,13 +56,9 @@ public class Pulsar extends Kit implements Listener{
             return;
         }
 
-        if(KitManager.getManager().usingKit(p)){
-            return;
-        }
-
         for(Entity e : p.getNearbyEntities(5,5,5)){
             if(e instanceof Player){
-                e.setVelocity(new Vector(0,1,0));
+                e.setVelocity(new Vector(0, 5, 0));
                 e.getWorld().strikeLightning(e.getLocation());
                 e.sendMessage(prefix + " §7Shi**, you have been pulsed and lifted by: §e" + p.getDisplayName());
             }
