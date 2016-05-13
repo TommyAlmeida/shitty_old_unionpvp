@@ -5,6 +5,7 @@ import java.util.List;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.engine.Kit;
+import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -33,7 +34,8 @@ public class Endermage extends Kit implements Listener{
     @EventHandler
     public void onclick(PlayerInteractEvent e){
         final Player p = e.getPlayer();
-        if (true){
+        KitManager km = KitManager.getManager();
+        if (km.getKitAmIUsing(p,"endermage")){
             if (p.getItemInHand().getType() == Material.ENDER_PORTAL_FRAME &&
                     e.getAction() == Action.RIGHT_CLICK_BLOCK){
                 e.setCancelled(true);
