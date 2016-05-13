@@ -14,6 +14,6 @@ public class PvP extends Kit {
 
     @Override
     public void applyKit(Player player) {
-        Weapon.giveWeapon(player,Weapon.DEFAULT_SWORD);
+        //Give's sword but already give it on apply kit metho
     }
 }

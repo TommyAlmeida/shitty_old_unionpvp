@@ -8,6 +8,7 @@ import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.utils.Messages;
 import eu.union.dev.utils.Util;
+import eu.union.dev.utils.Weapon;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
@@ -124,11 +125,12 @@ public class KitManager {
             player.sendMessage(Messages.PREFIX.toString() + " §7You already have a kit!");
         }else{
             readyPlayer(player);
+            Weapon.giveWeapon(player,Weapon.DEFAULT_SWORD);
             kit.applyKit(player);
 
             playerKit.put(player, kit);
 
-            Util.giveSoups(player);
+            Util.getInstance().giveSoups(player);
 
             player.sendMessage(Messages.PREFIX.toString() + " §7You are using kit: §a" + kit.getName());
         }

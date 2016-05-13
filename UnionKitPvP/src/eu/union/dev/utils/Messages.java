@@ -10,6 +10,7 @@ public enum Messages {
     ICON_STATS("§9Stats §7(Right-Click)"),
     ICON_CONFIG("§cSettings §7(Right-Click)");
 
+
     String s;
 
     Messages(String s){

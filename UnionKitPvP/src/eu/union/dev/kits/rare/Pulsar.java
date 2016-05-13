@@ -1,8 +1,11 @@
 package eu.union.dev.kits.rare;
 
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.Messages;
+import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -27,7 +30,6 @@ public class Pulsar extends Kit implements Listener{
 
     @Override
     public void applyKit(Player player) {
-        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
         Weapon.giveWeapon(player, Weapon.PULSAR_SHOCK,1);
     }
 
@@ -56,12 +58,16 @@ public class Pulsar extends Kit implements Listener{
             return;
         }
 
-        for(Entity e : p.getNearbyEntities(5,5,5)){
-            if(e instanceof Player){
-                e.setVelocity(new Vector(0, 5, 0));
-                e.getWorld().strikeLightning(e.getLocation());
-                e.sendMessage(prefix + " §7Shi**, you have been pulsed and lifted by: §e" + p.getDisplayName());
+        if(cooldown.tryUse(p)){
+            for(Entity e : p.getNearbyEntities(5,5,5)){
+                if(e instanceof Player){
+                    e.setVelocity(new Vector(0, 5, 0));
+                    e.getWorld().strikeLightning(e.getLocation());
+                    e.sendMessage(prefix + " §7Shi**, you have been pulsed and lifted by: §e" + p.getDisplayName());
+                }
             }
+        }else{
+            Util.sendCooldownMessage(p, cooldown, TimeUnit.SECONDS, true);
         }
     }
 

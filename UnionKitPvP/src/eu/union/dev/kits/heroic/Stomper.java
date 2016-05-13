@@ -18,7 +18,6 @@ public class Stomper extends Kit implements Listener {
 
     @Override
     public void applyKit(Player player) {
-        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
     }
 
     @EventHandler(priority= EventPriority.HIGH)

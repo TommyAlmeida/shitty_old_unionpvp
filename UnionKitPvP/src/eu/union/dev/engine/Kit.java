@@ -48,19 +48,17 @@ public abstract class Kit {
 
     private String name;
     private String permission;
-    private String[] about;
     private int level;
     Rarity rarity;
     Difficulty difficulty;
     public String prefix = Messages.PREFIX.toString();
 
 
-    public Kit(String name, String permission, Difficulty difficulty, Rarity rarity, int level, String... about) {
+    public Kit(String name, String permission, Difficulty difficulty, Rarity rarity, int level) {
         this.name = name;
         this.difficulty = difficulty;
         this.rarity = rarity;
         this.level = level;
-        this.about = about;
         this.permission = permission;
     }
 
@@ -71,10 +69,6 @@ public abstract class Kit {
 
     public Difficulty getDifficulty(){
         return difficulty;
-    }
-
-    public String[] getAbout() {
-        return about;
     }
 
     public Rarity getRarity() {

@@ -31,9 +31,16 @@ public class PlayerListeners implements Listener {
     public void onQuit(PlayerQuitEvent e){
         Player player = e.getPlayer();
         KitManager km = KitManager.getManager();
+        KPlayer kplayer = PlayerManager.getPlayer(player.getUniqueId());
 
         if (km.usingKit(player))
             km.removeKit(player);
+
+        if(kplayer != null){
+            PvPMain.getInstance().getSQL().updatePlayerProfileSQL(kplayer);
+        }else {
+            System.out.println("Inexisting PlayerProfile for this Player");
+        }
 
         e.setQuitMessage(null);
         Bukkit.broadcastMessage("§7[§c-§7] §7" + player.getDisplayName());
@@ -65,21 +72,19 @@ public class PlayerListeners implements Listener {
         Location loc = ConfigManager.getInstance().getLocation("Spawn");
         KitManager km = KitManager.getManager();
 
+        if (km.usingKit(e.getPlayer())) {
+            km.removeKit(e.getPlayer());
+        }
+
+
         e.setRespawnLocation(loc);
         Util.getInstance().buildJoinIcons(e.getPlayer());
-    }
-
-    @EventHandler
-    public void onMove(PlayerMoveEvent e){
-        KPlayer kPlayer = PlayerManager.getPlayer(e.getPlayer().getUniqueId());
-
-        PvPMain.getInstance().getSQL().updatePlayerProfileSQL(kPlayer);
     }
 
 
     void welcomeMessage(Player p){
         p.sendMessage("§m§7§l--------------------");
-        p.sendMessage(Util.getInstance().center("§eUnionPvP", 20));
+        p.sendMessage(Util.getInstance().center("§eUnionPvP", 25));
         p.sendMessage(Util.getInstance().center("§bPowered by UnionNetwork",20));
         p.sendMessage(" ");
         p.sendMessage("§7Are you ready? if yes, go ahead and choose your kit.");
@@ -108,6 +113,7 @@ public class PlayerListeners implements Listener {
         if (i.getType() != Material.MUSHROOM_SOUP && i.getType() != Material.BOWL) {
             player.sendMessage(Messages.PREFIX.toString() + " §7You cannot drop this item");
             event.setCancelled(true);
+            event.getItemDrop().remove();
         } else {
             event.getItemDrop().remove();
         }
