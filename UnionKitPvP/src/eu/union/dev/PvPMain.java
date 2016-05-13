@@ -11,6 +11,7 @@ import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.engine.storage.Database;
 import eu.union.dev.kits.common.Archer;
+import eu.union.dev.kits.common.Endermage;
 import eu.union.dev.kits.common.Grandpa;
 import eu.union.dev.kits.common.PvP;
 import eu.union.dev.kits.heroic.Stomper;
@@ -53,6 +54,7 @@ public class PvPMain extends JavaPlugin {
          */
         pm.registerEvents(new Stomper(), this);
         pm.registerEvents(new Pulsar(), this);
+        pm.registerEvents(new Endermage(), this);
 
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
@@ -103,5 +105,6 @@ public class PvPMain extends JavaPlugin {
         km.registerKit(new Archer());
         km.registerKit(new Stomper());
         km.registerKit(new Pulsar());
+        km.registerKit(new Endermage());
     }
 }

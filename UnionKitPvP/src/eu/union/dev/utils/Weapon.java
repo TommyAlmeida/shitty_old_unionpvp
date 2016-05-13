@@ -12,7 +12,8 @@ public enum Weapon {
     DEFAULT_BOW(Material.BOW, "§aDefault Bow"),
     GRANDPA_STICK(Material.STICK, "§eGrandPa Cane"),
     PULSAR_SHOCK(Material.MAGMA_CREAM, "§ePulsar Shock"),
-    EXPLODER_TNT(Material.BOW, "§eExploder TnT");
+    EXPLODER_TNT(Material.BOW, "§eExploder TnT"),
+    ENDERMAGE_PORTAL(Material.ENDER_PORTAL_FRAME, "§5Endermage Portal");;
 
 
     Material mat;
