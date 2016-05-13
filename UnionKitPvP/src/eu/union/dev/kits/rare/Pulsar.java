@@ -61,13 +61,13 @@ public class Pulsar extends Kit implements Listener{
         if(cooldown.tryUse(p)){
             for(Entity e : p.getNearbyEntities(5,5,5)){
                 if(e instanceof Player){
-                    e.setVelocity(new Vector(0, 5, 0));
+                    e.setFallDistance(-5);
                     e.getWorld().strikeLightning(e.getLocation());
                     e.sendMessage(prefix + " §7Shi**, you have been pulsed and lifted by: §e" + p.getDisplayName());
                 }
             }
         }else{
-            Util.sendCooldownMessage(p, cooldown, TimeUnit.SECONDS, true);
+            Util.getInstance().sendCooldownMessage(p, cooldown, TimeUnit.SECONDS, true);
         }
     }
 

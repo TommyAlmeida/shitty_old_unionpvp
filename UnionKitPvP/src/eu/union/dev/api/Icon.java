@@ -36,11 +36,7 @@ public class Icon {
     }
 
     public boolean hasLore(){
-        if(lore.length < 0){
-            return false;
-        }else{
-            return true;
-        }
+        return lore.length >= 0;
     }
 
     public void name(String name) {
