@@ -3,6 +3,7 @@ package eu.union.dev.kits.heroic;
 import eu.union.dev.PvPMain;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.Weapon;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +23,7 @@ public class Ninja extends Kit implements Listener{
 
     @Override
     public void applyKit(Player player) {
-        //kit ninja não tem items
+        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
     }
 
     HashMap<Player, Player> ninja = new HashMap<>();

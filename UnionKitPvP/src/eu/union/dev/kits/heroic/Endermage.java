@@ -26,7 +26,8 @@ public class Endermage extends Kit implements Listener{
 
     @Override
     public void applyKit(Player p) {
-        Weapon.giveWeapon(p,Weapon.ENDERMAGE_PORTAL);
+        Weapon.giveWeapon(p, Weapon.DEFAULT_SWORD);
+        Weapon.giveWeapon(p, Weapon.ENDERMAGE_PORTAL);
     }
 
     ArrayList<String> cd = new ArrayList<>();

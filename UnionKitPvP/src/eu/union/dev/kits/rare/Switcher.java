@@ -25,6 +25,7 @@ public class Switcher extends Kit implements Listener{
     public Switcher(){ super("switcher", "unkit.switcher", Difficulty.MEDIUM, Rarity.RARE, 0); }
     @Override
     public void applyKit(Player player) {
+        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
         Weapon.giveWeapon(player, Weapon.SWITCHER_SNOW_BALL);
     }
 

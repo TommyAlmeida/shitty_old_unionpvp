@@ -2,6 +2,7 @@ package eu.union.dev.kits.rare;
 
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.Weapon;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +18,7 @@ public class Turtle extends Kit implements Listener{
 
     @Override
     public void applyKit(Player player) {
-        //Tutle n tem items
+        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
     }
 
     @EventHandler

@@ -25,6 +25,7 @@ public class Flash extends Kit implements Listener{
 
     @Override
     public void applyKit(Player player) {
+        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
         Weapon.giveWeapon(player,Weapon.FLASH_TORCH);
     }
 
