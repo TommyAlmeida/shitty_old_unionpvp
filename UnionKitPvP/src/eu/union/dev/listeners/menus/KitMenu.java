@@ -66,7 +66,7 @@ public class KitMenu implements Listener {
         }
 
         {
-            Icon icon = new Icon(Material.ANVIL);
+            Icon icon = new Icon(Material.IRON_BOOTS);
             inv.setItem(3, KitLayout.getLayout().design(icon, km.getKitByName("stomper")));
         }
 
@@ -118,6 +118,11 @@ public class KitMenu implements Listener {
         {
             Icon icon = new Icon(Material.FEATHER);
             inv.setItem(13, KitLayout.getLayout().design(icon, km.getKitByName("phantom")));
+        }
+
+        {
+            Icon icon = new Icon(Material.GOLD_AXE);
+            inv.setItem(14, KitLayout.getLayout().design(icon, km.getKitByName("thor")));
         }
 
     }
@@ -200,6 +205,11 @@ public class KitMenu implements Listener {
                     break;
                 case 13: //Kit Phantom
                     offerKit(p, "phantom");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 14: //Kit Thor
+                    offerKit(p, "thor");
                     e.getView().close();
                     e.setCancelled(true);
                     break;

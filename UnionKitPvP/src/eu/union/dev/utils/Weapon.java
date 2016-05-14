@@ -15,10 +15,11 @@ public enum Weapon {
     EXPLODER_TNT(Material.BOW, "§eExploder TnT"),
     ENDERMAGE_PORTAL(Material.ENDER_PORTAL_FRAME, "§5Endermage Portal"),
     FISHERMAN_ROD(Material.FISHING_ROD, "§eFisherman Rod"),
-    SWITCHER_SNOW_BALL(Material.SNOW_BALL, "§fSwitcher Ball"),
+    SWITCHER_SNOW_BALL(Material.SNOW_BALL, "§7Switcher Ball"),
     KANGAROO_FIREWORK(Material.FIREWORK, "§cKangaroo Firework"),
     FLASH_TORCH(Material.REDSTONE_TORCH_ON, "§4Flash Torch"),
-    PHANTOM_FEATHER(Material.FEATHER, "§7Phantom Feather");
+    PHANTOM_FEATHER(Material.FEATHER, "§7Phantom Feather"),
+    THOR_HAMMER(Material.GOLD_AXE, "§6Thor Hammer");
 
 
     Material mat;
