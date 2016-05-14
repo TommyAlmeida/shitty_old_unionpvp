@@ -12,13 +12,12 @@ import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.engine.storage.Database;
 import eu.union.dev.kits.common.Archer;
 import eu.union.dev.kits.common.Fisherman;
-import eu.union.dev.kits.heroic.Endermage;
+import eu.union.dev.kits.heroic.*;
 import eu.union.dev.kits.common.Grandpa;
 import eu.union.dev.kits.common.PvP;
-import eu.union.dev.kits.heroic.Kangaroo;
-import eu.union.dev.kits.heroic.Stomper;
 import eu.union.dev.kits.rare.Pulsar;
 import eu.union.dev.kits.rare.Switcher;
+import eu.union.dev.kits.rare.Turtle;
 import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
 import eu.union.dev.listeners.mechanics.JumpPad;
@@ -61,6 +60,9 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new Fisherman(), this);
         pm.registerEvents(new Switcher(), this);
         pm.registerEvents(new Kangaroo(), this);
+        pm.registerEvents(new Turtle(), this);
+        pm.registerEvents(new Ninja(), this);
+        pm.registerEvents(new Anchor(), this);
 
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
@@ -115,5 +117,8 @@ public class PvPMain extends JavaPlugin {
         km.registerKit(new Fisherman());
         km.registerKit(new Switcher());
         km.registerKit(new Kangaroo());
+        km.registerKit(new Turtle());
+        km.registerKit(new Ninja());
+        km.registerKit(new Anchor());
     }
 }
