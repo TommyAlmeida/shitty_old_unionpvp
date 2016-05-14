@@ -17,7 +17,8 @@ public enum Weapon {
     FISHERMAN_ROD(Material.FISHING_ROD, "§eFisherman Rod"),
     SWITCHER_SNOW_BALL(Material.SNOW_BALL, "§fSwitcher Ball"),
     KANGAROO_FIREWORK(Material.FIREWORK, "§cKangaroo Firework"),
-    FLASH_TORCH(Material.REDSTONE_TORCH_ON, "§4Flash Torch");
+    FLASH_TORCH(Material.REDSTONE_TORCH_ON, "§4Flash Torch"),
+    PHANTOM_FEATHER(Material.FEATHER, "§7Phantom Feather");
 
 
     Material mat;

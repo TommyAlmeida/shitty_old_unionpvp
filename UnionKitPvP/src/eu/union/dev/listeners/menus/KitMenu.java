@@ -115,6 +115,11 @@ public class KitMenu implements Listener {
             inv.setItem(12, KitLayout.getLayout().design(icon, km.getKitByName("flash")));
         }
 
+        {
+            Icon icon = new Icon(Material.FEATHER);
+            inv.setItem(13, KitLayout.getLayout().design(icon, km.getKitByName("phantom")));
+        }
+
     }
 
     @EventHandler
@@ -188,6 +193,11 @@ public class KitMenu implements Listener {
                     break;
                 case 12: //Kit Flash
                     offerKit(p, "flash");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 13: //Kit Phantom
+                    offerKit(p, "phantom");
                     e.getView().close();
                     e.setCancelled(true);
                     break;

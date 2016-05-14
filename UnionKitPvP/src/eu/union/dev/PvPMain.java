@@ -15,10 +15,7 @@ import eu.union.dev.kits.common.Fisherman;
 import eu.union.dev.kits.heroic.*;
 import eu.union.dev.kits.common.Grandpa;
 import eu.union.dev.kits.common.PvP;
-import eu.union.dev.kits.rare.Flash;
-import eu.union.dev.kits.rare.Pulsar;
-import eu.union.dev.kits.rare.Switcher;
-import eu.union.dev.kits.rare.Turtle;
+import eu.union.dev.kits.rare.*;
 import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
 import eu.union.dev.listeners.mechanics.JumpPad;
@@ -65,6 +62,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new Ninja(), this);
         pm.registerEvents(new Anchor(), this);
         pm.registerEvents(new Flash(), this);
+        pm.registerEvents(new Phantom(), this);
 
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
@@ -123,5 +121,6 @@ public class PvPMain extends JavaPlugin {
         km.registerKit(new Ninja());
         km.registerKit(new Anchor());
         km.registerKit(new Flash());
+        km.registerKit(new Phantom());
     }
 }
