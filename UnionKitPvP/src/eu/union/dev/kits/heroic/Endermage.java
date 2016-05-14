@@ -1,4 +1,4 @@
-package eu.union.dev.kits.common;
+package eu.union.dev.kits.heroic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Endermage extends Kit implements Listener{
 
     public Endermage() {
-        super("endermage", "unkit.endermage", Difficulty.LOW, Rarity.COMMON, 0);
+        super("endermage", "unkit.endermage", Difficulty.MEDIUM, Rarity.HEROIC, 0);
     }
 
     @Override

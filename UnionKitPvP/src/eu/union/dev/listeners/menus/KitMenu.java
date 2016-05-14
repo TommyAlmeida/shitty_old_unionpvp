@@ -75,6 +75,26 @@ public class KitMenu implements Listener {
             inv.setItem(4, KitLayout.getLayout().design(icon, km.getKitByName("pulsar")));
         }
 
+        {
+            Icon icon = new Icon(Material.ENDER_PORTAL_FRAME);
+            inv.setItem(5, KitLayout.getLayout().design(icon, km.getKitByName("endermage")));
+        }
+
+        {
+            Icon icon = new Icon(Material.FISHING_ROD);
+            inv.setItem(6, KitLayout.getLayout().design(icon, km.getKitByName("fisherman")));
+        }
+
+        {
+            Icon icon = new Icon(Material.SNOW_BALL);
+            inv.setItem(7, KitLayout.getLayout().design(icon, km.getKitByName("switcher")));
+        }
+
+        {
+            Icon icon = new Icon(Material.FIREWORK);
+            inv.setItem(8, KitLayout.getLayout().design(icon, km.getKitByName("kangaroo")));
+        }
+
     }
 
     @EventHandler
@@ -108,6 +128,26 @@ public class KitMenu implements Listener {
                     break;
                 case 4: //Kit Pulsar
                     offerKit(p, "pulsar");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 5: //Kit Endermage
+                    offerKit(p, "endermage");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 6: //Kit Fisherman
+                    offerKit(p, "fisherman");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 7: //Kit Switcher
+                    offerKit(p, "switcher");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 8: //Kit Kangaroo
+                    offerKit(p, "kangaroo");
                     e.getView().close();
                     e.setCancelled(true);
                     break;

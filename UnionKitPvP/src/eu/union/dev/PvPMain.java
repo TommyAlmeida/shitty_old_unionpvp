@@ -11,11 +11,14 @@ import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.engine.storage.Database;
 import eu.union.dev.kits.common.Archer;
-import eu.union.dev.kits.common.Endermage;
+import eu.union.dev.kits.common.Fisherman;
+import eu.union.dev.kits.heroic.Endermage;
 import eu.union.dev.kits.common.Grandpa;
 import eu.union.dev.kits.common.PvP;
+import eu.union.dev.kits.heroic.Kangaroo;
 import eu.union.dev.kits.heroic.Stomper;
 import eu.union.dev.kits.rare.Pulsar;
+import eu.union.dev.kits.rare.Switcher;
 import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
 import eu.union.dev.listeners.mechanics.JumpPad;
@@ -55,6 +58,9 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new Stomper(), this);
         pm.registerEvents(new Pulsar(), this);
         pm.registerEvents(new Endermage(), this);
+        pm.registerEvents(new Fisherman(), this);
+        pm.registerEvents(new Switcher(), this);
+        pm.registerEvents(new Kangaroo(), this);
 
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
@@ -106,5 +112,8 @@ public class PvPMain extends JavaPlugin {
         km.registerKit(new Stomper());
         km.registerKit(new Pulsar());
         km.registerKit(new Endermage());
+        km.registerKit(new Fisherman());
+        km.registerKit(new Switcher());
+        km.registerKit(new Kangaroo());
     }
 }

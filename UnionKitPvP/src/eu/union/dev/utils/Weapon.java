@@ -13,7 +13,10 @@ public enum Weapon {
     GRANDPA_STICK(Material.STICK, "§eGrandPa Cane"),
     PULSAR_SHOCK(Material.MAGMA_CREAM, "§ePulsar Shock"),
     EXPLODER_TNT(Material.BOW, "§eExploder TnT"),
-    ENDERMAGE_PORTAL(Material.ENDER_PORTAL_FRAME, "§5Endermage Portal");;
+    ENDERMAGE_PORTAL(Material.ENDER_PORTAL_FRAME, "§5Endermage Portal"),
+    FISHERMAN_ROD(Material.FISHING_ROD, "§eFisherman Rod"),
+    SWITCHER_SNOW_BALL(Material.SNOW_BALL, "§fSwitcher Ball"),
+    KANGAROO_FIREWORK(Material.FIREWORK, "§cKangaroo Firework");
 
 
     Material mat;
