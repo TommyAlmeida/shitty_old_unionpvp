@@ -19,6 +19,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 import java.util.Random;
@@ -126,40 +128,64 @@ public class PlayerListeners implements Listener {
         Player killer = e.getEntity().getKiller();
 
         KPlayer kPlayer_killed = PlayerManager.getPlayer(killed.getUniqueId());
-        KPlayer kPlayer_killer = PlayerManager.getPlayer(killer.getUniqueId());
-        Random rand = new Random();
-        int coins = rand.nextInt(7);
 
-        if(kPlayer_killed == null || kPlayer_killer == null){
-            killed.sendMessage(Messages.PREFIX.toString() + " §cReconnect to the server please.");
-            killer.sendMessage(Messages.PREFIX.toString() + " §cReconnect to the server please.");
-            return;
-        }else{
-            kPlayer_killed.addDeaths(1);
-            kPlayer_killer.addKills(1);
+        if (killer != null) {
+            KPlayer kPlayer_killer = PlayerManager.getPlayer(killer.getUniqueId());
 
-            if(coins <= 0){
-                coins++;
+            Random rand = new Random();
+            int coins = rand.nextInt(7);
+
+            if(kPlayer_killed == null || kPlayer_killer == null){
+                killed.sendMessage(Messages.PREFIX.toString() + " §cReconnect to the server please.");
+                killer.sendMessage(Messages.PREFIX.toString() + " §cReconnect to the server please.");
+                return;
+            }else{
+                kPlayer_killed.addDeaths(1);
+                kPlayer_killer.addKills(1);
+
+                if(coins <= 0){
+                    coins++;
+                }
+
+                kPlayer_killer.addCoins(coins);
             }
 
-            kPlayer_killer.addCoins(coins);
+            Bukkit.broadcastMessage("§a" + killer.getDisplayName() + " §chas been slained by §b" + killed.getDisplayName());
+            killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
+            killer.sendMessage("§6+%coins coins".replace("%coins",String.valueOf(coins)));
         }
-
 
         e.setDeathMessage(null);
 
-        Bukkit.broadcastMessage("§a" + killer.getDisplayName() + " §chas been slained by §b" + killed.getDisplayName());
-        killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
-        killer.sendMessage("§6+%coins coins".replace("%coins",String.valueOf(coins)));
-
         if (km.usingKit(killed)) {
             km.removeKit(killed);
-            e.getDrops().clear();
             e.setDroppedExp(0);
         }
 
-        /*Location loc = ConfigManager.getInstance().getLocation("Spawn");
-        killed.teleport(loc);*/
+        /*
+            Dropar somente Sopas, Cogumelos e potes.
+         */
+        e.getDrops().removeIf(k ->
+           k != null && !(
+               k.getType() == Material.MUSHROOM_SOUP ||
+               k.getType() == Material.RED_MUSHROOM ||
+               k.getType() == Material.BROWN_MUSHROOM ||
+               k.getType() == Material.BOWL
+           )
+        );
+
+        /*
+            Delay para teleportar, pois senão os items
+            são dropados no spawn.
+         */
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Util.getInstance().buildJoinIcons(killed);
+                Location loc = ConfigManager.getInstance().getLocation("Spawn");
+                killed.teleport(loc);
+            }
+        }.runTaskLater(PvPMain.getInstance(), 5);
     }
 
 }
