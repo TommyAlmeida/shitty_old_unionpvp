@@ -110,6 +110,16 @@ public class KitMenu implements Listener {
             inv.setItem(11, KitLayout.getLayout().design(icon, km.getKitByName("anchor")));
         }
 
+        {
+            Icon icon = new Icon(Material.REDSTONE_TORCH_ON);
+            inv.setItem(12, KitLayout.getLayout().design(icon, km.getKitByName("flash")));
+        }
+
+        {
+            Icon icon = new Icon(Material.FEATHER);
+            inv.setItem(13, KitLayout.getLayout().design(icon, km.getKitByName("phantom")));
+        }
+
     }
 
     @EventHandler
@@ -178,8 +188,18 @@ public class KitMenu implements Listener {
                     e.getView().close();
                     e.setCancelled(true);
                     break;
-                case 11:
+                case 11: //Kit Anchor
                     offerKit(p, "anchor");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 12: //Kit Flash
+                    offerKit(p, "flash");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 13: //Kit Phantom
+                    offerKit(p, "phantom");
                     e.getView().close();
                     e.setCancelled(true);
                     break;
