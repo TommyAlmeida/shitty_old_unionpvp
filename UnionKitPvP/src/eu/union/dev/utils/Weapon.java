@@ -16,7 +16,8 @@ public enum Weapon {
     ENDERMAGE_PORTAL(Material.ENDER_PORTAL_FRAME, "§5Endermage Portal"),
     FISHERMAN_ROD(Material.FISHING_ROD, "§eFisherman Rod"),
     SWITCHER_SNOW_BALL(Material.SNOW_BALL, "§fSwitcher Ball"),
-    KANGAROO_FIREWORK(Material.FIREWORK, "§cKangaroo Firework");
+    KANGAROO_FIREWORK(Material.FIREWORK, "§cKangaroo Firework"),
+    FLASH_TORCH(Material.REDSTONE_TORCH_ON, "§4Flash Torch");
 
 
     Material mat;
