@@ -3,6 +3,7 @@ package eu.union.dev.listeners.mechanics;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,7 +21,7 @@ public class JumpPad implements Listener {
     public void onJump(PlayerMoveEvent e){
         Player p = e.getPlayer();
 
-        if((e.getTo().getBlock().getType() == Material.SPONGE)
+        if((e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == Material.SPONGE)
                 || (e.getTo().getBlock().getType() == Material.STONE_PLATE)
                 || (e.getTo().getBlock().getType() == Material.CARPET)){
             Vector v = p.getLocation().getDirection().multiply(1).setY(1.0D);
@@ -33,7 +34,8 @@ public class JumpPad implements Listener {
 
     @EventHandler
     public void onFallDamage(EntityDamageEvent e){
-        if(e.getCause() == EntityDamageEvent.DamageCause.FALL){
+        if(e.getEntity() instanceof Player &&
+           e.getCause() == EntityDamageEvent.DamageCause.FALL){
             if(players.contains(e.getEntity())){
                 e.setCancelled(true);
                 for(int i = 0; i < 10; i++){
