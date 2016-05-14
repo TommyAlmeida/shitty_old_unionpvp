@@ -1,21 +1,17 @@
 package eu.union.dev.engine.managers;
 
+import com.google.common.collect.Maps;
 import eu.union.dev.engine.KPlayer;
 
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.UUID;
 
 public class PlayerManager {
 
-    private static ArrayList<KPlayer> players = new ArrayList<>();
+    private static Map<UUID, KPlayer> players = Maps.newHashMap();
 
     public static KPlayer getPlayer(UUID uuid){
-        for(int i = 0; i < players.size(); i++){
-            if(players.get(i).getUuid() == uuid){
-                return players.get(i);
-            }
-        }
-        return null;
+        return players.get(uuid);
     }
 
     public static boolean addPlayerProfile(KPlayer profile){
@@ -23,11 +19,11 @@ public class PlayerManager {
             return false;
         }
 
-        players.add(profile);
+        players.put(profile.getUuid(), profile);
         return true;
     }
 
     public static void removePlayer(KPlayer player){
-        players.remove(player);
+        players.remove(player.getUuid());
     }
 }
