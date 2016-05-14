@@ -126,10 +126,12 @@ public class KitMenu implements Listener {
                 case 0: //Kit PvP
                     offerKit(p, "pvp");
                     e.getView().close();
+                    e.setCancelled(true);
                     break;
                 case 1: //Kit Archer
                     offerKit(p, "archer");
                     e.getView().close();
+                    e.setCancelled(true);
                     break;
                 case 2: //Kit GrandPa
                     offerKit(p, "grandpa");

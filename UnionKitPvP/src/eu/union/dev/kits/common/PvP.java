@@ -9,7 +9,7 @@ public class PvP extends Kit {
 
     public PvP() {
         super("pvp", Perms.KIT_FREE.toString(), Difficulty.LOW,
-                Rarity.COMMON, 0, "Simple as fuck, \n", "oi");
+                Rarity.COMMON, 0);
     }
 
     @Override

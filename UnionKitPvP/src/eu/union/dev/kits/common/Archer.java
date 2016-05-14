@@ -10,7 +10,7 @@ public class Archer extends Kit {
 
     public Archer() {
         super("archer", Perms.KIT_FREE.toString(), Difficulty.PRO,
-                Rarity.HEROIC, 0, "§7teste", "§7teste"
+                Rarity.COMMON, 0
         );
     }
 
