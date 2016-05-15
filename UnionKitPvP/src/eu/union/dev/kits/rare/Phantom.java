@@ -1,8 +1,10 @@
 package eu.union.dev.kits.rare;
 
 import eu.union.dev.PvPMain;
+import eu.union.dev.api.Ability;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -18,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Fentis on 14/05/2016.
@@ -32,7 +35,7 @@ public class Phantom extends Kit implements Listener{
         Weapon.giveWeapon(player, Weapon.PHANTOM_FEATHER);
     }
 
-    ArrayList<String> cd = new ArrayList<>();
+    Ability cooldown = new Ability(1,30, TimeUnit.SECONDS);
     @SuppressWarnings("deprecation")
     @EventHandler
     public void onclickinv(InventoryClickEvent e) {
@@ -54,8 +57,8 @@ public class Phantom extends Kit implements Listener{
                 km.getKitAmIUsing(p, "phantom")){
             if (e.getAction() == Action.RIGHT_CLICK_AIR ||
                     e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                if (cd.contains(p.getName())) {
-                    p.sendMessage("§cYou are in cooldown!");
+                if (!cooldown.tryUse(p)) {
+                    Util.getInstance().sendCooldownMessage(p,cooldown,TimeUnit.SECONDS,true);
                 } else {
                     p.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 1.0F, 1.0F);
                     p.setAllowFlight(true);
@@ -67,7 +70,6 @@ public class Phantom extends Kit implements Listener{
                     p.getInventory().setBoots(addcolor(Material.LEATHER_BOOTS));
                     p.sendMessage("§aYou become a ghost and can fly 5s!");
                     p.updateInventory();
-                    cd.add(p.getName());
                     Bukkit.getScheduler().runTaskLater(PvPMain.getInstance(), new Runnable()
                             {
                                 public void run() {
@@ -78,14 +80,6 @@ public class Phantom extends Kit implements Listener{
                                 }
                             }
                             , 5*20);
-                    Bukkit.getScheduler().runTaskLater(PvPMain.getInstance(), new Runnable()
-                            {
-                                public void run() {
-                                    cd.remove(p.getName());
-                                    p.sendMessage("§aThe cooldown is over!");
-                                }
-                            }
-                            , 30*20L);
                 }
             }
         }

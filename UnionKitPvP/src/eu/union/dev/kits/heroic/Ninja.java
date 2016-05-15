@@ -1,8 +1,10 @@
 package eu.union.dev.kits.heroic;
 
 import eu.union.dev.PvPMain;
+import eu.union.dev.api.Ability;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,6 +15,7 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Fentis on 14/05/2016.
@@ -27,7 +30,7 @@ public class Ninja extends Kit implements Listener{
     }
 
     HashMap<Player, Player> ninja = new HashMap<>();
-    ArrayList<String> cd = new ArrayList<>();
+    Ability cooldown = new Ability(1,15, TimeUnit.SECONDS);
 
     @EventHandler
     public void hitplayer(EntityDamageByEntityEvent e)
@@ -49,22 +52,14 @@ public class Ninja extends Kit implements Listener{
                 ninja.containsKey(p)){
             Player t = ninja.get(p);
             if (t!=null && !t.isDead()){
-                if (!cd.contains(p.getName())){
+                if (cooldown.tryUse(p)){
                     if (p.getLocation().distance(t.getLocation()) <30.0){
-                        cd.add(p.getName());
                         p.teleport(t);
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
-                            @Override
-                            public void run() {
-                                cd.remove(p.getName());
-                                p.sendMessage("§aThe cooldown is over!");
-                            }
-                        }, 15*20);
                     }else{
                         p.sendMessage("§cThe player is too far!");
                     }
                 }else{
-                    p.sendMessage("§cYou are in cooldown!");
+                    Util.getInstance().sendCooldownMessage(p,cooldown,TimeUnit.SECONDS,true);
                 }
             }
         }

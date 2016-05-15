@@ -1,8 +1,10 @@
 package eu.union.dev.kits.rare;
 
 import eu.union.dev.PvPMain;
+import eu.union.dev.api.Ability;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -15,6 +17,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Fentis on 14/05/2016.
@@ -29,7 +32,7 @@ public class Flash extends Kit implements Listener{
         Weapon.giveWeapon(player,Weapon.FLASH_TORCH);
     }
 
-    ArrayList<String> cd = new ArrayList<>();
+    Ability cooldown = new Ability(1,15, TimeUnit.SECONDS);
     @SuppressWarnings("deprecation")
     @EventHandler
     public void onclick(PlayerInteractEvent e){
@@ -41,12 +44,11 @@ public class Flash extends Kit implements Listener{
             if (km.getKitAmIUsing(p, "flash")){
                 e.setCancelled(true);
                 p.updateInventory();
-                if (!cd.contains(p.getName())){
+                if (cooldown.tryUse(p)){
                     Block b = p.getTargetBlock((HashSet<Byte>)null, 100);
                     if (b.getType() != Material.AIR &&
                             b.getRelative(BlockFace.UP).getType() == Material.AIR &&
                             b.getRelative(BlockFace.UP).getRelative(BlockFace.UP).getType() == Material.AIR){
-                        cd.add(p.getName());
                         p.getWorld().strikeLightningEffect(p.getLocation());
                         p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 1.0F, 1.0F);
                         p.getWorld().playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 5);
@@ -57,18 +59,9 @@ public class Flash extends Kit implements Listener{
                         p.teleport(bl);
                         p.getWorld().strikeLightningEffect(p.getLocation());
                         p.getWorld().playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 5);
-                        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable()
-                                {
-                                    public void run()
-                                    {
-                                        p.sendMessage("§aThe cooldown is over!");
-                                        cd.remove(p.getName());
-                                    }
-                                }
-                                , 15*20);
                     }
                 }else{
-                    p.sendMessage("§cYou are in cooldown!");
+                    Util.getInstance().sendCooldownMessage(p,cooldown,TimeUnit.SECONDS,true);
                 }
             }
         }

@@ -10,6 +10,7 @@ public enum Weapon {
 
     DEFAULT_SWORD(Material.WOOD_SWORD, "§aDefault Sword"),
     DEFAULT_BOW(Material.BOW, "§aDefault Bow"),
+    DEFAULT_ARROW(Material.ARROW, "§aArrow"),
     GRANDPA_STICK(Material.STICK, "§eGrandPa Cane"),
     PULSAR_SHOCK(Material.MAGMA_CREAM, "§ePulsar Shock"),
     EXPLODER_TNT(Material.BOW, "§eExploder TnT"),

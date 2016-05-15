@@ -1,10 +1,9 @@
 package eu.union.dev.kits.rare;
 
-import eu.union.dev.PvPMain;
+import eu.union.dev.api.Ability;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,7 +14,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Fentis on 14/05/2016.
@@ -29,7 +28,7 @@ public class Switcher extends Kit implements Listener{
         Weapon.giveWeapon(player, Weapon.SWITCHER_SNOW_BALL);
     }
 
-    ArrayList<String> cd = new ArrayList<>();
+    Ability cooldown = new Ability(1, 3, TimeUnit.SECONDS);
     @SuppressWarnings("deprecation")
     @EventHandler
     public void onclick(PlayerInteractEvent e){
@@ -40,15 +39,8 @@ public class Switcher extends Kit implements Listener{
                 e.setCancelled(true);
                 p.updateInventory();
                 if (e.getAction() == Action.RIGHT_CLICK_AIR){
-                    if (!cd.contains(p.getName())){
+                    if (cooldown.tryUse(p)){
                         p.launchProjectile(Snowball.class);
-                        cd.add(p.getName());
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
-                            @Override
-                            public void run() {
-                                cd.remove(p.getName());
-                            }
-                        }, 3*20);
                     }
                 }
             }

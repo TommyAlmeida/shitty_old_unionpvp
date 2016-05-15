@@ -2,6 +2,7 @@ package eu.union.dev.kits.common;
 
 import eu.union.dev.engine.Kit;
 import eu.union.dev.utils.Perms;
+import eu.union.dev.utils.Weapon;
 import org.bukkit.entity.Player;
 
 public class Poseidon extends Kit{
@@ -13,6 +14,6 @@ public class Poseidon extends Kit{
 
     @Override
     public void applyKit(Player player) {
-
+        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
     }
 }
