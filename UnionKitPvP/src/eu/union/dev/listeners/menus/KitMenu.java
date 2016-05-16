@@ -139,6 +139,16 @@ public class KitMenu implements Listener {
             Icon icon = new Icon(Material.ENCHANTED_BOOK);
             inv.setItem(17, KitLayout.getLayout().design(icon, km.getKitByName("specialist")));
         }
+
+        {
+            Icon icon = new Icon(Material.SLIME_BALL);
+            inv.setItem(18, KitLayout.getLayout().design(icon, km.getKitByName("hulk")));
+        }
+
+        {
+            Icon icon = new Icon(Material.BLAZE_ROD);
+            inv.setItem(19, KitLayout.getLayout().design(icon, km.getKitByName("monk")));
+        }
     }
 
     @EventHandler
@@ -239,6 +249,16 @@ public class KitMenu implements Listener {
                     break;
                 case 17: //Kit Specialist
                     offerKit(p, "specialist");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 18: //Kit Hulk
+                    offerKit(p, "hulk");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 19: //Kit Monk
+                    offerKit(p, "monk");
                     e.getView().close();
                     e.setCancelled(true);
                     break;

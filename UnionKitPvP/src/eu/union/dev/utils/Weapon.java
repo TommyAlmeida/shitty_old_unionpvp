@@ -22,7 +22,9 @@ public enum Weapon {
     PHANTOM_FEATHER(Material.FEATHER, "§7Phantom Feather"),
     THOR_HAMMER(Material.GOLD_AXE, "§6Thor Hammer"),
     SPECIALIST_BOOK(Material.ENCHANTED_BOOK, "§9Specialist Book"),
-    TIMELORD_CLOCK(Material.WATCH, "§6TimeLord Clock");
+    TIMELORD_CLOCK(Material.WATCH, "§6TimeLord Clock"),
+    HULK_SLIME(Material.SLIME_BALL, "§aHulk Catch"),
+    MONK_ROD(Material.BLAZE_ROD, "§6Monk's Rod");
 
 
     Material mat;
