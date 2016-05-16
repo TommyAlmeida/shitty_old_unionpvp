@@ -21,7 +21,8 @@ public enum Weapon {
     FLASH_TORCH(Material.REDSTONE_TORCH_ON, "§4Flash Torch"),
     PHANTOM_FEATHER(Material.FEATHER, "§7Phantom Feather"),
     THOR_HAMMER(Material.GOLD_AXE, "§6Thor Hammer"),
-    SPECIALIST_BOOK(Material.ENCHANTED_BOOK, "§9Specialist Book");
+    SPECIALIST_BOOK(Material.ENCHANTED_BOOK, "§9Specialist Book"),
+    TIMELORD_CLOCK(Material.WATCH, "§6TimeLord Clock");
 
 
     Material mat;
