@@ -67,7 +67,6 @@ public class PlayerListeners implements Listener {
         welcomeMessage(p);
         Util.getInstance().buildJoinIcons(p);
         Util.getInstance().buildScoreboard(p);
-
     }
 
     @EventHandler
@@ -82,17 +81,16 @@ public class PlayerListeners implements Listener {
 
         e.setRespawnLocation(loc);
         Util.getInstance().buildJoinIcons(e.getPlayer());
+        Util.getInstance().readyPlayer(e.getPlayer());
     }
 
 
     void welcomeMessage(Player p){
-        p.sendMessage("§m§7§l--------------------");
         p.sendMessage(Util.getInstance().center("§eUnionPvP", 25));
-        p.sendMessage(Util.getInstance().center("§bPowered by UnionNetwork",20));
+        p.sendMessage(Util.getInstance().center("§bPowered by UnionNetwork",8));
         p.sendMessage(" ");
-        p.sendMessage("§7Are you ready? if yes, go ahead and choose your kit.");
+        p.sendMessage(Util.getInstance().center("§7Are you ready? if yes, go ahead and choose your kit.",23));
         p.sendMessage(" ");
-        p.sendMessage("§m§7§l-------------------");
     }
 
     @EventHandler
@@ -182,6 +180,7 @@ public class PlayerListeners implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
+                Util.getInstance().readyPlayer(killed);
                 Util.getInstance().buildJoinIcons(killed);
                 Location loc = ConfigManager.getInstance().getLocation("Spawn");
                 killed.teleport(loc);

@@ -95,6 +95,7 @@ public class KitManager {
         player.setExhaustion(0f);
         player.setFallDistance(0f);
         player.setFireTicks(0);
+        player.setFireTicks(0);
 
         for (PotionEffect pE : player.getActivePotionEffects()) {
             player.removePotionEffect(pE.getType());
@@ -125,7 +126,6 @@ public class KitManager {
             player.sendMessage(Messages.PREFIX.toString() + " §7You already have a kit!");
         }else{
             readyPlayer(player);
-            Weapon.giveWeapon(player,Weapon.DEFAULT_SWORD);
             kit.applyKit(player);
 
             playerKit.put(player, kit);
