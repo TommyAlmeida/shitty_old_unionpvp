@@ -2,6 +2,7 @@ package eu.union.dev;
 
 import eu.union.dev.commands.KitCMD;
 import eu.union.dev.commands.ListKitsCMD;
+import eu.union.dev.commands.ReconnectCMD;
 import eu.union.dev.commands.StatsCMD;
 import eu.union.dev.commands.location.SetSpawn;
 import eu.union.dev.commands.location.Spawn;
@@ -72,6 +73,7 @@ public class PvPMain extends JavaPlugin {
         getCommand("setspawn").setExecutor(new SetSpawn());
         getCommand("spawn").setExecutor(new Spawn());
         getCommand("stats").setExecutor(new StatsCMD());
+        getCommand("recon").setExecutor(new ReconnectCMD());
     }
 
     @Override

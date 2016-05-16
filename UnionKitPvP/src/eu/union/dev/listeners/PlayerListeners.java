@@ -149,9 +149,11 @@ public class PlayerListeners implements Listener {
                 kPlayer_killer.addCoins(coins);
             }
 
-            Bukkit.broadcastMessage("§a" + killer.getDisplayName() + " §chas been slained by §b" + killed.getDisplayName());
+            Bukkit.broadcastMessage("§a" + killed.getDisplayName() + " §chas been slained by §b" + killer.getDisplayName());
             killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
             killer.sendMessage("§6+%coins coins".replace("%coins",String.valueOf(coins)));
+            killer.sendMessage(Messages.PREFIX.toString() + " §cYou killed §e" + killed.getDisplayName());
+            killed.sendMessage(Messages.PREFIX.toString() + " §cYou have been killed by §b" + killer.getDisplayName());
         }
 
         e.setDeathMessage(null);

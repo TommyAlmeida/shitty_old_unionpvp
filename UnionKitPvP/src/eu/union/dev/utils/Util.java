@@ -10,9 +10,11 @@ import eu.union.dev.engine.managers.PlayerManager;
 import net.minecraft.server.v1_8_R3.AttributeModifier;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -86,8 +88,14 @@ public class Util {
         }
 
         {
-            Icon stats = new Icon(Material.IRON_SWORD, "§9Stats §7(Right-Click)", "§7Where do you wanna go?");
-            inv.setItem(8,stats.build());
+            ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
+
+            SkullMeta meta = (SkullMeta) skull.getItemMeta();
+            meta.setOwner(player.getName());
+            meta.setDisplayName("§9Stats §7(Right-Click)");
+            skull.setItemMeta(meta);
+
+            inv.setItem(8,skull);
         }
     }
 

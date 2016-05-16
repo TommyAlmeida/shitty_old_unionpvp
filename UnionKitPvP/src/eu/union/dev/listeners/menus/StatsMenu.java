@@ -27,7 +27,7 @@ public class StatsMenu implements Listener{
             return;
         }
 
-        if (!(item.getType() == Material.COMPASS)) {
+        if (!(item.getType() == Material.SKULL_ITEM)) {
             return;
         }
 
@@ -54,6 +54,7 @@ public class StatsMenu implements Listener{
 
         {
             Icon icon = new Icon(Material.STONE_SWORD, "§eKills", "§" + kplayer.getKills());
+            inv.setItem();
         }
 
         {
