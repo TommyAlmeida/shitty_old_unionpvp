@@ -125,6 +125,16 @@ public class KitMenu implements Listener {
             inv.setItem(14, KitLayout.getLayout().design(icon, km.getKitByName("thor")));
         }
 
+        {
+            Icon icon = new Icon(Material.SPIDER_EYE);
+            inv.setItem(15, KitLayout.getLayout().design(icon, km.getKitByName("viper")));
+        }
+
+        {
+            Icon icon = new Icon(Material.WATCH);
+            inv.setItem(16, KitLayout.getLayout().design(icon, km.getKitByName("timelord")));
+        }
+
     }
 
     @EventHandler
@@ -210,6 +220,16 @@ public class KitMenu implements Listener {
                     break;
                 case 14: //Kit Thor
                     offerKit(p, "thor");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 15: //Kit Viper
+                    offerKit(p, "viper");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 16: //Kit TimeLord
+                    offerKit(p, "timelord");
                     e.getView().close();
                     e.setCancelled(true);
                     break;
