@@ -59,18 +59,16 @@ public class PlayerListeners implements Listener {
         if (km.usingKit(p))
             km.removeKit(p);
 
-        km.readyPlayer(p);
-
         Location loc = ConfigManager.getInstance().getLocation("Spawn");
         p.teleport(loc);
 
-        welcomeMessage(p);
+        Util.getInstance().readyPlayer(p);
         Util.getInstance().buildJoinIcons(p);
         Util.getInstance().buildScoreboard(p);
     }
 
     @EventHandler
-    public void onRespawn(PlayerRespawnEvent e){
+    public void onRespawn(PlayerRespawnEvent e) {
         Location loc = ConfigManager.getInstance().getLocation("Spawn");
         KitManager km = KitManager.getManager();
 
@@ -82,15 +80,6 @@ public class PlayerListeners implements Listener {
         e.setRespawnLocation(loc);
         Util.getInstance().buildJoinIcons(e.getPlayer());
         Util.getInstance().readyPlayer(e.getPlayer());
-    }
-
-
-    void welcomeMessage(Player p){
-        p.sendMessage(Util.getInstance().center("§eUnionPvP", 25));
-        p.sendMessage(Util.getInstance().center("§bPowered by UnionNetwork",8));
-        p.sendMessage(" ");
-        p.sendMessage(Util.getInstance().center("§7Are you ready? if yes, go ahead and choose your kit.",23));
-        p.sendMessage(" ");
     }
 
     @EventHandler
@@ -135,8 +124,8 @@ public class PlayerListeners implements Listener {
             int coins = rand.nextInt(7);
 
             if(kPlayer_killed == null || kPlayer_killer == null){
-                killed.sendMessage(Messages.PREFIX.toString() + " §cReconnect to the server please.");
-                killer.sendMessage(Messages.PREFIX.toString() + " §cReconnect to the server please.");
+                killed.sendMessage(Messages.PREFIX.toString() + " §cReconnect please.");
+                killer.sendMessage(Messages.PREFIX.toString() + " §cReconnect please.");
                 return;
             }else{
                 kPlayer_killed.addDeaths(1);
@@ -151,9 +140,9 @@ public class PlayerListeners implements Listener {
 
             Bukkit.broadcastMessage("§a" + killed.getDisplayName() + " §chas been slained by §b" + killer.getDisplayName());
             killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
+            killer.sendMessage("§cYou killed §e" + killed.getDisplayName());
+            killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
             killer.sendMessage("§6+%coins coins".replace("%coins",String.valueOf(coins)));
-            killer.sendMessage(Messages.PREFIX.toString() + " §cYou killed §e" + killed.getDisplayName());
-            killed.sendMessage(Messages.PREFIX.toString() + " §cYou have been killed by §b" + killer.getDisplayName());
         }
 
         e.setDeathMessage(null);
@@ -182,7 +171,6 @@ public class PlayerListeners implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                Util.getInstance().readyPlayer(killed);
                 Util.getInstance().buildJoinIcons(killed);
                 Location loc = ConfigManager.getInstance().getLocation("Spawn");
                 killed.teleport(loc);
