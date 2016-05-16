@@ -5,6 +5,7 @@ import eu.union.dev.api.Packets;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.utils.Messages;
 import eu.union.dev.utils.Perms;
+import eu.union.dev.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -29,7 +30,6 @@ public class Spawn implements CommandExecutor {
 
             Packets.getAPI().sendActionBar(p, "§9You need to wait §c" + 5 + " seconds §9to teleport.");
 
-
             Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                 int seconds = 0;
                 @Override
@@ -37,6 +37,7 @@ public class Spawn implements CommandExecutor {
                     p.teleport(loc);
                 }
             }, 20*5);
+            Util.getInstance().buildJoinIcons(p);
         }
         return false;
     }

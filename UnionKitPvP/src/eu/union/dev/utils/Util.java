@@ -13,6 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -136,4 +137,17 @@ public class Util {
         }.runTaskTimer(PvPMain.getInstance(), 0, 20);
     }
 
+    public void readyPlayer(Player player) {
+        player.getInventory().clear();
+        player.setHealth(player.getMaxHealth());
+        player.setFoodLevel(20);
+        player.setExhaustion(0f);
+        player.setFallDistance(0f);
+        player.setFireTicks(0);
+
+        for (PotionEffect pE : player.getActivePotionEffects()) {
+            player.removePotionEffect(pE.getType());
+        }
+
+    }
 }
