@@ -66,6 +66,7 @@ public class PlayerListeners implements Listener {
 
         welcomeMessage(p);
         Util.getInstance().buildJoinIcons(p);
+        Util.getInstance().buildScoreboard(p);
 
     }
 

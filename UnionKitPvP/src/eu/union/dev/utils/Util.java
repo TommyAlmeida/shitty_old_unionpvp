@@ -1,5 +1,6 @@
 package eu.union.dev.utils;
 
+import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
@@ -12,6 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -86,13 +88,52 @@ public class Util {
             Icon stats = new Icon(Material.IRON_SWORD, "§9Stats §7(Right-Click)", "§7Where do you wanna go?");
             inv.setItem(8,stats.build());
         }
+    }
+
+    public void buildScoreboard(Player p) {
+        final KPlayer profile = PlayerManager.getPlayer(p.getUniqueId());
 
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective obj = board.registerNewObjective("dummy","dummy");
         obj.setDisplayName("§aLv.§e" + profile.getLevel());
         obj.setDisplaySlot(DisplaySlot.BELOW_NAME);
 
-        player.setScoreboard(board);
+        new BukkitRunnable() {
+            public void run() {
+                final String STATS_OBJC_ID = "Stats";
+                final Scoreboard board;
+
+                if (p.getScoreboard() == null) {
+                    board = Bukkit.getScoreboardManager().getNewScoreboard();
+                } else {
+                    board = p.getScoreboard();
+                }
+
+                Objective obj;
+
+                if (board.getObjective(STATS_OBJC_ID) == null) {
+                    obj = board.registerNewObjective(STATS_OBJC_ID, "dummy");
+                } else {
+                    board.getObjective(STATS_OBJC_ID).unregister();
+                    obj = board.registerNewObjective(STATS_OBJC_ID, "dummy");
+                }
+
+                obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+                int sc = 8;
+                obj.setDisplayName("      §e§lUNION KITPVP      ");
+                obj.getScore("§a").setScore(sc--);
+                obj.getScore("§e [INFO] ").setScore(sc--);
+                obj.getScore("§f  Kills: §e" + profile.getKills()).setScore(sc--);
+                obj.getScore("§f  Deaths: §e" + profile.getDeaths()).setScore(sc--);
+                obj.getScore("§f  Coins: §e" + profile.getCoins()).setScore(sc--);
+                obj.getScore("§f  Streak: §e").setScore(sc--); //TODO: implementar
+                obj.getScore("§f  Level: §e" + profile.getLevel()).setScore(sc--);
+                obj.getScore("§b").setScore(sc--);
+                obj.getScore("§f  www.unionnetwork.eu").setScore(sc);
+
+                p.setScoreboard(board);
+            }
+        }.runTaskTimer(PvPMain.getInstance(), 0, 20);
     }
 
 }

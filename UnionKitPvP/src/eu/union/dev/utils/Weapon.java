@@ -20,7 +20,8 @@ public enum Weapon {
     KANGAROO_FIREWORK(Material.FIREWORK, "§cKangaroo Firework"),
     FLASH_TORCH(Material.REDSTONE_TORCH_ON, "§4Flash Torch"),
     PHANTOM_FEATHER(Material.FEATHER, "§7Phantom Feather"),
-    THOR_HAMMER(Material.GOLD_AXE, "§6Thor Hammer");
+    THOR_HAMMER(Material.GOLD_AXE, "§6Thor Hammer"),
+    SPECIALIST_BOOK(Material.ENCHANTED_BOOK, "§9Specialist Book");
 
 
     Material mat;

@@ -10,11 +10,8 @@ import eu.union.dev.commands.staff.GameModeCMD;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.engine.storage.Database;
-import eu.union.dev.kits.common.Archer;
-import eu.union.dev.kits.common.Fisherman;
+import eu.union.dev.kits.common.*;
 import eu.union.dev.kits.heroic.*;
-import eu.union.dev.kits.common.Grandpa;
-import eu.union.dev.kits.common.PvP;
 import eu.union.dev.kits.rare.*;
 import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
@@ -64,6 +61,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new Flash(), this);
         pm.registerEvents(new Phantom(), this);
         pm.registerEvents(new Thor(), this);
+        pm.registerEvents(new Specialist(), this);
 
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
@@ -124,5 +122,6 @@ public class PvPMain extends JavaPlugin {
         km.registerKit(new Flash());
         km.registerKit(new Phantom());
         km.registerKit(new Thor());
+        km.registerKit(new Specialist());
     }
 }

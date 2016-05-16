@@ -75,6 +75,10 @@ public class KPlayer {
     }
 
     public int getKDR(){
+        if(deaths == 0){
+            return deaths;
+        }
+
         return kills / deaths;
     }
 }

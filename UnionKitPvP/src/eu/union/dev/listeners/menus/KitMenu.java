@@ -125,6 +125,11 @@ public class KitMenu implements Listener {
             inv.setItem(14, KitLayout.getLayout().design(icon, km.getKitByName("thor")));
         }
 
+        {
+            Icon icon = new Icon(Material.ENCHANTED_BOOK);
+            inv.setItem(15, KitLayout.getLayout().design(icon, km.getKitByName("specialist")));
+        }
+
     }
 
     @EventHandler
@@ -210,6 +215,11 @@ public class KitMenu implements Listener {
                     break;
                 case 14: //Kit Thor
                     offerKit(p, "thor");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 15: //Kit Specialist
+                    offerKit(p, "specialist");
                     e.getView().close();
                     e.setCancelled(true);
                     break;
