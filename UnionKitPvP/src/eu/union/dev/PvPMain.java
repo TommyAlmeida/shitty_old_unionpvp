@@ -20,6 +20,7 @@ import eu.union.dev.listeners.mechanics.JumpPad;
 import eu.union.dev.listeners.mechanics.SoupListener;
 import eu.union.dev.listeners.menus.KitMenu;
 import eu.union.dev.listeners.menus.MainMenu;
+import eu.union.dev.listeners.menus.StatsMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -44,6 +45,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new ServerListeners(), this);
         pm.registerEvents(new KitMenu(), this);
         pm.registerEvents(new MainMenu(), this);
+        pm.registerEvents(new StatsMenu(), this);
         pm.registerEvents(new SoupListener(), this);
         pm.registerEvents(new JumpPad(), this);
 
