@@ -22,7 +22,8 @@ public class Specialist extends Kit implements Listener {
 
     @Override
     public void applyKit(Player player) {
-        Weapon.giveWeapon(player, Weapon.SPECIALIST_BOOK);
+        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
+        Weapon.giveWeapon(player, Weapon.SPECIALIST_BOOK, 1);
     }
 
     @EventHandler

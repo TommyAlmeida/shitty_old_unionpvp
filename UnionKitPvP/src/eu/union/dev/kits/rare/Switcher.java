@@ -25,7 +25,7 @@ public class Switcher extends Kit implements Listener{
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.SWITCHER_SNOW_BALL);
+        Weapon.giveWeapon(player, Weapon.SWITCHER_SNOW_BALL, 1);
     }
 
     Ability cooldown = new Ability(1, 3, TimeUnit.SECONDS);

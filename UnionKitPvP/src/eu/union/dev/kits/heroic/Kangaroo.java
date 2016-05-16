@@ -26,7 +26,7 @@ public class Kangaroo extends Kit implements Listener{
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.KANGAROO_FIREWORK);
+        Weapon.giveWeapon(player, Weapon.KANGAROO_FIREWORK, 1);
     }
 
     ArrayList<String> cd = new ArrayList<>();

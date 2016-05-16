@@ -64,6 +64,11 @@ public enum Weapon {
         p.getInventory().setItem(slot,item);
     }
 
+    public static void giveWeapon(Player p, Weapon weapon, int slot, Enchantment enchant, int level){
+        ItemStack item = Weapon.makeWeapon(weapon, enchant, level);
+        p.getInventory().setItem(slot,item);
+    }
+
     public static void giveWeapon(Player p, Weapon weapon, Enchantment enchant, int level){
         ItemStack item = Weapon.makeWeapon(weapon, enchant, level);
         p.getInventory().setItem(0,item);

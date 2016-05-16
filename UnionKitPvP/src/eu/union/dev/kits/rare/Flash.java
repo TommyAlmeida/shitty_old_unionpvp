@@ -29,7 +29,7 @@ public class Flash extends Kit implements Listener{
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player,Weapon.FLASH_TORCH);
+        Weapon.giveWeapon(player,Weapon.FLASH_TORCH, 1);
     }
 
     Ability cooldown = new Ability(1,15, TimeUnit.SECONDS);

@@ -18,7 +18,7 @@ public class Fisherman extends Kit implements Listener{
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.FISHERMAN_ROD);
+        Weapon.giveWeapon(player, Weapon.FISHERMAN_ROD, 1);
     }
 
     @EventHandler

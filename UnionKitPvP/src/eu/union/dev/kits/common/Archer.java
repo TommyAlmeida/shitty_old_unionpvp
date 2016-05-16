@@ -17,7 +17,7 @@ public class Archer extends Kit {
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.DEFAULT_BOW, Enchantment.ARROW_INFINITE, 1);
+        Weapon.giveWeapon(player, Weapon.DEFAULT_BOW, 1, Enchantment.ARROW_INFINITE, 1);
         Weapon.giveWeapon(player, Weapon.DEFAULT_ARROW, 35);
     }
 

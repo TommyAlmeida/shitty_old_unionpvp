@@ -32,7 +32,7 @@ public class Phantom extends Kit implements Listener{
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.PHANTOM_FEATHER);
+        Weapon.giveWeapon(player, Weapon.PHANTOM_FEATHER, 1);
     }
 
     Ability cooldown = new Ability(1,30, TimeUnit.SECONDS);
