@@ -3,6 +3,7 @@ package eu.union.dev.kits.common;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.utils.Perms;
 import eu.union.dev.utils.Weapon;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 
 public class PvP extends Kit {
@@ -14,6 +15,6 @@ public class PvP extends Kit {
 
     @Override
     public void applyKit(Player player) {
-        //Give's sword but already give it on apply kit metho
+        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD, Enchantment.DAMAGE_ALL,1);
     }
 }

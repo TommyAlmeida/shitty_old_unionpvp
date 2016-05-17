@@ -69,6 +69,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new TimeLord(), this);
         pm.registerEvents(new Hulk(), this);
         pm.registerEvents(new Monk(), this);
+        pm.registerEvents(new JumpFall(), this);
 
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
@@ -135,5 +136,6 @@ public class PvPMain extends JavaPlugin {
         km.registerKit(new TimeLord());
         km.registerKit(new Hulk());
         km.registerKit(new Monk());
+        km.registerKit(new JumpFall());
     }
 }

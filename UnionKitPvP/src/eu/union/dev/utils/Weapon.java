@@ -24,7 +24,8 @@ public enum Weapon {
     SPECIALIST_BOOK(Material.ENCHANTED_BOOK, "§9Specialist Book"),
     TIMELORD_CLOCK(Material.WATCH, "§6TimeLord Clock"),
     HULK_SLIME(Material.SLIME_BALL, "§aHulk Catch"),
-    MONK_ROD(Material.BLAZE_ROD, "§6Monk's Rod");
+    MONK_ROD(Material.BLAZE_ROD, "§6Monk's Rod"),
+    JUMPFALL_PAPER(Material.PAPER, "§7JumpFall Paper");
 
 
     Material mat;
