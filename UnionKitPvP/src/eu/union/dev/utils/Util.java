@@ -5,9 +5,7 @@ import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.KPlayer;
-import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.PlayerManager;
-import net.minecraft.server.v1_8_R3.AttributeModifier;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
@@ -20,6 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
 import java.util.concurrent.TimeUnit;
 
@@ -107,42 +106,41 @@ public class Util {
         obj.setDisplayName("§aLv.§e" + profile.getLevel());
         obj.setDisplaySlot(DisplaySlot.BELOW_NAME);
 
+        Objective stats = board.registerNewObjective("stats", "dummy");
+        stats.setDisplaySlot(DisplaySlot.SIDEBAR);
+        int index = 8;
+        stats.setDisplayName("      §e§lUNION KITPVP      ");
+        stats.getScore("§a").setScore(index--);
+        stats.getScore("§e [INFO] ").setScore(index--);
+        stats.getScore("§1").setScore(index--);
+        stats.getScore("§2").setScore(index--);
+        stats.getScore("§3").setScore(index--);
+        stats.getScore("§4").setScore(index--);
+        stats.getScore("§b").setScore(index--);
+        stats.getScore("§f  www.unionnetwork.eu").setScore(index);
+
+        board.registerNewTeam("kills").addEntry("§1");
+        board.registerNewTeam("deaths").addEntry("§2");
+        board.registerNewTeam("coins").addEntry("§3");
+        board.registerNewTeam("level").addEntry("§4");
+
         new BukkitRunnable() {
+            final Team deaths = board.getTeam("deaths");
+            final Team kills = board.getTeam("kills");
+            final Team coins = board.getTeam("coins");
+            final Team level = board.getTeam("level");
+
             public void run() {
-                final String STATS_OBJC_ID = "Stats";
-                final Scoreboard board;
+                final KPlayer profile = PlayerManager.getPlayer(p.getUniqueId());
 
-                if (p.getScoreboard() == null) {
-                    board = Bukkit.getScoreboardManager().getNewScoreboard();
-                } else {
-                    board = p.getScoreboard();
-                }
-
-                Objective obj;
-
-                if (board.getObjective(STATS_OBJC_ID) == null) {
-                    obj = board.registerNewObjective(STATS_OBJC_ID, "dummy");
-                } else {
-                    board.getObjective(STATS_OBJC_ID).unregister();
-                    obj = board.registerNewObjective(STATS_OBJC_ID, "dummy");
-                }
-
-                obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-                int sc = 8;
-                obj.setDisplayName("      §e§lUNION KITPVP      ");
-                obj.getScore("§a").setScore(sc--);
-                obj.getScore("§e [INFO] ").setScore(sc--);
-                obj.getScore("§f  Kills: §e" + profile.getKills()).setScore(sc--);
-                obj.getScore("§f  Deaths: §e" + profile.getDeaths()).setScore(sc--);
-                obj.getScore("§f  Coins: §e" + profile.getCoins()).setScore(sc--);
-                obj.getScore("§f  Streak: §e").setScore(sc--); //TODO: implementar
-                obj.getScore("§f  Level: §e" + profile.getLevel()).setScore(sc--);
-                obj.getScore("§b").setScore(sc--);
-                obj.getScore("§f  www.unionnetwork.eu").setScore(sc);
-
-                p.setScoreboard(board);
+                deaths.setPrefix("§f  Deaths: §e" + profile.getDeaths());
+                kills.setPrefix("§f  Kills: §e" + profile.getKills());
+                coins.setPrefix("§f  Coins: §e" + profile.getCoins());
+                level.setPrefix("§f  Level: §e" + profile.getLevel());
             }
-        }.runTaskTimer(PvPMain.getInstance(), 0, 20);
+        }.runTaskTimer(PvPMain.getInstance(), 0, 2 * 20);
+
+        p.setScoreboard(board);
     }
 
     public void readyPlayer(Player player) {
