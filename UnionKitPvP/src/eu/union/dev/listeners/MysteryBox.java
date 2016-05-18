@@ -28,6 +28,10 @@ public class MysteryBox implements Listener {
         Block b = event.getClickedBlock();
         Player player = event.getPlayer();
 
+        if(b == null) {
+          return;
+        }
+
         if(!(event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             return;
         }
@@ -36,11 +40,7 @@ public class MysteryBox implements Listener {
             return;
         }
 
-        if(b == null) {
-            return;
-        }
-
-        if(mysterycase.get("USING") == true) {
+        if(mysterycase.get("USING")) {
 
             player.sendMessage(Messages.PREFIX.toString() + " §7The case is alread in use. Wait a few moments.");
 
