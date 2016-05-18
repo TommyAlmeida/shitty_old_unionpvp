@@ -5,6 +5,7 @@ import eu.union.dev.api.Ability;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
@@ -69,6 +70,8 @@ public class Repulsion extends Kit implements Listener{
                         }
                     }
                 }.runTaskTimer(PvPMain.getInstance(), 0, 20);
+            }else{
+                Util.getInstance().sendCooldownMessage(p,cooldown,TimeUnit.SECONDS,true);
             }
         }
     }
