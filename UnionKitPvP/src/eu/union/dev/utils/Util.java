@@ -67,6 +67,7 @@ public class Util {
 
     public void buildJoinIcons(Player player){
         Inventory inv = player.getInventory();
+        inv.clear();
         KPlayer profile = PlayerManager.getPlayer(player.getUniqueId());
 
         {
