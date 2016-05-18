@@ -68,21 +68,6 @@ public class PlayerListeners implements Listener {
     }
 
     @EventHandler
-    public void onRespawn(PlayerRespawnEvent e) {
-        Location loc = ConfigManager.getInstance().getLocation("Spawn");
-        KitManager km = KitManager.getManager();
-
-        if (km.usingKit(e.getPlayer())) {
-            km.removeKit(e.getPlayer());
-        }
-
-
-        e.setRespawnLocation(loc);
-        Util.getInstance().buildJoinIcons(e.getPlayer());
-        Util.getInstance().readyPlayer(e.getPlayer());
-    }
-
-    @EventHandler
     public void onChat(AsyncPlayerChatEvent e){
         String prefix = PermissionsEx.getUser(e.getPlayer()).getGroups()[0].getPrefix();
         KPlayer kPlayer = PlayerManager.getPlayer(e.getPlayer().getUniqueId());
@@ -150,6 +135,8 @@ public class PlayerListeners implements Listener {
         if (km.usingKit(killed)) {
             km.removeKit(killed);
             e.setDroppedExp(0);
+        } else {
+            km.readyPlayer(killed);
         }
 
         /*
