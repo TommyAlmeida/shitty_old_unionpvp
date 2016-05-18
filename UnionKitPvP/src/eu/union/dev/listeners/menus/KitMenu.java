@@ -154,6 +154,16 @@ public class KitMenu implements Listener {
             Icon icon = new Icon(Material.PAPER);
             inv.setItem(20, KitLayout.getLayout().design(icon, km.getKitByName("jumpfall")));
         }
+
+        {
+            Icon icon = new Icon(Material.MAGMA_CREAM);
+            inv.setItem(21, KitLayout.getLayout().design(icon, km.getKitByName("magma")));
+        }
+
+        {
+            Icon icon = new Icon(Material.SLIME_BLOCK);
+            inv.setItem(22, KitLayout.getLayout().design(icon, km.getKitByName("repulsion")));
+        }
     }
 
     @EventHandler
@@ -269,6 +279,16 @@ public class KitMenu implements Listener {
                     break;
                 case 20: //Kit JumpFall
                     offerKit(p, "jumpfall");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 21: //Kit Magma
+                    offerKit(p, "magma");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 22: //Kit Repulsion
+                    offerKit(p, "repulsion");
                     e.getView().close();
                     e.setCancelled(true);
                     break;
