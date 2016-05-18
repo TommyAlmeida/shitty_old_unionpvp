@@ -21,10 +21,16 @@ public class JumpPad implements Listener {
     public void onJump(PlayerMoveEvent e){
         Player p = e.getPlayer();
 
-        if((e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == Material.SPONGE)
-                || (e.getTo().getBlock().getType() == Material.STONE_PLATE)
+        if((e.getTo().getBlock().getType() == Material.STONE_PLATE)
                 || (e.getTo().getBlock().getType() == Material.CARPET)){
             Vector v = p.getLocation().getDirection().multiply(1).setY(1.0D);
+            p.setVelocity(v);
+            p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 3.0F, 2.0F);
+            p.getWorld().playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 4);
+            players.add(p);
+        }
+        if(e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == Material.SPONGE){
+            Vector v = new Vector(0.0D,5.0D,0.0D);
             p.setVelocity(v);
             p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 3.0F, 2.0F);
             p.getWorld().playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 4);
