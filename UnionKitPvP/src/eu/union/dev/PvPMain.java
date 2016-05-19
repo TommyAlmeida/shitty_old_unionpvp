@@ -16,6 +16,7 @@ import eu.union.dev.kits.heroic.*;
 import eu.union.dev.kits.rare.*;
 import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
+import eu.union.dev.listeners.mechanics.GiveKitInArea;
 import eu.union.dev.listeners.mechanics.JumpPad;
 import eu.union.dev.listeners.mechanics.SoupListener;
 import eu.union.dev.listeners.menus.KitMenu;
@@ -48,6 +49,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new StatsMenu(), this);
         pm.registerEvents(new SoupListener(), this);
         pm.registerEvents(new JumpPad(), this);
+        pm.registerEvents(new GiveKitInArea(), this);
 
         /**
          * Kits with listeners
