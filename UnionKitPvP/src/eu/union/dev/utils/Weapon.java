@@ -48,7 +48,7 @@ public enum Weapon {
         return item;
     }
 
-    private static ItemStack makeWeapon(Weapon weapon, Enchantment enchant, int level){
+    /*private static ItemStack makeWeapon(Weapon weapon, Enchantment enchant, int level){
         ItemStack item = new ItemStack(weapon.mat, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(weapon.name);
@@ -57,7 +57,7 @@ public enum Weapon {
         item.setItemMeta(meta);
 
         return item;
-    }
+    }*/
 
     public static void giveWeapon(Player p, Weapon weapon){
         ItemStack item = Weapon.makeWeapon(weapon);
@@ -70,13 +70,15 @@ public enum Weapon {
     }
 
     public static void giveWeapon(Player p, Weapon weapon, int slot, Enchantment enchant, int level){
-        ItemStack item = Weapon.makeWeapon(weapon, enchant, level);
+        ItemStack item = Weapon.makeWeapon(weapon);
         p.getInventory().setItem(slot,item);
+        p.getInventory().getItem(slot).addEnchantment(enchant,level);
     }
 
     public static void giveWeapon(Player p, Weapon weapon, Enchantment enchant, int level){
-        ItemStack item = Weapon.makeWeapon(weapon, enchant, level);
+        ItemStack item = Weapon.makeWeapon(weapon);
         p.getInventory().setItem(0,item);
+        p.getInventory().getItem(0).addEnchantment(enchant,level);
     }
 
     public String getName(){
