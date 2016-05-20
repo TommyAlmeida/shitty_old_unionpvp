@@ -25,7 +25,9 @@ public enum Weapon {
     TIMELORD_CLOCK(Material.WATCH, "§6TimeLord Clock"),
     HULK_SLIME(Material.SLIME_BALL, "§aHulk Catch"),
     MONK_ROD(Material.BLAZE_ROD, "§6Monk's Rod"),
-    JUMPFALL_PAPER(Material.PAPER, "§7JumpFall Paper");
+    JUMPFALL_PAPER(Material.PAPER, "§7JumpFall Paper"),
+    CHECKPOINT_FENCE(Material.NETHER_FENCE, "§4Set Position"),
+    CHECKPOINT_POT(Material.FLOWER_POT_ITEM, "§5Teleport");
 
 
     Material mat;

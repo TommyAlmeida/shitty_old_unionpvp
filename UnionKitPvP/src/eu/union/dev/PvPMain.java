@@ -75,6 +75,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new Magma(), this);
         pm.registerEvents(new Repulsion(), this);
         pm.registerEvents(new FireBoost(), this);
+        pm.registerEvents(new CheckPoint(), this);
 
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
@@ -145,5 +146,6 @@ public class PvPMain extends JavaPlugin {
         km.registerKit(new Magma());
         km.registerKit(new Repulsion());
         km.registerKit(new FireBoost());
+        km.registerKit(new CheckPoint());
     }
 }

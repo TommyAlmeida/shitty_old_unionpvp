@@ -47,7 +47,8 @@ public class Endermage extends Kit implements Listener{
                     for (Player p2 : p.getWorld().getPlayers()){
                         if ((Math.abs(bl.getX() - p2.getLocation().getX()) < 3.0D) &&
                                 (Math.abs(bl.getZ() - p2.getLocation().getZ()) < 3.0D) &&
-                                (Math.abs(bl.getY() - p2.getLocation().getY()) >= 5.0D)){
+                                (Math.abs(bl.getY() - p2.getLocation().getY()) >= 5.0D) &&
+                                !p2.canSee(p)){
                             players.add(p2);
                             p2.setNoDamageTicks(5*20);
                             p2.teleport(bl.add(0.5D, 1.0D, 0.5D));
@@ -78,7 +79,8 @@ public class Endermage extends Kit implements Listener{
                                     for (Player p2 : p.getWorld().getPlayers()){
                                         if ((Math.abs(bl.getX() - p2.getLocation().getX()) < 3.0D) &&
                                                 (Math.abs(bl.getZ() - p2.getLocation().getZ()) < 3.0D) &&
-                                                (Math.abs(bl.getY() - p2.getLocation().getY()) >= 5.0D)){
+                                                (Math.abs(bl.getY() - p2.getLocation().getY()) >= 5.0D) &&
+                                                p2.canSee(p)){
                                             status = false;
                                             players.add(p2);
                                             p2.setNoDamageTicks(5*20);
