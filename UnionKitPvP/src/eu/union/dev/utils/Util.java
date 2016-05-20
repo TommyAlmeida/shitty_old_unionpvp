@@ -109,14 +109,16 @@ public class Util {
 
         Objective stats = board.registerNewObjective("stats", "dummy");
         stats.setDisplaySlot(DisplaySlot.SIDEBAR);
-        int index = 8;
+        int index = 10;
         stats.setDisplayName("      §e§lUNION KITPVP      ");
         stats.getScore("§a").setScore(index--);
-        stats.getScore("§e [INFO] ").setScore(index--);
+        stats.getScore("§e[INFO] ").setScore(index--);
         stats.getScore("§1").setScore(index--);
         stats.getScore("§2").setScore(index--);
         stats.getScore("§3").setScore(index--);
         stats.getScore("§4").setScore(index--);
+        stats.getScore("§5").setScore(index--);
+        stats.getScore("§fClan: §cSoon").setScore(index--);
         stats.getScore("§b").setScore(index--);
         stats.getScore("§f  www.unionnetwork.eu").setScore(index);
 
@@ -124,20 +126,23 @@ public class Util {
         board.registerNewTeam("deaths").addEntry("§2");
         board.registerNewTeam("coins").addEntry("§3");
         board.registerNewTeam("level").addEntry("§4");
+        board.registerNewTeam("kdr").addEntry("§5");
 
         new BukkitRunnable() {
             final Team deaths = board.getTeam("deaths");
             final Team kills = board.getTeam("kills");
             final Team coins = board.getTeam("coins");
             final Team level = board.getTeam("level");
+            final Team kdr = board.getTeam("kdr");
 
             public void run() {
                 final KPlayer profile = PlayerManager.getPlayer(p.getUniqueId());
 
-                deaths.setPrefix("§f  Deaths: §e" + profile.getDeaths());
-                kills.setPrefix("§f  Kills: §e" + profile.getKills());
-                coins.setPrefix("§f  Coins: §e" + profile.getCoins());
-                level.setPrefix("§f  Level: §e" + profile.getLevel());
+                deaths.setPrefix("§fDeaths: §e" + profile.getDeaths());
+                kills.setPrefix("§fKills: §e" + profile.getKills());
+                coins.setPrefix("§fCoins: §e" + profile.getCoins());
+                level.setPrefix("§fLevel: §e" + profile.getLevel());
+                kdr.setPrefix("§fKDR: §e" + profile.getKDR());
             }
         }.runTaskTimer(PvPMain.getInstance(), 0, 2 * 20);
 
