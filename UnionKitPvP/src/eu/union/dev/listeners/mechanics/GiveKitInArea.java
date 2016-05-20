@@ -4,6 +4,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,6 +26,9 @@ public class GiveKitInArea implements Listener{
             for (ProtectedRegion region : set){
                 if (region.getId().equalsIgnoreCase("givekit")){
                     Bukkit.dispatchCommand(p, "kit pvp");
+                }
+                if (!Util.getInstance().inPvP(p)){
+                    Util.getInstance().addPlayerPvP(p);
                 }
             }
         }

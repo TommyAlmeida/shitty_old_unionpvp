@@ -20,6 +20,7 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Util {
@@ -29,7 +30,7 @@ public class Util {
     public static Util getInstance() {
         return instance;
     }
-
+    private ArrayList<String> pvp = new ArrayList<>();
     public String center(String msg, int length)
     {
         StringBuilder b = new StringBuilder("");
@@ -97,6 +98,7 @@ public class Util {
 
             inv.setItem(8,skull);
         }
+        removePlayerPvP(player);
     }
 
     public void buildScoreboard(Player p) {
@@ -156,5 +158,18 @@ public class Util {
             player.removePotionEffect(pE.getType());
         }
 
+    }
+    public void addPlayerPvP(Player p){
+        pvp.remove(p.getName());
+    }
+    public void removePlayerPvP(Player p){
+        pvp.add(p.getName());
+    }
+    public boolean inPvP(Player p){
+        if(pvp.contains(p.getName())){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

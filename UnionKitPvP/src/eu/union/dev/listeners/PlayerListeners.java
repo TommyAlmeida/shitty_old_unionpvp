@@ -165,4 +165,19 @@ public class PlayerListeners implements Listener {
         }.runTaskLater(PvPMain.getInstance(), 5);
     }
 
+    @EventHandler
+    public void ondamage(EntityDamageByEntityEvent e){
+        if (e.getEntity() instanceof Player){
+            Player p = (Player)e.getEntity();
+            if (!Util.getInstance().inPvP(p)){
+                e.setCancelled(true);
+            }
+        }
+        if (e.getDamager() instanceof Player){
+            Player p = (Player)e.getDamager();
+            if (!Util.getInstance().inPvP(p)){
+                e.setCancelled(true);
+            }
+        }
+    }
 }
