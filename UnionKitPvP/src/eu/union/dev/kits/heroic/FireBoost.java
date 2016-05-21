@@ -52,6 +52,8 @@ public class FireBoost extends Kit implements Listener{
                             if (!p.getItemInHand().getType().toString().contains("_SWORD") || !p.isBlocking() || !p.isSneaking()){
                                 cancel();
                                 p.setVelocity(new Vector(0.0,(i+0.5),0.0));
+                            }else{
+                                p.playNote(p.getLocation(), (byte)0, (byte)(i+10));
                             }
                         }else{
                             if (!p.getItemInHand().getType().toString().contains("_SWORD") || !p.isBlocking() || !p.isSneaking()){

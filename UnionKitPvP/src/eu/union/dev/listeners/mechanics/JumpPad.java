@@ -32,7 +32,7 @@ public class JumpPad implements Listener {
             players.add(p);
         }
         if(e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == Material.SPONGE){
-            Vector v = new Vector(0.0D,5.0D,0.0D);
+            Vector v = new Vector(0.0D,3.5D,0.0D);
             p.setVelocity(v);
             p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 3.0F, 2.0F);
             p.getWorld().playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 4);

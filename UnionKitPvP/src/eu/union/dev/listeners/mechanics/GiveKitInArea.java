@@ -27,6 +27,9 @@ public class GiveKitInArea implements Listener{
                 if (region.getId().equalsIgnoreCase("givekit")){
                     Util.getInstance().randomKit(p);
                 }
+                if (!Util.getInstance().inPvP(p)){
+                    Util.getInstance().addPlayerPvP(p);
+                }
             }
         }
     }
