@@ -5,6 +5,7 @@ import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.KPlayer;
+import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -20,6 +21,8 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
+import java.util.Collections;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Util {
@@ -120,7 +123,7 @@ public class Util {
         stats.getScore("§5").setScore(index--);
         stats.getScore("§fClan: §cSoon").setScore(index--);
         stats.getScore("§b").setScore(index--);
-        stats.getScore("§f  www.unionnetwork.eu").setScore(index);
+        stats.getScore("§fwww.unionnetwork.eu").setScore(index);
 
         board.registerNewTeam("kills").addEntry("§1");
         board.registerNewTeam("deaths").addEntry("§2");
@@ -162,4 +165,16 @@ public class Util {
         }
 
     }
+
+    public void randomKit(Player player){
+        Random r = new Random();
+        KitManager km = KitManager.getManager();
+        KPlayer kplayer = PlayerManager.getPlayer(player.getUniqueId());
+
+        int kits = r.nextInt(km.getKits().size());
+
+        km.applyKit(player, km.getKits().get(kits));
+    }
+
+
 }
