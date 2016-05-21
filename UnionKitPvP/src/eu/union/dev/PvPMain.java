@@ -4,8 +4,7 @@ import eu.union.dev.commands.KitCMD;
 import eu.union.dev.commands.ListKitsCMD;
 import eu.union.dev.commands.ReconnectCMD;
 import eu.union.dev.commands.StatsCMD;
-import eu.union.dev.commands.location.SetSpawn;
-import eu.union.dev.commands.location.Spawn;
+import eu.union.dev.commands.location.*;
 import eu.union.dev.commands.staff.BuildCMD;
 import eu.union.dev.commands.staff.GameModeCMD;
 import eu.union.dev.engine.managers.KitManager;
@@ -22,6 +21,7 @@ import eu.union.dev.listeners.mechanics.SoupListener;
 import eu.union.dev.listeners.menus.KitMenu;
 import eu.union.dev.listeners.menus.MainMenu;
 import eu.union.dev.listeners.menus.StatsMenu;
+import eu.union.dev.listeners.menus.WarpsMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -50,6 +50,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new SoupListener(), this);
         pm.registerEvents(new JumpPad(), this);
         pm.registerEvents(new GiveKitInArea(), this);
+        pm.registerEvents(new WarpsMenu() ,this);
 
         /**
          * Kits with listeners
@@ -85,6 +86,13 @@ public class PvPMain extends JavaPlugin {
         getCommand("spawn").setExecutor(new Spawn());
         getCommand("stats").setExecutor(new StatsCMD());
         getCommand("recon").setExecutor(new ReconnectCMD());
+        getCommand("setfps").setExecutor(new SetFPS());
+        getCommand("fps").setExecutor(new FPS());
+        getCommand("setlavachallenge").setExecutor(new SetLavaChallenge());
+        getCommand("lavachallenge").setExecutor(new LavaChallenge());
+        getCommand("setclick").setExecutor(new SetClick());
+        getCommand("click").setExecutor(new Click());
+        getCommand("warps").setExecutor(new Warps());
     }
 
     @Override

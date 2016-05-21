@@ -11,3 +11,13 @@ commands:
   spawn:
   stats:
   recon:
+  setfps:
+  fps:
+  setlavachallenge:
+    aliases: [setlc]
+  lavachallenge:
+    aliases: [lc]
+  setclick:
+  click:
+  warps:
+    aliases: [warp]

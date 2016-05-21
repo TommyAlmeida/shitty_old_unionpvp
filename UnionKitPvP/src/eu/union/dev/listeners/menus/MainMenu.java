@@ -1,8 +1,6 @@
 package eu.union.dev.listeners.menus;
 
 import eu.union.dev.api.Icon;
-import eu.union.dev.engine.layouts.KitLayout;
-import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Inv;
 import eu.union.dev.utils.Messages;
 import org.bukkit.Material;
@@ -87,6 +85,7 @@ public class MainMenu implements Listener {
             switch (e.getSlot()){
                 case 11:
                     e.setCancelled(true);
+                    new WarpsMenu().setItems();
                     p.openInventory(Inv.getInstance().warps);
                     break;
                 case 13:
