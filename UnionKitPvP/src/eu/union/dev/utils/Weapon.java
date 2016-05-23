@@ -27,7 +27,8 @@ public enum Weapon {
     MONK_ROD(Material.BLAZE_ROD, "§6Monk's Rod"),
     JUMPFALL_PAPER(Material.PAPER, "§7JumpFall Paper"),
     CHECKPOINT_FENCE(Material.NETHER_FENCE, "§4Set Position"),
-    CHECKPOINT_POT(Material.FLOWER_POT_ITEM, "§5Teleport");
+    CHECKPOINT_POT(Material.FLOWER_POT_ITEM, "§5Teleport"),
+    SPECTRE_SUGAR(Material.SUGAR, "§7Spectre");
 
 
     Material mat;

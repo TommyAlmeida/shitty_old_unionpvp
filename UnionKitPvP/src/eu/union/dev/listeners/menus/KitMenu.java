@@ -174,6 +174,10 @@ public class KitMenu implements Listener {
             Icon icon = new Icon(Material.NETHER_FENCE);
             inv.setItem(24,KitLayout.getLayout().design(icon, km.getKitByName("checkpoint")));
         }
+        {
+            Icon icon = new Icon(Material.SUGAR);
+            inv.setItem(25,KitLayout.getLayout().design(icon, km.getKitByName("spectre")));
+        }
     }
 
     @EventHandler
@@ -309,6 +313,11 @@ public class KitMenu implements Listener {
                     break;
                 case 24: //Kit CheckPoint
                     offerKit(p, "checkpoint");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 25: //Kit Spectre
+                    offerKit(p, "spectre");
                     e.getView().close();
                     e.setCancelled(true);
                     break;
