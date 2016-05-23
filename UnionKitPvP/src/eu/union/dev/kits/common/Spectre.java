@@ -2,6 +2,7 @@ package eu.union.dev.kits.common;
 
 import eu.union.dev.api.Ability;
 import eu.union.dev.engine.Kit;
+import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Material;
@@ -33,7 +34,8 @@ public class Spectre extends Kit implements Listener{
     @EventHandler
     public void onclick(PlayerInteractEvent e){
         Player p = e.getPlayer();
-        if (p.getItemInHand().getType() == Material.SUGAR){
+        KitManager km = KitManager.getManager();
+        if (p.getItemInHand().getType() == Material.SUGAR && km.getKitAmIUsing(p,"spectre")){
             if (cooldown.tryUse(p)){
                 p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 5*20, 0),true);
                 p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 5*20, 0),true);
