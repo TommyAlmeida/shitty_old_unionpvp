@@ -13,6 +13,7 @@ public enum Weapon {
     DEFAULT_ARROW(Material.ARROW, "§aArrow"),
     GRANDPA_STICK(Material.STICK, "§eGrandPa Cane"),
     PULSAR_SHOCK(Material.MAGMA_CREAM, "§ePulsar Shock"),
+    ICECUBE_ITEM(Material.PACKED_ICE, "§aIceCube Item"),
     EXPLODER_TNT(Material.BOW, "§eExploder TnT"),
     ENDERMAGE_PORTAL(Material.ENDER_PORTAL_FRAME, "§5Endermage Portal"),
     FISHERMAN_ROD(Material.FISHING_ROD, "§eFisherman Rod"),
