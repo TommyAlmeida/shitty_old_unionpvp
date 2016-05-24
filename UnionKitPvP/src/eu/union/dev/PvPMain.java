@@ -1,5 +1,7 @@
 package eu.union.dev;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.reflect.ClassPath;
 import eu.union.dev.commands.KitCMD;
 import eu.union.dev.commands.ListKitsCMD;
 import eu.union.dev.commands.ReconnectCMD;
@@ -7,12 +9,11 @@ import eu.union.dev.commands.StatsCMD;
 import eu.union.dev.commands.location.*;
 import eu.union.dev.commands.staff.BuildCMD;
 import eu.union.dev.commands.staff.GameModeCMD;
+import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.engine.storage.Database;
-import eu.union.dev.kits.common.*;
 import eu.union.dev.kits.heroic.*;
-import eu.union.dev.kits.rare.*;
 import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
 import eu.union.dev.listeners.mechanics.GiveKitInArea;
@@ -23,9 +24,11 @@ import eu.union.dev.listeners.menus.MainMenu;
 import eu.union.dev.listeners.menus.StatsMenu;
 import eu.union.dev.listeners.menus.WarpsMenu;
 import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.sql.Connection;
 
 public class PvPMain extends JavaPlugin {
@@ -51,35 +54,6 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new JumpPad(), this);
         pm.registerEvents(new GiveKitInArea(), this);
         pm.registerEvents(new WarpsMenu() ,this);
-
-        /**
-         * Kits with listeners
-         */
-        pm.registerEvents(new Stomper(), this);
-        pm.registerEvents(new Pulsar(), this);
-        pm.registerEvents(new Endermage(), this);
-        pm.registerEvents(new Fisherman(), this);
-        pm.registerEvents(new Switcher(), this);
-        pm.registerEvents(new Kangaroo(), this);
-        pm.registerEvents(new Turtle(), this);
-        pm.registerEvents(new Ninja(), this);
-        pm.registerEvents(new Anchor(), this);
-        pm.registerEvents(new Flash(), this);
-        pm.registerEvents(new Phantom(), this);
-        pm.registerEvents(new Thor(), this);
-        pm.registerEvents(new IceCube(), this);
-        pm.registerEvents(new Specialist(), this);
-        pm.registerEvents(new Viper(), this);
-        pm.registerEvents(new TimeLord(), this);
-        pm.registerEvents(new Hulk(), this);
-        pm.registerEvents(new Monk(), this);
-        pm.registerEvents(new JumpFall(), this);
-        pm.registerEvents(new Magma(), this);
-        pm.registerEvents(new Repulsion(), this);
-        pm.registerEvents(new FireBoost(), this);
-        pm.registerEvents(new CheckPoint(), this);
-        pm.registerEvents(new Spectre(), this);
-        pm.registerEvents(new Madman(), this);
 
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
@@ -134,33 +108,32 @@ public class PvPMain extends JavaPlugin {
     private void registerKits(){
         KitManager km = KitManager.getManager();
 
-        km.registerKit(new PvP());
-        km.registerKit(new Grandpa());
-        km.registerKit(new Archer());
-        km.registerKit(new IceCube());
-        km.registerKit(new Stomper());
-        km.registerKit(new Pulsar());
-        km.registerKit(new Endermage());
-        km.registerKit(new Fisherman());
-        km.registerKit(new Switcher());
-        km.registerKit(new Kangaroo());
-        km.registerKit(new Turtle());
-        km.registerKit(new Ninja());
-        km.registerKit(new Anchor());
-        km.registerKit(new Flash());
-        km.registerKit(new Phantom());
-        km.registerKit(new Thor());
-        km.registerKit(new Specialist());
-        km.registerKit(new Viper());
-        km.registerKit(new TimeLord());
-        km.registerKit(new Hulk());
-        km.registerKit(new Monk());
-        km.registerKit(new JumpFall());
-        km.registerKit(new Magma());
-        km.registerKit(new Repulsion());
-        km.registerKit(new FireBoost());
-        km.registerKit(new CheckPoint());
-        km.registerKit(new Spectre());
-        km.registerKit(new Madman());
+        try {
+            /* Pega todas as classes do pacote de kits */
+            ImmutableSet<ClassPath.ClassInfo> kitClasses = ClassPath.from(getClassLoader())
+                .getTopLevelClassesRecursive("eu.union.dev.kits");
+
+            kitClasses.forEach(classInfo -> {
+                try {
+                    /* Carrega a classe do kit. */
+                    Class<?> kitClass = classInfo.load();
+
+                    /*  Cria uma nova instancia da classe carregada. */
+                    Kit kit = (Kit) kitClass.newInstance();
+
+                    /* Verifica se a classe é um Listener, e registra os eventos */
+                    if (Listener.class.isAssignableFrom(kitClass)) {
+                      getServer().getPluginManager().registerEvents((Listener) kit, this);
+                    }
+
+                    /* Registra o kit */
+                    km.registerKit(kit);
+                } catch (InstantiationException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+          });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
