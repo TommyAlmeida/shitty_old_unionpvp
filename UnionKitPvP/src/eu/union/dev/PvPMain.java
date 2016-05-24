@@ -67,6 +67,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new Flash(), this);
         pm.registerEvents(new Phantom(), this);
         pm.registerEvents(new Thor(), this);
+        pm.registerEvents(new IceCube(), this);
         pm.registerEvents(new Specialist(), this);
         pm.registerEvents(new Viper(), this);
         pm.registerEvents(new TimeLord(), this);
@@ -136,6 +137,7 @@ public class PvPMain extends JavaPlugin {
         km.registerKit(new PvP());
         km.registerKit(new Grandpa());
         km.registerKit(new Archer());
+        km.registerKit(new IceCube());
         km.registerKit(new Stomper());
         km.registerKit(new Pulsar());
         km.registerKit(new Endermage());
