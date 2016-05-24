@@ -27,7 +27,7 @@ public class Madman extends Kit implements Listener{
     public Madman() {
         super("madman", "unkit.madman", Difficulty.LOW, Rarity.HEROIC, 0);
     }
-    public void start(){
+    public void start(){//Time in Seconds
         new BukkitRunnable() {
             @Override
             public void run() {

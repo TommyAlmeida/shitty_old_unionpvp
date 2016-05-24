@@ -327,11 +327,6 @@ public class KitMenu implements Listener {
                     e.getView().close();
                     e.setCancelled(true);
                     break;
-                case 26: //Kit Madman
-                    offerKit(p, "madman");
-                    e.getView().close();
-                    e.setCancelled(true);
-                    break;
             }
         }
     }
