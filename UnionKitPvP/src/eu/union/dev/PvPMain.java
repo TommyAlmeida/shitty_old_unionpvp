@@ -78,6 +78,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new FireBoost(), this);
         pm.registerEvents(new CheckPoint(), this);
         pm.registerEvents(new Spectre(), this);
+        pm.registerEvents(new Madman(), this);
 
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
@@ -94,6 +95,7 @@ public class PvPMain extends JavaPlugin {
         getCommand("setclick").setExecutor(new SetClick());
         getCommand("click").setExecutor(new Click());
         getCommand("warps").setExecutor(new Warps());
+        new Madman().start();
     }
 
     @Override
@@ -157,5 +159,6 @@ public class PvPMain extends JavaPlugin {
         km.registerKit(new FireBoost());
         km.registerKit(new CheckPoint());
         km.registerKit(new Spectre());
+        km.registerKit(new Madman());
     }
 }
