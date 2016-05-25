@@ -5,6 +5,7 @@ import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.KPlayer;
+import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -21,6 +22,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Util {
@@ -163,6 +165,15 @@ public class Util {
         }
 
     }
+
+    public void randomKit(Player p){
+        Random r = new Random();
+        KitManager km = KitManager.getManager();
+        int index = r.nextInt(km.getKits().size());
+
+        km.applyKit(p, km.getKits().get(index));
+    }
+
     public boolean inPvP(Player p){
         if (pvp.contains(p.getName())){
             return false;

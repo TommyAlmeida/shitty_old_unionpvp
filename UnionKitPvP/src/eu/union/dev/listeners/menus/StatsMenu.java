@@ -83,12 +83,12 @@ public class StatsMenu implements Listener{
         }
 
         {
-            Icon icon = new Icon(Material.GOLD_AXE, "§9Streaks &o&cSOON");
+            Icon icon = new Icon(Material.GOLD_AXE, "§9Streaks §o§cSOON");
             inv.setItem(15,icon.build());
         }
 
         {
-            Icon icon = new Icon(Material.CHAINMAIL_CHESTPLATE, "§9Assists &o&cSOON");
+            Icon icon = new Icon(Material.CHAINMAIL_CHESTPLATE, "§9Assists §o§cSOON");
             inv.setItem(16,icon.build());
         }
     }
