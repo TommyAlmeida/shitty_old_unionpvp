@@ -3,6 +3,7 @@ package eu.union.dev.kits.heroic;
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
@@ -78,8 +79,14 @@ public class IceCube extends Kit implements Listener {
 			int x = cubeOffset[0];
 			int y = cubeOffset[1];
 			int z = cubeOffset[2];
-
-			world.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).setType(Material.ICE);
+			/*
+			 * Apenas definir como ICE, caso o bloco seja AIR
+			 * para evitar Grief no mapa.
+			 */
+			Block b = world.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z);
+			if (b.getType() == Material.AIR) {
+				b.setType(Material.ICE);
+			}
 		}
 
 		c.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 124, 3));
@@ -92,8 +99,10 @@ public class IceCube extends Kit implements Listener {
 				int x = cubeOffset[0];
 				int y = cubeOffset[1];
 				int z = cubeOffset[2];
-
-				world.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z).setType(Material.AIR);
+				Block b = world.getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z);
+				if (b.getType() == Material.ICE) {
+					b.setType(Material.AIR);
+				}
 			}
 		}, 100L);
 
