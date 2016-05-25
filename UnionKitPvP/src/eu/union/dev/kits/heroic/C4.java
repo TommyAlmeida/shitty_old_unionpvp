@@ -51,6 +51,8 @@ public class C4 extends Kit implements Listener{
                     c4.setPickupDelay(10000);
                     c4item.put(p, c4);
                     return;
+                }else{
+                    Util.getInstance().sendCooldownMessage(p,cooldown,TimeUnit.SECONDS,true);
                 }
             }
             if (p.getItemInHand().getType() == Material.LEVER){

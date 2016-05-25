@@ -189,6 +189,11 @@ public class KitMenu implements Listener {
             Icon icon = new Icon(Material.TNT);
             inv.setItem(27, KitLayout.getLayout().design(icon, km.getKitByName("c4")));
         }
+
+        {
+            Icon icon = new Icon(Material.SADDLE);
+            inv.setItem(28, KitLayout.getLayout().design(icon, km.getKitByName("rider")));
+        }
     }
 
     @EventHandler
@@ -338,6 +343,12 @@ public class KitMenu implements Listener {
                     e.setCancelled(true);
                     break;
                 case 27: //Kit C4
+                    offerKit(p, "c4");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 28: //Kit Rider
+                    offerKit(p, "rider");
                     e.getView().close();
                     e.setCancelled(true);
                     break;
