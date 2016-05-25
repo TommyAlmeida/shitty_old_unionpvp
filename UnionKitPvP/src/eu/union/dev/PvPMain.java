@@ -11,6 +11,7 @@ import eu.union.dev.commands.staff.BuildCMD;
 import eu.union.dev.commands.staff.GameModeCMD;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.engine.modules.AutoMessage;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.engine.storage.Database;
 import eu.union.dev.kits.heroic.*;
@@ -43,6 +44,7 @@ public class PvPMain extends JavaPlugin {
         instance = this;
         canConnect(true);
         ConfigManager.getInstance().setup(this);
+        AutoMessage.getAPI().broadcast();
 
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new PlayerListeners(), this);
