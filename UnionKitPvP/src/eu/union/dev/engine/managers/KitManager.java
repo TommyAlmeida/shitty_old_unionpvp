@@ -60,14 +60,7 @@ public class KitManager {
     }
 
     public boolean getKitAmIUsing(Player p, String name){
-        if (playerKit.containsKey(p)){
-            if(playerKit.get(p).getName() == name){
-                return true;
-            }
-        }else{
-            return false;
-        }
-        return false;
+		return playerKit.containsKey(p) && playerKit.get(p).equals(name);
     }
 
 
