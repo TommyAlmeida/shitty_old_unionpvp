@@ -150,7 +150,6 @@ public class KitManager {
 
         readyPlayer(player);
         playerKit.remove(player);
-        player.sendMessage(Messages.PREFIX.toString() + " §cYou are no longer using a kit.");
     }
 
     /**

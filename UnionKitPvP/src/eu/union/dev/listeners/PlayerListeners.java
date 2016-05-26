@@ -107,6 +107,7 @@ public class PlayerListeners implements Listener {
 
             Random rand = new Random();
             int coins = rand.nextInt(7);
+            int exp = rand.nextInt(16);
 
             if(kPlayer_killed == null || kPlayer_killer == null){
                 killed.sendMessage(Messages.PREFIX.toString() + " §cReconnect please.");
@@ -121,6 +122,7 @@ public class PlayerListeners implements Listener {
                 }
 
                 kPlayer_killer.addCoins(coins);
+                kPlayer_killer.addEXP(exp);
             }
 
             Bukkit.broadcastMessage("§a" + killed.getDisplayName() + " §chas been slained by §b" + killer.getDisplayName());
