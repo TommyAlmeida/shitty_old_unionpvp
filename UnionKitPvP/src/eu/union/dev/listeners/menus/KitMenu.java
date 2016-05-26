@@ -194,6 +194,21 @@ public class KitMenu implements Listener {
             Icon icon = new Icon(Material.SADDLE);
             inv.setItem(28, KitLayout.getLayout().design(icon, km.getKitByName("rider")));
         }
+
+        {
+            Icon icon = new Icon(Material.WATER_BUCKET);
+            inv.setItem(29, KitLayout.getLayout().design(icon, km.getKitByName("fireman")));
+        }
+
+        {
+            Icon icon = new Icon(Material.IRON_BLOCK);
+            inv.setItem(30, KitLayout.getLayout().design(icon, km.getKitByName("tank")));
+        }
+
+        {
+            Icon icon = new Icon(Material.RAW_FISH);
+            inv.setItem(31, KitLayout.getLayout().design(icon, km.getKitByName("poseidon")));
+        }
     }
 
     @EventHandler
@@ -349,6 +364,21 @@ public class KitMenu implements Listener {
                     break;
                 case 28: //Kit Rider
                     offerKit(p, "rider");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 29: //Kit Fireman
+                    offerKit(p, "fireman");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 30: //Kit Tank
+                    offerKit(p, "tank");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 31: //Kit Poseidon
+                    offerKit(p, "poseidon");
                     e.getView().close();
                     e.setCancelled(true);
                     break;
