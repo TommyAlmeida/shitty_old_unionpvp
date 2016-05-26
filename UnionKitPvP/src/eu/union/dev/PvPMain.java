@@ -10,6 +10,7 @@ import eu.union.dev.commands.location.*;
 import eu.union.dev.commands.staff.BuildCMD;
 import eu.union.dev.commands.staff.GameModeCMD;
 import eu.union.dev.engine.Kit;
+import eu.union.dev.engine.handlers.ExpHandler;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.modules.AutoMessage;
 import eu.union.dev.engine.storage.ConfigManager;
@@ -37,15 +38,19 @@ public class PvPMain extends JavaPlugin {
     private static PvPMain instance;
     Database sql = new Database("root", "Be2Cj16M790EcI", "Profiles", "3306", "localhost");
     private Connection c;
+    public ExpHandler exp = new ExpHandler();
 
     public void onEnable(){
-        registerKits();
-
         instance = this;
+
+        //Handlers
         canConnect(true);
         ConfigManager.getInstance().setup(this);
         AutoMessage.getAPI().broadcast();
+        exp.initializeLevels();
+        registerKits();
 
+        //Listeners
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new PlayerListeners(), this);
         pm.registerEvents(new ServerListeners(), this);
@@ -57,6 +62,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new GiveKitInArea(), this);
         pm.registerEvents(new WarpsMenu() ,this);
 
+        //Commands
         getCommand("kit").setExecutor(new KitCMD());
         getCommand("kits").setExecutor(new ListKitsCMD());
         getCommand("gm").setExecutor(new GameModeCMD());
