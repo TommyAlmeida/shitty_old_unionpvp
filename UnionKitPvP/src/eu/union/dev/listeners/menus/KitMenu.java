@@ -68,7 +68,7 @@ public class KitMenu implements Listener {
             inv.setItem(slot++, createItem(Material.STAINED_GLASS_PANE,1,(byte)2,"§dEpic Kits"));
             inv.setItem(slot++, createItem(Material.STAINED_GLASS_PANE,1,(byte)1,"§6Heroic Kits"));
             inv.setItem(slot++, createItem(Material.STAINED_GLASS_PANE,1,(byte)10,"§5Beast Kits"));
-            inv.setItem(8, new Icon(Material.CARPET, "§aNext Page").build());
+            inv.setItem(slot++, new Icon(Material.CARPET, "§aNext Page").build());
         }
         if (type.equalsIgnoreCase("all")){
             for (int i = 0; i < km.getKits().size(); i++) {
@@ -134,7 +134,7 @@ public class KitMenu implements Listener {
             if (e.getSlot() < 0) {
                 return;
             }
-            String kit = item.getItemMeta().getDisplayName().replace("§7","").replace("§b","").replace("§d","").replace("§6","").replace("§5","");
+            String kit = item.getItemMeta().getDisplayName().replace("§7Kit » ","").replace("§7","").replace("§b","").replace("§d","").replace("§6","").replace("§5","");
             if (KitManager.getManager().getKitByName(kit) != null){
                 offerKit(p, kit);
                 e.getView().close();
@@ -147,37 +147,30 @@ public class KitMenu implements Listener {
                     e.setCancelled(true);
                     break;
                 case 1: //Seus Kits
-                    e.getView().close();
                     e.setCancelled(true);
                     setItems(p,"player");
                     break;
                 case 2: //Todos os Kits
-                    e.getView().close();
                     e.setCancelled(true);
                     setItems(p,"all");
                     break;
                 case 3: //Kits Commons
-                    e.getView().close();
                     e.setCancelled(true);
                     setItems(p,"common");
                     break;
                 case 4: //Kits Rare
-                    e.getView().close();
                     e.setCancelled(true);
                     setItems(p,"rare");
                     break;
                 case 5: //Kits Epic
-                    e.getView().close();
                     e.setCancelled(true);
                     setItems(p,"epic");
                     break;
                 case 6: //Kits Heroic
-                    e.getView().close();
                     e.setCancelled(true);
                     setItems(p,"heroic");
                     break;
                 case 7: //Kits Beast
-                    e.getView().close();
                     e.setCancelled(true);
                     setItems(p,"beast");
                     break;
