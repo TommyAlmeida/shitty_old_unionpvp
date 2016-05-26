@@ -1,12 +1,7 @@
 package eu.union.dev.engine.handlers;
 
-import org.bukkit.entity.Player;
-
 import java.util.*;
 
-/**
- * EOS'S NetworkEXP
- */
 public class ExpHandler {
 
     private int intitalexp;
