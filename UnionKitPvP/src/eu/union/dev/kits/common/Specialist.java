@@ -1,5 +1,6 @@
 package eu.union.dev.kits.common;
 
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Perms;
@@ -17,7 +18,7 @@ public class Specialist extends Kit implements Listener {
 
     public Specialist() {
         super("specialist", Perms.KIT_FREE.toString(), Difficulty.LOW,
-                Rarity.COMMON, 0);
+                Rarity.COMMON, 0, new Icon(Material.ENCHANTED_BOOK));
     }
 
     @Override

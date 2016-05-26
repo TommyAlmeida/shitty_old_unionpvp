@@ -2,6 +2,7 @@ package eu.union.dev.kits.rare;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Thor extends Kit implements Listener{
 
-    public Thor(){ super("thor", "unkit.thor", Difficulty.LOW, Rarity.RARE, 0); }
+    public Thor(){ super("thor", "unkit.thor", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.GOLD_AXE)); }
 
     @Override
     public void applyKit(Player player) {

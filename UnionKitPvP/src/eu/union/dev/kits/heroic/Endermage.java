@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.union.dev.PvPMain;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
@@ -21,7 +22,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Endermage extends Kit implements Listener{
 
     public Endermage() {
-        super("endermage", "unkit.endermage", Difficulty.MEDIUM, Rarity.HEROIC, 0);
+        super("endermage", "unkit.endermage", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.ENDER_PORTAL_FRAME));
     }
 
     @Override

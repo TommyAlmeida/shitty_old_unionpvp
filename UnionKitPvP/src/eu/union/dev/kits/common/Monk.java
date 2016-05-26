@@ -1,6 +1,7 @@
 package eu.union.dev.kits.common;
 
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Monk extends Kit implements Listener{
 
-    public Monk(){super("monk","unkit.monk",Difficulty.LOW,Rarity.COMMON,0);}
+    public Monk(){super("monk","unkit.monk",Difficulty.LOW,Rarity.COMMON,0, new Icon(Material.BLAZE_ROD));}
 
     @Override
     public void applyKit(Player player) {

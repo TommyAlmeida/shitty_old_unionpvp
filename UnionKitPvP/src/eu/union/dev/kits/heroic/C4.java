@@ -1,6 +1,7 @@
 package eu.union.dev.kits.heroic;
 
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
@@ -27,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class C4 extends Kit implements Listener{
 
     public C4() {
-        super("c4", "unkit.c4", Difficulty.MEDIUM, Rarity.HEROIC, 0);
+        super("c4", "unkit.c4", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.TNT));
     }
 
     @Override

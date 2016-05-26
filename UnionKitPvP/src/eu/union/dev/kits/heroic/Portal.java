@@ -2,6 +2,7 @@ package eu.union.dev.kits.heroic;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
@@ -26,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class Portal extends Kit implements Listener{
 
     public Portal() {
-        super("portal", "unkit.portal", Difficulty.MEDIUM, Rarity.HEROIC, 0);
+        super("portal", "unkit.portal", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.IRON_BARDING));
     }
 
     @Override

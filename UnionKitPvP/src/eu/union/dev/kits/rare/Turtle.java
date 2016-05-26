@@ -1,8 +1,10 @@
 package eu.union.dev.kits.rare;
 
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +16,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
  */
 public class Turtle extends Kit implements Listener{
 
-    public Turtle(){ super("turtle", "unkit.turtle", Difficulty.MEDIUM, Rarity.RARE, 0); }
+    public Turtle(){ super("turtle", "unkit.turtle", Difficulty.MEDIUM, Rarity.RARE, 0, new Icon(Material.IRON_CHESTPLATE)); }
 
     @Override
     public void applyKit(Player player) {

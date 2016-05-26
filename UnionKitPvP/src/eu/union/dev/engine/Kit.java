@@ -1,5 +1,6 @@
 package eu.union.dev.engine;
 
+import eu.union.dev.api.Icon;
 import eu.union.dev.utils.Messages;
 import org.bukkit.entity.Player;
 
@@ -49,17 +50,19 @@ public abstract class Kit {
     private String name;
     private String permission;
     private int level;
+    private Icon icon;
     Rarity rarity;
     Difficulty difficulty;
     public String prefix = Messages.PREFIX.toString();
 
 
-    public Kit(String name, String permission, Difficulty difficulty, Rarity rarity, int level) {
+    public Kit(String name, String permission, Difficulty difficulty, Rarity rarity, int level, Icon icon) {
         this.name = name;
         this.difficulty = difficulty;
         this.rarity = rarity;
         this.level = level;
         this.permission = permission;
+        this.icon = icon;
     }
 
 
@@ -88,5 +91,7 @@ public abstract class Kit {
     }
 
     public abstract void applyKit(Player player);
+
+    public Icon getIcon(){return icon;}
 
 }

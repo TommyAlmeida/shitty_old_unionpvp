@@ -1,6 +1,7 @@
 package eu.union.dev.kits.rare;
 
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class Balestra extends Kit implements Listener{
 
     public Balestra() {
-        super("balestra", "unkit.balestra", Difficulty.PRO, Rarity.RARE, 0);
+        super("balestra", "unkit.balestra", Difficulty.PRO, Rarity.RARE, 0, new Icon(Material.ARROW));
     }
 
     @Override

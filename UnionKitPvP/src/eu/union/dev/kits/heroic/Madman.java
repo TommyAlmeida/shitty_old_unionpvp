@@ -1,12 +1,14 @@
 package eu.union.dev.kits.heroic;
 
 import eu.union.dev.PvPMain;
+import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +27,7 @@ import java.util.HashMap;
 public class Madman extends Kit implements Listener{
 
     public Madman() {
-        super("madman", "unkit.madman", Difficulty.LOW, Rarity.HEROIC, 0);
+        super("madman", "unkit.madman", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.BARRIER));
     }
     public void start(){//Time in Seconds
         new BukkitRunnable() {

@@ -1,8 +1,10 @@
 package eu.union.dev.kits.common;
 
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +16,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class Fireman extends Kit implements Listener{
 
     public Fireman() {
-        super("fireman", "unkit.fireman", Difficulty.LOW, Rarity.COMMON, 0);
+        super("fireman", "unkit.fireman", Difficulty.LOW, Rarity.COMMON, 0, new Icon(Material.WATER_BUCKET));
     }
 
     @Override

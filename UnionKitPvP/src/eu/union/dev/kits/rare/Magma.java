@@ -1,8 +1,10 @@
 package eu.union.dev.kits.rare;
 
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,7 +17,7 @@ import java.util.Random;
  */
 public class Magma extends Kit implements Listener{
 
-    public Magma(){super("magma","unkit.magma",Difficulty.LOW,Rarity.RARE,0);}
+    public Magma(){super("magma","unkit.magma",Difficulty.LOW,Rarity.RARE,0, new Icon(Material.MAGMA_CREAM));}
 
     @Override
     public void applyKit(Player player) {

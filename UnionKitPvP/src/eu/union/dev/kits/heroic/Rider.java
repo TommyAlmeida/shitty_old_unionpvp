@@ -2,6 +2,7 @@ package eu.union.dev.kits.heroic;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
@@ -23,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class Rider extends Kit implements Listener{
 
     public Rider() {
-        super("rider", "unkit.rider", Difficulty.LOW, Rarity.HEROIC, 0);
+        super("rider", "unkit.rider", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.SADDLE));
     }
 
     @Override

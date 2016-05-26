@@ -2,6 +2,7 @@ package eu.union.dev.kits.heroic;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
@@ -9,6 +10,7 @@ import eu.union.dev.utils.ParticleEffect;
 import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class FireBoost extends Kit implements Listener{
 
-    public FireBoost(){super("fireboost","unkit.fireboost",Difficulty.MEDIUM,Rarity.HEROIC,0);}
+    public FireBoost(){super("fireboost","unkit.fireboost",Difficulty.MEDIUM,Rarity.HEROIC,0, new Icon(Material.BLAZE_POWDER));}
 
     @Override
     public void applyKit(Player player) {

@@ -1,6 +1,7 @@
 package eu.union.dev.kits.rare;
 
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
@@ -23,7 +24,7 @@ public class Pulsar extends Kit implements Listener{
 
 
     public Pulsar() {
-        super("pulsar", "unkit.pulsar", Difficulty.MEDIUM, Rarity.BEAST, 0);
+        super("pulsar", "unkit.pulsar", Difficulty.MEDIUM, Rarity.BEAST, 0, new Icon(Material.MAGMA_CREAM));
     }
 
     public Ability cooldown = new Ability(1,13, TimeUnit.SECONDS);

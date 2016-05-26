@@ -1,6 +1,7 @@
 package eu.union.dev.kits.rare;
 
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class CheckPoint extends Kit implements Listener{
 
-    public CheckPoint(){ super("checkpoint", "unkit.checkpoint", Difficulty.LOW, Rarity.RARE, 0); }
+    public CheckPoint(){ super("checkpoint", "unkit.checkpoint", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.NETHER_FENCE)); }
 
     @Override
     public void applyKit(Player player) {

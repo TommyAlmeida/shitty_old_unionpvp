@@ -1,6 +1,7 @@
 package eu.union.dev.kits.common;
 
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
@@ -21,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class Spectre extends Kit implements Listener{
 
     public Spectre() {
-        super("spectre", "unkit.spectre", Difficulty.LOW, Rarity.COMMON, 0);
+        super("spectre", "unkit.spectre", Difficulty.LOW, Rarity.COMMON, 0, new Icon(Material.SUGAR));
     }
 
     @Override

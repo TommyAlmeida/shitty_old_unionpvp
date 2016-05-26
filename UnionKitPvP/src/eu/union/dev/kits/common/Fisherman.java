@@ -1,8 +1,10 @@
 package eu.union.dev.kits.common;
 
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,7 +15,7 @@ import org.bukkit.event.player.PlayerFishEvent;
  */
 public class Fisherman extends Kit implements Listener{
 
-    public Fisherman(){ super("fisherman", "unkit.fisherman", Difficulty.LOW, Rarity.COMMON, 0); }
+    public Fisherman(){ super("fisherman", "unkit.fisherman", Difficulty.LOW, Rarity.COMMON, 0, new Icon(Material.FISHING_ROD)); }
 
     @Override
     public void applyKit(Player player) {

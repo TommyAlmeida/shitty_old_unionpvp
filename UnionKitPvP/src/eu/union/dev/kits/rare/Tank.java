@@ -1,10 +1,12 @@
 package eu.union.dev.kits.rare;
 
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Effect;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -18,7 +20,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 public class Tank extends Kit implements Listener{
 
     public Tank() {
-        super("tank", "unkit.tank", Difficulty.LOW, Rarity.RARE, 0);
+        super("tank", "unkit.tank", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.IRON_BLOCK));
     }
 
     @Override
