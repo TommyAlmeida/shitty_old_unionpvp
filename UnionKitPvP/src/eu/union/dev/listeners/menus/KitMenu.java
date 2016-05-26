@@ -211,7 +211,7 @@ public class KitMenu implements Listener {
         }
 
         {
-            Icon icon = new Icon(Material.OBSIDIAN);
+            Icon icon = new Icon(Material.IRON_BARDING);
             inv.setItem(32, KitLayout.getLayout().design(icon, km.getKitByName("portal")));
         }
     }

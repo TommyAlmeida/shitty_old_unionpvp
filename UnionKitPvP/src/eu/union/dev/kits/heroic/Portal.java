@@ -33,7 +33,7 @@ public class Portal extends Kit implements Listener{
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
         Weapon.giveWeapon(player, Weapon.PORTAL_BLUE,1);
-        Weapon.giveWeapon(player, Weapon.PORTAL_BLUE,2);
+        Weapon.giveWeapon(player, Weapon.PORTAL_ORANGE,2);
     }
 
     HashMap<String, Location> blue = new HashMap<>();
@@ -44,7 +44,7 @@ public class Portal extends Kit implements Listener{
         Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
         if (km.getKitAmIUsing(p,"portal")){
-            if (p.getItemInHand().getType() == Material.DIAMOND_BLOCK){
+            if (p.getItemInHand().getType() == Material.DIAMOND_BARDING){
                 e.setCancelled(true);
                 p.updateInventory();
                 if (e.getClickedBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
@@ -60,7 +60,7 @@ public class Portal extends Kit implements Listener{
                     }, 1);
                 }
             }
-            if (p.getItemInHand().getType() == Material.GOLD_BLOCK){
+            if (p.getItemInHand().getType() == Material.GOLD_BARDING){
                 e.setCancelled(true);
                 p.updateInventory();
                 if (e.getClickedBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
