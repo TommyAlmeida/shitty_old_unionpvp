@@ -31,7 +31,9 @@ public enum Weapon {
     CHECKPOINT_POT(Material.FLOWER_POT_ITEM, "§5Teleport"),
     SPECTRE_SUGAR(Material.SUGAR, "§7Spectre"),
     C4_SLIME(Material.SLIME_BALL, "§4C4"),
-    RIDER_SADDLE(Material.SADDLE, "§6Rider");
+    RIDER_SADDLE(Material.SADDLE, "§6Rider"),
+    PORTAL_BLUE(Material.DIAMOND_BLOCK, "§bBlue Portal"),
+    PORTAL_ORANGE(Material.GOLD_BLOCK, "§6Orange Portal");
 
 
     Material mat;

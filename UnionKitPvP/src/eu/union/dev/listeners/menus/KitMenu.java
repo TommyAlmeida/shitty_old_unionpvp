@@ -209,6 +209,11 @@ public class KitMenu implements Listener {
             Icon icon = new Icon(Material.RAW_FISH);
             inv.setItem(31, KitLayout.getLayout().design(icon, km.getKitByName("poseidon")));
         }
+
+        {
+            Icon icon = new Icon(Material.OBSIDIAN);
+            inv.setItem(32, KitLayout.getLayout().design(icon, km.getKitByName("portal")));
+        }
     }
 
     @EventHandler
@@ -379,6 +384,11 @@ public class KitMenu implements Listener {
                     break;
                 case 31: //Kit Poseidon
                     offerKit(p, "poseidon");
+                    e.getView().close();
+                    e.setCancelled(true);
+                    break;
+                case 32: //Kit Portal
+                    offerKit(p, "portal");
                     e.getView().close();
                     e.setCancelled(true);
                     break;
