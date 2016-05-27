@@ -37,8 +37,9 @@ public class Portal extends Kit implements Listener{
         Weapon.giveWeapon(player, Weapon.PORTAL_ORANGE,2);
     }
 
-    HashMap<String, Location> blue = new HashMap<>();
-    HashMap<String, Location> orange = new HashMap<>();
+    HashMap<Player, Location> blue = new HashMap<>();
+    HashMap<Player, Location> orange = new HashMap<>();
+
     @SuppressWarnings("deprecation")
     @EventHandler
     public void onclick(PlayerInteractEvent e){
@@ -51,10 +52,10 @@ public class Portal extends Kit implements Listener{
                 if (e.getClickedBlock() != null &&
                     e.getClickedBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
                     Block b = e.getClickedBlock().getRelative(BlockFace.UP);
-                    if (blue.containsKey(p.getName())){
-                        p.sendBlockChange(blue.get(p.getName()), Material.AIR, (byte)0);
+                    if (blue.containsKey(p)){
+                        p.sendBlockChange(blue.get(p), Material.AIR, (byte)0);
                     }
-                    blue.put(p.getName(), b.getLocation().add(0.5, 0, 0.5));
+                    blue.put(p, b.getLocation().add(0.5, 0, 0.5));
                     Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                         public void run() {
                             p.sendBlockChange(b.getLocation(), Material.CARPET, (byte)11);
@@ -68,10 +69,10 @@ public class Portal extends Kit implements Listener{
                 if (e.getClickedBlock() != null &&
                     e.getClickedBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
                     Block b = e.getClickedBlock().getRelative(BlockFace.UP);
-                    if (orange.containsKey(p.getName())){
-                        p.sendBlockChange(orange.get(p.getName()), Material.AIR, (byte)0);
+                    if (orange.containsKey(p)){
+                        p.sendBlockChange(orange.get(p), Material.AIR, (byte)0);
                     }
-                    orange.put(p.getName(), b.getLocation().add(0.5, 0, 0.5));
+                    orange.put(p, b.getLocation().add(0.5, 0, 0.5));
                     Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                         public void run() {
                             p.sendBlockChange(b.getLocation(), Material.CARPET, (byte)1);
@@ -85,39 +86,46 @@ public class Portal extends Kit implements Listener{
     @EventHandler
     public void onmove(PlayerMoveEvent e){
         Player p = e.getPlayer();
-        for (Player ps : Bukkit.getOnlinePlayers()){
-            if (blue.containsKey(ps.getName()) && orange.containsKey(ps.getName())){
-                if (blue.get(ps.getName()).distance(p.getLocation())<=1){
-                    if (cooldown.tryUse(p)){
-                        p.getWorld().playEffect(p.getLocation(), Effect.ENDER_SIGNAL,1);
-                        p.getWorld().playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 1, 1);
-                        Location loc = orange.get(ps.getName());
-                        loc.setPitch(p.getLocation().getPitch());
-                        loc.setYaw(p.getLocation().getYaw());
-                        p.teleport(loc);
-                    }
-                }
-                if (orange.get(ps.getName()).distance(p.getLocation())<=1){
-                    if (cooldown.tryUse(p)){
-                        p.getWorld().playEffect(p.getLocation(), Effect.ENDER_SIGNAL,1);
-                        p.getWorld().playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 1, 1);
-                        Location loc = blue.get(ps.getName());
-                        loc.setPitch(p.getLocation().getPitch());
-                        loc.setYaw(p.getLocation().getYaw());
-                        p.teleport(loc);
-                    }
-                }
+        if (blue.containsKey(p) && orange.containsKey(p)){
+          if (blue.get(p).distance(p.getLocation())<=1){
+            if (cooldown.tryUse(p)){
+              p.getWorld().playEffect(p.getLocation(), Effect.ENDER_SIGNAL,1);
+              p.getWorld().playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 1, 1);
+              Location loc = orange.get(p);
+              loc.setPitch(p.getLocation().getPitch());
+              loc.setYaw(p.getLocation().getYaw());
+              p.teleport(loc);
             }
+          }
+          if (orange.get(p).distance(p.getLocation())<=1){
+            if (cooldown.tryUse(p)){
+              p.getWorld().playEffect(p.getLocation(), Effect.ENDER_SIGNAL,1);
+              p.getWorld().playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 1, 1);
+              Location loc = blue.get(p);
+              loc.setPitch(p.getLocation().getPitch());
+              loc.setYaw(p.getLocation().getYaw());
+              p.teleport(loc);
+            }
+          }
         }
     }
     @EventHandler
     public void onquit(PlayerQuitEvent e){
-        blue.remove(e.getPlayer().getName());
-        orange.remove(e.getPlayer().getName());
+        removePlayer(e.getPlayer());
     }
     @EventHandler
     public void ondeath(PlayerDeathEvent e){
-        blue.remove(e.getEntity().getName());
-        orange.remove(e.getEntity().getName());
+        removePlayer(e.getEntity());
+    }
+
+    private void removePlayer(Player p) {
+      if (blue.containsKey(p)){
+        p.sendBlockChange(blue.get(p), Material.AIR, (byte)0);
+        blue.remove(p);
+      }
+      if (orange.containsKey(p)){
+        p.sendBlockChange(orange.get(p), Material.AIR, (byte)0);
+        orange.remove(p);
+      }
     }
 }
