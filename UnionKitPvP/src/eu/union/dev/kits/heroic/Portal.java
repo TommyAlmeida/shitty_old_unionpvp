@@ -48,7 +48,8 @@ public class Portal extends Kit implements Listener{
             if (p.getItemInHand().getType() == Material.DIAMOND_BARDING){
                 e.setCancelled(true);
                 p.updateInventory();
-                if (e.getClickedBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
+                if (e.getClickedBlock() != null &&
+                    e.getClickedBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
                     Block b = e.getClickedBlock().getRelative(BlockFace.UP);
                     if (blue.containsKey(p.getName())){
                         p.sendBlockChange(blue.get(p.getName()), Material.AIR, (byte)0);
@@ -64,7 +65,8 @@ public class Portal extends Kit implements Listener{
             if (p.getItemInHand().getType() == Material.GOLD_BARDING){
                 e.setCancelled(true);
                 p.updateInventory();
-                if (e.getClickedBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
+                if (e.getClickedBlock() != null &&
+                    e.getClickedBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
                     Block b = e.getClickedBlock().getRelative(BlockFace.UP);
                     if (orange.containsKey(p.getName())){
                         p.sendBlockChange(orange.get(p.getName()), Material.AIR, (byte)0);
