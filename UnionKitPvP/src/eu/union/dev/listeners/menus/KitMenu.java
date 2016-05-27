@@ -5,6 +5,7 @@ import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.layouts.KitLayout;
 import eu.union.dev.utils.Inv;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -44,14 +45,14 @@ public class KitMenu implements Listener {
         }
 
         e.setCancelled(true);
-        setItems(p, "player");
+        Inventory inv = Bukkit.createInventory(null, 3*9, "Kits");
+        setItems(p, inv, "player");
         p.openInventory(Inv.getInstance().kits);
     }
 
-    void setItems(Player p, String type) {
+    void setItems(Player p, Inventory inv, String type) {
         KitManager km = KitManager.getManager();
 
-        Inventory inv = Inv.getInstance().kits;
         inv.clear();
         int slot = 0;
         {
@@ -148,31 +149,31 @@ public class KitMenu implements Listener {
                     break;
                 case 1: //Seus Kits
                     e.setCancelled(true);
-                    setItems(p,"player");
+                    setItems(p,e.getClickedInventory(),"player");
                     break;
                 case 2: //Todos os Kits
                     e.setCancelled(true);
-                    setItems(p,"all");
+                    setItems(p,e.getClickedInventory(),"all");
                     break;
                 case 3: //Kits Commons
                     e.setCancelled(true);
-                    setItems(p,"common");
+                    setItems(p,e.getClickedInventory(),"common");
                     break;
                 case 4: //Kits Rare
                     e.setCancelled(true);
-                    setItems(p,"rare");
+                    setItems(p,e.getClickedInventory(),"rare");
                     break;
                 case 5: //Kits Epic
                     e.setCancelled(true);
-                    setItems(p,"epic");
+                    setItems(p,e.getClickedInventory(),"epic");
                     break;
                 case 6: //Kits Heroic
                     e.setCancelled(true);
-                    setItems(p,"heroic");
+                    setItems(p,e.getClickedInventory(),"heroic");
                     break;
                 case 7: //Kits Beast
                     e.setCancelled(true);
-                    setItems(p,"beast");
+                    setItems(p,e.getClickedInventory(),"beast");
                     break;
                 case 8: //Next Page
                     //Abrir o menu para a proxima pagina
