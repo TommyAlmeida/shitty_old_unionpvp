@@ -1,5 +1,6 @@
 package eu.union.dev.commands;
 
+import eu.union.dev.PvPMain;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
@@ -26,9 +27,12 @@ public class StatsCMD implements CommandExecutor {
             if (kplayer != null) {
                 player.sendMessage("§7§m-------------------------------");
                 player.sendMessage("§9Level: §e%s".replace("%s", String.valueOf(kplayer.getLevel())));
+                player.sendMessage("§9Current EXP: §e%s".replace("%s", String.valueOf(PvPMain.getInstance().exp.getExp(kplayer.getUuid()))));
+                player.sendMessage("§9Needed EXP: §e%s".replace("%s", String.valueOf(PvPMain.getInstance().exp.getneededXP(kplayer.getUuid()))));
                 player.sendMessage("§9Coins: §e%s".replace("%s", String.valueOf(kplayer.getCoins())));
                 player.sendMessage("§9Kills: §e%s".replace("%s", String.valueOf(kplayer.getKills())));
                 player.sendMessage("§9Deaths: §e%s".replace("%s", String.valueOf(kplayer.getDeaths())));
+                player.sendMessage("§9KDR: §e%s".replace("%s", String.valueOf(kplayer.getKDR())));
                 player.sendMessage("§7§m-------------------------------");
             }
         }

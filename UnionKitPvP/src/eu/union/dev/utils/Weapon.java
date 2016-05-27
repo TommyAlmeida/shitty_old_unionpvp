@@ -29,7 +29,11 @@ public enum Weapon {
     JUMPFALL_PAPER(Material.PAPER, "§7JumpFall Paper"),
     CHECKPOINT_FENCE(Material.NETHER_FENCE, "§4Set Position"),
     CHECKPOINT_POT(Material.FLOWER_POT_ITEM, "§5Teleport"),
-    SPECTRE_SUGAR(Material.SUGAR, "§7Spectre");
+    SPECTRE_SUGAR(Material.SUGAR, "§7Spectre"),
+    C4_SLIME(Material.SLIME_BALL, "§4C4"),
+    RIDER_SADDLE(Material.SADDLE, "§6Rider"),
+    PORTAL_BLUE(Material.DIAMOND_BARDING, "§bBlue Portal"),
+    PORTAL_ORANGE(Material.GOLD_BARDING, "§6Orange Portal");
 
 
     Material mat;

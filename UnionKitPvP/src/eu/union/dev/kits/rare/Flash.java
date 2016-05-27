@@ -2,6 +2,7 @@ package eu.union.dev.kits.rare;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
@@ -24,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Flash extends Kit implements Listener{
 
-    public Flash(){ super("flash", "unkit.flash", Difficulty.LOW, Rarity.RARE, 0); }
+    public Flash(){ super("flash", "unkit.flash", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.REDSTONE_TORCH_ON)); }
 
     @Override
     public void applyKit(Player player) {

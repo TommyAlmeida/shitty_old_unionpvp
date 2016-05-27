@@ -1,8 +1,10 @@
 package eu.union.dev.kits.common;
 
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +19,7 @@ import java.util.Random;
  */
 public class Viper extends Kit implements Listener{
 
-    public Viper(){ super("viper","unkit.viper",Difficulty.LOW,Rarity.COMMON,0); }
+    public Viper(){ super("viper","unkit.viper",Difficulty.LOW,Rarity.COMMON,0, new Icon(Material.SPIDER_EYE)); }
 
     @Override
     public void applyKit(Player player) {

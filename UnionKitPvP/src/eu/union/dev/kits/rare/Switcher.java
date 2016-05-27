@@ -1,6 +1,7 @@
 package eu.union.dev.kits.rare;
 
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
@@ -21,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Switcher extends Kit implements Listener{
 
-    public Switcher(){ super("switcher", "unkit.switcher", Difficulty.MEDIUM, Rarity.RARE, 0); }
+    public Switcher(){ super("switcher", "unkit.switcher", Difficulty.MEDIUM, Rarity.RARE, 0, new Icon(Material.SNOW_BALL)); }
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);

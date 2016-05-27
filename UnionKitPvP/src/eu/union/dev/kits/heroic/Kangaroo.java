@@ -1,5 +1,6 @@
 package eu.union.dev.kits.heroic;
 
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  */
 public class Kangaroo extends Kit implements Listener{
 
-    public Kangaroo(){ super("kangaroo", "unkit.kangaroo", Difficulty.MEDIUM, Rarity.HEROIC, 0); }
+    public Kangaroo(){ super("kangaroo", "unkit.kangaroo", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.FIREWORK)); }
 
     @Override
     public void applyKit(Player player) {

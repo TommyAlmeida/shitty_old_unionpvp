@@ -2,6 +2,7 @@ package eu.union.dev.kits.rare;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
@@ -27,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Phantom extends Kit implements Listener{
 
-    public Phantom(){ super("phantom", "unkit.phantom", Difficulty.LOW, Rarity.RARE, 0); };
+    public Phantom(){ super("phantom", "unkit.phantom", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.FEATHER)); };
 
     @Override
     public void applyKit(Player player) {

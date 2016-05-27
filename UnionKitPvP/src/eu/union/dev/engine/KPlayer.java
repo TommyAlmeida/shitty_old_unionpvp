@@ -1,5 +1,8 @@
 package eu.union.dev.engine;
 
+import eu.union.dev.PvPMain;
+import eu.union.dev.kits.common.PvP;
+
 import java.util.UUID;
 
 /**
@@ -43,15 +46,15 @@ public class KPlayer {
     }
 
     public int getLevel(){
-        return level;
+        return PvPMain.getInstance().exp.getLevel(uuid);
     }
 
     public void setLevel(int level) {
-        this.level = level;
+        PvPMain.getInstance().exp.setLevel(uuid,level);
     }
 
-    public void addLevel(int level){
-        this.level += level;
+    public void addEXP(int exp){
+        PvPMain.getInstance().exp.addExp(uuid, exp);
     }
 
     public void setKills(int kills) {

@@ -2,11 +2,13 @@ package eu.union.dev.kits.heroic;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -23,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Repulsion extends Kit implements Listener{
 
-    public Repulsion(){super("repulsion","unkit.repulsion",Difficulty.LOW,Rarity.HEROIC,0);}
+    public Repulsion(){super("repulsion","unkit.repulsion",Difficulty.LOW,Rarity.HEROIC,0, new Icon(Material.SLIME_BLOCK));}
 
     @Override
     public void applyKit(Player player) {

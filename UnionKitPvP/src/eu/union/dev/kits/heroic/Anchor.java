@@ -1,10 +1,12 @@
 package eu.union.dev.kits.heroic;
 
 import eu.union.dev.PvPMain;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +19,7 @@ import org.bukkit.util.Vector;
  */
 public class Anchor extends Kit implements Listener{
 
-    public Anchor(){ super("anchor", "unkit.anchor", Difficulty.LOW, Rarity.HEROIC, 0); }
+    public Anchor(){ super("anchor", "unkit.anchor", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.ANVIL)); }
 
     @Override
     public void applyKit(Player player) {

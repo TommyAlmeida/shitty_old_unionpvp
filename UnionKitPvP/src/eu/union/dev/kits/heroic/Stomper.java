@@ -1,8 +1,10 @@
 package eu.union.dev.kits.heroic;
 
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +15,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class Stomper extends Kit implements Listener {
 
     public Stomper() {
-        super("stomper", "unkit.stomper", Difficulty.MEDIUM, Rarity.HEROIC, 0);
+        super("stomper", "unkit.stomper", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.IRON_BOOTS));
     }
 
     @Override

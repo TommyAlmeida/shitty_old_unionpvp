@@ -1,6 +1,7 @@
 package eu.union.dev.kits.rare;
 
 import eu.union.dev.api.Ability;
+import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Util;
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Hulk extends Kit implements Listener{
 
-    public Hulk(){ super("hulk","unkit.hulk",Difficulty.MEDIUM,Rarity.RARE,0);}
+    public Hulk(){ super("hulk","unkit.hulk",Difficulty.MEDIUM,Rarity.RARE,0, new Icon(Material.SLIME_BALL));}
 
     @Override
     public void applyKit(Player player) {

@@ -2,6 +2,7 @@ package eu.union.dev.kits.heroic;
 
 import java.util.concurrent.TimeUnit;
 
+import eu.union.dev.api.Icon;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -59,7 +60,7 @@ public class IceCube extends Kit implements Listener {
 	};
 
 	public IceCube() {
-		super("icecube", "unkit.icecube", Difficulty.HARD, Rarity.HEROIC, 0);
+		super("icecube", "unkit.icecube", Difficulty.HARD, Rarity.HEROIC, 0, new Icon(Material.ICE));
 	}
 
 	public void applyKit(Player player) {
