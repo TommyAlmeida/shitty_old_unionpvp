@@ -15,7 +15,11 @@ public class AutoMessage {
     public ArrayList<String> messages = new ArrayList<String>();
     public long interval = 20000 / 30;
 
-    private void setMessages(){
+    public AutoMessage() {
+      setMessages();
+    }
+
+  private void setMessages(){
         messages.add("§cThe server is in beta, sorry for the bugs!");
         messages.add("Report? §bwww.unionnetwork.eu");
         messages.add("Every week §anew kits §7are implemented");

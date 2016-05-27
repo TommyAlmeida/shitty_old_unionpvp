@@ -62,7 +62,7 @@ public class C4 extends Kit implements Listener{
                     Location loc = c4item.get(p).getLocation();
                     for (Entity en : c4item.get(p).getNearbyEntities(5, 5, 5)){
                         if (en instanceof Player ){
-                            if (!((Player)en).canSee(p) &&
+                            if (((Player)en).canSee(p) &&
                                     Util.getInstance().inPvP(((Player)en))){
                                 ((Player)en).damage(10, p);
                             }

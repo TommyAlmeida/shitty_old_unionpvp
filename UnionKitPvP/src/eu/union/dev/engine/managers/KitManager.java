@@ -60,7 +60,7 @@ public class KitManager {
     }
 
     public boolean getKitAmIUsing(Player p, String name){
-		return playerKit.containsKey(p) && playerKit.get(p).equals(name);
+        return playerKit.containsKey(p) && playerKit.get(p).equals(getKitByName(name));
     }
 
 
