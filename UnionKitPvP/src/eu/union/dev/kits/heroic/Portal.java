@@ -19,6 +19,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -46,12 +47,14 @@ public class Portal extends Kit implements Listener{
         Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
         if (km.getKitAmIUsing(p,"portal")){
-            if (p.getItemInHand().getType() == Material.DIAMOND_BARDING){
+            Block bloc = p.getTargetBlock((HashSet<Byte>)null, 100);
+            if (p.getItemInHand().getType() == Material.DIAMOND_BARDING &&
+                    (e.getAction() == Action.RIGHT_CLICK_BLOCK ||
+                            e.getAction() == Action.RIGHT_CLICK_AIR)){
                 e.setCancelled(true);
                 p.updateInventory();
-                if (e.getClickedBlock() != null &&
-                    e.getClickedBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
-                    Block b = e.getClickedBlock().getRelative(BlockFace.UP);
+                if (bloc.getType() != Material.AIR && bloc.getRelative(BlockFace.UP).getType() == Material.AIR){
+                    Block b = bloc.getRelative(BlockFace.UP);
                     if (blue.containsKey(p)){
                         p.sendBlockChange(blue.get(p), Material.AIR, (byte)0);
                     }
@@ -63,12 +66,13 @@ public class Portal extends Kit implements Listener{
                     }, 1);
                 }
             }
-            if (p.getItemInHand().getType() == Material.GOLD_BARDING){
+            if (p.getItemInHand().getType() == Material.GOLD_BARDING &&
+                    (e.getAction() == Action.RIGHT_CLICK_BLOCK ||
+                            e.getAction() == Action.RIGHT_CLICK_AIR)){
                 e.setCancelled(true);
                 p.updateInventory();
-                if (e.getClickedBlock() != null &&
-                    e.getClickedBlock().getRelative(BlockFace.UP).getType() == Material.AIR){
-                    Block b = e.getClickedBlock().getRelative(BlockFace.UP);
+                if (bloc.getType() != Material.AIR && bloc.getRelative(BlockFace.UP).getType() == Material.AIR){
+                    Block b = bloc.getRelative(BlockFace.UP);
                     if (orange.containsKey(p)){
                         p.sendBlockChange(orange.get(p), Material.AIR, (byte)0);
                     }
