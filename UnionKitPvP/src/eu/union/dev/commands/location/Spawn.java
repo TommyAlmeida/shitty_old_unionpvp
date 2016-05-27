@@ -2,6 +2,7 @@ package eu.union.dev.commands.location;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Packets;
+import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.utils.Messages;
 import eu.union.dev.utils.Perms;
@@ -34,10 +35,13 @@ public class Spawn implements CommandExecutor {
                 int seconds = 0;
                 @Override
                 public void run() {
+                    KitManager km = KitManager.getManager();
+                    km.removeKit(p);
                     p.teleport(loc);
+                    Util.getInstance().readyPlayer(p);
+                    Util.getInstance().buildJoinIcons(p);
                 }
             }, 20*5);
-            Util.getInstance().buildJoinIcons(p);
         }
         return false;
     }
