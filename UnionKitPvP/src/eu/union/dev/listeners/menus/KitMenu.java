@@ -45,7 +45,7 @@ public class KitMenu implements Listener {
         }
 
         e.setCancelled(true);
-        Inventory inv = Bukkit.createInventory(null, 3*9, "Kits");
+        Inventory inv = Bukkit.createInventory(null, 6*9, "Kits");
         setItems(p, inv, "player");
         p.openInventory(inv);
     }
