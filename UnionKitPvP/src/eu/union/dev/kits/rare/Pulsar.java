@@ -1,5 +1,6 @@
 package eu.union.dev.kits.rare;
 
+import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
@@ -8,6 +9,7 @@ import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Messages;
 import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -68,6 +70,12 @@ public class Pulsar extends Kit implements Listener{
                 if(e instanceof Player){
                     e.setVelocity(new Vector(0,7,0));
                     e.getWorld().strikeLightning(e.getLocation());
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            ((Player) e).damage(7.0D);
+                        }
+                    },20*2);
                     e.sendMessage(prefix + " §7Shi**, you have been pulsed by: §e" + p.getDisplayName());
                     fall.add((Player) e);
                 }
