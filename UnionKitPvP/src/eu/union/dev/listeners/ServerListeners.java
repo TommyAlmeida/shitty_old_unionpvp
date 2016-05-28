@@ -59,7 +59,8 @@ public class ServerListeners implements Listener {
 
     @EventHandler
     public void onMobSpawn(CreatureSpawnEvent e){
-        if(e.getEntity().getType() != EntityType.HORSE)
+        if(e.getEntity().getType() != EntityType.HORSE ||
+                e.getEntity().getType() != EntityType.GUARDIAN)
             e.setCancelled(true);
         else
             e.setCancelled(false);
