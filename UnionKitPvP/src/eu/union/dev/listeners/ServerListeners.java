@@ -18,6 +18,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerAchievementAwardedEvent;
 import org.bukkit.event.player.PlayerChatTabCompleteEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.Inventory;
@@ -70,6 +71,24 @@ public class ServerListeners implements Listener {
     @EventHandler
     public void onTabComplete(PlayerChatTabCompleteEvent e){
         e.getTabCompletions().clear();
+    }
+
+    @EventHandler
+    public void onCMD(PlayerCommandPreprocessEvent e){
+        if(e.getMessage().equalsIgnoreCase("plugins")
+                || e.getMessage().equalsIgnoreCase("pl")
+                || e.getMessage().equalsIgnoreCase("?")
+                || e.getMessage().equalsIgnoreCase("bukkit:plugins")
+                || e.getMessage().equalsIgnoreCase("bukkit:version")
+                || e.getMessage().equalsIgnoreCase("bukkit:?")
+                || e.getMessage().equalsIgnoreCase("tps"))
+        {
+            if(!Perms.isStaff(e.getPlayer())){
+                e.setCancelled(true);
+            }else{
+                e.getPlayer().sendMessage("§cAll plugins are custom made by UnionNetwork");
+            }
+        }
     }
 
     @EventHandler
@@ -141,8 +160,4 @@ public class ServerListeners implements Listener {
         e.setCancelled(true);
     }
 
-    @EventHandler
-    public void openBenchBlocks(PlayerInteractEvent e){
-
-    }
 }

@@ -136,6 +136,11 @@ public class PlayerListeners implements Listener {
             killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
         }
 
+        /**
+         * Remove todos os items do chão
+         */
+        e.getDrops().clear();
+
         if (km.usingKit(killed)) {
             km.removeKit(killed);
             e.setDroppedExp(0);
@@ -155,15 +160,6 @@ public class PlayerListeners implements Listener {
            )
         );
 
-        /**
-         * Remove todos os items do chão passado 5 segundos
-         */
-        Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                e.getDrops().clear();
-            }
-        },20*5);
 
         /*
             Delay para teleportar, pois senão os items

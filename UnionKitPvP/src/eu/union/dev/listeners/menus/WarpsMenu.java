@@ -25,7 +25,7 @@ public class WarpsMenu implements Listener{
         }
 
         {
-            Icon umxum = new Icon(Material.BLAZE_ROD, "§7» §61v1 §7«");
+            Icon umxum = new Icon(Material.BLAZE_ROD, "§7» §61vBOT §7«");
             inv.setItem(10, umxum.build());
         }
 
