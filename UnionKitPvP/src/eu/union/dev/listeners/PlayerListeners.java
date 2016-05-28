@@ -141,12 +141,7 @@ public class PlayerListeners implements Listener {
         /**
          * Remove todos os items do chão
          */
-        Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                e.getDrops().clear();
-            }
-        }, 20*5);
+        e.getDrops().clear();
 
         if (km.usingKit(killed)) {
             km.removeKit(killed);
