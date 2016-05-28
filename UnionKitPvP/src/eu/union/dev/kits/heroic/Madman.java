@@ -75,7 +75,7 @@ public class Madman extends Kit implements Listener{
                     if (ps.getLocation().distance(p.getLocation())>20){
                         if (vitimas.containsKey(ps.getName())){
                             vitimas.remove(ps.getName());
-                            Packets.getAPI().sendActionBar(ps, "§aMadman is far! The effect has passed!");
+                            Packets.getAPI().sendActionBar(ps, "§aMadman is too far away! The effect has passed!");
                         }
                     }
                 }
