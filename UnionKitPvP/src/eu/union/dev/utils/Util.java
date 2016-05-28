@@ -104,6 +104,7 @@ public class Util {
 
     public void buildScoreboard(Player p) {
         final KPlayer profile = PlayerManager.getPlayer(p.getUniqueId());
+        KitManager km = KitManager.getManager();
 
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective obj = board.registerNewObjective("dummy","dummy");
@@ -112,7 +113,7 @@ public class Util {
 
         Objective stats = board.registerNewObjective("stats", "dummy");
         stats.setDisplaySlot(DisplaySlot.SIDEBAR);
-        int index = 10;
+        int index = 11;
         stats.setDisplayName("      §e§lUNION KITPVP      ");
         stats.getScore("§a").setScore(index--);
         stats.getScore("§e[INFO] ").setScore(index--);
@@ -120,9 +121,10 @@ public class Util {
         stats.getScore("§2").setScore(index--);
         stats.getScore("§3").setScore(index--);
         stats.getScore("§4").setScore(index--);
+        stats.getScore("§6").setScore(index--);
         stats.getScore("§5").setScore(index--);
-        stats.getScore("§fClan: §cSoon").setScore(index--);
         stats.getScore("§b").setScore(index--);
+        stats.getScore("§7/stats").setScore(index);
         stats.getScore("§f  www.unionnetwork.eu").setScore(index);
 
         board.registerNewTeam("kills").addEntry("§1");
@@ -130,12 +132,14 @@ public class Util {
         board.registerNewTeam("coins").addEntry("§3");
         board.registerNewTeam("level").addEntry("§4");
         board.registerNewTeam("kdr").addEntry("§5");
+        board.registerNewTeam("exp").addEntry("§6");
 
         new BukkitRunnable() {
             final Team deaths = board.getTeam("deaths");
             final Team kills = board.getTeam("kills");
             final Team coins = board.getTeam("coins");
             final Team level = board.getTeam("level");
+            final Team exp = board.getTeam("exp");
             final Team kdr = board.getTeam("kdr");
 
             public void run() {
@@ -144,6 +148,7 @@ public class Util {
                 deaths.setPrefix("§fDeaths: §e" + profile.getDeaths());
                 kills.setPrefix("§fKills: §e" + profile.getKills());
                 coins.setPrefix("§fCoins: §e" + profile.getCoins());
+                exp.setPrefix("§fEXP: §e" + PvPMain.getInstance().exp.getExp(profile.getUuid()));
                 level.setPrefix("§fLevel: §e" + profile.getLevel());
                 kdr.setPrefix("§fKDR: §e" + profile.getKDR());
             }

@@ -1,6 +1,7 @@
 package eu.union.dev.listeners;
 
 import eu.union.dev.PvPMain;
+import eu.union.dev.api.Packets;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
@@ -85,7 +86,8 @@ public class PlayerListeners implements Listener {
         if (!km.usingKit(player))
             return;
 
-        if (i.getType() != Material.MUSHROOM_SOUP && i.getType() != Material.BOWL) {
+        if (i.getType() != Material.MUSHROOM_SOUP && i.getType() != Material.BOWL && i.getType() != Material.BROWN_MUSHROOM
+                && i.getType() != Material.RED_MUSHROOM) {
             player.sendMessage(Messages.PREFIX.toString() + " §7You cannot drop this item");
             event.setCancelled(true);
             event.getItemDrop().remove();
@@ -136,6 +138,11 @@ public class PlayerListeners implements Listener {
             killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
         }
 
+        /**
+         * Remove todos os items do chão
+         */
+        e.getDrops().clear();
+
         if (km.usingKit(killed)) {
             km.removeKit(killed);
             e.setDroppedExp(0);
@@ -155,15 +162,6 @@ public class PlayerListeners implements Listener {
            )
         );
 
-        /**
-         * Remove todos os items do chão passado 5 segundos
-         */
-        Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                e.getDrops().clear();
-            }
-        },20*5);
 
         /*
             Delay para teleportar, pois senão os items
