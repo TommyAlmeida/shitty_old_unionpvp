@@ -5,6 +5,7 @@ import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.Util;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -31,7 +32,7 @@ public class Guardian extends Kit implements Listener{
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-
+        Weapon.giveWeapon(player, Weapon.GUARDIAN_SHARD,1);
     }
 
     Ability cooldown = new Ability(1, 60, TimeUnit.SECONDS);
@@ -59,7 +60,7 @@ public class Guardian extends Kit implements Listener{
                     }
                 }, 30*20);
             }else{
-                p.sendMessage("CD");
+                Util.getInstance().sendCooldownMessage(p,cooldown,TimeUnit.SECONDS,true);
             }
         }
     }

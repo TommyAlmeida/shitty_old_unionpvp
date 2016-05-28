@@ -34,7 +34,8 @@ public enum Weapon {
     RIDER_SADDLE(Material.SADDLE, "§6Rider"),
     PORTAL_BLUE(Material.DIAMOND_BARDING, "§bBlue Portal"),
     PORTAL_ORANGE(Material.GOLD_BARDING, "§6Orange Portal"),
-    WEATHERLORD_TORNADO(Material.WATCH, "§bWeather Controller");
+    WEATHERLORD_TORNADO(Material.WATCH, "§bWeather Controller"),
+    GUARDIAN_SHARD(Material.PRISMARINE_SHARD, "§bGuardian Tower");
 
 
     Material mat;
