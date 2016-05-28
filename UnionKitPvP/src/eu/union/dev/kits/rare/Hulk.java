@@ -52,5 +52,6 @@ public class Hulk extends Kit implements Listener{
     @EventHandler
     public void ondeath(PlayerDeathEvent e){
         e.getEntity().leaveVehicle();
+        e.getEntity().eject();
     }
 }
