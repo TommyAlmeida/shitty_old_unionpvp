@@ -4,6 +4,7 @@ import eu.union.dev.engine.modules.Booster;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class BoosterManager {
 
@@ -18,6 +19,11 @@ public class BoosterManager {
             }
         }
         return null;
+    }
+
+
+    public void addBoosterToPlayer(UUID uuid){
+
     }
 
     public static BoosterManager getManager() {

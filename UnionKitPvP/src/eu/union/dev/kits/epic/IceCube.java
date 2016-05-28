@@ -1,4 +1,4 @@
-package eu.union.dev.kits.heroic;
+package eu.union.dev.kits.epic;
 
 import java.util.concurrent.TimeUnit;
 
@@ -60,12 +60,12 @@ public class IceCube extends Kit implements Listener {
 	};
 
 	public IceCube() {
-		super("icecube", "unkit.icecube", Difficulty.HARD, Rarity.HEROIC, 0, new Icon(Material.ICE));
+		super("icecube", "unkit.icecube", Difficulty.LOW, Rarity.EPIC, 0, new Icon(Material.ICE));
 	}
 
 	public void applyKit(Player player) {
 		Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-		Weapon.giveWeapon(player, Weapon.ICECUBE_ITEM);
+		Weapon.giveWeapon(player, Weapon.ICECUBE_ITEM,1);
 	}
 
 	public void cubeCreate(Player c) {
@@ -93,7 +93,7 @@ public class IceCube extends Kit implements Listener {
 		c.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 124, 3));
 		c.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 124, 4));
 
-		c.sendMessage("§aAAAAAAAAAAAAGH!...");
+		c.sendMessage("§aDAMN, IM FREEZING!...");
 
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), () -> {
 			for (int[] cubeOffset : cubeOffsets) {

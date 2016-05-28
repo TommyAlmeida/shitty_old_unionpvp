@@ -117,22 +117,27 @@ public class PlayerListeners implements Listener {
                 kPlayer_killed.addDeaths(1);
                 kPlayer_killer.addKills(1);
 
-                if(coins <= 0){
+                if(coins <= 0 || exp <= 0){
                     coins++;
+                    exp++;
                 }
 
                 kPlayer_killer.addCoins(coins);
                 kPlayer_killer.addEXP(exp);
             }
 
+            e.setDeathMessage(null);
+
             Bukkit.broadcastMessage("§a" + killed.getDisplayName() + " §chas been slained by §b" + killer.getDisplayName());
             killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
-            killer.sendMessage("§cYou killed §e" + killed.getDisplayName());
-            killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
-            killer.sendMessage("§6+%coins coins".replace("%coins",String.valueOf(coins)));
-        }
 
-        e.setDeathMessage(null);
+            killer.sendMessage("§e(+%coins coins) §a(+%exp EXP) §cFor killing: §b"
+                    .replace("%coins",String.valueOf(coins)
+                    .replace("%exp",String.valueOf(exp)
+                    .replace("%killed",String.valueOf(killed.getDisplayName())))));
+
+            killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
+        }
 
         if (km.usingKit(killed)) {
             km.removeKit(killed);
@@ -152,6 +157,16 @@ public class PlayerListeners implements Listener {
                k.getType() == Material.BOWL
            )
         );
+
+        /**
+         * Remove todos os items do chão passado 5 segundos
+         */
+        Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                e.getDrops().clear();
+            }
+        },20*5);
 
         /*
             Delay para teleportar, pois senão os items

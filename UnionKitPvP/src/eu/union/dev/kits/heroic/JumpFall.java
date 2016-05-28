@@ -19,9 +19,7 @@ import org.bukkit.util.Vector;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Fentis on 17/05/2016.
- */
+
 public class JumpFall extends Kit implements Listener{
 
     public JumpFall() {super("jumpfall","unkit.jumpfall",Difficulty.MEDIUM,Rarity.HEROIC,0, new Icon(Material.PAPER));}

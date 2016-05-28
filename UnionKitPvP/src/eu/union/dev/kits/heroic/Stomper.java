@@ -1,7 +1,9 @@
 package eu.union.dev.kits.heroic;
 
+import eu.union.dev.PvPMain;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
+import eu.union.dev.engine.handlers.ShockwaveHandler;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.Weapon;
 import org.bukkit.Material;
@@ -57,8 +59,7 @@ public class Stomper extends Kit implements Listener {
                         }
                     }
                 }
-
-                e.setDamage(4.0D);
+                e.setDamage(5.0D);
                 return;
             }
             return;

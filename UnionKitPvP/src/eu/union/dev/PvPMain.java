@@ -78,7 +78,11 @@ public class PvPMain extends JavaPlugin {
         getCommand("setclick").setExecutor(new SetClick());
         getCommand("click").setExecutor(new Click());
         getCommand("warps").setExecutor(new Warps());
-        new Madman().start();//Start Runnable in Seconds
+
+        /**
+         * Kits with runnables (in seconds)
+         */
+        new Madman().start();
     }
 
     @Override

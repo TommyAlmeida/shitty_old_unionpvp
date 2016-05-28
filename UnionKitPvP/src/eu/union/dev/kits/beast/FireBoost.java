@@ -1,4 +1,4 @@
-package eu.union.dev.kits.heroic;
+package eu.union.dev.kits.beast;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class FireBoost extends Kit implements Listener{
 
-    public FireBoost(){super("fireboost","unkit.fireboost",Difficulty.MEDIUM,Rarity.HEROIC,0, new Icon(Material.BLAZE_POWDER));}
+    public FireBoost(){super("fireboost","unkit.fireboost",Difficulty.MEDIUM,Rarity.BEAST,0, new Icon(Material.BLAZE_POWDER));}
 
     @Override
     public void applyKit(Player player) {

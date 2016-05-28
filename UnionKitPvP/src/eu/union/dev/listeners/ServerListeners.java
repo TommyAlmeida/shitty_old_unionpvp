@@ -8,6 +8,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Horse;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
@@ -57,7 +59,10 @@ public class ServerListeners implements Listener {
 
     @EventHandler
     public void onMobSpawn(CreatureSpawnEvent e){
-        e.setCancelled(true);
+        if(e.getEntity().getType() != EntityType.HORSE)
+            e.setCancelled(true);
+        else
+            e.setCancelled(false);
     }
 
 
@@ -133,5 +138,10 @@ public class ServerListeners implements Listener {
     @EventHandler
     public void onFood(FoodLevelChangeEvent e){
         e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void openBenchBlocks(PlayerInteractEvent e){
+
     }
 }

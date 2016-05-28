@@ -22,7 +22,7 @@ public class ExpHandler {
         starterlevel = 0;
         baseCurve = 30;
         difficulty = 5;
-        maximumlevelCapacity = 101;
+        maximumlevelCapacity = 101; //Needs to be 1 more than the original capacity
     }
 
     /**

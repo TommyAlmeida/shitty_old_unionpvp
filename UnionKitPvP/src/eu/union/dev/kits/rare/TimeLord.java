@@ -34,7 +34,7 @@ public class TimeLord extends Kit implements Listener{
         Weapon.giveWeapon(player, Weapon.TIMELORD_CLOCK,1);
     }
 
-    Ability cooldown = new Ability(1, 15, TimeUnit.SECONDS);
+    Ability cooldown = new Ability(1, 30, TimeUnit.SECONDS);
     ArrayList<String> congelados = new ArrayList<>();
     @EventHandler
     public void onclick(PlayerInteractEvent e){

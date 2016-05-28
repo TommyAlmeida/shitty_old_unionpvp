@@ -14,10 +14,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Pulsar extends Kit implements Listener{
@@ -27,7 +29,8 @@ public class Pulsar extends Kit implements Listener{
         super("pulsar", "unkit.pulsar", Difficulty.MEDIUM, Rarity.BEAST, 0, new Icon(Material.MAGMA_CREAM));
     }
 
-    public Ability cooldown = new Ability(1,13, TimeUnit.SECONDS);
+    public Ability cooldown = new Ability(1,15, TimeUnit.SECONDS);
+    private ArrayList<Player> fall = new ArrayList<>();
 
     @Override
     public void applyKit(Player player) {
@@ -63,13 +66,30 @@ public class Pulsar extends Kit implements Listener{
         if(cooldown.tryUse(p)){
             for(Entity e : p.getNearbyEntities(5,5,5)){
                 if(e instanceof Player){
-                    e.setFallDistance(-5);
+                    e.setVelocity(new Vector(0,7,0));
                     e.getWorld().strikeLightning(e.getLocation());
-                    e.sendMessage(prefix + " §7Shi**, you have been pulsed and lifted by: §e" + p.getDisplayName());
+                    e.sendMessage(prefix + " §7Shi**, you have been pulsed by: §e" + p.getDisplayName());
+                    fall.add((Player) e);
                 }
             }
         }else{
             Util.getInstance().sendCooldownMessage(p, cooldown, TimeUnit.SECONDS, true);
+        }
+    }
+
+    @EventHandler
+    public void onFallDamage(EntityDamageEvent e){
+        Player p = (Player) e.getEntity();
+
+        if(e.getEntity() instanceof Player){
+            if(e.getCause() == EntityDamageEvent.DamageCause.FALL){
+                if(fall.contains(p)){
+                    e.setCancelled(true);
+                    for(int i = 0; i < 10; i++){
+                        fall.remove(p);
+                    }
+                }
+            }
         }
     }
 

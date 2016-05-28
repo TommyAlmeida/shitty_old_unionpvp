@@ -34,7 +34,7 @@ public class Specialist extends Kit implements Listener {
 
         if(km.getKitAmIUsing(p,"specialist")){
             if(e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().getType() == Material.ENCHANTED_BOOK){
-                p.openEnchanting(null,true);
+                p.openEnchanting(p.getLocation(),true);
             }
         }
     }

@@ -33,7 +33,8 @@ public enum Weapon {
     C4_SLIME(Material.SLIME_BALL, "§4C4"),
     RIDER_SADDLE(Material.SADDLE, "§6Rider"),
     PORTAL_BLUE(Material.DIAMOND_BARDING, "§bBlue Portal"),
-    PORTAL_ORANGE(Material.GOLD_BARDING, "§6Orange Portal");
+    PORTAL_ORANGE(Material.GOLD_BARDING, "§6Orange Portal"),
+    WEATHERLORD_TORNADO(Material.WATCH, "§bWeather Controller");
 
 
     Material mat;

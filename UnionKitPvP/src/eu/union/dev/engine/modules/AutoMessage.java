@@ -13,13 +13,13 @@ public class AutoMessage {
 
     private String prefix = "§e§lUnionNetwork §r§7» ";
     public ArrayList<String> messages = new ArrayList<String>();
-    public long interval = 20000 / 30;
+    public long interval = 20000 / 50;
 
     public AutoMessage() {
       setMessages();
     }
 
-  private void setMessages(){
+    private void setMessages(){
         messages.add("§cThe server is in beta, sorry for the bugs!");
         messages.add("Report? §bwww.unionnetwork.eu");
         messages.add("Every week §anew kits §7are implemented");
