@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
@@ -136,6 +137,56 @@ public class PlayerListeners implements Listener {
             killer.sendMessage("§e(+" + coins +  " coins) §a(+" + exp + " EXP) §cFor killing: §b" + killed.getDisplayName());
 
             killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
+        }
+
+        if (killer == null || !(e.getEntity().getKiller() instanceof  Player)){
+            EntityDamageEvent.DamageCause damage = e.getEntity().getLastDamageCause().getCause();
+            if (damage == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION ||
+                    damage == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by explosion");
+            }
+            if (damage == EntityDamageEvent.DamageCause.LAVA){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by lava");
+            }
+            if (damage == EntityDamageEvent.DamageCause.FALL){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by fall");
+            }
+            if (damage == EntityDamageEvent.DamageCause.FIRE ||
+                    damage == EntityDamageEvent.DamageCause.FIRE_TICK){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by fire");
+            }
+            if (damage == EntityDamageEvent.DamageCause.MAGIC){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by magic");
+            }
+            if (damage == EntityDamageEvent.DamageCause.DROWNING){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by drowning");
+            }
+            if (damage == EntityDamageEvent.DamageCause.WITHER){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by wither");
+            }
+            if (damage == EntityDamageEvent.DamageCause.POISON){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by poison");
+            }
+            if (damage == EntityDamageEvent.DamageCause.FALLING_BLOCK){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by falling block");
+            }
+            if (damage == EntityDamageEvent.DamageCause.LIGHTNING){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by lightning");
+            }
+            if (damage == EntityDamageEvent.DamageCause.PROJECTILE){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by projectile");
+            }
+            if (damage == EntityDamageEvent.DamageCause.VOID){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by void");
+            }
+            if (damage == EntityDamageEvent.DamageCause.SUICIDE){
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by suicide");
+            }
+            if (damage == EntityDamageEvent.DamageCause.ENTITY_ATTACK){
+                if (!(killed.getKiller() instanceof Player)){
+                    Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by "+killed.getKiller().getType().toString().toLowerCase().replace("_"," "));
+                }
+            }
         }
 
         /**
