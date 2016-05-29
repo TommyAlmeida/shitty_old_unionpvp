@@ -12,7 +12,7 @@ public class PvP extends Kit {
 
     public PvP() {
         super("pvp", Perms.KIT_FREE.toString(), Difficulty.LOW,
-                Rarity.COMMON, 0, new Icon(Material.WOOD_SWORD));
+                Rarity.COMMON, 0, new Icon(Material.WOOD_SWORD), Category.SWORDS);
     }
 
     @Override

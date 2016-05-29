@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Thor extends Kit implements Listener{
 
-    public Thor(){ super("thor", "unkit.thor", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.GOLD_AXE)); }
+    public Thor(){ super("thor", "unkit.thor", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.GOLD_AXE), Category.SPAWNER); }
 
     @Override
     public void applyKit(Player player) {

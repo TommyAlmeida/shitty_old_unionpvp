@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class Portal extends Kit implements Listener{
 
     public Portal() {
-        super("portal", "unkit.portal", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.IRON_BARDING));
+        super("portal", "unkit.portal", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.IRON_BARDING), Category.TELEPORT);
     }
 
     @Override

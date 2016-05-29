@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Repulsion extends Kit implements Listener{
 
-    public Repulsion(){super("repulsion","unkit.repulsion",Difficulty.LOW,Rarity.HEROIC,0, new Icon(Material.SLIME_BLOCK));}
+    public Repulsion(){super("repulsion","unkit.repulsion",Difficulty.LOW,Rarity.HEROIC,0, new Icon(Material.SLIME_BLOCK), Category.SOCIAL);}
 
     @Override
     public void applyKit(Player player) {

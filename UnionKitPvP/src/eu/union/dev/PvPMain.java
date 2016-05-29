@@ -2,11 +2,9 @@ package eu.union.dev;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
-import eu.union.dev.commands.KitCMD;
-import eu.union.dev.commands.ListKitsCMD;
-import eu.union.dev.commands.ReconnectCMD;
-import eu.union.dev.commands.StatsCMD;
+import eu.union.dev.commands.*;
 import eu.union.dev.commands.location.*;
+import eu.union.dev.commands.staff.AdminCMD;
 import eu.union.dev.commands.staff.BuildCMD;
 import eu.union.dev.commands.staff.GameModeCMD;
 import eu.union.dev.engine.Kit;
@@ -61,6 +59,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new JumpPad(), this);
         pm.registerEvents(new GiveKitInArea(), this);
         pm.registerEvents(new WarpsMenu() ,this);
+        pm.registerEvents(new AdminCMD() ,this);
 
         //Commands
         getCommand("kit").setExecutor(new KitCMD());
@@ -78,6 +77,8 @@ public class PvPMain extends JavaPlugin {
         getCommand("setclick").setExecutor(new SetClick());
         getCommand("click").setExecutor(new Click());
         getCommand("warps").setExecutor(new Warps());
+        getCommand("reset").setExecutor(new ResetStatsCMD());
+        getCommand("admin").setExecutor(new AdminCMD());
 
         /**
          * Kits with runnables (in seconds)

@@ -11,6 +11,8 @@ commands:
   spawn:
   stats:
   recon:
+  reset:
+  admin:
   setfps:
   fps:
   setlavachallenge:

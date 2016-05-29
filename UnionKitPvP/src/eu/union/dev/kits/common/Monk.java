@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Monk extends Kit implements Listener{
 
-    public Monk(){super("monk","unkit.monk",Difficulty.LOW,Rarity.COMMON,0, new Icon(Material.BLAZE_ROD));}
+    public Monk(){super("monk","unkit.monk",Difficulty.LOW,Rarity.COMMON,0, new Icon(Material.BLAZE_ROD), Category.SOCIAL);}
 
     @Override
     public void applyKit(Player player) {

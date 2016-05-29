@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class Madman extends Kit implements Listener{
 
     public Madman() {
-        super("madman", "unkit.madman", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.BARRIER));
+        super("madman", "unkit.madman", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.BARRIER), Category.CHARGER);
     }
     public void start(){//Time in Seconds
         new BukkitRunnable() {

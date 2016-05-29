@@ -16,7 +16,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
  */
 public class Turtle extends Kit implements Listener{
 
-    public Turtle(){ super("turtle", "unkit.turtle", Difficulty.MEDIUM, Rarity.RARE, 0, new Icon(Material.IRON_CHESTPLATE)); }
+    public Turtle(){ super("turtle", "unkit.turtle", Difficulty.MEDIUM, Rarity.RARE, 0, new Icon(Material.IRON_CHESTPLATE), Category.PROTECTED); }
 
     @Override
     public void applyKit(Player player) {

@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Phantom extends Kit implements Listener{
 
-    public Phantom(){ super("phantom", "unkit.phantom", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.FEATHER)); };
+    public Phantom(){ super("phantom", "unkit.phantom", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.FEATHER), Category.POTION); };
 
     @Override
     public void applyKit(Player player) {

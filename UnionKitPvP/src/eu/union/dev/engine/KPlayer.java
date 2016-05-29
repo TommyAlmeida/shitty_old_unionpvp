@@ -80,4 +80,16 @@ public class KPlayer {
     public int getKDR(){
         return deaths == 0 ? kills : kills / deaths;
     }
+
+    public void clear(boolean cleanCoins){
+        deaths = 0;
+        kills = 0;
+        level = 0;
+        kdr = 0;
+
+        if(cleanCoins){
+            coins = 0;
+        }
+
+    }
 }

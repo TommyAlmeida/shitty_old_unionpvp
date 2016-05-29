@@ -47,20 +47,51 @@ public abstract class Kit {
         }
     }
 
+    public enum Category{
+        NONE(""),
+        CHANCE("Chance"),
+        JUMPER("Jumper"),
+        SPAWNER("Spawner"),
+        CHARGER("Charger"),
+        BROKEN("Broken Kit"),
+        LONG_DISTANCE("Long Distance"),
+        PROTECTED("Protected"),
+        KAMIKAZE("Kamikaze"),
+        CATCHER("Catcher"),
+        SOCIAL("Interact"),
+        TELEPORT("Teleport"),
+        FREEZE("Freeze"),
+        GRAB("Grabber"),
+        POTION("Potion"),
+        SWORDS("Swords");
+
+        String name;
+
+        Category(String name){
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
     private String name;
     private String permission;
     private int level;
     private Icon icon;
     Rarity rarity;
     Difficulty difficulty;
+    Category category;
     public String prefix = Messages.PREFIX.toString();
 
 
-    public Kit(String name, String permission, Difficulty difficulty, Rarity rarity, int level, Icon icon) {
+    public Kit(String name, String permission, Difficulty difficulty, Rarity rarity, int level, Icon icon, Category category) {
         this.name = name;
         this.difficulty = difficulty;
         this.rarity = rarity;
         this.level = level;
+        this.category = category;
         this.permission = permission;
         this.icon = icon;
     }
@@ -88,6 +119,10 @@ public abstract class Kit {
 
     public String getPermission() {
         return permission;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     public abstract void applyKit(Player player);

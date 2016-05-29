@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Ninja extends Kit implements Listener{
 
-    public Ninja(){ super("ninja", "unkit.ninja", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.COAL_BLOCK)); }
+    public Ninja(){ super("ninja", "unkit.ninja", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.COAL_BLOCK), Category.TELEPORT); }
 
     @Override
     public void applyKit(Player player) {

@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class C4 extends Kit implements Listener{
 
     public C4() {
-        super("c4", "unkit.c4", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.TNT));
+        super("c4", "unkit.c4", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.TNT), Category.KAMIKAZE);
     }
 
     @Override

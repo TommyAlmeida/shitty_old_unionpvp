@@ -60,7 +60,7 @@ public class IceCube extends Kit implements Listener {
 	};
 
 	public IceCube() {
-		super("icecube", "unkit.icecube", Difficulty.LOW, Rarity.EPIC, 0, new Icon(Material.ICE));
+		super("icecube", "unkit.icecube", Difficulty.LOW, Rarity.EPIC, 0, new Icon(Material.ICE), Category.LONG_DISTANCE);
 	}
 
 	public void applyKit(Player player) {

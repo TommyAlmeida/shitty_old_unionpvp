@@ -22,7 +22,8 @@ import java.util.concurrent.TimeUnit;
 public class Spectre extends Kit implements Listener{
 
     public Spectre() {
-        super("spectre", "unkit.spectre", Difficulty.LOW, Rarity.COMMON, 0, new Icon(Material.SUGAR));
+        super("spectre", "unkit.spectre", Difficulty.LOW, Rarity.COMMON, 0, new Icon(Material.SUGAR),
+                Category.POTION);
     }
 
     @Override

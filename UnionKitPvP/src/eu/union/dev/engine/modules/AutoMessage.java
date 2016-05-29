@@ -12,16 +12,17 @@ public class AutoMessage {
     private Random rand = new Random();
 
     private String prefix = "§e§lUnionNetwork §r§7» ";
-    public ArrayList<String> messages = new ArrayList<String>();
-    public long interval = 20000 / 50;
+    public ArrayList<String> messages = new ArrayList<>();
+
+    public long interval = 20000 / 100;
 
     public AutoMessage() {
       setMessages();
     }
 
     private void setMessages(){
-        messages.add("§cThe server is in beta, sorry for the bugs!");
-        messages.add("Report? §bwww.unionnetwork.eu");
+        messages.add("§7The server is in §c§lBETA");
+        messages.add("Report a player? §bwww.unionnetwork.eu");
         messages.add("Every week §anew kits §7are implemented");
     }
 

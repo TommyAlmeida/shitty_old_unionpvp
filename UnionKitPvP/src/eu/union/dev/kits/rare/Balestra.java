@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class Balestra extends Kit implements Listener{
 
     public Balestra() {
-        super("balestra", "unkit.balestra", Difficulty.PRO, Rarity.RARE, 0, new Icon(Material.ARROW));
+        super("balestra", "unkit.balestra", Difficulty.PRO, Rarity.RARE, 0, new Icon(Material.ARROW), Category.LONG_DISTANCE);
     }
 
     @Override

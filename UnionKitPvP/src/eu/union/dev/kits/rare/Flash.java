@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Flash extends Kit implements Listener{
 
-    public Flash(){ super("flash", "unkit.flash", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.REDSTONE_TORCH_ON)); }
+    public Flash(){ super("flash", "unkit.flash", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.REDSTONE_TORCH_ON), Category.TELEPORT); }
 
     @Override
     public void applyKit(Player player) {

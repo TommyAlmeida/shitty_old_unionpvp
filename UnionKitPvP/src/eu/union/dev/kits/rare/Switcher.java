@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Switcher extends Kit implements Listener{
 
-    public Switcher(){ super("switcher", "unkit.switcher", Difficulty.MEDIUM, Rarity.RARE, 0, new Icon(Material.SNOW_BALL)); }
+    public Switcher(){ super("switcher", "unkit.switcher", Difficulty.MEDIUM, Rarity.RARE, 0, new Icon(Material.SNOW_BALL), Category.TELEPORT); }
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
