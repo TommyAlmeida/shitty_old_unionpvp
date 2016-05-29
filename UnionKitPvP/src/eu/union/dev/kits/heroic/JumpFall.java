@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 public class JumpFall extends Kit implements Listener{
 
-    public JumpFall() {super("jumpfall","unkit.jumpfall",Difficulty.MEDIUM,Rarity.HEROIC,0, new Icon(Material.PAPER));}
+    public JumpFall() {super("jumpfall","unkit.jumpfall",Difficulty.MEDIUM,Rarity.HEROIC,0, new Icon(Material.PAPER), Category.SOCIAL);}
 
     @Override
     public void applyKit(Player player) {

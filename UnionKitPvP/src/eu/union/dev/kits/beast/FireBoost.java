@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class FireBoost extends Kit implements Listener{
 
-    public FireBoost(){super("fireboost","unkit.fireboost",Difficulty.MEDIUM,Rarity.BEAST,0, new Icon(Material.BLAZE_POWDER));}
+    public FireBoost(){super("fireboost","unkit.fireboost",Difficulty.MEDIUM,Rarity.BEAST,0, new Icon(Material.BLAZE_POWDER), Category.CHARGER);}
 
     @Override
     public void applyKit(Player player) {

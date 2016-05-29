@@ -22,7 +22,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Endermage extends Kit implements Listener{
 
     public Endermage() {
-        super("endermage", "unkit.endermage", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.ENDER_PORTAL_FRAME));
+        super("endermage", "unkit.endermage", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.ENDER_PORTAL_FRAME), Category.SOCIAL);
     }
 
     @Override

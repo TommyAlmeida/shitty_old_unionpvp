@@ -59,6 +59,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new JumpPad(), this);
         pm.registerEvents(new GiveKitInArea(), this);
         pm.registerEvents(new WarpsMenu() ,this);
+        pm.registerEvents(new AdminCMD() ,this);
 
         //Commands
         getCommand("kit").setExecutor(new KitCMD());

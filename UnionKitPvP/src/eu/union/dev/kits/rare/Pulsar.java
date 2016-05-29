@@ -28,7 +28,7 @@ public class Pulsar extends Kit implements Listener{
 
 
     public Pulsar() {
-        super("pulsar", "unkit.pulsar", Difficulty.MEDIUM, Rarity.BEAST, 0, new Icon(Material.MAGMA_CREAM));
+        super("pulsar", "unkit.pulsar", Difficulty.MEDIUM, Rarity.BEAST, 0, new Icon(Material.MAGMA_CREAM), Category.SPAWNER);
     }
 
     public Ability cooldown = new Ability(1,15, TimeUnit.SECONDS);

@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 public class Guardian extends Kit implements Listener{
 
     public Guardian() {
-        super("guardian", "guardian.unkit", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.PRISMARINE_SHARD));
+        super("guardian", "guardian.unkit", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.PRISMARINE_SHARD), Category.SPAWNER);
     }
 
     @Override

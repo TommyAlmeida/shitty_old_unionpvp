@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class Rider extends Kit implements Listener{
 
     public Rider() {
-        super("rider", "unkit.rider", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.SADDLE));
+        super("rider", "unkit.rider", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.SADDLE), Category.SPAWNER);
     }
 
     @Override

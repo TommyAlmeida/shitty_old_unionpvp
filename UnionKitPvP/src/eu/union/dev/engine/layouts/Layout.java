@@ -2,14 +2,13 @@ package eu.union.dev.engine.layouts;
 
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
+import eu.union.dev.engine.modules.Item;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * Design all lore features in a fancy way
+ */
 public interface Layout {
 
-    /**
-     * Design all lore features in a fancy way
-     * @param icon
-     * @param kit
-     */
-     ItemStack design(Icon icon, Kit kit);
+    ItemStack design(Icon icon, Kit kit);
 }

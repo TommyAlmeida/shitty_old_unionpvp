@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class CheckPoint extends Kit implements Listener{
 
-    public CheckPoint(){ super("checkpoint", "unkit.checkpoint", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.NETHER_FENCE)); }
+    public CheckPoint(){ super("checkpoint", "unkit.checkpoint", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.NETHER_FENCE), Category.TELEPORT); }
 
     @Override
     public void applyKit(Player player) {

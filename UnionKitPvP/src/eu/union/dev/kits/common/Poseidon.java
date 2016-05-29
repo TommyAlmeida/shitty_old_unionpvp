@@ -17,7 +17,7 @@ public class Poseidon extends Kit implements Listener{
 
     public Poseidon() {
         super("poseidon", "unkit.poseidon", Difficulty.LOW,
-                Rarity.COMMON, 0, new Icon(Material.RAW_FISH));
+                Rarity.COMMON, 0, new Icon(Material.RAW_FISH), Category.POTION);
     }
 
     @Override

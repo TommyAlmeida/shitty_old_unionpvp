@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class TimeLord extends Kit implements Listener{
 
-    public TimeLord(){super("timelord","unkit.timelord",Difficulty.LOW,Rarity.RARE,0, new Icon(Material.WATCH));}
+    public TimeLord(){super("timelord","unkit.timelord",Difficulty.LOW,Rarity.RARE,0, new Icon(Material.WATCH), Category.FREEZE);}
 
     @Override
     public void applyKit(Player player) {

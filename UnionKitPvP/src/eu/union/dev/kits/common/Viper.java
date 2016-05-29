@@ -19,7 +19,8 @@ import java.util.Random;
  */
 public class Viper extends Kit implements Listener{
 
-    public Viper(){ super("viper","unkit.viper",Difficulty.LOW,Rarity.COMMON,0, new Icon(Material.SPIDER_EYE)); }
+    public Viper(){ super("viper","unkit.viper",Difficulty.LOW,Rarity.COMMON,0, new Icon(Material.SPIDER_EYE),
+            Category.CHANCE); }
 
     @Override
     public void applyKit(Player player) {

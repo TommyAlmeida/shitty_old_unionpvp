@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Hulk extends Kit implements Listener{
 
-    public Hulk(){ super("hulk","unkit.hulk",Difficulty.MEDIUM,Rarity.RARE,0, new Icon(Material.SLIME_BALL));}
+    public Hulk(){ super("hulk","unkit.hulk",Difficulty.MEDIUM,Rarity.RARE,0, new Icon(Material.SLIME_BALL), Category.GRAB);}
 
     @Override
     public void applyKit(Player player) {

@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 public class Kangaroo extends Kit implements Listener{
 
-    public Kangaroo(){ super("kangaroo", "unkit.kangaroo", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.FIREWORK)); }
+    public Kangaroo(){ super("kangaroo", "unkit.kangaroo", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.FIREWORK), Category.SOCIAL); }
 
     @Override
     public void applyKit(Player player) {
