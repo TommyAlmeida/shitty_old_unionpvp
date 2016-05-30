@@ -240,6 +240,7 @@ public class PlayerListeners implements Listener {
                 Location loc = ConfigManager.getInstance().getLocation("Spawn");
                 Util.getInstance().readyPlayer2(killed);
                 killed.teleport(loc);
+                km.removeKit(killed);
             }
 
         }.runTaskLater(PvPMain.getInstance(), 5);
