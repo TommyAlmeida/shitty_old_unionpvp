@@ -4,9 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import eu.union.dev.commands.*;
 import eu.union.dev.commands.location.*;
-import eu.union.dev.commands.staff.AdminCMD;
-import eu.union.dev.commands.staff.BuildCMD;
-import eu.union.dev.commands.staff.GameModeCMD;
+import eu.union.dev.commands.staff.*;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.handlers.ExpHandler;
 import eu.union.dev.engine.managers.KitManager;
@@ -79,6 +77,8 @@ public class PvPMain extends JavaPlugin {
         getCommand("warps").setExecutor(new Warps());
         getCommand("reset").setExecutor(new ResetStatsCMD());
         getCommand("admin").setExecutor(new AdminCMD());
+        getCommand("check").setExecutor(new CheckCMD());
+        getCommand("ready").setExecutor(new ReadyPlayerCMD());
 
         /**
          * Kits with runnables (in seconds)

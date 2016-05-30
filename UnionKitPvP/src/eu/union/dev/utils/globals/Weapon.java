@@ -1,4 +1,4 @@
-package eu.union.dev.utils;
+package eu.union.dev.utils.globals;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

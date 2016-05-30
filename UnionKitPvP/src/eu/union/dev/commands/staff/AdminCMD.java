@@ -1,21 +1,24 @@
 package eu.union.dev.commands.staff;
 
 import eu.union.dev.api.Icon;
-import eu.union.dev.utils.Messages;
-import eu.union.dev.utils.Perms;
+import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.globals.Messages;
+import eu.union.dev.utils.globals.Perms;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityInteractEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -23,12 +26,28 @@ import java.util.ArrayList;
 
 public class AdminCMD implements CommandExecutor, Listener {
 
-    public static ArrayList<Player> admin = new ArrayList<>();
+    private ArrayList<Player> admin = new ArrayList<>();
 
-    Icon quickChange = new Icon(Material.MAGMA_CREAM, "§6QuickChange", "§7Quick change your admin mode");
-    Icon openInv = new Icon(Material.ANVIL, "§9Open Inventory", "§7Open the players right clicked inventory");
-    Icon ff = new Icon(Material.STICK, "§bCheck ff", "§7Check if player have ff");
-    Icon buildOn = new Icon(Material.GRASS, "§eBuild Mode", "§7Set your build mode to online");
+    private Icon quickChange = new Icon(Material.MAGMA_CREAM, "§6QuickChange", "§7Quick change your admin mode");
+    private Icon openInv = new Icon(Material.ANVIL, "§9Open Inventory", "§7Open the players right clicked inventory");
+    private Icon info = new Icon(Material.BLAZE_ROD, "§bPlayer Info", "§7Check player informations");
+    private Icon buildOn = new Icon(Material.GRASS, "§eBuild Mode", "§7Set your build mode to online");
+    private Icon antikb = new Icon(Material.STICK,
+            "§cTest Anti-KnockBack", "§7Check if the player have anti-kb");
+
+    private int getAmount(Player p, Material m) {
+        int amount = 0;
+        ItemStack[] arrayOfItemStack;
+        int j = (arrayOfItemStack = p.getInventory().getContents()).length;
+        for (int i = 0; i < j; i++) {
+            ItemStack item = arrayOfItemStack[i];
+            if ((item != null) && (item.getType() == m) &&
+                    (item.getAmount() > 0)) {
+                amount += item.getAmount();
+            }
+        }
+        return amount;
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -46,13 +65,22 @@ public class AdminCMD implements CommandExecutor, Listener {
             if (admin.contains(p)) {
                 admin.remove(p);
                 p.sendMessage(Messages.PREFIX.toString() + " §7You are §cno longer §7in §aadmin mode!");
+                pi.clear();
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    online.showPlayer(p);
+                }
             } else {
                 admin.add(p);
                 p.sendMessage(Messages.PREFIX.toString() + " §7Your §aadmin mode §7has been enabled!");
+                p.setGameMode(GameMode.CREATIVE);
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    online.hidePlayer(p);
+                }
                 pi.clear();
-                pi.setItem(2, quickChange.build());
+                pi.setItem(0, quickChange.build());
+                pi.setItem(2, antikb.buildEnchant());
                 pi.setItem(4, openInv.build());
-                pi.setItem(6, ff.build());
+                pi.setItem(6, info.build());
                 pi.setItem(8, buildOn.build());
             }
         }
@@ -70,10 +98,19 @@ public class AdminCMD implements CommandExecutor, Listener {
     }
 
     @EventHandler
+    public void onAdminPickupItem(PlayerPickupItemEvent e) {
+        Player p = e.getPlayer();
+        if (admin.contains(p.getName())) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void onRightClickPlayer(PlayerInteractEntityEvent e) {
         if (e.getRightClicked() instanceof Player) {
             Player clicked = (Player) e.getRightClicked();
             Player player = e.getPlayer();
+            KitManager km = KitManager.getManager();
 
             if (admin.contains(player)) {
 
@@ -91,10 +128,14 @@ public class AdminCMD implements CommandExecutor, Listener {
 
                 if (player.getItemInHand().getItemMeta().getDisplayName().contains(openInv.getName())) {
                     player.openInventory(clicked.getInventory());
-                }
-
-                if (player.getItemInHand().getItemMeta().getDisplayName().contains(ff.getName())) {
-                    player.sendMessage(Messages.PREFIX.toString() + " §cSoon");
+                }else if (player.getItemInHand().getItemMeta().getDisplayName().contains(info.getName())) {
+                    player.sendMessage("§7§m-------------------------------");
+                    player.sendMessage("§9Health: §e" + clicked.getMaxHealth());
+                    player.sendMessage("§9GameMode: §e" + clicked.getGameMode());
+                    player.sendMessage("§9Is Flying: §e" + clicked.isFlying());
+                    player.sendMessage("§9Soups: §e" + getAmount(clicked, Material.MUSHROOM_SOUP));
+                    player.sendMessage("§9Using kit: §e" + km.getKitByPlayer(clicked).getName());
+                    player.sendMessage("§7§m-------------------------------");
                 }
             }
         }
@@ -103,14 +144,13 @@ public class AdminCMD implements CommandExecutor, Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        PlayerInventory pi = p.getInventory();
         ItemStack item = p.getItemInHand();
 
         if (item == null) {
             return;
         }
 
-        if (!(item.getType() == Material.COMPASS)) {
+        if (!(item.getType() == quickChange.getMaterial()) || !(item.getType() == buildOn.getMaterial())) {
             return;
         }
 
@@ -122,21 +162,10 @@ public class AdminCMD implements CommandExecutor, Listener {
             return;
         }
 
-        if (item.getItemMeta().getDisplayName() == quickChange.getName()) {
-            if (admin.contains(p)) {
-                admin.remove(p);
-                p.sendMessage(Messages.PREFIX.toString() + " §7You are §cno longer §7in §aadmin mode!");
-            } else {
-                admin.add(p);
-                p.sendMessage(Messages.PREFIX.toString() + " §7Your §aadmin mode §7has been enabled!");
-                pi.clear();
-                pi.setItem(2, quickChange.build());
-                pi.setItem(4, openInv.build());
-                pi.setItem(6, ff.build());
-                pi.setItem(8, buildOn.build());
-            }
-        }else if (item.getItemMeta().getDisplayName() == buildOn.getName()) {
-            Bukkit.dispatchCommand(p,"build");
+        if (item.getItemMeta().getDisplayName() == "§6QuickChange") {
+            p.chat("/admin");
+        } else if (item.getItemMeta().getDisplayName() == "§eBuild Mode") {
+            p.chat("/build");
         }
     }
 

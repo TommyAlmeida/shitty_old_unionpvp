@@ -5,6 +5,8 @@ import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.PlayerManager;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 
@@ -170,6 +172,67 @@ public class Database {
             return false;
         }
         return true;
+    }
+
+    public synchronized List<String> getTop(TopType type) throws SQLException{
+        List<String> result = new ArrayList<>();
+        Statement s = c.createStatement();
+
+        switch(type){
+            case KILLS:
+                if(s != null){
+                    ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Kills`");
+                    rs.findColumn("PlayerName");
+                    if(rs.last()){
+                        result.add(rs.getString("PlayerName"));
+                    }if(rs.previous()){
+                        result.add(rs.getString("PlayerName"));
+                    }if(rs.previous()){
+                        result.add(rs.getString("PlayerName"));
+                    }
+                }
+                break;
+            case DEATHS:
+                if(s != null){
+                    ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Deaths`");
+                    rs.findColumn("PlayerName");
+                    if(rs.last()){
+                        result.add(rs.getString("PlayerName"));
+                    }if(rs.previous()){
+                        result.add(rs.getString("PlayerName"));
+                    }if(rs.previous()){
+                        result.add(rs.getString("PlayerName"));
+                    }
+                }
+                break;
+            case COINS:
+                if(s != null){
+                    ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Coins`");
+                    rs.findColumn("PlayerName");
+                    if(rs.last()){
+                        result.add(rs.getString("PlayerName"));
+                    }if(rs.previous()){
+                        result.add(rs.getString("PlayerName"));
+                    }if(rs.previous()){
+                        result.add(rs.getString("PlayerName"));
+                    }
+                }
+                break;
+            case LEVEL:
+                if(s != null){
+                    ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Level`");
+                    rs.findColumn("PlayerName");
+                    if(rs.last()){
+                        result.add(rs.getString("PlayerName"));
+                    }if(rs.previous()){
+                        result.add(rs.getString("PlayerName"));
+                    }if(rs.previous()){
+                        result.add(rs.getString("PlayerName"));
+                    }
+                }
+                break;
+        }
+        return result;
     }
 
 }

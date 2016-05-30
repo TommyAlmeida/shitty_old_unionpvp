@@ -1,9 +1,8 @@
-package eu.union.dev.commands;
+package eu.union.dev.commands.staff;
 
-import eu.union.dev.PvPMain;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.PlayerManager;
-import eu.union.dev.utils.Messages;
+import eu.union.dev.utils.globals.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

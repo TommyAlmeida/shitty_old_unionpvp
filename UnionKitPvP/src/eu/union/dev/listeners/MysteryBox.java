@@ -1,7 +1,7 @@
 package eu.union.dev.listeners;
 
 import eu.union.dev.PvPMain;
-import eu.union.dev.utils.Messages;
+import eu.union.dev.utils.globals.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;

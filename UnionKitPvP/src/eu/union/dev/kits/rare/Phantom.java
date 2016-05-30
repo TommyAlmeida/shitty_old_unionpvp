@@ -5,8 +5,8 @@ import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
-import eu.union.dev.utils.Util;
-import eu.union.dev.utils.Weapon;
+import eu.union.dev.utils.globals.Util;
+import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -20,7 +20,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**

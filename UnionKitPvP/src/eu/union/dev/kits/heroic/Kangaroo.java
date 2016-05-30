@@ -3,7 +3,7 @@ package eu.union.dev.kits.heroic;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
-import eu.union.dev.utils.Weapon;
+import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;

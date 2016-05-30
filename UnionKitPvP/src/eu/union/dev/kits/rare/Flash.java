@@ -1,12 +1,11 @@
 package eu.union.dev.kits.rare;
 
-import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
-import eu.union.dev.utils.Util;
-import eu.union.dev.utils.Weapon;
+import eu.union.dev.utils.globals.Util;
+import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -16,7 +15,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 

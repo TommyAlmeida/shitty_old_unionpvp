@@ -1,4 +1,4 @@
-package eu.union.dev.utils;
+package eu.union.dev.utils.globals;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
@@ -33,6 +33,7 @@ public class Util {
         return instance;
     }
     private ArrayList<String> pvp = new ArrayList<>();
+
     public String center(String msg, int length)
     {
         StringBuilder b = new StringBuilder("");
@@ -125,7 +126,7 @@ public class Util {
         stats.getScore("§5").setScore(index--);
         stats.getScore("§b").setScore(index--);
         stats.getScore("§7/stats").setScore(index);
-        stats.getScore("§f  www.unionnetwork.eu").setScore(index);
+        stats.getScore("§fwww.unionnetwork.eu").setScore(index);
 
         board.registerNewTeam("kills").addEntry("§1");
         board.registerNewTeam("deaths").addEntry("§2");
@@ -164,6 +165,7 @@ public class Util {
         player.setExhaustion(0f);
         player.setFallDistance(0f);
         player.setFireTicks(0);
+        player.setAllowFlight(false);
 
         for (PotionEffect pE : player.getActivePotionEffects()) {
             player.removePotionEffect(pE.getType());

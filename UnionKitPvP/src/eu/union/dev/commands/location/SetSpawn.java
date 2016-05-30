@@ -1,8 +1,8 @@
 package eu.union.dev.commands.location;
 
 import eu.union.dev.engine.storage.ConfigManager;
-import eu.union.dev.utils.Messages;
-import eu.union.dev.utils.Perms;
+import eu.union.dev.utils.globals.Messages;
+import eu.union.dev.utils.globals.Perms;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

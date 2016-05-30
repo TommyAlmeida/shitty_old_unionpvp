@@ -13,6 +13,8 @@ commands:
   recon:
   reset:
   admin:
+  check:
+  ready:
   setfps:
   fps:
   setlavachallenge:

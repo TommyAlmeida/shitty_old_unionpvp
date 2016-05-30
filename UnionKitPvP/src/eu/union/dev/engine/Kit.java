@@ -1,7 +1,7 @@
 package eu.union.dev.engine;
 
 import eu.union.dev.api.Icon;
-import eu.union.dev.utils.Messages;
+import eu.union.dev.utils.globals.Messages;
 import org.bukkit.entity.Player;
 
 public abstract class Kit {

@@ -1,4 +1,4 @@
-package eu.union.dev.utils;
+package eu.union.dev.utils.globals;
 
 public enum Messages {
 

@@ -2,18 +2,15 @@ package eu.union.dev.listeners;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.commands.staff.BuildCMD;
-import eu.union.dev.utils.Perms;
+import eu.union.dev.utils.globals.Perms;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Horse;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
-import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerAchievementAwardedEvent;
@@ -22,6 +19,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Random;
 
 public class ServerListeners implements Listener {
 
@@ -32,6 +31,7 @@ public class ServerListeners implements Listener {
     @EventHandler
     public void refillChest(PlayerInteractEvent e){
         Action a = e.getAction();
+        Random rand = new Random();
 
         if(!(a == Action.RIGHT_CLICK_BLOCK)) return;
 

@@ -1,28 +1,22 @@
 package eu.union.dev.listeners;
 
 import eu.union.dev.PvPMain;
-import eu.union.dev.api.Packets;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.engine.storage.ConfigManager;
-import eu.union.dev.kits.common.PvP;
-import eu.union.dev.utils.Messages;
-import eu.union.dev.utils.Util;
+import eu.union.dev.utils.globals.Messages;
+import eu.union.dev.utils.globals.Util;
 import org.bukkit.*;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 import java.util.Random;
@@ -105,32 +99,47 @@ public class PlayerListeners implements Listener {
 
         KPlayer kPlayer_killed = PlayerManager.getPlayer(killed.getUniqueId());
 
+        //Se o player que está a matar nao for nullo
         if (killer != null) {
             KPlayer kPlayer_killer = PlayerManager.getPlayer(killer.getUniqueId());
 
+            //Variaveis para decidir quanto motante o player recebe de 0 a X
             Random rand = new Random();
             int coins = rand.nextInt(7);
             int exp = rand.nextInt(16);
 
+            //Caso o jogador nao existir no player object irá ser kickado para que possa reconectar
             if(kPlayer_killed == null || kPlayer_killer == null){
                 killed.sendMessage(Messages.PREFIX.toString() + " §cReconnect please.");
                 killer.sendMessage(Messages.PREFIX.toString() + " §cReconnect please.");
+                killed.kickPlayer("§cReconnect please");
+                killer.kickPlayer("§cReconnect please");
                 return;
             }else{
+                //O "assasino" recebe mais 1 kill e o jogador morto recebe mais 1 morte
                 kPlayer_killed.addDeaths(1);
                 kPlayer_killer.addKills(1);
 
+                //Se o level for maior que 1 o motante de coins recebidas será mais elevado
+                if(kPlayer_killed.getLevel() > 1){
+                    coins = rand.nextInt(47);
+                }
+
+                //Se o random decidir que for 0 ele irá adicionar +1 para evitar os jogadores receberem 0 de coisn ou exp
                 if(coins <= 0 || exp <= 0){
                     coins++;
                     exp++;
                 }
 
+                //Adiciona as cois e o exp
                 kPlayer_killer.addCoins(coins);
                 kPlayer_killer.addEXP(exp);
             }
 
+            //Previne que a mensagem default do minecraft seja mandada
             e.setDeathMessage(null);
 
+            //Envia as mensagens de o jogador ter sido morto e de receber X Stats ou de ser morto
             Bukkit.broadcastMessage("§a" + killed.getDisplayName() + " §chas been slained by §b" + killer.getDisplayName());
             killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
 
@@ -139,7 +148,8 @@ public class PlayerListeners implements Listener {
             killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
         }
 
-        if (killer == null || !(e.getEntity().getKiller() instanceof  Player)){
+        //Substitui todas as mensagens default para mensagens custom
+        if ((killer == null) || (e.getEntity().getKiller() == null)){
             EntityDamageEvent.DamageCause damage = e.getEntity().getLastDamageCause().getCause();
             if (damage == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION ||
                     damage == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION){
@@ -149,7 +159,7 @@ public class PlayerListeners implements Listener {
                 Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by lava");
             }
             if (damage == EntityDamageEvent.DamageCause.FALL){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by fall");
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c thought it was a bird and died");
             }
             if (damage == EntityDamageEvent.DamageCause.FIRE ||
                     damage == EntityDamageEvent.DamageCause.FIRE_TICK){
@@ -159,7 +169,7 @@ public class PlayerListeners implements Listener {
                 Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by magic");
             }
             if (damage == EntityDamageEvent.DamageCause.DROWNING){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by drowning");
+                Bukkit.broadcastMessage("§a"+killed.getName()+"§c thought it was a fish and died");
             }
             if (damage == EntityDamageEvent.DamageCause.WITHER){
                 Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by wither");
@@ -183,7 +193,7 @@ public class PlayerListeners implements Listener {
                 Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by suicide");
             }
             if (damage == EntityDamageEvent.DamageCause.ENTITY_ATTACK){
-                if (!(killed.getKiller() instanceof Player)){
+                if (killed.getKiller() == null){
                     Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by "+killed.getKiller().getType().toString().toLowerCase().replace("_"," "));
                 }
             }
@@ -198,7 +208,7 @@ public class PlayerListeners implements Listener {
             km.removeKit(killed);
             e.setDroppedExp(0);
         } else {
-            km.readyPlayer(killed);
+            Util.getInstance().readyPlayer(killed);
         }
 
         /*

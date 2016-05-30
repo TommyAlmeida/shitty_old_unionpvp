@@ -4,17 +4,13 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.storage.ConfigManager;
-import eu.union.dev.utils.Messages;
-import eu.union.dev.utils.Perms;
-import eu.union.dev.utils.Util;
+import eu.union.dev.utils.globals.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.io.IOException;
 
 public class Spawn implements CommandExecutor {
 

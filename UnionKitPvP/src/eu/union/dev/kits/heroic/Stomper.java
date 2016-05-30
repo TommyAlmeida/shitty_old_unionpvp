@@ -1,11 +1,9 @@
 package eu.union.dev.kits.heroic;
 
-import eu.union.dev.PvPMain;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
-import eu.union.dev.engine.handlers.ShockwaveHandler;
 import eu.union.dev.engine.managers.KitManager;
-import eu.union.dev.utils.Weapon;
+import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -49,7 +47,7 @@ public class Stomper extends Kit implements Listener {
                         }
                         if (plr.isSneaking())
                         {
-                            plr.damage(6.0D, p);
+                            plr.damage(9.0D, p);
                             plr.sendMessage(prefix +  " §7You were stomped by: §b" + p.getName());
                         }
                         else
@@ -59,7 +57,7 @@ public class Stomper extends Kit implements Listener {
                         }
                     }
                 }
-                e.setDamage(5.0D);
+                e.setDamage(8.0D);
                 return;
             }
             return;

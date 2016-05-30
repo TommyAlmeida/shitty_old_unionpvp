@@ -1,7 +1,7 @@
 package eu.union.dev.commands.staff;
 
-import eu.union.dev.utils.Messages;
-import eu.union.dev.utils.Perms;
+import eu.union.dev.utils.globals.Messages;
+import eu.union.dev.utils.globals.Perms;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

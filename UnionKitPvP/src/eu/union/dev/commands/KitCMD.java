@@ -2,7 +2,7 @@ package eu.union.dev.commands;
 
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
-import eu.union.dev.utils.Messages;
+import eu.union.dev.utils.globals.Messages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

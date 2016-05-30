@@ -3,7 +3,7 @@ package eu.union.dev.commands.location;
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.storage.ConfigManager;
-import eu.union.dev.utils.Util;
+import eu.union.dev.utils.globals.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;

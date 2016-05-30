@@ -2,8 +2,8 @@ package eu.union.dev.kits.common;
 
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
-import eu.union.dev.utils.Perms;
-import eu.union.dev.utils.Weapon;
+import eu.union.dev.utils.globals.Perms;
+import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;

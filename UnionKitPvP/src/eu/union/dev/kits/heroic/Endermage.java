@@ -7,7 +7,7 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
-import eu.union.dev.utils.Weapon;
+import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;

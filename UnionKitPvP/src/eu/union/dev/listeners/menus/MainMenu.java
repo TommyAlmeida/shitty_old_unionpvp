@@ -1,8 +1,8 @@
 package eu.union.dev.listeners.menus;
 
 import eu.union.dev.api.Icon;
-import eu.union.dev.utils.Inv;
-import eu.union.dev.utils.Messages;
+import eu.union.dev.utils.globals.Inv;
+import eu.union.dev.utils.globals.Messages;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

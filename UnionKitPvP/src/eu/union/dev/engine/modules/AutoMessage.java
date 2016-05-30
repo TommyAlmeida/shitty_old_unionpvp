@@ -14,7 +14,7 @@ public class AutoMessage {
     private String prefix = "§e§lUnionNetwork §r§7» ";
     public ArrayList<String> messages = new ArrayList<>();
 
-    public long interval = 20000 / 100;
+    public long interval = 20 * 85;
 
     public AutoMessage() {
       setMessages();
