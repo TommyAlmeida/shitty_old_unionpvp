@@ -34,24 +34,22 @@ public class Stomper extends Kit implements Listener {
         Player p = (Player) e.getEntity();
         if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
             if (km.getKitAmIUsing(p, "stomper")) {
-                for (Entity ent : p.getNearbyEntities(5.0D, 2.0D, 5.0D)) {
-                    if ((ent instanceof Player)) {
-                        Player plr = (Player) ent;
-                        if (e.getDamage() <= 4.0D) {
-                            e.setCancelled(true);
-                            return;
-                        }
-                        if (plr.isSneaking()) {
-                            plr.damage(9.0D, p);
-                            plr.sendMessage(prefix + " §7You were stomped by: §b" + p.getName());
-                        } else {
-                            plr.damage(e.getDamage(), p);
-                            plr.sendMessage(prefix + " §7You were stomped by: §b" + p.getName());
+                if (e.getDamage() >=6.0D){
+                    for (Entity ent : p.getNearbyEntities(5.0D,2.0D,5.0D)){
+                        if (ent instanceof Player){
+                            Player plr = (Player)ent;
+                            double damage = e.getDamage();
+                            if (plr.isSneaking()){//Se estive no shift
+                                plr.damage(6.0, p);//Leva dano baixo 3 corações
+                                plr.sendMessage(prefix + " §7You were stomped by: §b" + p.getName());
+                            }else{
+                                plr.damage(damage,p);//O kit Somper da o dano q ele tomou para o plr
+                                plr.sendMessage(prefix + " §7You were stomped by: §b" + p.getName());
+                            }
+                            e.setDamage(4.0);
                         }
                     }
                 }
-                e.setDamage(8.0D);
-                return;
             }
             return;
         }
