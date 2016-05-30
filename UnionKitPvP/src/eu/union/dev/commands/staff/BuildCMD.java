@@ -15,17 +15,17 @@ public class BuildCMD implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if(!(commandSender instanceof Player)){
-           return true;
+        if (!(commandSender instanceof Player)) {
+            return true;
         }
 
         Player p = (Player) commandSender;
 
-        if(Perms.isStaff(p)){
-            if(build.contains(p)){
+        if (Perms.isStaff(p)) {
+            if (build.contains(p)) {
                 build.remove(p);
                 p.sendMessage(Messages.PREFIX.toString() + " §7Build has been disabled.");
-            }else{
+            } else {
                 build.add(p);
                 p.sendMessage(Messages.PREFIX.toString() + " §7Build has been enabled.");
             }

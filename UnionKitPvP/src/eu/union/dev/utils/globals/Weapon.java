@@ -41,12 +41,12 @@ public enum Weapon {
     Material mat;
     String name;
 
-    Weapon(Material mat, String name){
+    Weapon(Material mat, String name) {
         this.mat = mat;
         this.name = name;
     }
 
-    private static ItemStack makeWeapon(Weapon weapon){
+    private static ItemStack makeWeapon(Weapon weapon) {
         ItemStack item = new ItemStack(weapon.mat, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(weapon.name);
@@ -67,29 +67,29 @@ public enum Weapon {
         return item;
     }*/
 
-    public static void giveWeapon(Player p, Weapon weapon){
+    public static void giveWeapon(Player p, Weapon weapon) {
         ItemStack item = Weapon.makeWeapon(weapon);
-        p.getInventory().setItem(0,item);
+        p.getInventory().setItem(0, item);
     }
 
-    public static void giveWeapon(Player p, Weapon weapon, int slot){
+    public static void giveWeapon(Player p, Weapon weapon, int slot) {
         ItemStack item = Weapon.makeWeapon(weapon);
-        p.getInventory().setItem(slot,item);
+        p.getInventory().setItem(slot, item);
     }
 
-    public static void giveWeapon(Player p, Weapon weapon, int slot, Enchantment enchant, int level){
+    public static void giveWeapon(Player p, Weapon weapon, int slot, Enchantment enchant, int level) {
         ItemStack item = Weapon.makeWeapon(weapon);
-        p.getInventory().setItem(slot,item);
-        p.getInventory().getItem(slot).addEnchantment(enchant,level);
+        p.getInventory().setItem(slot, item);
+        p.getInventory().getItem(slot).addEnchantment(enchant, level);
     }
 
-    public static void giveWeapon(Player p, Weapon weapon, Enchantment enchant, int level){
+    public static void giveWeapon(Player p, Weapon weapon, Enchantment enchant, int level) {
         ItemStack item = Weapon.makeWeapon(weapon);
-        p.getInventory().setItem(0,item);
-        p.getInventory().getItem(0).addEnchantment(enchant,level);
+        p.getInventory().setItem(0, item);
+        p.getInventory().getItem(0).addEnchantment(enchant, level);
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 

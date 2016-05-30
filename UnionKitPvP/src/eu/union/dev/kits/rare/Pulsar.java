@@ -20,24 +20,23 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class Pulsar extends Kit implements Listener{
+public class Pulsar extends Kit implements Listener {
 
 
+    public Ability cooldown = new Ability(1, 15, TimeUnit.SECONDS);
+    private ArrayList<Player> fall = new ArrayList<>();
     public Pulsar() {
         super("pulsar", "unkit.pulsar", Difficulty.MEDIUM, Rarity.BEAST, 0, new Icon(Material.MAGMA_CREAM), Category.SPAWNER);
     }
 
-    public Ability cooldown = new Ability(1,15, TimeUnit.SECONDS);
-    private ArrayList<Player> fall = new ArrayList<>();
-
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.PULSAR_SHOCK,1);
+        Weapon.giveWeapon(player, Weapon.PULSAR_SHOCK, 1);
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event){
+    public void onInteract(PlayerInteractEvent event) {
         Player p = event.getPlayer();
         ItemStack item = p.getItemInHand();
 
@@ -61,35 +60,35 @@ public class Pulsar extends Kit implements Listener{
             return;
         }
 
-        if(cooldown.tryUse(p)){
-            for(Entity e : p.getNearbyEntities(5,5,5)){
-                if(e instanceof Player){
-                    e.setVelocity(new Vector(0,7,0));
+        if (cooldown.tryUse(p)) {
+            for (Entity e : p.getNearbyEntities(5, 5, 5)) {
+                if (e instanceof Player) {
+                    e.setVelocity(new Vector(0, 7, 0));
                     e.getWorld().strikeLightning(e.getLocation());
                     Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                         @Override
                         public void run() {
                             ((Player) e).damage(7.0D);
                         }
-                    },20*2);
+                    }, 20 * 2);
                     e.sendMessage(prefix + " §7Shi**, you have been pulsed by: §e" + p.getDisplayName());
                     fall.add((Player) e);
                 }
             }
-        }else{
+        } else {
             Util.getInstance().sendCooldownMessage(p, cooldown, TimeUnit.SECONDS, true);
         }
     }
 
     @EventHandler
-    public void onFallDamage(EntityDamageEvent e){
+    public void onFallDamage(EntityDamageEvent e) {
         Player p = (Player) e.getEntity();
 
-        if(e.getEntity() instanceof Player){
-            if(e.getCause() == EntityDamageEvent.DamageCause.FALL){
-                if(fall.contains(p)){
+        if (e.getEntity() instanceof Player) {
+            if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+                if (fall.contains(p)) {
                     e.setCancelled(true);
-                    for(int i = 0; i < 10; i++){
+                    for (int i = 0; i < 10; i++) {
                         fall.remove(p);
                     }
                 }

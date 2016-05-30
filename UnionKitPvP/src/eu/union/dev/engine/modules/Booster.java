@@ -11,7 +11,7 @@ public abstract class Booster {
     private boolean global = false;
     private KPlayer owner;
 
-    public Booster(String name, int coins, boolean owned, boolean global, KPlayer owner){
+    public Booster(String name, int coins, boolean owned, boolean global, KPlayer owner) {
         this.name = name;
         this.coins = coins;
         this.global = global;
@@ -51,7 +51,7 @@ public abstract class Booster {
         this.global = global;
     }
 
-    public KPlayer getOwner(){
+    public KPlayer getOwner() {
         return owner;
     }
 

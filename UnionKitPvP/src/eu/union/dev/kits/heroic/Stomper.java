@@ -23,35 +23,28 @@ public class Stomper extends Kit implements Listener {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
     }
 
-    @EventHandler(priority= EventPriority.HIGH)
-    public void onPlayerStomp(EntityDamageEvent e)
-    {
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onPlayerStomp(EntityDamageEvent e) {
         KitManager km = KitManager.getManager();
 
         if (!(e.getEntity() instanceof Player)) {
             return;
         }
 
-        Player p = (Player)e.getEntity();
-        if (e.getCause() == EntityDamageEvent.DamageCause.FALL)
-        {
-            if(km.getKitAmIUsing(p, "stomper")){
+        Player p = (Player) e.getEntity();
+        if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+            if (km.getKitAmIUsing(p, "stomper")) {
                 for (Entity ent : p.getNearbyEntities(5.0D, 2.0D, 5.0D)) {
-                    if ((ent instanceof Player))
-                    {
-                        Player plr = (Player)ent;
-                        if (e.getDamage() <= 4.0D)
-                        {
+                    if ((ent instanceof Player)) {
+                        Player plr = (Player) ent;
+                        if (e.getDamage() <= 4.0D) {
                             e.setCancelled(true);
                             return;
                         }
-                        if (plr.isSneaking())
-                        {
+                        if (plr.isSneaking()) {
                             plr.damage(9.0D, p);
-                            plr.sendMessage(prefix +  " §7You were stomped by: §b" + p.getName());
-                        }
-                        else
-                        {
+                            plr.sendMessage(prefix + " §7You were stomped by: §b" + p.getName());
+                        } else {
                             plr.damage(e.getDamage(), p);
                             plr.sendMessage(prefix + " §7You were stomped by: §b" + p.getName());
                         }

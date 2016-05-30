@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 /**
  * Created by Fentis on 26/05/2016.
  */
-public class Fireman extends Kit implements Listener{
+public class Fireman extends Kit implements Listener {
 
     public Fireman() {
         super("fireman", "unkit.fireman", Difficulty.LOW, Rarity.COMMON, 0, new Icon(Material.LAVA_BUCKET), Category.PROTECTED);
@@ -25,13 +25,13 @@ public class Fireman extends Kit implements Listener{
     }
 
     @EventHandler
-    public void ondamage(EntityDamageEvent e){
-        if (e.getEntity() instanceof Player){
+    public void ondamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
             KitManager km = KitManager.getManager();
-            if (km.getKitAmIUsing((Player)e.getEntity(),"fireman")){
+            if (km.getKitAmIUsing((Player) e.getEntity(), "fireman")) {
                 if (e.getCause() == EntityDamageEvent.DamageCause.LAVA ||
                         e.getCause() == EntityDamageEvent.DamageCause.FIRE ||
-                        e.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK){
+                        e.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK) {
                     e.setCancelled(true);
                 }
             }

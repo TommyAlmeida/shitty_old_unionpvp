@@ -17,6 +17,6 @@ public class PvP extends Kit {
 
     @Override
     public void applyKit(Player player) {
-        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD, Enchantment.DAMAGE_ALL,1);
+        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD, Enchantment.DAMAGE_ALL, 1);
     }
 }

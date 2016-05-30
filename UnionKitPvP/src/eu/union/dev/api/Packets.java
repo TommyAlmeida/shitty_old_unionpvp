@@ -11,6 +11,10 @@ public class Packets {
 
     private static Packets instance = new Packets();
 
+    public static Packets getAPI() {
+        return instance;
+    }
+
     public void sendTitle(Player player, String title, String subtitle, int fadeIn, int stay, int fadeOut) {
         CraftPlayer craftplayer = (CraftPlayer) player;
         PlayerConnection connection = craftplayer.getHandle().playerConnection;
@@ -22,15 +26,15 @@ public class Packets {
         connection.sendPacket(subtitlePacket);
     }
 
-    public void sendActionBar(Player player, String msg){
-        IChatBaseComponent cbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + msg +"\"}");
-        PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc,(byte) 2);
+    public void sendActionBar(Player player, String msg) {
+        IChatBaseComponent cbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + msg + "\"}");
+        PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc, (byte) 2);
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(ppoc);
     }
 
-    public void setHeaderFooter(Player player, String header, String footer){
-        if(header == null) header = "";
-        if(footer == null) footer = "";
+    public void setHeaderFooter(Player player, String header, String footer) {
+        if (header == null) header = "";
+        if (footer == null) footer = "";
 
         header = ChatColor.translateAlternateColorCodes('&', header);
         footer = ChatColor.translateAlternateColorCodes('&', footer);
@@ -53,10 +57,6 @@ public class Packets {
             e.printStackTrace();
         }
 
-        ((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
-    }
-
-    public static Packets getAPI() {
-        return instance;
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
     }
 }

@@ -13,9 +13,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class StatsMenu implements Listener{
+public class StatsMenu implements Listener {
 
-    private Inventory inv = Bukkit.createInventory(null, 9*3, "Stats");
+    private Inventory inv = Bukkit.createInventory(null, 9 * 3, "Stats");
 
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
@@ -48,62 +48,62 @@ public class StatsMenu implements Listener{
     }
 
 
-    private void setItems(Player p){
+    private void setItems(Player p) {
         KPlayer kplayer = PlayerManager.getPlayer(p.getUniqueId());
 
-        for(int i = 0; i < 27; i++){
+        for (int i = 0; i < 27; i++) {
             Icon spacer = new Icon(Material.STAINED_GLASS_PANE, "§a");
-            inv.setItem(i,spacer.build());
+            inv.setItem(i, spacer.build());
         }
 
         {
             Icon icon = new Icon(Material.STONE_SWORD, "§9Kills", "§f" + kplayer.getKills());
-            inv.setItem(10,icon.build());
+            inv.setItem(10, icon.build());
         }
 
         {
             Icon icon = new Icon(Material.LEATHER_HELMET, "§9KDR", "§f" + kplayer.getKills());
-            inv.setItem(11,icon.build());
+            inv.setItem(11, icon.build());
         }
 
         {
             Icon icon = new Icon(Material.EXP_BOTTLE, "§9Level", "§f" + kplayer.getLevel());
-            inv.setItem(12,icon.build());
+            inv.setItem(12, icon.build());
         }
 
         {
             Icon icon = new Icon(Material.EMERALD, "§9Coins", "§f" + kplayer.getCoins());
-            inv.setItem(13,icon.build());
+            inv.setItem(13, icon.build());
         }
 
         {
             Icon icon = new Icon(Material.REDSTONE, "§9Deaths", "§f" + kplayer.getDeaths());
-            inv.setItem(14,icon.build());
+            inv.setItem(14, icon.build());
         }
 
         {
             Icon icon = new Icon(Material.GOLD_AXE, "§9Streaks §o§cSOON");
-            inv.setItem(15,icon.build());
+            inv.setItem(15, icon.build());
         }
 
         {
             Icon icon = new Icon(Material.CHAINMAIL_CHESTPLATE, "§9Assists §o§cSOON");
-            inv.setItem(16,icon.build());
+            inv.setItem(16, icon.build());
         }
     }
 
     @EventHandler
-    public void onInvClick(InventoryClickEvent e){
-        if(e.getInventory().getName() == "Stats"){
-            if(e.getSlot() < 0){
+    public void onInvClick(InventoryClickEvent e) {
+        if (e.getInventory().getName() == "Stats") {
+            if (e.getSlot() < 0) {
                 return;
             }
 
-            if(e.getCurrentItem().getItemMeta().getDisplayName() == "§a"){
+            if (e.getCurrentItem().getItemMeta().getDisplayName() == "§a") {
                 e.setCancelled(true);
             }
 
-            switch(e.getSlot()){
+            switch (e.getSlot()) {
                 case 10:
                     e.setCancelled(true);
                     break;

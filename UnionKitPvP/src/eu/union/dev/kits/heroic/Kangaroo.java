@@ -20,9 +20,13 @@ import java.util.ArrayList;
 /**
  * Created by Fentis on 14/05/2016.
  */
-public class Kangaroo extends Kit implements Listener{
+public class Kangaroo extends Kit implements Listener {
 
-    public Kangaroo(){ super("kangaroo", "unkit.kangaroo", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.FIREWORK), Category.SOCIAL); }
+    ArrayList<String> cd = new ArrayList<>();
+
+    public Kangaroo() {
+        super("kangaroo", "unkit.kangaroo", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.FIREWORK), Category.SOCIAL);
+    }
 
     @Override
     public void applyKit(Player player) {
@@ -30,30 +34,22 @@ public class Kangaroo extends Kit implements Listener{
         Weapon.giveWeapon(player, Weapon.KANGAROO_FIREWORK, 1);
     }
 
-    ArrayList<String> cd = new ArrayList<>();
     @EventHandler
-    public void onclick(PlayerInteractEvent e)
-    {
+    public void onclick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
-        if (p.getItemInHand().getType() == Material.FIREWORK)
-        {
-            if (km.getKitAmIUsing(p, "kangaroo"))
-            {
+        if (p.getItemInHand().getType() == Material.FIREWORK) {
+            if (km.getKitAmIUsing(p, "kangaroo")) {
                 e.setCancelled(true);
                 Vector v = p.getEyeLocation().getDirection();
-                if (!cd.contains(p.getName()))
-                {
+                if (!cd.contains(p.getName())) {
                     cd.add(p.getName());
-                    if (!p.isSneaking())
-                    {
+                    if (!p.isSneaking()) {
                         p.setFallDistance(-1.0F);
                         v.multiply(0.5F);
                         v.setY(1.0D);
                         p.setVelocity(v);
-                    }
-                    else
-                    {
+                    } else {
                         p.setFallDistance(-1.0F);
                         v.multiply(1.5F);
                         v.setY(0.5D);
@@ -65,27 +61,24 @@ public class Kangaroo extends Kit implements Listener{
     }
 
     @EventHandler
-    public void removecd(PlayerMoveEvent event)
-    {
+    public void removecd(PlayerMoveEvent event) {
         Player p = event.getPlayer();
-        if (cd.contains(p.getName()))
-        {
+        if (cd.contains(p.getName())) {
             Block b = p.getLocation().getBlock();
             if ((b.getType() != Material.AIR) ||
-                    (b.getRelative(BlockFace.DOWN).getType() != Material.AIR)){
+                    (b.getRelative(BlockFace.DOWN).getType() != Material.AIR)) {
                 cd.remove(p.getName());
             }
         }
     }
 
     @EventHandler
-    public void canceldamagefall(EntityDamageEvent e)
-    {
+    public void canceldamagefall(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player) {
             KitManager km = KitManager.getManager();
-            if (km.getKitAmIUsing((Player)e.getEntity(), "kangaroo") &&
-                    e.getCause() == EntityDamageEvent.DamageCause.FALL){
-                if (e.getDamage() > 7.0D){
+            if (km.getKitAmIUsing((Player) e.getEntity(), "kangaroo") &&
+                    e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+                if (e.getDamage() > 7.0D) {
                     e.setDamage(7.0D);
                 }
             }

@@ -12,21 +12,20 @@ public class BoosterManager {
 
     List<Booster> boosters = new ArrayList<>();
 
-    public Booster getBoosterByName(String name){
-        for(Booster booster : boosters){
-            if(booster.getName().equalsIgnoreCase(name)){
+    public static BoosterManager getManager() {
+        return boosterManager;
+    }
+
+    public Booster getBoosterByName(String name) {
+        for (Booster booster : boosters) {
+            if (booster.getName().equalsIgnoreCase(name)) {
                 return booster;
             }
         }
         return null;
     }
 
+    public void addBoosterToPlayer(UUID uuid) {
 
-    public void addBoosterToPlayer(UUID uuid){
-
-    }
-
-    public static BoosterManager getManager() {
-        return boosterManager;
     }
 }

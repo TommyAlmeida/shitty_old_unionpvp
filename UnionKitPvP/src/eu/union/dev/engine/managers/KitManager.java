@@ -1,9 +1,5 @@
 package eu.union.dev.engine.managers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.utils.globals.Messages;
@@ -11,26 +7,28 @@ import eu.union.dev.utils.globals.Util;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class KitManager {
 
     public static KitManager km = new KitManager();
+    public HashMap<Player, Kit> playerKit = new HashMap<>();
+    List<Kit> kits = new ArrayList<>(); //Lista de Kits.
 
     /**
      * Método que sempre retornará o mesmo KitManager.
+     *
      * @return
      */
     public static KitManager getManager() {
         return km;
     }
 
-
-    List<Kit> kits = new ArrayList<>(); //Lista de Kits.
-
-    public HashMap<Player, Kit> playerKit = new HashMap<>();
-
-
     /**
      * Register kit by adding him on kits list
+     *
      * @param kit
      */
     public void registerKit(Kit kit) {
@@ -39,6 +37,7 @@ public class KitManager {
 
     /**
      * Remove kit form kits list
+     *
      * @param kit
      */
     public void unregisterKit(Kit kit) {
@@ -47,6 +46,7 @@ public class KitManager {
 
     /**
      * Search kit by name
+     *
      * @param name
      * @return
      */
@@ -58,13 +58,14 @@ public class KitManager {
         return null;
     }
 
-    public boolean getKitAmIUsing(Player p, String name){
+    public boolean getKitAmIUsing(Player p, String name) {
         return playerKit.containsKey(p) && playerKit.get(p).equals(getKitByName(name));
     }
 
 
     /**
      * Get the player kit that hes using
+     *
      * @param player
      * @return
      */
@@ -75,9 +76,9 @@ public class KitManager {
     }
 
 
-
     /**
      * Reset all player values to default
+     *
      * @param player
      */
     public void readyPlayer(Player player) {
@@ -98,6 +99,7 @@ public class KitManager {
 
     /**
      * Function activated when player use the kit
+     *
      * @param player
      * @param kit
      */
@@ -109,14 +111,14 @@ public class KitManager {
             return;
         }
 
-        if(!hasEnoughLevel(kPlayer, kit)){
+        if (!hasEnoughLevel(kPlayer, kit)) {
             player.sendMessage(Messages.PREFIX.toString() + " §7You dont have enough §alevel");
             return;
         }
 
-        if(usingKit(player)){
+        if (usingKit(player)) {
             player.sendMessage(Messages.PREFIX.toString() + " §7You already have a kit!");
-        }else{
+        } else {
             readyPlayer(player);
             kit.applyKit(player);
 
@@ -131,6 +133,7 @@ public class KitManager {
 
     /**
      * Remove kit from player
+     *
      * @param player
      */
     public void removeKit(Player player) {
@@ -146,24 +149,26 @@ public class KitManager {
 
     /**
      * Returns the difficulty of the kit
+     *
      * @param kit
      * @return
      */
-    public String getKitDifficulty(Kit kit){
+    public String getKitDifficulty(Kit kit) {
         return kit.getDifficulty().value();
     }
 
     /**
      * Check if the player have the level required
      * to use the selected kit
+     *
      * @param kPlayer
      * @param kit
      * @return
      */
-    public boolean hasEnoughLevel(KPlayer kPlayer, Kit kit){
-        if(kPlayer.getLevel() >= kit.getLevel()){
+    public boolean hasEnoughLevel(KPlayer kPlayer, Kit kit) {
+        if (kPlayer.getLevel() >= kit.getLevel()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -173,9 +178,9 @@ public class KitManager {
     }
 
 
-
     /**
      * Get a list of kits
+     *
      * @return
      */
     public List<Kit> getKits() {

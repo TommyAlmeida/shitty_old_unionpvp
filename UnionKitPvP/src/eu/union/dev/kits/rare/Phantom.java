@@ -25,9 +25,15 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Fentis on 14/05/2016.
  */
-public class Phantom extends Kit implements Listener{
+public class Phantom extends Kit implements Listener {
 
-    public Phantom(){ super("phantom", "unkit.phantom", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.FEATHER), Category.POTION); };
+    Ability cooldown = new Ability(1, 30, TimeUnit.SECONDS);
+
+    ;
+
+    public Phantom() {
+        super("phantom", "unkit.phantom", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.FEATHER), Category.POTION);
+    }
 
     @Override
     public void applyKit(Player player) {
@@ -35,30 +41,29 @@ public class Phantom extends Kit implements Listener{
         Weapon.giveWeapon(player, Weapon.PHANTOM_FEATHER, 1);
     }
 
-    Ability cooldown = new Ability(1,30, TimeUnit.SECONDS);
     @SuppressWarnings("deprecation")
     @EventHandler
     public void onclickinv(InventoryClickEvent e) {
         KitManager km = KitManager.getManager();
-        if (km.getKitAmIUsing((Player)e.getWhoClicked(), "phantom") &&
+        if (km.getKitAmIUsing((Player) e.getWhoClicked(), "phantom") &&
                 e.getCurrentItem() != null &&
                 e.getCurrentItem().getTypeId() != 0 &&
-                e.getCurrentItem().getType().name().contains("LEATHER_")){
+                e.getCurrentItem().getType().name().contains("LEATHER_")) {
             e.setCancelled(true);
         }
     }
+
     @SuppressWarnings("deprecation")
     @EventHandler
-    public void onclick(PlayerInteractEvent e)
-    {
+    public void onclick(PlayerInteractEvent e) {
         final Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
         if (p.getItemInHand().getType() == Material.FEATHER &&
-                km.getKitAmIUsing(p, "phantom")){
+                km.getKitAmIUsing(p, "phantom")) {
             if (e.getAction() == Action.RIGHT_CLICK_AIR ||
                     e.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 if (!cooldown.tryUse(p)) {
-                    Util.getInstance().sendCooldownMessage(p,cooldown,TimeUnit.SECONDS,true);
+                    Util.getInstance().sendCooldownMessage(p, cooldown, TimeUnit.SECONDS, true);
                 } else {
                     p.playSound(p.getLocation(), Sound.FIREWORK_LAUNCH, 1.0F, 1.0F);
                     p.setAllowFlight(true);
@@ -70,8 +75,7 @@ public class Phantom extends Kit implements Listener{
                     p.getInventory().setBoots(addcolor(Material.LEATHER_BOOTS));
                     p.sendMessage("§aYou become a ghost and can fly 5s!");
                     p.updateInventory();
-                    Bukkit.getScheduler().runTaskLater(PvPMain.getInstance(), new Runnable()
-                            {
+                    Bukkit.getScheduler().runTaskLater(PvPMain.getInstance(), new Runnable() {
                                 public void run() {
                                     p.setAllowFlight(false);
                                     p.setFlying(false);
@@ -79,13 +83,13 @@ public class Phantom extends Kit implements Listener{
                                     p.sendMessage("§bYou came back to life and you can not fly!");
                                 }
                             }
-                            , 5*20);
+                            , 5 * 20);
                 }
             }
         }
     }
-    ItemStack addcolor(Material m)
-    {
+
+    ItemStack addcolor(Material m) {
         ItemStack i = new ItemStack(m);
         LeatherArmorMeta im = (LeatherArmorMeta) i.getItemMeta();
         im.setColor(Color.WHITE);

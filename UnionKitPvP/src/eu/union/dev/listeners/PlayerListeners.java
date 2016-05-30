@@ -7,14 +7,20 @@ import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Util;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
@@ -26,7 +32,7 @@ public class PlayerListeners implements Listener {
     KitManager km = KitManager.getManager();
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent e){
+    public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         KitManager km = KitManager.getManager();
         KPlayer kplayer = PlayerManager.getPlayer(player.getUniqueId());
@@ -34,9 +40,9 @@ public class PlayerListeners implements Listener {
         if (km.usingKit(player))
             km.removeKit(player);
 
-        if(kplayer != null){
+        if (kplayer != null) {
             PvPMain.getInstance().getSQL().updatePlayerProfileSQL(kplayer);
-        }else {
+        } else {
             System.out.println("Inexisting PlayerProfile for this Player");
         }
 
@@ -45,7 +51,7 @@ public class PlayerListeners implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
+    public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
 
@@ -64,7 +70,7 @@ public class PlayerListeners implements Listener {
     }
 
     @EventHandler
-    public void onChat(AsyncPlayerChatEvent e){
+    public void onChat(AsyncPlayerChatEvent e) {
         String prefix = PermissionsEx.getUser(e.getPlayer()).getGroups()[0].getPrefix();
         KPlayer kPlayer = PlayerManager.getPlayer(e.getPlayer().getUniqueId());
 
@@ -86,14 +92,12 @@ public class PlayerListeners implements Listener {
             player.sendMessage(Messages.PREFIX.toString() + " §7You cannot drop this item");
             event.setCancelled(true);
             event.getItemDrop().remove();
-        } else {
-            event.getItemDrop().remove();
         }
 
     }
 
     @EventHandler
-    public void onDeath(PlayerDeathEvent e){
+    public void onDeath(PlayerDeathEvent e) {
         Player killed = e.getEntity();
         Player killer = e.getEntity().getKiller();
 
@@ -109,24 +113,24 @@ public class PlayerListeners implements Listener {
             int exp = rand.nextInt(16);
 
             //Caso o jogador nao existir no player object irá ser kickado para que possa reconectar
-            if(kPlayer_killed == null || kPlayer_killer == null){
+            if (kPlayer_killed == null || kPlayer_killer == null) {
                 killed.sendMessage(Messages.PREFIX.toString() + " §cReconnect please.");
                 killer.sendMessage(Messages.PREFIX.toString() + " §cReconnect please.");
                 killed.kickPlayer("§cReconnect please");
                 killer.kickPlayer("§cReconnect please");
                 return;
-            }else{
+            } else {
                 //O "assasino" recebe mais 1 kill e o jogador morto recebe mais 1 morte
                 kPlayer_killed.addDeaths(1);
                 kPlayer_killer.addKills(1);
 
                 //Se o level for maior que 1 o motante de coins recebidas será mais elevado
-                if(kPlayer_killed.getLevel() > 1){
+                if (kPlayer_killed.getLevel() > 1) {
                     coins = rand.nextInt(47);
                 }
 
                 //Se o random decidir que for 0 ele irá adicionar +1 para evitar os jogadores receberem 0 de coisn ou exp
-                if(coins <= 0 || exp <= 0){
+                if (coins <= 0 || exp <= 0) {
                     coins++;
                     exp++;
                 }
@@ -143,84 +147,72 @@ public class PlayerListeners implements Listener {
             Bukkit.broadcastMessage("§a" + killed.getDisplayName() + " §chas been slained by §b" + killer.getDisplayName());
             killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
 
-            killer.sendMessage("§e(+" + coins +  " coins) §a(+" + exp + " EXP) §cFor killing: §b" + killed.getDisplayName());
+            killer.sendMessage("§e(+" + coins + " coins) §a(+" + exp + " EXP) §cFor killing: §b" + killed.getDisplayName());
 
             killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
         }
 
         //Substitui todas as mensagens default para mensagens custom
-        if ((killer == null) || (e.getEntity().getKiller() == null)){
+        if ((killer == null) || (e.getEntity().getKiller() == null)) {
             EntityDamageEvent.DamageCause damage = e.getEntity().getLastDamageCause().getCause();
             if (damage == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION ||
-                    damage == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by explosion");
+                    damage == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by explosion");
             }
-            if (damage == EntityDamageEvent.DamageCause.LAVA){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by lava");
+            if (damage == EntityDamageEvent.DamageCause.LAVA) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by lava");
             }
-            if (damage == EntityDamageEvent.DamageCause.FALL){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c thought it was a bird and died");
+            if (damage == EntityDamageEvent.DamageCause.FALL) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c thought it was a bird and died");
             }
             if (damage == EntityDamageEvent.DamageCause.FIRE ||
-                    damage == EntityDamageEvent.DamageCause.FIRE_TICK){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by fire");
+                    damage == EntityDamageEvent.DamageCause.FIRE_TICK) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by fire");
             }
-            if (damage == EntityDamageEvent.DamageCause.MAGIC){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by magic");
+            if (damage == EntityDamageEvent.DamageCause.MAGIC) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by magic");
             }
-            if (damage == EntityDamageEvent.DamageCause.DROWNING){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c thought it was a fish and died");
+            if (damage == EntityDamageEvent.DamageCause.DROWNING) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c thought it was a fish and died");
             }
-            if (damage == EntityDamageEvent.DamageCause.WITHER){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by wither");
+            if (damage == EntityDamageEvent.DamageCause.WITHER) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by wither");
             }
-            if (damage == EntityDamageEvent.DamageCause.POISON){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by poison");
+            if (damage == EntityDamageEvent.DamageCause.POISON) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by poison");
             }
-            if (damage == EntityDamageEvent.DamageCause.FALLING_BLOCK){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by falling block");
+            if (damage == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by falling block");
             }
-            if (damage == EntityDamageEvent.DamageCause.LIGHTNING){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by lightning");
+            if (damage == EntityDamageEvent.DamageCause.LIGHTNING) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by lightning");
             }
-            if (damage == EntityDamageEvent.DamageCause.PROJECTILE){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by projectile");
+            if (damage == EntityDamageEvent.DamageCause.PROJECTILE) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by projectile");
             }
-            if (damage == EntityDamageEvent.DamageCause.VOID){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by void");
+            if (damage == EntityDamageEvent.DamageCause.VOID) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by void");
             }
-            if (damage == EntityDamageEvent.DamageCause.SUICIDE){
-                Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by suicide");
+            if (damage == EntityDamageEvent.DamageCause.SUICIDE) {
+                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by suicide");
             }
-            if (damage == EntityDamageEvent.DamageCause.ENTITY_ATTACK){
-                if (killed.getKiller() == null){
-                    Bukkit.broadcastMessage("§a"+killed.getName()+"§c has died by "+killed.getKiller().getType().toString().toLowerCase().replace("_"," "));
+            if (damage == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+                if (killed.getKiller() == null) {
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by " + killed.getKiller().getType().toString().toLowerCase().replace("_", " "));
                 }
             }
-        }
-
-        /**
-         * Remove todos os items do chão
-         */
-        e.getDrops().clear();
-
-        if (km.usingKit(killed)) {
-            km.removeKit(killed);
-            e.setDroppedExp(0);
-        } else {
-            Util.getInstance().readyPlayer(killed);
         }
 
         /*
             Dropar somente Sopas, Cogumelos e potes.
          */
         e.getDrops().removeIf(k ->
-           k != null && !(
-               k.getType() == Material.MUSHROOM_SOUP ||
-               k.getType() == Material.RED_MUSHROOM ||
-               k.getType() == Material.BROWN_MUSHROOM ||
-               k.getType() == Material.BOWL
-           )
+                k != null && !(
+                        k.getType() == Material.MUSHROOM_SOUP ||
+                                k.getType() == Material.RED_MUSHROOM ||
+                                k.getType() == Material.BROWN_MUSHROOM ||
+                                k.getType() == Material.BOWL
+                )
         );
 
 
@@ -231,6 +223,13 @@ public class PlayerListeners implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
+                if (km.usingKit(killed)) {
+                    km.removeKit(killed);
+                    e.setDroppedExp(0);
+                } else {
+                    Util.getInstance().readyPlayer(killed);
+                }
+
                 Util.getInstance().buildJoinIcons(killed);
                 Location loc = ConfigManager.getInstance().getLocation("Spawn");
                 killed.teleport(loc);
@@ -239,16 +238,16 @@ public class PlayerListeners implements Listener {
     }
 
     @EventHandler
-    public void ondamage(EntityDamageByEntityEvent e){
-        if (e.getEntity() instanceof Player){
-            Player p = (Player)e.getEntity();
-            if (!Util.getInstance().inPvP(p)){
+    public void ondamage(EntityDamageByEntityEvent e) {
+        if (e.getEntity() instanceof Player) {
+            Player p = (Player) e.getEntity();
+            if (!Util.getInstance().inPvP(p)) {
                 e.setCancelled(true);
             }
         }
-        if (e.getDamager() instanceof Player){
-            Player p = (Player)e.getDamager();
-            if (!Util.getInstance().inPvP(p)){
+        if (e.getDamager() instanceof Player) {
+            Player p = (Player) e.getDamager();
+            if (!Util.getInstance().inPvP(p)) {
                 e.setCancelled(true);
             }
         }

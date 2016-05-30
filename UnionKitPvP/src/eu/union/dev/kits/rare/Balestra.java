@@ -18,7 +18,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Fentis on 26/05/2016.
  */
-public class Balestra extends Kit implements Listener{
+public class Balestra extends Kit implements Listener {
+
+    Ability cooldown = new Ability(1, 3, TimeUnit.SECONDS);
 
     public Balestra() {
         super("balestra", "unkit.balestra", Difficulty.PRO, Rarity.RARE, 0, new Icon(Material.ARROW), Category.LONG_DISTANCE);
@@ -27,23 +29,22 @@ public class Balestra extends Kit implements Listener{
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.DEFAULT_BOW,1);
+        Weapon.giveWeapon(player, Weapon.DEFAULT_BOW, 1);
     }
 
-    Ability cooldown = new Ability(1, 3, TimeUnit.SECONDS);
     @EventHandler
-    public void onclick(PlayerInteractEvent e){
+    public void onclick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
-        if (km.getKitAmIUsing(p, "balestra")){
-            if (p.getItemInHand().getType() == Material.BOW){
+        if (km.getKitAmIUsing(p, "balestra")) {
+            if (p.getItemInHand().getType() == Material.BOW) {
                 e.setCancelled(true);
-                if (cooldown.tryUse(p)){
+                if (cooldown.tryUse(p)) {
                     Arrow a = p.shootArrow();
                     a.setCritical(true);
                     a.setVelocity(a.getVelocity().multiply(2));
-                }else{
-                    Packets.getAPI().sendActionBar(p,"§a§lRELOADING...");
+                } else {
+                    Packets.getAPI().sendActionBar(p, "§a§lRELOADING...");
                 }
             }
         }

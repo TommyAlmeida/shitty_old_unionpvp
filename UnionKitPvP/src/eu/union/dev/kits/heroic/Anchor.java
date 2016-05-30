@@ -17,9 +17,11 @@ import org.bukkit.util.Vector;
 /**
  * Created by Fentis on 14/05/2016.
  */
-public class Anchor extends Kit implements Listener{
+public class Anchor extends Kit implements Listener {
 
-    public Anchor(){ super("anchor", "unkit.anchor", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.ANVIL), Category.PROTECTED); }
+    public Anchor() {
+        super("anchor", "unkit.anchor", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.ANVIL), Category.PROTECTED);
+    }
 
     @Override
     public void applyKit(Player player) {
@@ -27,12 +29,12 @@ public class Anchor extends Kit implements Listener{
     }
 
     @EventHandler
-    public void ondamage(EntityDamageByEntityEvent e){
-        if (e.getEntity() instanceof Player && e.getDamager() instanceof Player){
-            final Player d = (Player)e.getDamager();
-            final Player p = (Player)e.getEntity();
+    public void ondamage(EntityDamageByEntityEvent e) {
+        if (e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
+            final Player d = (Player) e.getDamager();
+            final Player p = (Player) e.getEntity();
             KitManager km = KitManager.getManager();
-            if (km.getKitAmIUsing(p, "anchor")){
+            if (km.getKitAmIUsing(p, "anchor")) {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                     @Override
                     public void run() {
@@ -41,7 +43,7 @@ public class Anchor extends Kit implements Listener{
                     }
                 }, 1);
             }
-            if (km.getKitAmIUsing(d, "anchor")){
+            if (km.getKitAmIUsing(d, "anchor")) {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                     @Override
                     public void run() {

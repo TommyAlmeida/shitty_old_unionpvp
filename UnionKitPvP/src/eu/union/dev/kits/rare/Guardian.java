@@ -23,7 +23,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Fentis on 28/05/2016.
  */
-public class Guardian extends Kit implements Listener{
+public class Guardian extends Kit implements Listener {
+
+    Ability cooldown = new Ability(1, 60, TimeUnit.SECONDS);
 
     public Guardian() {
         super("guardian", "guardian.unkit", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.PRISMARINE_SHARD), Category.SPAWNER);
@@ -32,16 +34,15 @@ public class Guardian extends Kit implements Listener{
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.GUARDIAN_SHARD,1);
+        Weapon.giveWeapon(player, Weapon.GUARDIAN_SHARD, 1);
     }
 
-    Ability cooldown = new Ability(1, 60, TimeUnit.SECONDS);
     @EventHandler
-    public void onclick(PlayerInteractEvent e){
+    public void onclick(PlayerInteractEvent e) {
         final Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
-        if (km.getKitAmIUsing(p,"guardian") && p.getItemInHand().getType() == Material.PRISMARINE_SHARD){
-            if (cooldown.tryUse(p)){
+        if (km.getKitAmIUsing(p, "guardian") && p.getItemInHand().getType() == Material.PRISMARINE_SHARD) {
+            if (cooldown.tryUse(p)) {
                 ArmorStand as = p.getWorld().spawn(p.getLocation(), ArmorStand.class);
                 final org.bukkit.entity.Guardian g = p.getWorld().spawn(p.getLocation(), org.bukkit.entity.Guardian.class);
                 as.setBasePlate(false);
@@ -50,7 +51,7 @@ public class Guardian extends Kit implements Listener{
                 as.setPassenger(g);
                 g.setMaxHealth(100.0);
                 g.setHealth(100.0);
-                g.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 60*20, 10), true);
+                g.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 60 * 20, 10), true);
                 Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                     @Override
                     public void run() {
@@ -58,18 +59,19 @@ public class Guardian extends Kit implements Listener{
                         as.remove();
                         g.remove();
                     }
-                }, 30*20);
-            }else{
-                Util.getInstance().sendCooldownMessage(p,cooldown,TimeUnit.SECONDS,true);
+                }, 30 * 20);
+            } else {
+                Util.getInstance().sendCooldownMessage(p, cooldown, TimeUnit.SECONDS, true);
             }
         }
     }
+
     @EventHandler
-    public void ontarget(EntityTargetEvent e){
+    public void ontarget(EntityTargetEvent e) {
         if (e.getEntity() instanceof org.bukkit.entity.Guardian &&
-                e.getTarget() instanceof Player){
+                e.getTarget() instanceof Player) {
             KitManager km = KitManager.getManager();
-            if (km.getKitAmIUsing((Player)e.getTarget(),"guardian")){
+            if (km.getKitAmIUsing((Player) e.getTarget(), "guardian")) {
                 e.setCancelled(true);
             }
         }

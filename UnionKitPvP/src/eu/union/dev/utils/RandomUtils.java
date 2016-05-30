@@ -1,10 +1,9 @@
 package eu.union.dev.utils;
 
-import java.util.Random;
-
-import java.util.Random;
 import org.bukkit.Material;
 import org.bukkit.util.Vector;
+
+import java.util.Random;
 
 public class RandomUtils {
 

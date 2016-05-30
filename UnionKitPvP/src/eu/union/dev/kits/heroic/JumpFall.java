@@ -20,9 +20,13 @@ import org.bukkit.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 
-public class JumpFall extends Kit implements Listener{
+public class JumpFall extends Kit implements Listener {
 
-    public JumpFall() {super("jumpfall","unkit.jumpfall",Difficulty.MEDIUM,Rarity.HEROIC,0, new Icon(Material.PAPER), Category.SOCIAL);}
+    Ability cooldown = new Ability(1, 30, TimeUnit.SECONDS);
+
+    public JumpFall() {
+        super("jumpfall", "unkit.jumpfall", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.PAPER), Category.SOCIAL);
+    }
 
     @Override
     public void applyKit(Player player) {
@@ -30,23 +34,23 @@ public class JumpFall extends Kit implements Listener{
         Weapon.giveWeapon(player, Weapon.JUMPFALL_PAPER, 1);
     }
 
-    Ability cooldown = new Ability(1,30, TimeUnit.SECONDS);
     @EventHandler
-    public void onclick(PlayerInteractEvent e){
+    public void onclick(PlayerInteractEvent e) {
         final Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
-        if (km.getKitAmIUsing(p, "jumpfall") && p.getItemInHand().getType() == Material.PAPER){
-            if (cooldown.tryUse(p)){
-                p.setVelocity(new Vector(0,10,0));
+        if (km.getKitAmIUsing(p, "jumpfall") && p.getItemInHand().getType() == Material.PAPER) {
+            if (cooldown.tryUse(p)) {
+                p.setVelocity(new Vector(0, 10, 0));
                 new BukkitRunnable() {
                     int i = 0;
+
                     @Override
                     public void run() {
-                        if (i==3){
+                        if (i == 3) {
                             p.setAllowFlight(true);
                             p.setFlying(true);
                         }
-                        if (i==6){
+                        if (i == 6) {
                             p.setAllowFlight(false);
                             p.setFlying(false);
                             cancel();
@@ -54,25 +58,25 @@ public class JumpFall extends Kit implements Listener{
                         i++;
                     }
                 }.runTaskTimer(PvPMain.getInstance(), 0, 20);
-            }else{
-                Util.getInstance().sendCooldownMessage(p,cooldown,TimeUnit.SECONDS,true);
+            } else {
+                Util.getInstance().sendCooldownMessage(p, cooldown, TimeUnit.SECONDS, true);
             }
         }
     }
 
     @EventHandler
-    public void ondamagefall(EntityDamageEvent e){
+    public void ondamagefall(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player) {
-            Player p = (Player)e.getEntity();
+            Player p = (Player) e.getEntity();
             KitManager km = KitManager.getManager();
             if (km.getKitAmIUsing(p, "jumpfall") &&
-                    e.getCause() == EntityDamageEvent.DamageCause.FALL){
-                if (e.getDamage() > 7.0D){
+                    e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+                if (e.getDamage() > 7.0D) {
                     e.setDamage(4.0D);
-                    for (Entity en : p.getNearbyEntities(3.0, 3.0, 3.0)){
-                        if (en instanceof Player){
-                            if (!((Player)en).isSneaking()){
-                                en.setVelocity(new Vector(0,10,0));
+                    for (Entity en : p.getNearbyEntities(3.0, 3.0, 3.0)) {
+                        if (en instanceof Player) {
+                            if (!((Player) en).isSneaking()) {
+                                en.setVelocity(new Vector(0, 10, 0));
                             }
                         }
                     }

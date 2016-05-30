@@ -18,23 +18,23 @@ public enum Perms {
 
     String s;
 
-    Perms(String s){
+    Perms(String s) {
         this.s = s;
     }
 
-    @Override
-    public String toString(){
-        return this.s;
-    }
-
-    public static boolean isStaff(Player p){
-        if(p.hasPermission(UNION_ADMIN.toString()) ||
+    public static boolean isStaff(Player p) {
+        if (p.hasPermission(UNION_ADMIN.toString()) ||
                 p.hasPermission(UNION_OWNER.toString()) ||
-                p.hasPermission(UNION_MOD.toString())){
+                p.hasPermission(UNION_MOD.toString())) {
             return true;
-        }else{
+        } else {
             p.sendMessage(Messages.PREFIX.toString() + " §cYou dont have permission to use this.");
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.s;
     }
 }

@@ -10,8 +10,6 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -128,7 +126,7 @@ public class AdminCMD implements CommandExecutor, Listener {
 
                 if (player.getItemInHand().getItemMeta().getDisplayName().contains(openInv.getName())) {
                     player.openInventory(clicked.getInventory());
-                }else if (player.getItemInHand().getItemMeta().getDisplayName().contains(info.getName())) {
+                } else if (player.getItemInHand().getItemMeta().getDisplayName().contains(info.getName())) {
                     player.sendMessage("§7§m-------------------------------");
                     player.sendMessage("§9Health: §e" + clicked.getMaxHealth());
                     player.sendMessage("§9GameMode: §e" + clicked.getGameMode());

@@ -1,22 +1,21 @@
 package eu.union.dev.engine;
 
 import eu.union.dev.PvPMain;
-import eu.union.dev.kits.common.PvP;
 
 import java.util.UUID;
 
 /**
  * Level formula: L = (25 + sqrt(25 * 25 - 4 * 25 * (-X) ))/ (2 * 25)
- *
+ * <p>
  * TODO: Transform level formula to actual exp system
  */
 public class KPlayer {
 
     private UUID uuid;
-    private int deaths,kills,level,kdr;
+    private int deaths, kills, level, kdr;
     private long coins;
 
-    public KPlayer(UUID uuid, int kills, int deaths, long coins, int level, int kdr){
+    public KPlayer(UUID uuid, int kills, int deaths, long coins, int level, int kdr) {
         this.uuid = uuid;
         this.kills = kills;
         this.deaths = deaths;
@@ -37,7 +36,7 @@ public class KPlayer {
         this.deaths = deaths;
     }
 
-    public void addDeaths(int deaths){
+    public void addDeaths(int deaths) {
         this.deaths += deaths;
     }
 
@@ -45,23 +44,23 @@ public class KPlayer {
         return kills;
     }
 
-    public int getLevel(){
-        return PvPMain.getInstance().exp.getLevel(uuid);
-    }
-
-    public void setLevel(int level) {
-        PvPMain.getInstance().exp.setLevel(uuid,level);
-    }
-
-    public void addEXP(int exp){
-        PvPMain.getInstance().exp.addExp(uuid, exp);
-    }
-
     public void setKills(int kills) {
         this.kills = kills;
     }
 
-    public void addKills(int kills){
+    public int getLevel() {
+        return PvPMain.getInstance().exp.getLevel(uuid);
+    }
+
+    public void setLevel(int level) {
+        PvPMain.getInstance().exp.setLevel(uuid, level);
+    }
+
+    public void addEXP(int exp) {
+        PvPMain.getInstance().exp.addExp(uuid, exp);
+    }
+
+    public void addKills(int kills) {
         this.kills += kills;
     }
 
@@ -73,21 +72,21 @@ public class KPlayer {
         this.coins = coins;
     }
 
-    public void addCoins(long coins){
+    public void addCoins(long coins) {
         this.coins += coins;
     }
 
-    public int getKDR(){
+    public int getKDR() {
         return deaths == 0 ? kills : kills / deaths;
     }
 
-    public void clear(boolean cleanCoins){
+    public void clear(boolean cleanCoins) {
         deaths = 0;
         kills = 0;
         level = 0;
         kdr = 0;
 
-        if(cleanCoins){
+        if (cleanCoins) {
             coins = 0;
         }
 

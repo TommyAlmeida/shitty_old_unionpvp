@@ -1,6 +1,9 @@
 package eu.union.dev.engine.handlers;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class ExpHandler {
 
@@ -16,8 +19,7 @@ public class ExpHandler {
     private ArrayList<Integer> levelcurve = new ArrayList<>();
 
 
-    public ExpHandler()
-    {
+    public ExpHandler() {
         intitalexp = 0;
         starterlevel = 0;
         baseCurve = 30;
@@ -36,10 +38,10 @@ public class ExpHandler {
         Integer value = users.get(uuid);
         int expAmount = 0;
 
-        if ( value != null ) {
+        if (value != null) {
             expAmount = value;
         } else {
-            if ( users.containsKey(uuid) && users.containsValue(uuid) ) {
+            if (users.containsKey(uuid) && users.containsValue(uuid)) {
                 expAmount = value;
             } else {
                 users.put(uuid, intitalexp);
@@ -92,7 +94,7 @@ public class ExpHandler {
     public void subtractExp(UUID uuid, int amount) {
         Integer value = users.get(uuid);
 
-        if ( value != null ) {
+        if (value != null) {
             if (users.get(uuid) <= 0) {
 
                 users.put(uuid, intitalexp);
@@ -110,14 +112,11 @@ public class ExpHandler {
      * Grab the amount of exp till the next level
      * </br>
      * This function is designed for API usage.
-     *
      */
-    public Integer getneededXP(UUID uuid)
-    {
+    public Integer getneededXP(UUID uuid) {
         int level = getLevel(uuid);
 
-        if ( getLevel(uuid) == maximumlevelCapacity - 1 )
-        {
+        if (getLevel(uuid) == maximumlevelCapacity - 1) {
             return 0;
         } else {
             int formula = levelcurve.get(level + 1) - getExp(uuid);
@@ -131,11 +130,10 @@ public class ExpHandler {
      * </br>
      * This function is designed for Config Usage
      *
-     * @param key The players unique ID
+     * @param key   The players unique ID
      * @param value The amount of exp
      */
-    public void loadExp(UUID key, int value)
-    {
+    public void loadExp(UUID key, int value) {
         users.put(key, value);
     }
 
@@ -146,10 +144,9 @@ public class ExpHandler {
      * Generates the level Stricture!
      * </br>
      * This function is designed for API usage.
-     *
      */
     public void initializeLevels() {
-        for ( int i = starterlevel; i < maximumlevelCapacity - 1; i++ ) {
+        for (int i = starterlevel; i < maximumlevelCapacity - 1; i++) {
 
             int formula = i * difficulty;
 
@@ -162,7 +159,6 @@ public class ExpHandler {
      * Retrieve the specific player's level!
      * </br>
      * This function is designed for API usage.
-     *
      */
 
     public Integer getLevel(UUID uuid) {
@@ -170,18 +166,18 @@ public class ExpHandler {
 
         int returnValue = starterlevel;
 
-        for ( int i = starterlevel; i < maximumlevelCapacity - 1; i++) {
+        for (int i = starterlevel; i < maximumlevelCapacity - 1; i++) {
 
             int formula = (maximumlevelCapacity - 1) * difficulty;
 
-            if (getExp(uuid) >= baseCurve * formula  ) {
+            if (getExp(uuid) >= baseCurve * formula) {
 
                 setExp(uuid, baseCurve * formula);
 
                 return maximumlevelCapacity - 1;
             }
-            if ( exp < levelcurve.get(i) && exp >= levelcurve.get(i - 1)  ) {
-                returnValue=(i - 1);
+            if (exp < levelcurve.get(i) && exp >= levelcurve.get(i - 1)) {
+                returnValue = (i - 1);
                 return returnValue;
             }
 
@@ -204,8 +200,7 @@ public class ExpHandler {
         int needed = getneededXP(uuid);
 
 
-        if ( getLevel(uuid) == maximumlevelCapacity - 1 )
-        {
+        if (getLevel(uuid) == maximumlevelCapacity - 1) {
             // Do whatever
         } else {
 

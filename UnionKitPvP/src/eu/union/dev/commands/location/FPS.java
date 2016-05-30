@@ -14,17 +14,17 @@ import org.bukkit.entity.Player;
 /**
  * Created by Fentis on 21/05/2016.
  */
-public class FPS implements CommandExecutor{
+public class FPS implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(!(commandSender instanceof Player)){
+        if (!(commandSender instanceof Player)) {
             return true;
         }
 
         Player p = (Player) commandSender;
 
-        if(command.getName().equalsIgnoreCase("fps")){
+        if (command.getName().equalsIgnoreCase("fps")) {
             Location loc = ConfigManager.getInstance().getLocation("FPS");
 
             Packets.getAPI().sendActionBar(p, "§9You need to wait §c" + 5 + " seconds §9to teleport.");
@@ -33,12 +33,12 @@ public class FPS implements CommandExecutor{
                 @Override
                 public void run() {
                     p.teleport(loc);
-                    Packets.getAPI().sendTitle(p,"§aWelcome to FPS","§4No times! Or will be banned!",3,4,5);
+                    Packets.getAPI().sendTitle(p, "§aWelcome to FPS", "§4No times! Or will be banned!", 3, 4, 5);
                     KitManager km = KitManager.getManager();
                     km.readyPlayer(p);
-                    km.applyKit(p,km.getKitByName("pvp"));
+                    km.applyKit(p, km.getKitByName("pvp"));
                 }
-            }, 20*5);
+            }, 20 * 5);
         }
         return false;
     }

@@ -10,12 +10,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 
 public class Database {
 
@@ -41,6 +35,7 @@ public class Database {
 
     /**
      * Open mysql connection
+     *
      * @return
      */
     public Connection open() {
@@ -67,8 +62,8 @@ public class Database {
     /**
      * Close mysql connection
      */
-    public Connection close(Connection c){
-        try{
+    public Connection close(Connection c) {
+        try {
             c.close();
         } catch (SQLException e) {
             PvPMain.getInstance().getLogger().log(Level.SEVERE, "MySQL can't close connection");
@@ -80,14 +75,14 @@ public class Database {
     /**
      * Get all tables together and setup one by one
      */
-    public synchronized void setupTables(){
+    public synchronized void setupTables() {
         setupProfiles();
     }
 
     /**
      * Setup the hub player profiles
      */
-    public synchronized void setupProfiles(){
+    public synchronized void setupProfiles() {
         try {
             PreparedStatement profiles = c
                     .prepareStatement("CREATE TABLE IF NOT EXISTS `KitPvP`(`id` int(11) NOT NULL auto_increment,"
@@ -107,12 +102,12 @@ public class Database {
 
     /**
      * Try to create a new player profile
+     *
      * @param uuid
      * @return
      */
-    public synchronized boolean createPlayerProfile(UUID uuid){
-        try
-        {
+    public synchronized boolean createPlayerProfile(UUID uuid) {
+        try {
             String PvPMainStatement = "SELECT * FROM KitPvP WHERE UUID = '" + uuid + "';";
             ResultSet result = this.c.createStatement().executeQuery(PvPMainStatement);
             if (result.next()) {
@@ -121,11 +116,9 @@ public class Database {
                         result.getInt("Level"), result.getInt("KDR")));
 
             } else {
-                PlayerManager.addPlayerProfile(new KPlayer(uuid,0,0,0,0,0));
+                PlayerManager.addPlayerProfile(new KPlayer(uuid, 0, 0, 0, 0, 0));
             }
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println("Error while trying to create PlayerDat! Reason: " + e.getMessage());
             return false;
         }
@@ -134,17 +127,15 @@ public class Database {
 
     /**
      * Update all data from player profile to the sql database
+     *
      * @param playerProfile
      * @return
      */
-    public synchronized boolean updatePlayerProfileSQL(KPlayer playerProfile)
-    {
-        try
-        {
+    public synchronized boolean updatePlayerProfileSQL(KPlayer playerProfile) {
+        try {
             String PvPMainStatement = "SELECT * FROM KitPvP WHERE UUID = '" + playerProfile.getUuid() + "'";
             ResultSet result = this.c.createStatement().executeQuery(PvPMainStatement);
-            if (result.next())
-            {
+            if (result.next()) {
                 String PvPMainUpdate = "UPDATE KitPvP SET Kills = " + playerProfile.getKills()
                         + ", Deaths = " + playerProfile.getDeaths()
                         + ", Coins = " + playerProfile.getCoins()
@@ -153,9 +144,7 @@ public class Database {
                         + " WHERE UUID = '"
                         + playerProfile.getUuid() + "';";
                 this.c.createStatement().executeUpdate(PvPMainUpdate);
-            }
-            else
-            {
+            } else {
                 String PvPMainUpdate = "INSERT INTO KitPvP (UUID, Kills, Deaths, Coins, Level,KDR) VALUES ('"
                         + playerProfile.getUuid() + "', "
                         + playerProfile.getKills() + ", "
@@ -165,68 +154,74 @@ public class Database {
                         + playerProfile.getKDR() + "); ";
                 this.c.createStatement().executeUpdate(PvPMainUpdate);
             }
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println("Error while trying to update the MySQL! Reason: " + e.getMessage());
             return false;
         }
         return true;
     }
 
-    public synchronized List<String> getTop(TopType type) throws SQLException{
+    public synchronized List<String> getTop(TopType type) throws SQLException {
         List<String> result = new ArrayList<>();
         Statement s = c.createStatement();
 
-        switch(type){
+        switch (type) {
             case KILLS:
-                if(s != null){
+                if (s != null) {
                     ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Kills`");
                     rs.findColumn("PlayerName");
-                    if(rs.last()){
+                    if (rs.last()) {
                         result.add(rs.getString("PlayerName"));
-                    }if(rs.previous()){
+                    }
+                    if (rs.previous()) {
                         result.add(rs.getString("PlayerName"));
-                    }if(rs.previous()){
+                    }
+                    if (rs.previous()) {
                         result.add(rs.getString("PlayerName"));
                     }
                 }
                 break;
             case DEATHS:
-                if(s != null){
+                if (s != null) {
                     ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Deaths`");
                     rs.findColumn("PlayerName");
-                    if(rs.last()){
+                    if (rs.last()) {
                         result.add(rs.getString("PlayerName"));
-                    }if(rs.previous()){
+                    }
+                    if (rs.previous()) {
                         result.add(rs.getString("PlayerName"));
-                    }if(rs.previous()){
+                    }
+                    if (rs.previous()) {
                         result.add(rs.getString("PlayerName"));
                     }
                 }
                 break;
             case COINS:
-                if(s != null){
+                if (s != null) {
                     ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Coins`");
                     rs.findColumn("PlayerName");
-                    if(rs.last()){
+                    if (rs.last()) {
                         result.add(rs.getString("PlayerName"));
-                    }if(rs.previous()){
+                    }
+                    if (rs.previous()) {
                         result.add(rs.getString("PlayerName"));
-                    }if(rs.previous()){
+                    }
+                    if (rs.previous()) {
                         result.add(rs.getString("PlayerName"));
                     }
                 }
                 break;
             case LEVEL:
-                if(s != null){
+                if (s != null) {
                     ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Level`");
                     rs.findColumn("PlayerName");
-                    if(rs.last()){
+                    if (rs.last()) {
                         result.add(rs.getString("PlayerName"));
-                    }if(rs.previous()){
+                    }
+                    if (rs.previous()) {
                         result.add(rs.getString("PlayerName"));
-                    }if(rs.previous()){
+                    }
+                    if (rs.previous()) {
                         result.add(rs.getString("PlayerName"));
                     }
                 }

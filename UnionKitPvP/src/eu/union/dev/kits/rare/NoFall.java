@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 /**
  * Created by Fentis on 26/05/2016.
  */
-public class NoFall extends Kit implements Listener{
+public class NoFall extends Kit implements Listener {
 
     public NoFall() {
         super("nofall", "unkit.nofall", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.STRING), Category.PROTECTED);
@@ -25,12 +25,12 @@ public class NoFall extends Kit implements Listener{
     }
 
     @EventHandler
-    public void ondamagefall(EntityDamageEvent e){
-        if (e.getEntity() instanceof Player){
-            Player p = (Player)e.getEntity();
+    public void ondamagefall(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            Player p = (Player) e.getEntity();
             KitManager km = KitManager.getManager();
-            if (km.getKitAmIUsing(p,"nofall")){
-                if (e.getCause() == EntityDamageEvent.DamageCause.FALL){
+            if (km.getKitAmIUsing(p, "nofall")) {
+                if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
                     e.setCancelled(true);
                 }
             }

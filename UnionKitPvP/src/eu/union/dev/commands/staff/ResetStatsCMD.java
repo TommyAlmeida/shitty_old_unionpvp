@@ -20,8 +20,8 @@ public class ResetStatsCMD implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if(cmd.getName().equalsIgnoreCase("reset")){
-            if(args.length == 0){
+        if (cmd.getName().equalsIgnoreCase("reset")) {
+            if (args.length == 0) {
                 player.sendMessage(Messages.PREFIX.toString() + " §7Use: /reset <player>");
                 return true;
             }
@@ -29,12 +29,12 @@ public class ResetStatsCMD implements CommandExecutor {
             Player target = Bukkit.getPlayerExact(args[0]);
             KPlayer kplayer = PlayerManager.getPlayer(target.getUniqueId());
 
-            if(!target.isOnline()){
+            if (!target.isOnline()) {
                 player.sendMessage(Messages.PREFIX.toString() + " §cSpecify an existing player");
                 return true;
             }
 
-            if(kplayer != null){
+            if (kplayer != null) {
                 kplayer.clear(true);
             }
         }

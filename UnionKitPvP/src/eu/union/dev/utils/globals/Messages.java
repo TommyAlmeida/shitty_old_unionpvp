@@ -13,12 +13,12 @@ public enum Messages {
 
     String s;
 
-    Messages(String s){
+    Messages(String s) {
         this.s = s;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.s;
     }
 }

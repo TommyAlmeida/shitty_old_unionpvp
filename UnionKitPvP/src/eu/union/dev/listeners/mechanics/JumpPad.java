@@ -1,7 +1,5 @@
 package eu.union.dev.listeners.mechanics;
 
-import eu.union.dev.engine.managers.KitManager;
-import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -20,19 +18,19 @@ public class JumpPad implements Listener {
     private ArrayList<Player> players = new ArrayList<Player>();
 
     @EventHandler
-    public void onJump(PlayerMoveEvent e){
+    public void onJump(PlayerMoveEvent e) {
         Player p = e.getPlayer();
 
-        if(e.getTo().getBlock().getType() == Material.STONE_PLATE ||
-                e.getTo().getBlock().getType() == Material.CARPET){
+        if (e.getTo().getBlock().getType() == Material.STONE_PLATE ||
+                e.getTo().getBlock().getType() == Material.CARPET) {
             Vector v = p.getLocation().getDirection().multiply(1).setY(1.0D);
             p.setVelocity(v);
             p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 3.0F, 2.0F);
             p.getWorld().playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 4);
             players.add(p);
         }
-        if(e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == Material.SPONGE){
-            Vector v = new Vector(0.0D,3.5D,0.0D);
+        if (e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == Material.SPONGE) {
+            Vector v = new Vector(0.0D, 3.5D, 0.0D);
             p.setVelocity(v);
             p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 3.0F, 2.0F);
             p.getWorld().playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 4);
@@ -41,12 +39,12 @@ public class JumpPad implements Listener {
     }
 
     @EventHandler
-    public void onFallDamage(EntityDamageEvent e){
-        if(e.getEntity() instanceof Player &&
-           e.getCause() == EntityDamageEvent.DamageCause.FALL){
-            if(players.contains(e.getEntity())){
+    public void onFallDamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player &&
+                e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+            if (players.contains(e.getEntity())) {
                 e.setCancelled(true);
-                for(int i = 0; i < 10; i++){
+                for (int i = 0; i < 10; i++) {
                     players.remove(e.getEntity());
                 }
             }

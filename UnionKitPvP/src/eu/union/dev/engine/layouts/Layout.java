@@ -2,7 +2,6 @@ package eu.union.dev.engine.layouts;
 
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
-import eu.union.dev.engine.modules.Item;
 import org.bukkit.inventory.ItemStack;
 
 /**

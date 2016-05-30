@@ -16,19 +16,20 @@ public class Spawn implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(!(commandSender instanceof Player)){
+        if (!(commandSender instanceof Player)) {
             return true;
         }
 
         Player p = (Player) commandSender;
 
-        if(command.getName().equalsIgnoreCase("spawn")){
+        if (command.getName().equalsIgnoreCase("spawn")) {
             Location loc = ConfigManager.getInstance().getLocation("Spawn");
 
             Packets.getAPI().sendActionBar(p, "§9You need to wait §c" + 5 + " seconds §9to teleport.");
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                 int seconds = 0;
+
                 @Override
                 public void run() {
                     KitManager km = KitManager.getManager();
@@ -37,7 +38,7 @@ public class Spawn implements CommandExecutor {
                     Util.getInstance().readyPlayer(p);
                     Util.getInstance().buildJoinIcons(p);
                 }
-            }, 20*5);
+            }, 20 * 5);
         }
         return false;
     }

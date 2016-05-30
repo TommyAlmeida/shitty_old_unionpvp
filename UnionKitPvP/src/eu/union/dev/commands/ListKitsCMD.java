@@ -1,14 +1,14 @@
 package eu.union.dev.commands;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListKitsCMD implements CommandExecutor {
 

@@ -15,9 +15,11 @@ import java.util.Random;
 /**
  * Created by Fentis on 18/05/2016.
  */
-public class Magma extends Kit implements Listener{
+public class Magma extends Kit implements Listener {
 
-    public Magma(){super("magma","unkit.magma",Difficulty.LOW,Rarity.RARE,0, new Icon(Material.MAGMA_CREAM), Category.CHANCE);}
+    public Magma() {
+        super("magma", "unkit.magma", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.MAGMA_CREAM), Category.CHANCE);
+    }
 
     @Override
     public void applyKit(Player player) {
@@ -25,16 +27,16 @@ public class Magma extends Kit implements Listener{
     }
 
     @EventHandler
-    public void onclick(EntityDamageByEntityEvent e){
+    public void onclick(EntityDamageByEntityEvent e) {
         if (e.getEntity() instanceof Player &&
-                e.getDamager() instanceof Player){
-            Player magma = (Player)e.getEntity();
-            Player damager = (Player)e.getDamager();
+                e.getDamager() instanceof Player) {
+            Player magma = (Player) e.getEntity();
+            Player damager = (Player) e.getDamager();
             KitManager km = KitManager.getManager();
-            if (km.getKitAmIUsing(magma, "magma")){
+            if (km.getKitAmIUsing(magma, "magma")) {
                 int porcentagem = new Random().nextInt(100);
-                if (porcentagem <= 15){
-                    damager.setFireTicks((new Random().nextInt(3)+3)*20);
+                if (porcentagem <= 15) {
+                    damager.setFireTicks((new Random().nextInt(3) + 3) * 20);
                 }
             }
         }

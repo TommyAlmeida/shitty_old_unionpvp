@@ -1,6 +1,5 @@
 package eu.union.dev.api;
 
-import eu.union.dev.engine.Kit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -17,19 +16,19 @@ public class Icon {
     Enchantment enchantment;
     int level;
 
-    public Icon(Material mat, String name, String... lore){
+    public Icon(Material mat, String name, String... lore) {
         this.mat = mat;
         this.name = name;
         this.amount = 1;
         this.lore = lore;
     }
 
-    public Icon(Material mat){
+    public Icon(Material mat) {
         this.mat = mat;
         this.amount = 1;
     }
 
-    public Icon(Material mat, Enchantment enchantment, int level){
+    public Icon(Material mat, Enchantment enchantment, int level) {
         this.mat = mat;
         this.amount = 1;
         this.enchantment = enchantment;
@@ -45,7 +44,7 @@ public class Icon {
         return mat;
     }
 
-    public boolean hasLore(){
+    public boolean hasLore() {
         return lore.length >= 0;
     }
 
@@ -53,7 +52,7 @@ public class Icon {
         this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -61,7 +60,7 @@ public class Icon {
         return lore;
     }
 
-    public ItemStack build(){
+    public ItemStack build() {
         ItemStack item = new ItemStack(mat, amount);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(name);
@@ -72,7 +71,7 @@ public class Icon {
         return item;
     }
 
-    public ItemStack buildEnchant(){
+    public ItemStack buildEnchant() {
         ItemStack item = new ItemStack(mat, amount);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(name);

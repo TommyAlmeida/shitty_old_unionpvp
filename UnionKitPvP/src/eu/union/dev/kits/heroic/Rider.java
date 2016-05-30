@@ -21,7 +21,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Fentis on 25/05/2016.
  */
-public class Rider extends Kit implements Listener{
+public class Rider extends Kit implements Listener {
+
+    Ability cooldown = new Ability(1, 30, TimeUnit.SECONDS);
 
     public Rider() {
         super("rider", "unkit.rider", Difficulty.LOW, Rarity.HEROIC, 0, new Icon(Material.SADDLE), Category.SPAWNER);
@@ -30,17 +32,16 @@ public class Rider extends Kit implements Listener{
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.RIDER_SADDLE,1);
+        Weapon.giveWeapon(player, Weapon.RIDER_SADDLE, 1);
     }
 
-    Ability cooldown = new Ability(1, 30, TimeUnit.SECONDS);
     @EventHandler
-    public void onclick(PlayerInteractEvent e){
+    public void onclick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
         if (km.getKitAmIUsing(p, "rider") &&
-                p.getItemInHand().getType() == Material.SADDLE){
-            if (cooldown.tryUse(p)){
+                p.getItemInHand().getType() == Material.SADDLE) {
+            if (cooldown.tryUse(p)) {
                 final Horse h = p.getWorld().spawn(p.getLocation(), Horse.class);
                 h.setAdult();
                 h.setColor(Horse.Color.BROWN);
@@ -53,9 +54,9 @@ public class Rider extends Kit implements Listener{
                         h.eject();
                         h.remove();
                     }
-                }, 10*20);
-            }else{
-                Util.getInstance().sendCooldownMessage(p,cooldown,TimeUnit.SECONDS,true);
+                }, 10 * 20);
+            } else {
+                Util.getInstance().sendCooldownMessage(p, cooldown, TimeUnit.SECONDS, true);
             }
         }
     }

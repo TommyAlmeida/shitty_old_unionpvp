@@ -12,23 +12,23 @@ public class GameModeCMD implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(!(commandSender instanceof Player)){
+        if (!(commandSender instanceof Player)) {
             return true;
         }
 
         Player p = (Player) commandSender;
 
-        if(command.getName().equalsIgnoreCase("gm")){
-            if(Perms.isStaff(p)){
-                if(args.length == 0){
+        if (command.getName().equalsIgnoreCase("gm")) {
+            if (Perms.isStaff(p)) {
+                if (args.length == 0) {
                     p.sendMessage(Messages.PREFIX.toString() + " §7Usage: /gm <o,1>");
                     return true;
                 }
 
-                if(args[0].equalsIgnoreCase("0")){
+                if (args[0].equalsIgnoreCase("0")) {
                     p.setGameMode(GameMode.SURVIVAL);
                     p.sendMessage(Messages.PREFIX.toString() + " §7Gamemode change to §bsurvival");
-                }else if(args[0].equalsIgnoreCase("1")){
+                } else if (args[0].equalsIgnoreCase("1")) {
                     p.setGameMode(GameMode.CREATIVE);
                     p.sendMessage(Messages.PREFIX.toString() + " §7Gamemode change to §bcreative.");
                 }

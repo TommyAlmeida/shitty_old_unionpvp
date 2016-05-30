@@ -10,12 +10,12 @@ public class PlayerManager {
 
     private static Map<UUID, KPlayer> players = Maps.newHashMap();
 
-    public static KPlayer getPlayer(UUID uuid){
+    public static KPlayer getPlayer(UUID uuid) {
         return players.get(uuid);
     }
 
-    public static boolean addPlayerProfile(KPlayer profile){
-        if(getPlayer(profile.getUuid()) != null){
+    public static boolean addPlayerProfile(KPlayer profile) {
+        if (getPlayer(profile.getUuid()) != null) {
             return false;
         }
 
@@ -23,7 +23,7 @@ public class PlayerManager {
         return true;
     }
 
-    public static void removePlayer(KPlayer player){
+    public static void removePlayer(KPlayer player) {
         players.remove(player.getUuid());
     }
 }

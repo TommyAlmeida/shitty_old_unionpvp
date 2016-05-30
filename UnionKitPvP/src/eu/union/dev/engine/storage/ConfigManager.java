@@ -13,22 +13,19 @@ import java.io.IOException;
 
 public class ConfigManager {
 
+    static ConfigManager instance = new ConfigManager();
+    Plugin p;
+    FileConfiguration config;
+    File cfile;
+    FileConfiguration data;
+    File dfile;
+
     public ConfigManager() {
     }
-
-    static ConfigManager instance = new ConfigManager();
 
     public static ConfigManager getInstance() {
         return instance;
     }
-
-    Plugin p;
-
-    FileConfiguration config;
-    File cfile;
-
-    FileConfiguration data;
-    File dfile;
 
     public void setup(Plugin p) {
         cfile = new File(p.getDataFolder(), "config.yml");
@@ -88,7 +85,7 @@ public class ConfigManager {
         saveConfig();
     }
 
-    public Location getLocation(String path){
+    public Location getLocation(String path) {
         String world = config.getString(path + ".world");
         double x = config.getDouble(path + ".x");
         double y = config.getDouble(path + ".y");
@@ -96,7 +93,7 @@ public class ConfigManager {
         double yaw = config.getDouble(path + ".yaw");
         double pitch = config.getDouble(path + ".pitch");
 
-        Location loc = new Location(Bukkit.getWorld(world),x,y,z);
+        Location loc = new Location(Bukkit.getWorld(world), x, y, z);
         loc.setYaw((float) yaw);
         loc.setPitch((float) pitch);
 

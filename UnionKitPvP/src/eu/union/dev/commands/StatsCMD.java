@@ -20,7 +20,7 @@ public class StatsCMD implements CommandExecutor {
         Player player = (Player) sender;
         KPlayer kplayer = PlayerManager.getPlayer(player.getUniqueId());
 
-        if(cmd.getName().equalsIgnoreCase("stats")){
+        if (cmd.getName().equalsIgnoreCase("stats")) {
             if (kplayer != null) {
                 player.sendMessage("§7§m-------------------------------");
                 player.sendMessage("§9Level: §e%s".replace("%s", String.valueOf(kplayer.getLevel())));
@@ -33,7 +33,6 @@ public class StatsCMD implements CommandExecutor {
                 player.sendMessage("§7§m-------------------------------");
             }
         }
-
 
 
         return true;

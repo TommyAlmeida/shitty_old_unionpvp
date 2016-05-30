@@ -5,15 +5,15 @@ import eu.union.dev.engine.Kit;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
-
 public class KitLayout implements Layout {
 
     private static KitLayout layout = new KitLayout();
 
     String regex = "\\[|\\]";
 
-
+    public static KitLayout getLayout() {
+        return layout;
+    }
 
     @Override
     public ItemStack design(Icon icon, Kit kit) {
@@ -28,7 +28,7 @@ public class KitLayout implements Layout {
                 " "
         );*/
 
-        icon = new Icon(icon.getMaterial(),  "§7Kit » " + kit.getRarity().getColor() + WordUtils.capitalize(kit.getName()),
+        icon = new Icon(icon.getMaterial(), "§7Kit » " + kit.getRarity().getColor() + WordUtils.capitalize(kit.getName()),
                 "§7Category: " + kit.getCategory().getName(),
                 " ",
                 "§7Difficulty: §e" + kit.getDifficulty().value(),
@@ -36,11 +36,5 @@ public class KitLayout implements Layout {
         );
 
         return icon.build();
-    }
-
-
-
-    public static KitLayout getLayout() {
-        return layout;
     }
 }

@@ -24,28 +24,31 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Fentis on 16/05/2016.
  */
-public class TimeLord extends Kit implements Listener{
+public class TimeLord extends Kit implements Listener {
 
-    public TimeLord(){super("timelord","unkit.timelord",Difficulty.LOW,Rarity.RARE,0, new Icon(Material.WATCH), Category.FREEZE);}
+    Ability cooldown = new Ability(1, 30, TimeUnit.SECONDS);
+    ArrayList<String> congelados = new ArrayList<>();
+
+    public TimeLord() {
+        super("timelord", "unkit.timelord", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.WATCH), Category.FREEZE);
+    }
 
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.TIMELORD_CLOCK,1);
+        Weapon.giveWeapon(player, Weapon.TIMELORD_CLOCK, 1);
     }
 
-    Ability cooldown = new Ability(1, 30, TimeUnit.SECONDS);
-    ArrayList<String> congelados = new ArrayList<>();
     @EventHandler
-    public void onclick(PlayerInteractEvent e){
+    public void onclick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
         if (p.getItemInHand().getType() == Material.WATCH &&
-                km.getKitAmIUsing(p, "timelord")){
-            if (cooldown.tryUse(p)){
-                for (Entity en : p.getNearbyEntities(5.0, 5.0, 5.0)){
-                    if (en instanceof Player){
-                        final Player p2 = (Player)en;
+                km.getKitAmIUsing(p, "timelord")) {
+            if (cooldown.tryUse(p)) {
+                for (Entity en : p.getNearbyEntities(5.0, 5.0, 5.0)) {
+                    if (en instanceof Player) {
+                        final Player p2 = (Player) en;
                         congelados.add(p2.getName());
                         p2.getWorld().playEffect(p2.getLocation(), Effect.SNOWBALL_BREAK, 10);
                         p2.getWorld().playSound(p2.getLocation(), Sound.WITHER_SHOOT, 10.0F, 1.0F);
@@ -54,18 +57,19 @@ public class TimeLord extends Kit implements Listener{
                             public void run() {
                                 congelados.remove(p2.getName());
                             }
-                        }, 5*20);
+                        }, 5 * 20);
                     }
                 }
-            }else{
-                Util.getInstance().sendCooldownMessage(p,cooldown,TimeUnit.SECONDS,true);
+            } else {
+                Util.getInstance().sendCooldownMessage(p, cooldown, TimeUnit.SECONDS, true);
             }
         }
     }
+
     @EventHandler
-    public void onmove(PlayerMoveEvent e){
+    public void onmove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
-        if (congelados.contains(p.getName())){
+        if (congelados.contains(p.getName())) {
             e.setTo(p.getLocation());
         }
     }

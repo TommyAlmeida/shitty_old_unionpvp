@@ -13,18 +13,18 @@ import java.io.IOException;
 /**
  * Created by Fentis on 21/05/2016.
  */
-public class SetLavaChallenge implements CommandExecutor{
+public class SetLavaChallenge implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(!(commandSender instanceof Player)){
+        if (!(commandSender instanceof Player)) {
             return true;
         }
 
         Player p = (Player) commandSender;
 
-        if(command.getName().equalsIgnoreCase("setlavachallenge")){
-            if(Perms.isStaff(p)){
+        if (command.getName().equalsIgnoreCase("setlavachallenge")) {
+            if (Perms.isStaff(p)) {
                 try {
                     ConfigManager.getInstance().setLocation("LavaChallenge", p.getLocation());
                     p.sendMessage(Messages.PREFIX.toString() + " §7LavaChallenge has been set.");

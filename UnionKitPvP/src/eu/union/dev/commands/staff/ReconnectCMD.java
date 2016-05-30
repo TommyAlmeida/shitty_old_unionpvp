@@ -17,10 +17,10 @@ public class ReconnectCMD implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if(player.hasPermission("union.admin") || player.hasPermission("union.mod")){
+        if (player.hasPermission("union.admin") || player.hasPermission("union.mod")) {
             Player target = Bukkit.getPlayer(args[0]);
 
-            if(target == null){
+            if (target == null) {
                 player.sendMessage("§cThe player is offline.");
             }
 

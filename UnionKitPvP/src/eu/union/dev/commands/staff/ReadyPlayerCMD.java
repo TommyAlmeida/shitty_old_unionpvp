@@ -1,9 +1,6 @@
 package eu.union.dev.commands.staff;
 
-import eu.union.dev.engine.KPlayer;
-import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
-import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Perms;
 import eu.union.dev.utils.globals.Util;
@@ -25,9 +22,9 @@ public class ReadyPlayerCMD implements CommandExecutor {
         Player player = (Player) sender;
         KitManager km = KitManager.getManager();
 
-        if(cmd.getName().equalsIgnoreCase("ready")){
-            if(Perms.isStaff(player)){
-                if(args.length == 0){
+        if (cmd.getName().equalsIgnoreCase("ready")) {
+            if (Perms.isStaff(player)) {
+                if (args.length == 0) {
                     km.removeKit(player);
                     Util.getInstance().readyPlayer(player);
                     Util.getInstance().buildJoinIcons(player);
@@ -36,7 +33,7 @@ public class ReadyPlayerCMD implements CommandExecutor {
 
                 Player target = Bukkit.getPlayerExact(args[0]);
 
-                if(!target.isOnline()){
+                if (!target.isOnline()) {
                     player.sendMessage(Messages.PREFIX.toString() + " §cSpecify an existing player");
                     return true;
                 }

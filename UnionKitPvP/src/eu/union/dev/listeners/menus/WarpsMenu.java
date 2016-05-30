@@ -12,16 +12,16 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class WarpsMenu implements Listener{
+public class WarpsMenu implements Listener {
 
-    public void setItems(){
+    public void setItems() {
         Inventory inv = Inv.getInstance().warps;
-        ItemStack i = new ItemStack(Material.STAINED_GLASS_PANE,1,(byte)5);
+        ItemStack i = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 5);
         ItemMeta im = i.getItemMeta();
         im.setDisplayName("§f");
         i.setItemMeta(im);
-        for(int j = 0; j < 27; j++){
-            inv.setItem(j,i);
+        for (int j = 0; j < 27; j++) {
+            inv.setItem(j, i);
         }
 
         {
@@ -46,37 +46,37 @@ public class WarpsMenu implements Listener{
     }
 
     @EventHandler
-    public void onInvClick(InventoryClickEvent e){
-        Player p = (Player)e.getWhoClicked();
+    public void onInvClick(InventoryClickEvent e) {
+        Player p = (Player) e.getWhoClicked();
         ItemStack item = e.getCurrentItem();
         if (e.getInventory().getName().equalsIgnoreCase("Warps")) {
             if (e.getSlot() < 0) {
                 return;
             }
 
-            if (item.getType() == Material.STAINED_GLASS_PANE){
+            if (item.getType() == Material.STAINED_GLASS_PANE) {
                 e.setCancelled(true);
             }
-            switch (e.getSlot()){
+            switch (e.getSlot()) {
                 case 10:
                     e.setCancelled(true);
                     e.getView().close();
-                    Bukkit.dispatchCommand(p,"1v1");
+                    Bukkit.dispatchCommand(p, "1v1");
                     break;
                 case 12:
                     e.setCancelled(true);
                     e.getView().close();
-                    Bukkit.dispatchCommand(p,"fps");
+                    Bukkit.dispatchCommand(p, "fps");
                     break;
                 case 14:
                     e.setCancelled(true);
                     e.getView().close();
-                    Bukkit.dispatchCommand(p,"lavachallenge");
+                    Bukkit.dispatchCommand(p, "lavachallenge");
                     break;
                 case 16:
                     e.setCancelled(true);
                     e.getView().close();
-                    Bukkit.dispatchCommand(p,"click");
+                    Bukkit.dispatchCommand(p, "click");
                     break;
             }
         }

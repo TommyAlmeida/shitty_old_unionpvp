@@ -20,27 +20,31 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Fentis on 14/05/2016.
  */
-public class Switcher extends Kit implements Listener{
+public class Switcher extends Kit implements Listener {
 
-    public Switcher(){ super("switcher", "unkit.switcher", Difficulty.MEDIUM, Rarity.RARE, 0, new Icon(Material.SNOW_BALL), Category.TELEPORT); }
+    Ability cooldown = new Ability(1, 3, TimeUnit.SECONDS);
+
+    public Switcher() {
+        super("switcher", "unkit.switcher", Difficulty.MEDIUM, Rarity.RARE, 0, new Icon(Material.SNOW_BALL), Category.TELEPORT);
+    }
+
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
         Weapon.giveWeapon(player, Weapon.SWITCHER_SNOW_BALL, 1);
     }
 
-    Ability cooldown = new Ability(1, 3, TimeUnit.SECONDS);
     @SuppressWarnings("deprecation")
     @EventHandler
-    public void onclick(PlayerInteractEvent e){
+    public void onclick(PlayerInteractEvent e) {
         final Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
-        if (p.getItemInHand().getType() == Material.SNOW_BALL){
-            if (km.getKitAmIUsing(p, "switcher")){
+        if (p.getItemInHand().getType() == Material.SNOW_BALL) {
+            if (km.getKitAmIUsing(p, "switcher")) {
                 e.setCancelled(true);
                 p.updateInventory();
-                if (e.getAction() == Action.RIGHT_CLICK_AIR){
-                    if (cooldown.tryUse(p)){
+                if (e.getAction() == Action.RIGHT_CLICK_AIR) {
+                    if (cooldown.tryUse(p)) {
                         p.launchProjectile(Snowball.class);
                     }
                 }
@@ -49,20 +53,15 @@ public class Switcher extends Kit implements Listener{
     }
 
     @EventHandler
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent e)
-    {
-        if ((e.getEntity() instanceof Player))
-        {
-            Player ph = (Player)e.getEntity();
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
+        if ((e.getEntity() instanceof Player)) {
+            Player ph = (Player) e.getEntity();
             KitManager km = KitManager.getManager();
-            if ((e.getDamager() instanceof Snowball))
-            {
-                Snowball snowball = (Snowball)e.getDamager();
-                if ((snowball.getShooter() instanceof Player))
-                {
-                    Player ps = (Player)snowball.getShooter();
-                    if (km.getKitAmIUsing(ps, "switcher"))
-                    {
+            if ((e.getDamager() instanceof Snowball)) {
+                Snowball snowball = (Snowball) e.getDamager();
+                if ((snowball.getShooter() instanceof Player)) {
+                    Player ps = (Player) snowball.getShooter();
+                    if (km.getKitAmIUsing(ps, "switcher")) {
                         Location psloc = ps.getLocation();
                         Location phloc = ph.getLocation();
                         ps.teleport(phloc);

@@ -28,19 +28,19 @@ public class MysteryBox implements Listener {
         Block b = event.getClickedBlock();
         Player player = event.getPlayer();
 
-        if(b == null) {
-          return;
-        }
-
-        if(!(event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+        if (b == null) {
             return;
         }
 
-        if(!(b.getType() == Material.ENDER_CHEST)) {
+        if (!(event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             return;
         }
 
-        if(mysterycase.get("USING")) {
+        if (!(b.getType() == Material.ENDER_CHEST)) {
+            return;
+        }
+
+        if (mysterycase.get("USING")) {
 
             player.sendMessage(Messages.PREFIX.toString() + " §7The case is alread in use. Wait a few moments.");
 
@@ -63,11 +63,11 @@ public class MysteryBox implements Listener {
 
             public void run() {
 
-                if(timer > 0) {
+                if (timer > 0) {
                     timer--;
                 }
 
-                if(timer == 8) {
+                if (timer == 8) {
 
                     FallingBlock b = block.getWorld().spawnFallingBlock(lb,
                             Material.ENDER_PORTAL_FRAME, (byte) 0);
@@ -75,7 +75,7 @@ public class MysteryBox implements Listener {
 
                 }
 
-                if(timer == 4) {
+                if (timer == 4) {
 
                     FallingBlock b = block.getWorld().spawnFallingBlock(lb,
                             Material.ENDER_PORTAL_FRAME, (byte) 0);
@@ -83,7 +83,7 @@ public class MysteryBox implements Listener {
 
                 }
 
-                if(timer == 0) {
+                if (timer == 0) {
                     Bukkit.getScheduler().cancelTask(TimerID);
 
                     mysterycase.remove("USING");

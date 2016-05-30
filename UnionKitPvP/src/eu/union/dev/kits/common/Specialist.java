@@ -28,27 +28,27 @@ public class Specialist extends Kit implements Listener {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent e){
+    public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
 
-        if(km.getKitAmIUsing(p,"specialist")){
-            if(e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().getType() == Material.ENCHANTED_BOOK){
-                p.openEnchanting(p.getLocation(),true);
+        if (km.getKitAmIUsing(p, "specialist")) {
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().getType() == Material.ENCHANTED_BOOK) {
+                p.openEnchanting(p.getLocation(), true);
             }
         }
     }
 
     @EventHandler
-    public void onKill(EntityDeathEvent e){
+    public void onKill(EntityDeathEvent e) {
         KitManager km = KitManager.getManager();
 
-        if(e.getEntity() instanceof Player){
+        if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
 
-            if(p.getKiller() instanceof Player){
+            if (p.getKiller() instanceof Player) {
                 Player p2 = e.getEntity().getKiller();
-                if(km.getKitAmIUsing(p,"specialist")){
+                if (km.getKitAmIUsing(p, "specialist")) {
                     p2.setLevel(p2.getLevel() + 1);
                     p2.getInventory().addItem(new ItemStack(Material.INK_SACK, 1, (short) 4));
                 }

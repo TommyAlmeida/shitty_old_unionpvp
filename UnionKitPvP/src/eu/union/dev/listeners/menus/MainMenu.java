@@ -47,24 +47,24 @@ public class MainMenu implements Listener {
     void setItems(Player p) {
         Inventory inv = Inv.getInstance().menu;
 
-        for(int i = 0; i < 27; i++){
+        for (int i = 0; i < 27; i++) {
             Icon spacer = new Icon(Material.THIN_GLASS, "§9");
-            inv.setItem(i,spacer.build());
+            inv.setItem(i, spacer.build());
         }
 
         {
             Icon warps = new Icon(Material.COMPASS, "§7» §bWarps §7«");
-            inv.setItem(11,warps.build());
+            inv.setItem(11, warps.build());
         }
 
         {
             Icon warps = new Icon(Material.EXP_BOTTLE, "§7» §aShop §7«");
-            inv.setItem(13,warps.build());
+            inv.setItem(13, warps.build());
         }
 
         {
             Icon warps = new Icon(Material.REDSTONE, "§7» §cSettings §7«");
-            inv.setItem(15,warps.build());
+            inv.setItem(15, warps.build());
         }
     }
 
@@ -74,7 +74,7 @@ public class MainMenu implements Listener {
         ItemStack item = e.getCurrentItem();
 
         if (e.getInventory().getName().equalsIgnoreCase("Menu")) {
-            if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§9")){
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§9")) {
                 e.setCancelled(true);
             }
 
@@ -82,7 +82,7 @@ public class MainMenu implements Listener {
                 return;
             }
 
-            switch (e.getSlot()){
+            switch (e.getSlot()) {
                 case 11:
                     e.setCancelled(true);
                     new WarpsMenu().setItems();

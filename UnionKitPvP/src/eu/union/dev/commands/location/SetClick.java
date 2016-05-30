@@ -13,18 +13,18 @@ import java.io.IOException;
 /**
  * Created by Fentis on 21/05/2016.
  */
-public class SetClick implements CommandExecutor{
+public class SetClick implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(!(commandSender instanceof Player)){
+        if (!(commandSender instanceof Player)) {
             return true;
         }
 
         Player p = (Player) commandSender;
 
-        if(command.getName().equalsIgnoreCase("setclick")){
-            if(Perms.isStaff(p)){
+        if (command.getName().equalsIgnoreCase("setclick")) {
+            if (Perms.isStaff(p)) {
                 try {
                     ConfigManager.getInstance().setLocation("Click", p.getLocation());
                     p.sendMessage(Messages.PREFIX.toString() + " §7Click has been set.");

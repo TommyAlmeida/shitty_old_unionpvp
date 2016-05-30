@@ -13,10 +13,12 @@ import org.bukkit.event.player.PlayerFishEvent;
 /**
  * Created by Fentis on 14/05/2016.
  */
-public class Fisherman extends Kit implements Listener{
+public class Fisherman extends Kit implements Listener {
 
-    public Fisherman(){ super("fisherman", "unkit.fisherman", Difficulty.LOW, Rarity.COMMON, 0, new Icon(Material.FISHING_ROD),
-            Category.CATCHER); }
+    public Fisherman() {
+        super("fisherman", "unkit.fisherman", Difficulty.LOW, Rarity.COMMON, 0, new Icon(Material.FISHING_ROD),
+                Category.CATCHER);
+    }
 
     @Override
     public void applyKit(Player player) {
@@ -25,12 +27,12 @@ public class Fisherman extends Kit implements Listener{
     }
 
     @EventHandler
-    public void onfishing(PlayerFishEvent e){
+    public void onfishing(PlayerFishEvent e) {
         Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
-        if (e.getCaught() instanceof Player){
-            Player p2 = (Player)e.getCaught();
-            if (km.getKitAmIUsing(p, "fisherman")){
+        if (e.getCaught() instanceof Player) {
+            Player p2 = (Player) e.getCaught();
+            if (km.getKitAmIUsing(p, "fisherman")) {
                 p2.teleport(p.getLocation());
             }
         }
