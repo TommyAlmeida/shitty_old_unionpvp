@@ -86,8 +86,8 @@ public class FireBoost extends Kit implements Listener {
             KitManager km = KitManager.getManager();
             if (km.getKitAmIUsing(p, "fireboost") &&
                     e.getCause() == EntityDamageEvent.DamageCause.FALL) {
-                if (e.getDamage() >= 4.0) {
-                    e.setDamage(4.0);
+                if (e.getDamage() >= 3.5) {
+                    e.setDamage(3.5);
                     particles(p.getLocation());
                     for (Entity en : p.getNearbyEntities(10, 5, 10)) {
                         if (en instanceof Player) {
