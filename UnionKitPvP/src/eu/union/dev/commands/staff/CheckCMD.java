@@ -43,8 +43,13 @@ public class CheckCMD implements CommandExecutor {
                 player.sendMessage("§9Deaths: §e%s".replace("%s", String.valueOf(kplayer.getDeaths())));
                 player.sendMessage("§9KDR: §e%s".replace("%s", String.valueOf(kplayer.getKDR())));
                 player.sendMessage(" ");
-                player.sendMessage("§9Kit: §e" + km.getKitByPlayer(target).getName());
-                player.sendMessage("§9Kits owned: §e" + km.getKits().size());
+                if(km.getKitByPlayer(target) == null){
+                    player.sendMessage("§9Kit: §7None");
+                    player.sendMessage("§9Kits owned: §7Thinking...");
+                }else{
+                    player.sendMessage("§9Kit: §e" + km.getKitByPlayer(target).getName());
+                    player.sendMessage("§9Kits owned: §e" + km.getKits().size());
+                }
                 player.sendMessage(" ");
                 player.sendMessage("§9IP: §e" + target.getAddress().getAddress().getHostAddress());
                 player.sendMessage("§7§m-------------------------------");

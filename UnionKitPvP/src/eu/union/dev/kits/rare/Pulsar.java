@@ -63,8 +63,9 @@ public class Pulsar extends Kit implements Listener {
         if (cooldown.tryUse(p)) {
             for (Entity e : p.getNearbyEntities(5, 5, 5)) {
                 if (e instanceof Player) {
-                    e.setVelocity(new Vector(0, 7, 0));
+                    e.setVelocity(new Vector(0, 2, 0));
                     e.getWorld().strikeLightning(e.getLocation());
+                    ((Player) e).damage(6.0D);
                     Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                         @Override
                         public void run() {

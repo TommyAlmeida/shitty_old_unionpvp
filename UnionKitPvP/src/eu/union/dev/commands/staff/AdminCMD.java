@@ -10,9 +10,11 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -30,8 +32,6 @@ public class AdminCMD implements CommandExecutor, Listener {
     private Icon openInv = new Icon(Material.ANVIL, "§9Open Inventory", "§7Open the players right clicked inventory");
     private Icon info = new Icon(Material.BLAZE_ROD, "§bPlayer Info", "§7Check player informations");
     private Icon buildOn = new Icon(Material.GRASS, "§eBuild Mode", "§7Set your build mode to online");
-    private Icon antikb = new Icon(Material.STICK,
-            "§cTest Anti-KnockBack", "§7Check if the player have anti-kb");
 
     private int getAmount(Player p, Material m) {
         int amount = 0;
@@ -76,10 +76,9 @@ public class AdminCMD implements CommandExecutor, Listener {
                 }
                 pi.clear();
                 pi.setItem(0, quickChange.build());
-                pi.setItem(2, antikb.buildEnchant());
-                pi.setItem(4, openInv.build());
-                pi.setItem(6, info.build());
-                pi.setItem(8, buildOn.build());
+                pi.setItem(2, openInv.build());
+                pi.setItem(4, info.build());
+                pi.setItem(6, buildOn.build());
             }
         }
 
@@ -143,22 +142,6 @@ public class AdminCMD implements CommandExecutor, Listener {
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         ItemStack item = p.getItemInHand();
-
-        if (item == null) {
-            return;
-        }
-
-        if (!(item.getType() == quickChange.getMaterial()) || !(item.getType() == buildOn.getMaterial())) {
-            return;
-        }
-
-        if (item.getItemMeta() == null) {
-            return;
-        }
-
-        if (!(item.getItemMeta().hasDisplayName())) {
-            return;
-        }
 
         if (item.getItemMeta().getDisplayName() == "§6QuickChange") {
             p.chat("/admin");

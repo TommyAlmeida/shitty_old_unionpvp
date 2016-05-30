@@ -172,6 +172,20 @@ public class Util {
 
     }
 
+    public void readyPlayer2(Player player) {
+        player.getInventory().clear();
+        player.setFoodLevel(20);
+        player.setExhaustion(0f);
+        player.setFallDistance(0f);
+        player.setFireTicks(0);
+        player.setAllowFlight(false);
+
+        for (PotionEffect pE : player.getActivePotionEffects()) {
+            player.removePotionEffect(pE.getType());
+        }
+
+    }
+
     public void randomKit(Player p) {
         Random r = new Random();
         KitManager km = KitManager.getManager();

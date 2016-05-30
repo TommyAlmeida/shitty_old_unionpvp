@@ -23,6 +23,7 @@ import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class ServerListeners implements Listener {
@@ -35,6 +36,7 @@ public class ServerListeners implements Listener {
     @EventHandler
     public void refillChest(PlayerInteractEvent e) {
         Action a = e.getAction();
+        ArrayList<ItemStack> items = new ArrayList<>();
         Random rand = new Random();
 
         if (!(a == Action.RIGHT_CLICK_BLOCK)) return;
@@ -139,6 +141,6 @@ public class ServerListeners implements Listener {
                 drop.getWorld().playEffect(drop.getLocation(), Effect.SMOKE, 4);
                 drop.remove();
             }
-        }, 32L);
+        }, 20*4);
     }
 }

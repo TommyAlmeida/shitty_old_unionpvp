@@ -28,10 +28,11 @@ public class Icon {
         this.amount = 1;
     }
 
-    public Icon(Material mat, Enchantment enchantment, int level) {
+    public Icon(Material mat, Enchantment enchantment, int level, String name) {
         this.mat = mat;
         this.amount = 1;
         this.enchantment = enchantment;
+        this.name = name;
         this.level = level;
     }
 

@@ -126,7 +126,8 @@ public class PlayerListeners implements Listener {
 
                 //Se o level for maior que 1 o motante de coins recebidas será mais elevado
                 if (kPlayer_killed.getLevel() > 1) {
-                    coins = rand.nextInt(47);
+                    coins = rand.nextInt(34);
+                    exp = rand.nextInt(47);
                 }
 
                 //Se o random decidir que for 0 ele irá adicionar +1 para evitar os jogadores receberem 0 de coisn ou exp
@@ -158,47 +159,60 @@ public class PlayerListeners implements Listener {
             if (damage == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION ||
                     damage == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by explosion");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.LAVA) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by lava");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.FALL) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c thought it was a bird and died");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.FIRE ||
                     damage == EntityDamageEvent.DamageCause.FIRE_TICK) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by fire");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.MAGIC) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by magic");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.DROWNING) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c thought it was a fish and died");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.WITHER) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by wither");
-            }
-            if (damage == EntityDamageEvent.DamageCause.POISON) {
+                e.setDeathMessage(null);
+            }if (damage == EntityDamageEvent.DamageCause.POISON) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by poison");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by falling block");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.LIGHTNING) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by lightning");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.PROJECTILE) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by projectile");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.VOID) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by void");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.SUICIDE) {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by suicide");
+                e.setDeathMessage(null);
             }
             if (damage == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
                 if (killed.getKiller() == null) {
                     Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by " + killed.getKiller().getType().toString().toLowerCase().replace("_", " "));
+                    e.setDeathMessage(null);
                 }
             }
         }
@@ -215,7 +229,6 @@ public class PlayerListeners implements Listener {
                 )
         );
 
-
         /*
             Delay para teleportar, pois senão os items
             são dropados no spawn.
@@ -223,18 +236,15 @@ public class PlayerListeners implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (km.usingKit(killed)) {
-                    km.removeKit(killed);
-                    e.setDroppedExp(0);
-                } else {
-                    Util.getInstance().readyPlayer(killed);
-                }
-
                 Util.getInstance().buildJoinIcons(killed);
                 Location loc = ConfigManager.getInstance().getLocation("Spawn");
+                Util.getInstance().readyPlayer2(killed);
                 killed.teleport(loc);
             }
+
         }.runTaskLater(PvPMain.getInstance(), 5);
+        Util.getInstance().readyPlayer(killed);
+
     }
 
     @EventHandler
