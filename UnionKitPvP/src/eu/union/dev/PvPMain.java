@@ -92,7 +92,8 @@ public class PvPMain extends JavaPlugin {
         /**
          * Kits with runnables (in seconds)
          */
-        new Madman().start();
+         new Simba().StartCheck(); 
+         new Madman().start();
     }
 
     @Override

@@ -35,7 +35,10 @@ public enum Weapon {
     PORTAL_BLUE(Material.DIAMOND_BARDING, "§bBlue Portal"),
     PORTAL_ORANGE(Material.GOLD_BARDING, "§6Orange Portal"),
     WEATHERLORD_TORNADO(Material.WATCH, "§bWeather Controller"),
-    GUARDIAN_SHARD(Material.PRISMARINE_SHARD, "§bGuardian Tower");
+    GUARDIAN_SHARD(Material.PRISMARINE_SHARD, "§bGuardian Tower"),
+    QUAKE_GUN(Material.IRON_HOE, "§bQuake Gun"),
+    RAIN_ARROW(Material.ARROW, "§4Rain"),
+    BLINK_STAR(Material.NETHER_STAR, "§bBlink Star");
 
 
     Material mat;

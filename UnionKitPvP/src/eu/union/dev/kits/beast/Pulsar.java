@@ -1,4 +1,4 @@
-package eu.union.dev.kits.rare;
+package eu.union.dev.kits.beast;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
