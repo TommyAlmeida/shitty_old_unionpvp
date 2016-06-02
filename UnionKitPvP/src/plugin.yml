@@ -15,6 +15,7 @@ commands:
   check:
   ready:
   level:
+  admin:
   setfps:
   report:
   fps:

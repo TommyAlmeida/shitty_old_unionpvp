@@ -30,10 +30,7 @@ public class ReportCMD implements CommandExecutor {
             message += args[i] + " ";
         }
 
-        if(message.length() == 0){
-            player.sendMessage(Messages.PREFIX.toString() + " §cYour report must have more than 10 characters");
-            return true;
-        }else if(message.length() < 10){
+        if(message.length() == 0) {
             player.sendMessage(Messages.PREFIX.toString() + " §cYour report must have more than 10 characters");
             return true;
         }

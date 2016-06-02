@@ -145,26 +145,16 @@ public class PlayerListeners implements Listener {
                 killer.kickPlayer("§cReconnect please");
                 return;
             } else {
-                //O "assasino" recebe mais 1 kill e o jogador morto recebe mais 1 morte
-                kPlayer_killed.addDeaths(1);
-                kPlayer_killer.addKills(1);
-
-                //Se o level for maior que 1 o motante de coins recebidas será mais elevado
-                if (kPlayer_killed.getLevel() > 1) {
-                    coins = rand.nextInt(34);
-                    exp = rand.nextInt(47);
-                }
 
                 //Se o random decidir que for 0 ele irá adicionar +1 para evitar os jogadores receberem 0 de coisn ou exp
                 if (coins <= 0 || exp <= 0) {
                     coins++;
                     exp++;
-                }else if(kPlayer_killed.getLevel() > 5){
-                    coins += 10;
-                    exp += 16;
-                }else if(kPlayer_killed.getUuid() == killed.getUniqueId()){
-                    coins = 0;
-                    exp = 0;
+                }
+
+                if(kPlayer_killed.getLevel() >= 5){
+                    coins = rand.nextInt(34);
+                    exp = rand.nextInt(47);
                 }
 
                 kPlayer_killer.addCurrentEXP(exp);

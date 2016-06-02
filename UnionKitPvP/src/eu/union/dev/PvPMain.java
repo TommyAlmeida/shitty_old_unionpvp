@@ -66,6 +66,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new JumpPad(), this);
         pm.registerEvents(new GiveKitInArea(), this);
         pm.registerEvents(new WarpsMenu(), this);
+        pm.registerEvents(new AdminCMD(), this);
 
         //Commands
         getCommand("kit").setExecutor(new KitCMD());
@@ -88,6 +89,7 @@ public class PvPMain extends JavaPlugin {
         getCommand("ready").setExecutor(new ReadyPlayerCMD());
         getCommand("report").setExecutor(new ReportCMD());
         getCommand("level").setExecutor(new Level());
+        getCommand("admin").setExecutor(new AdminCMD());
 
         /**
          * Kits with runnables (in seconds)

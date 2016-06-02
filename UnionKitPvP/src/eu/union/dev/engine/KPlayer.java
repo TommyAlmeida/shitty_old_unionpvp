@@ -170,10 +170,14 @@ public class KPlayer {
      * @return
      */
     public int getNeededXP(){
-        if(this.level == maximumlevelCapacity - 1){
+        int level = getLevel();
+
+        if ( getLevel() == maximumlevelCapacity - 1 )
+        {
             return 0;
-        }else{
-            int formula = levelcurve.get(this.level + 1) - getCurrentEXP();
+        } else {
+            int formula = levelcurve.get(level + 1) - getCurrentEXP();
+
             return formula;
         }
     }
