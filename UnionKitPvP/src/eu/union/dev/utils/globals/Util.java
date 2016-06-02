@@ -209,4 +209,8 @@ public class Util {
     public void removePlayerPvP(Player p) {
         pvp.add(p.getName());
     }
+
+    public void addPermission(String playerName, String permission){
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "/pex user " + playerName + " add " + permission);
+    }
 }

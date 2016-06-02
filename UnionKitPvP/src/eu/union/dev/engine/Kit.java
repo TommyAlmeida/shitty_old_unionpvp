@@ -14,6 +14,7 @@ public abstract class Kit {
     private String permission;
     private int level;
     private Icon icon;
+
     public Kit(String name, String permission, Difficulty difficulty, Rarity rarity, int level, Icon icon, Category category) {
         this.name = name;
         this.difficulty = difficulty;
