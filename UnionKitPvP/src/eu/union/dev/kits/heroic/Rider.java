@@ -26,7 +26,7 @@ public class Rider extends Kit implements Listener {
     Ability cooldown = new Ability(1, 30, TimeUnit.SECONDS);
 
     public Rider() {
-        super("rider", "unkit.rider", Difficulty.LOW, Rarity.HEROIC, 3, new Icon(Material.SADDLE), Category.SPAWNER);
+        super("rider", "unkit.rider", Difficulty.LOW, Rarity.HEROIC, 4, new Icon(Material.SADDLE), Category.SPAWNER);
     }
 
     @Override

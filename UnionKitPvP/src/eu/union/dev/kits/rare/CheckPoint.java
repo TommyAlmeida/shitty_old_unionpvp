@@ -25,7 +25,7 @@ public class CheckPoint extends Kit implements Listener {
     HashMap<Player, Location> locs = new HashMap<>();
 
     public CheckPoint() {
-        super("checkpoint", "unkit.checkpoint", Difficulty.LOW, Rarity.RARE, 4, new Icon(Material.NETHER_FENCE), Category.TELEPORT);
+        super("checkpoint", "unkit.checkpoint", Difficulty.LOW, Rarity.RARE, 2, new Icon(Material.NETHER_FENCE), Category.TELEPORT);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class Phantom extends Kit implements Listener {
     ;
 
     public Phantom() {
-        super("phantom", "unkit.phantom", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.FEATHER), Category.POTION);
+        super("phantom", "unkit.phantom", Difficulty.LOW, Rarity.RARE, 7, new Icon(Material.FEATHER), Category.POTION);
     }
 
     @Override

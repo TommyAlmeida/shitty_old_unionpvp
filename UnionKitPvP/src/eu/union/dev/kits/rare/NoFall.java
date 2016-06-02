@@ -16,7 +16,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class NoFall extends Kit implements Listener {
 
     public NoFall() {
-        super("nofall", "unkit.nofall", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.STRING), Category.PROTECTED);
+        super("nofall", "unkit.nofall", Difficulty.LOW, Rarity.RARE, 3, new Icon(Material.STRING), Category.PROTECTED);
     }
 
     @Override
