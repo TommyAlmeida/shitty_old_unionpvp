@@ -2,6 +2,7 @@ package eu.union.dev.kits.common;
 
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
+import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -17,7 +18,7 @@ import org.bukkit.util.Vector;
 public class Spiderman extends Kit implements Listener{
 
     public Spiderman() {
-        super("Spiderman", "unkit.spiderman", Difficulty.LOW, Rarity.COMMON, 3, new Icon(Material.WEB), Category.GRAB);
+        super("spiderman", "unkit.spiderman", Difficulty.LOW, Rarity.COMMON, 3, new Icon(Material.WEB), Category.GRAB);
     }
 
     @Override
@@ -32,7 +33,8 @@ public class Spiderman extends Kit implements Listener{
                 p.getLocation().getBlock().getRelative(BlockFace.WEST).getType() != Material.AIR ||
                 p.getLocation().getBlock().getRelative(BlockFace.NORTH).getType() != Material.AIR ||
                 p.getLocation().getBlock().getRelative(BlockFace.SOUTH).getType() != Material.AIR){
-            if (p.isSneaking()){
+            KitManager km = KitManager.getManager();
+            if (p.isSneaking() && km.getKitAmIUsing(p,"spiderman")){
                 p.setVelocity(new Vector(0, 0.5, 0));
             }
         }
