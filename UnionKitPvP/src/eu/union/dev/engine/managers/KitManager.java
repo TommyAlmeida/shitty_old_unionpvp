@@ -114,21 +114,20 @@ public class KitManager {
         if (!hasEnoughLevel(kPlayer, kit)) {
             player.sendMessage(Messages.PREFIX.toString() + " §7You dont have enough §alevel");
             return;
+        }else{
+            if (usingKit(player)) {
+                player.sendMessage(Messages.PREFIX.toString() + " §7You already have a kit!");
+            } else {
+                readyPlayer(player);
+                kit.applyKit(player);
+
+                playerKit.put(player, kit);
+
+                Util.getInstance().giveSoups(player);
+
+                player.sendMessage(Messages.PREFIX.toString() + " §7You are using kit: §a" + kit.getName());
+            }
         }
-
-        if (usingKit(player)) {
-            player.sendMessage(Messages.PREFIX.toString() + " §7You already have a kit!");
-        } else {
-            readyPlayer(player);
-            kit.applyKit(player);
-
-            playerKit.put(player, kit);
-
-            Util.getInstance().giveSoups(player);
-
-            player.sendMessage(Messages.PREFIX.toString() + " §7You are using kit: §a" + kit.getName());
-        }
-
     }
 
     /**
@@ -166,10 +165,10 @@ public class KitManager {
      * @return
      */
     public boolean hasEnoughLevel(KPlayer kPlayer, Kit kit) {
-        if (kPlayer.getLevel() >= kit.getLevel()) {
-            return true;
-        } else {
+        if (!(kPlayer.getLevel() >= kit.getLevel())) {
             return false;
+        } else {
+            return true;
         }
     }
 

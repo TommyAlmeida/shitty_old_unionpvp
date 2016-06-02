@@ -4,7 +4,6 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
-import eu.union.dev.commands.staff.AdminCMD;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
@@ -72,8 +71,6 @@ public class Util {
     public void buildJoinIcons(Player player) {
         Inventory inv = player.getInventory();
         inv.clear();
-        KPlayer profile = PlayerManager.getPlayer(player.getUniqueId());
-
         {
             Icon kits = new Icon(Material.NETHER_STAR, "§aKits §7(Right-Click)", "§7Choose your kit");
             inv.setItem(0, kits.build());
@@ -167,10 +164,6 @@ public class Util {
         player.setFireTicks(0);
         player.setAllowFlight(false);
 
-        for(int i = 0; i < 5; i++){
-            AdminCMD.admin.remove(player);
-        }
-
         for (PotionEffect pE : player.getActivePotionEffects()) {
             player.removePotionEffect(pE.getType());
         }
@@ -184,10 +177,6 @@ public class Util {
         player.setFallDistance(0f);
         player.setFireTicks(0);
         player.setAllowFlight(false);
-
-        for(int i = 0; i < 5; i++){
-            AdminCMD.admin.remove(player);
-        }
 
         for (PotionEffect pE : player.getActivePotionEffects()) {
             player.removePotionEffect(pE.getType());

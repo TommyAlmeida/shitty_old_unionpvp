@@ -32,8 +32,8 @@ public class KPlayer {
         this.kdr = kdr;
         this.coins = coins;
         this.baseCurve = 30;
-        this.difficulty = 3;
-        this.maximumlevelCapacity = 101; // = 100
+        this.difficulty = 6;
+        this.maximumlevelCapacity = 101; // = 1-100 YOU MUST ADD A EXTRA 1 for example 81 will give you 80
 
         //Initialize the level structure
         for(int i = starterlevel; i < this.maximumlevelCapacity - 1; i++){

@@ -22,6 +22,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
@@ -56,6 +57,7 @@ public class PlayerListeners implements Listener {
         KitManager km = KitManager.getManager();
 
         e.setJoinMessage(null);
+        Bukkit.broadcastMessage("§7[§a+§7] §7" + p.getDisplayName());
         PvPMain.getInstance().getSQL().createPlayerProfile(p.getUniqueId());
 
         if (km.usingKit(p))
@@ -102,6 +104,7 @@ public class PlayerListeners implements Listener {
         Player killer = e.getEntity().getKiller();
 
         KPlayer kPlayer_killed = PlayerManager.getPlayer(killed.getUniqueId());
+        Location loc = ConfigManager.getInstance().getLocation("Spawn");
 
         //Se o player que está a matar nao for nullo
         if (killer != null) {
@@ -134,11 +137,19 @@ public class PlayerListeners implements Listener {
                 if (coins <= 0 || exp <= 0) {
                     coins++;
                     exp++;
+                }else if(kPlayer_killed.getLevel() > 5){
+                    coins += 10;
+                    exp += 16;
+                }else if(kPlayer_killed.getUuid() == killed.getUniqueId()){
+                    coins = 0;
+                    exp = 0;
                 }
 
-                //Adiciona as cois e o exp
-                kPlayer_killer.addCoins(coins);
                 kPlayer_killer.addCurrentEXP(exp);
+                kPlayer_killer.addCoins(coins);
+
+                kPlayer_killed.addDeaths(1);
+                kPlayer_killer.addKills(1);
             }
 
             //Previne que a mensagem default do minecraft seja mandada
@@ -151,9 +162,9 @@ public class PlayerListeners implements Listener {
             killer.sendMessage("§e(+" + coins + " coins) §a(+" + exp + " EXP) §cFor killing: §b" + killed.getDisplayName());
 
             killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
+
         }
 
-        //Substitui todas as mensagens default para mensagens custom
         if ((killer == null) || (e.getEntity().getKiller() == null)) {
             EntityDamageEvent.DamageCause damage = e.getEntity().getLastDamageCause().getCause();
             if (damage == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION ||
@@ -209,17 +220,19 @@ public class PlayerListeners implements Listener {
                 Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by suicide");
                 e.setDeathMessage(null);
             }
-            if (damage == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
-                if (killed.getKiller() == null) {
-                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by " + killed.getKiller().getType().toString().toLowerCase().replace("_", " "));
-                    e.setDeathMessage(null);
-                }
-            }
         }
 
-        /*
-            Dropar somente Sopas, Cogumelos e potes.
-         */
+        System.out.println("Passou o death message");
+
+        if(km.usingKit(killed)){
+            km.removeKit(killed);
+        }else{
+            km.readyPlayer(killed);
+        }
+
+        System.out.println("Removeu o kit");
+
+
         e.getDrops().removeIf(k ->
                 k != null && !(
                         k.getType() == Material.MUSHROOM_SOUP ||
@@ -229,29 +242,29 @@ public class PlayerListeners implements Listener {
                 )
         );
 
-        if(km.usingKit(killed)){
-            for(int i = 0; i < 10; i++){
-                km.removeKit(killed);
-            }
-        }
-
         /*
             Delay para teleportar, pois senão os items
             são dropados no spawn.
          */
-        new BukkitRunnable() {
+       new BukkitRunnable() {
             @Override
             public void run() {
-                Location loc = ConfigManager.getInstance().getLocation("Spawn");
                 killed.teleport(loc);
-                Util.getInstance().readyPlayerNoHealth(killed);
-                km.removeKit(killed);
+                System.out.println("Teleportou para o spawn");
                 Util.getInstance().buildJoinIcons(killed);
+                System.out.println("Deu os join items");
+                for (int i = 0; i < 10; i++) {
+                    killed.setFireTicks(0);
+                }
+                System.out.println("Tirou o fire");
             }
 
         }.runTaskLater(PvPMain.getInstance(), 5);
 
-        Util.getInstance().readyPlayer(killed);
+        for (int i = 0; i < 10; i++) {
+            killed.setFireTicks(0);
+        }
+        System.out.println("Tirou o fire");
 
     }
 
@@ -270,4 +283,15 @@ public class PlayerListeners implements Listener {
             }
         }
     }
+
+    private void sendDeathMessages(Player killed, Player killer, int coins, int exp){
+        //Envia as mensagens de o jogador ter sido morto e de receber X Stats ou de ser morto
+        Bukkit.broadcastMessage("§a" + killed.getDisplayName() + " §chas been slained by §b" + killer.getDisplayName());
+        killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
+
+        killer.sendMessage("§e(+" + coins + " coins) §a(+" + exp + " EXP) §cFor killing: §b" + killed.getDisplayName());
+
+        killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
+    }
+
 }

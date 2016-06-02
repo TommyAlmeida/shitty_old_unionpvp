@@ -25,6 +25,7 @@ public class GiveKitInArea implements Listener {
             ApplicableRegionSet set = getWorldGuard().getRegionManager(p.getWorld()).getApplicableRegions(p.getLocation());
             for (ProtectedRegion region : set) {
                 if (region.getId().equalsIgnoreCase("givekit")) {
+                    p.getInventory().clear();
                     Util.getInstance().randomKit(p);
                 }
                 if (!Util.getInstance().inPvP(p)) {
