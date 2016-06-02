@@ -88,7 +88,7 @@ public class KitMenu implements Listener {
             }
         }
         if (type.contains("player")) {
-            inv.setItem(slot++, new Icon(Material.CARPET, "§aNext Page", "§5 §6" + nextpage).build());
+            inv.setItem(slot++, new Icon(Material.CARPET, "§aNext Page", "§5Your Kits §6" + nextpage).build());
             inv.setItem(0, new Icon(Material.CARPET, "§7Back Page", "§5Your Kits §6" + backpage).build());
             int kits = 0;
             for (int i = 0; i < km.getKits().size(); i++) {
