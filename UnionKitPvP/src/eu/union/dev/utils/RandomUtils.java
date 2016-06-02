@@ -13,6 +13,10 @@ public class RandomUtils {
         // No instance allowed
     }
 
+    /**
+     * Get a random X,Y,Z vector
+     * @return
+     */
     public static Vector getRandomVector() {
         double x, y, z;
         x = random.nextDouble() * 2 - 1;
@@ -22,6 +26,10 @@ public class RandomUtils {
         return new Vector(x, y, z).normalize();
     }
 
+    /**
+     * Get a random X,Z circular vector
+     * @return
+     */
     public static Vector getRandomCircleVector() {
         double rnd, x, z;
         rnd = random.nextDouble() * 2 * Math.PI;
@@ -29,6 +37,19 @@ public class RandomUtils {
         z = Math.sin(rnd);
 
         return new Vector(x, 0, z);
+    }
+
+    /**
+     * A easy way to return a chance in 100%
+     * @param chance
+     * @return
+     */
+    public static boolean chance(int chance){
+        if(random.nextInt(100) <= chance){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public static Material getRandomMaterial(Material[] materials) {

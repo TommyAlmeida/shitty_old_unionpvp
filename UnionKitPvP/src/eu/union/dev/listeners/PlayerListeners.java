@@ -138,7 +138,7 @@ public class PlayerListeners implements Listener {
 
                 //Adiciona as cois e o exp
                 kPlayer_killer.addCoins(coins);
-                kPlayer_killer.addEXP(exp);
+                kPlayer_killer.addCurrentEXP(exp);
             }
 
             //Previne que a mensagem default do minecraft seja mandada
@@ -229,6 +229,12 @@ public class PlayerListeners implements Listener {
                 )
         );
 
+        if(km.usingKit(killed)){
+            for(int i = 0; i < 10; i++){
+                km.removeKit(killed);
+            }
+        }
+
         /*
             Delay para teleportar, pois senão os items
             são dropados no spawn.
@@ -236,14 +242,15 @@ public class PlayerListeners implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                Util.getInstance().buildJoinIcons(killed);
                 Location loc = ConfigManager.getInstance().getLocation("Spawn");
-                Util.getInstance().readyPlayer2(killed);
                 killed.teleport(loc);
+                Util.getInstance().readyPlayerNoHealth(killed);
                 km.removeKit(killed);
+                Util.getInstance().buildJoinIcons(killed);
             }
 
         }.runTaskLater(PvPMain.getInstance(), 5);
+
         Util.getInstance().readyPlayer(killed);
 
     }

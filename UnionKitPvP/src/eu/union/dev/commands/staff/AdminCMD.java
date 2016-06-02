@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class AdminCMD implements CommandExecutor, Listener {
 
-    private ArrayList<Player> admin = new ArrayList<>();
+    public static ArrayList<Player> admin = new ArrayList<>();
 
     private Icon quickChange = new Icon(Material.MAGMA_CREAM, "§6QuickChange", "§7Quick change your admin mode");
     private Icon openInv = new Icon(Material.ANVIL, "§9Open Inventory", "§7Open the players right clicked inventory");

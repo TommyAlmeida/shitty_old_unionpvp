@@ -33,7 +33,8 @@ public class Spawn implements CommandExecutor {
                 @Override
                 public void run() {
                     KitManager km = KitManager.getManager();
-                    km.removeKit(p);
+                    if (km.usingKit(p))
+                        km.removeKit(p);
                     p.teleport(loc);
                     Util.getInstance().readyPlayer(p);
                     Util.getInstance().buildJoinIcons(p);

@@ -92,6 +92,7 @@ public class Database {
                             + "`Coins` bigint(255) NOT NULL,"
                             + "`Level` int(10) NOT NULL,"
                             + "`KDR` int(10) NOT NULL,"
+                            + "`EXP` int(15) NOT NULL,"
                             + " PRIMARY KEY(`id`));");
             profiles.execute();
             profiles.close();
@@ -113,10 +114,10 @@ public class Database {
             if (result.next()) {
                 PlayerManager.addPlayerProfile(new KPlayer(uuid, result.getInt("Kills"),
                         result.getInt("Deaths"), result.getLong("Coins"),
-                        result.getInt("Level"), result.getInt("KDR")));
+                        result.getInt("Level"), result.getInt("KDR"), result.getInt("EXP")));
 
             } else {
-                PlayerManager.addPlayerProfile(new KPlayer(uuid, 0, 0, 0, 0, 0));
+                PlayerManager.addPlayerProfile(new KPlayer(uuid, 0, 0, 0, 0, 0,0));
             }
         } catch (SQLException e) {
             System.out.println("Error while trying to create PlayerDat! Reason: " + e.getMessage());
@@ -141,17 +142,19 @@ public class Database {
                         + ", Coins = " + playerProfile.getCoins()
                         + ", Level = " + playerProfile.getLevel()
                         + ", KDR = " + playerProfile.getKDR()
+                        + ", EXP = " + playerProfile.getCurrentEXP()
                         + " WHERE UUID = '"
                         + playerProfile.getUuid() + "';";
                 this.c.createStatement().executeUpdate(PvPMainUpdate);
             } else {
-                String PvPMainUpdate = "INSERT INTO KitPvP (UUID, Kills, Deaths, Coins, Level,KDR) VALUES ('"
+                String PvPMainUpdate = "INSERT INTO KitPvP (UUID, Kills, Deaths, Coins, Level, KDR, EXP) VALUES ('"
                         + playerProfile.getUuid() + "', "
                         + playerProfile.getKills() + ", "
                         + playerProfile.getDeaths() + ", "
                         + playerProfile.getCoins() + ", "
                         + playerProfile.getLevel() + ", "
-                        + playerProfile.getKDR() + "); ";
+                        + playerProfile.getKDR() + ", "
+                        + playerProfile.getCurrentEXP() + "); ";
                 this.c.createStatement().executeUpdate(PvPMainUpdate);
             }
         } catch (SQLException e) {

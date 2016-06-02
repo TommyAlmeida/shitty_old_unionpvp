@@ -24,8 +24,8 @@ public class StatsCMD implements CommandExecutor {
             if (kplayer != null) {
                 player.sendMessage("§7§m-------------------------------");
                 player.sendMessage("§9Level: §e%s".replace("%s", String.valueOf(kplayer.getLevel())));
-                player.sendMessage("§9Current EXP: §e%s".replace("%s", String.valueOf(PvPMain.getInstance().exp.getExp(kplayer.getUuid()))));
-                player.sendMessage("§9Needed EXP: §e%s".replace("%s", String.valueOf(PvPMain.getInstance().exp.getneededXP(kplayer.getUuid()))));
+                player.sendMessage("§9Current EXP: §e%s".replace("%s", String.valueOf(kplayer.getCurrentEXP())));
+                player.sendMessage("§9Needed EXP: §e%s".replace("%s", String.valueOf(kplayer.getNeededXP())));
                 player.sendMessage("§9Coins: §e%s".replace("%s", String.valueOf(kplayer.getCoins())));
                 player.sendMessage("§9Kills: §e%s".replace("%s", String.valueOf(kplayer.getKills())));
                 player.sendMessage("§9Deaths: §e%s".replace("%s", String.valueOf(kplayer.getDeaths())));

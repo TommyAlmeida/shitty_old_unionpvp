@@ -4,6 +4,7 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
+import eu.union.dev.commands.staff.AdminCMD;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
@@ -148,7 +149,7 @@ public class Util {
                 deaths.setPrefix("§fDeaths: §e" + profile.getDeaths());
                 kills.setPrefix("§fKills: §e" + profile.getKills());
                 coins.setPrefix("§fCoins: §e" + profile.getCoins());
-                exp.setPrefix("§fEXP: §e" + PvPMain.getInstance().exp.getExp(profile.getUuid()));
+                exp.setPrefix("§fEXP: §e" + profile.getCurrentEXP());
                 level.setPrefix("§fLevel: §e" + profile.getLevel());
                 kdr.setPrefix("§fKDR: §e" + profile.getKDR());
             }
@@ -166,13 +167,17 @@ public class Util {
         player.setFireTicks(0);
         player.setAllowFlight(false);
 
+        for(int i = 0; i < 5; i++){
+            AdminCMD.admin.remove(player);
+        }
+
         for (PotionEffect pE : player.getActivePotionEffects()) {
             player.removePotionEffect(pE.getType());
         }
 
     }
 
-    public void readyPlayer2(Player player) {
+    public void readyPlayerNoHealth(Player player) {
         player.getInventory().clear();
         player.setFoodLevel(20);
         player.setExhaustion(0f);
@@ -180,9 +185,15 @@ public class Util {
         player.setFireTicks(0);
         player.setAllowFlight(false);
 
+        for(int i = 0; i < 5; i++){
+            AdminCMD.admin.remove(player);
+        }
+
         for (PotionEffect pE : player.getActivePotionEffects()) {
             player.removePotionEffect(pE.getType());
         }
+
+
 
     }
 

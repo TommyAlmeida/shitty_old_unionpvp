@@ -1,5 +1,6 @@
 package eu.union.dev.kits.heroic;
 
+import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -14,7 +15,6 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
-import eu.union.dev.utils.Weapon;
 
 public class Simba extends Kit{
 
