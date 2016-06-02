@@ -63,7 +63,7 @@ public class MainMenu implements Listener {
         }
 
         {
-            Icon warps = new Icon(Material.REDSTONE, "§7» §cSettings §7«");
+            Icon warps = new Icon(Material.BLAZE_POWDER, "§7» §cAuras §7«");
             inv.setItem(15, warps.build());
         }
     }
@@ -96,7 +96,8 @@ public class MainMenu implements Listener {
                     break;
                 case 15:
                     e.setCancelled(true);
-                    p.openInventory(Inv.getInstance().config);
+                    p.sendMessage(Messages.PREFIX.toString() + " §cComing soon!");
+                    e.getView().close();
                     break;
             }
         }

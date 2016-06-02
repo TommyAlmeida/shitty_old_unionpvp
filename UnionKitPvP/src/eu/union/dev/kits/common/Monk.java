@@ -24,7 +24,7 @@ public class Monk extends Kit implements Listener {
     Ability cooldown = new Ability(1, 15, TimeUnit.SECONDS);
 
     public Monk() {
-        super("monk", "unkit.monk", Difficulty.LOW, Rarity.COMMON, 0, new Icon(Material.BLAZE_ROD), Category.SOCIAL);
+        super("monk", "unkit.monk", Difficulty.LOW, Rarity.COMMON, 4, new Icon(Material.BLAZE_ROD), Category.SOCIAL);
     }
 
     @Override

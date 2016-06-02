@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 public class Blink extends Kit implements Listener{
 
     public Blink() {
-        super("blink", "unkit.blink", Difficulty.LOW, Rarity.COMMON, 0,new Icon(Material.NETHER_STAR), Category.TELEPORT);
+        super("blink", "unkit.blink", Difficulty.LOW, Rarity.COMMON, 1,new Icon(Material.NETHER_STAR), Category.TELEPORT);
     }
 
     @Override

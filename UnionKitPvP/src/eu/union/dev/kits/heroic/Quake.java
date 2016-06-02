@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 public class Quake extends Kit implements Listener{
 
     public Quake() {
-        super("quake", "unkit.quake", Difficulty.PRO, Rarity.HEROIC, 0, new Icon(Material.IRON_HOE), Category.LONG_DISTANCE);
+        super("quake", "unkit.quake", Difficulty.PRO, Rarity.HEROIC, 2, new Icon(Material.IRON_HOE), Category.LONG_DISTANCE);
     }
 
     @Override

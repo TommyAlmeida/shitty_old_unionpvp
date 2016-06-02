@@ -28,7 +28,7 @@ public class Guardian extends Kit implements Listener {
     Ability cooldown = new Ability(1, 60, TimeUnit.SECONDS);
 
     public Guardian() {
-        super("guardian", "guardian.unkit", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.PRISMARINE_SHARD), Category.SPAWNER);
+        super("guardian", "guardian.unkit", Difficulty.LOW, Rarity.RARE, 6, new Icon(Material.PRISMARINE_SHARD), Category.SPAWNER);
     }
 
     @Override

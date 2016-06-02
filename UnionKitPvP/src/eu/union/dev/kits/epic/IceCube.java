@@ -59,7 +59,7 @@ public class IceCube extends Kit implements Listener {
     private Ability cd = new Ability(1, 12, TimeUnit.SECONDS);
 
     public IceCube() {
-        super("icecube", "unkit.icecube", Difficulty.LOW, Rarity.EPIC, 0, new Icon(Material.ICE), Category.LONG_DISTANCE);
+        super("icecube", "unkit.icecube", Difficulty.LOW, Rarity.EPIC, 6, new Icon(Material.ICE), Category.LONG_DISTANCE);
     }
 
     public void applyKit(Player player) {

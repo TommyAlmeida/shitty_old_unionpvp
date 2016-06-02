@@ -31,7 +31,7 @@ public class C4 extends Kit implements Listener {
     Ability cooldown = new Ability(1, 15, TimeUnit.SECONDS);
 
     public C4() {
-        super("c4", "unkit.c4", Difficulty.MEDIUM, Rarity.HEROIC, 0, new Icon(Material.TNT), Category.KAMIKAZE);
+        super("c4", "unkit.c4", Difficulty.MEDIUM, Rarity.HEROIC, 6, new Icon(Material.TNT), Category.KAMIKAZE);
     }
 
     @Override

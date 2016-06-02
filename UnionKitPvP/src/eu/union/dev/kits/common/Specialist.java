@@ -18,7 +18,7 @@ public class Specialist extends Kit implements Listener {
 
     public Specialist() {
         super("specialist", Perms.KIT_FREE.toString(), Difficulty.LOW,
-                Rarity.COMMON, 0, new Icon(Material.ENCHANTED_BOOK), Category.SOCIAL);
+                Rarity.COMMON, 3, new Icon(Material.ENCHANTED_BOOK), Category.SOCIAL);
     }
 
     @Override

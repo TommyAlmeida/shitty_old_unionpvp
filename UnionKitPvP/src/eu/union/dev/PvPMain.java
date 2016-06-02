@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import eu.union.dev.commands.KitCMD;
 import eu.union.dev.commands.ListKitsCMD;
+import eu.union.dev.commands.ReportCMD;
 import eu.union.dev.commands.StatsCMD;
 import eu.union.dev.commands.location.*;
 import eu.union.dev.commands.staff.*;
@@ -13,7 +14,7 @@ import eu.union.dev.engine.modules.AutoMessage;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.engine.storage.Database;
 import eu.union.dev.kits.heroic.Madman;
-import eu.union.dev.kits.heroic.Simba;
+import eu.union.dev.kits.rare.Simba;
 import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
 import eu.union.dev.listeners.mechanics.GiveKitInArea;
@@ -85,6 +86,7 @@ public class PvPMain extends JavaPlugin {
         getCommand("reset").setExecutor(new ResetStatsCMD());
         getCommand("check").setExecutor(new CheckCMD());
         getCommand("ready").setExecutor(new ReadyPlayerCMD());
+        getCommand("report").setExecutor(new ReportCMD());
         getCommand("level").setExecutor(new Level());
 
         /**

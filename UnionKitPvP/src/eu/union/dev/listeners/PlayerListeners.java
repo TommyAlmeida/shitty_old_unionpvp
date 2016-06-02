@@ -22,15 +22,22 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class PlayerListeners implements Listener {
 
     KitManager km = KitManager.getManager();
+    private Map<Player, Long> cooldown;
+
+    public PlayerListeners() {
+        this.cooldown = new HashMap<>();
+    }
+
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
@@ -77,7 +84,26 @@ public class PlayerListeners implements Listener {
         KPlayer kPlayer = PlayerManager.getPlayer(e.getPlayer().getUniqueId());
 
         e.setCancelled(true);
-        Bukkit.broadcastMessage(prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
+
+        //Anti-Spam
+        if(!(e.getPlayer().hasPermission("union.bypass"))) {
+            if (this.cooldown.containsKey(e.getPlayer())) {
+                int cooldownTime = 5;
+                long timeLeft = this.cooldown.get(e.getPlayer()) / 1000L + cooldownTime - System.currentTimeMillis() / 1000L;
+                if (timeLeft > 0L) {
+                    e.getPlayer().sendMessage(Messages.PREFIX.toString() + " §7You need to wait §a" + timeLeft + "§7 seconds to talk again!");
+                    return;
+                }
+                this.cooldown.remove(e.getPlayer());
+            }
+            this.cooldown.put(e.getPlayer(), System.currentTimeMillis());
+
+            Bukkit.broadcastMessage(prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
+        } else {
+            Bukkit.broadcastMessage(prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
+        }
+
+
     }
 
     @EventHandler
@@ -282,16 +308,6 @@ public class PlayerListeners implements Listener {
                 e.setCancelled(true);
             }
         }
-    }
-
-    private void sendDeathMessages(Player killed, Player killer, int coins, int exp){
-        //Envia as mensagens de o jogador ter sido morto e de receber X Stats ou de ser morto
-        Bukkit.broadcastMessage("§a" + killed.getDisplayName() + " §chas been slained by §b" + killer.getDisplayName());
-        killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
-
-        killer.sendMessage("§e(+" + coins + " coins) §a(+" + exp + " EXP) §cFor killing: §b" + killed.getDisplayName());
-
-        killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
     }
 
 }

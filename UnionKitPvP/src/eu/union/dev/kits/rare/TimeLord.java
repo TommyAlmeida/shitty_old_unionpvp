@@ -30,7 +30,7 @@ public class TimeLord extends Kit implements Listener {
     ArrayList<String> congelados = new ArrayList<>();
 
     public TimeLord() {
-        super("timelord", "unkit.timelord", Difficulty.LOW, Rarity.RARE, 0, new Icon(Material.WATCH), Category.FREEZE);
+        super("timelord", "unkit.timelord", Difficulty.LOW, Rarity.RARE, 7, new Icon(Material.WATCH), Category.FREEZE);
     }
 
     @Override

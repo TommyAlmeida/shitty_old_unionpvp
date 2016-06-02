@@ -1,4 +1,4 @@
-package eu.union.dev.kits.heroic;
+package eu.union.dev.kits.rare;
 
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Bukkit;
@@ -22,7 +22,7 @@ public class Simba extends Kit{
     * Created by Owen
     */
 	public Simba() {
-		super("simba", "unkit.simba", Difficulty.MEDIUM, Rarity.RARE, 0, new Icon(Material.DIAMOND_HELMET), Category.PROTECTED);
+		super("simba", "unkit.simba", Difficulty.MEDIUM, Rarity.RARE, 2, new Icon(Material.DIAMOND_HELMET), Category.PROTECTED);
 	}
 
 	@Override

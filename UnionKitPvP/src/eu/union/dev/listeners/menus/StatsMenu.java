@@ -51,6 +51,7 @@ public class StatsMenu implements Listener {
     private void setItems(Player p) {
         KPlayer kplayer = PlayerManager.getPlayer(p.getUniqueId());
 
+
         for (int i = 0; i < 27; i++) {
             Icon spacer = new Icon(Material.STAINED_GLASS_PANE, "§a");
             inv.setItem(i, spacer.build());
@@ -82,12 +83,12 @@ public class StatsMenu implements Listener {
         }
 
         {
-            Icon icon = new Icon(Material.GOLD_AXE, "§9Streaks §o§cSOON");
+            Icon icon = new Icon(Material.GOLD_AXE, "§9Streaks §c§oSOON");
             inv.setItem(15, icon.build());
         }
 
         {
-            Icon icon = new Icon(Material.CHAINMAIL_CHESTPLATE, "§9Assists §o§cSOON");
+            Icon icon = new Icon(Material.BLAZE_ROD, "§9Current EXP: ", "§f" + kplayer.getCurrentEXP());
             inv.setItem(16, icon.build());
         }
     }

@@ -23,12 +23,13 @@ public class AutoMessage {
     }
 
     private void setMessages() {
-        messages.add("§7The server is in §c§lBETA");
         messages.add("§7Suggestions? §6www.unionnetwork.eu");
         messages.add("Follow us on twitter: §bhttps://twitter.com/UnionMcNetwork");
         messages.add("Every week §anew kits §7are added.");
         messages.add("Are you a youtuber? §6TAG minimum: §e1k subs");
-        messages.add("§7A new §dgameplay §7experience just for u!");
+        messages.add("§7A new §dgameplay §7experience!");
+        messages.add("§7How do i get level? §cBy killing players.");
+        messages.add("§7Bugs? Sorry we are in §c§lOPEN-BETA");
     }
 
     private void pushMessages() {
