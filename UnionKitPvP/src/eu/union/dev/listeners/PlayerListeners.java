@@ -32,11 +32,7 @@ import java.util.Random;
 public class PlayerListeners implements Listener {
 
     KitManager km = KitManager.getManager();
-    private Map<Player, Long> cooldown;
-
-    public PlayerListeners() {
-        this.cooldown = new HashMap<>();
-    }
+    private Map<Player, Long> cooldown = new HashMap<>();
 
 
     @EventHandler
@@ -64,7 +60,6 @@ public class PlayerListeners implements Listener {
         KitManager km = KitManager.getManager();
 
         e.setJoinMessage(null);
-        Bukkit.broadcastMessage("§7[§a+§7] §7" + p.getDisplayName());
         PvPMain.getInstance().getSQL().createPlayerProfile(p.getUniqueId());
 
         if (km.usingKit(p))
@@ -76,6 +71,7 @@ public class PlayerListeners implements Listener {
         Util.getInstance().readyPlayer(p);
         Util.getInstance().buildJoinIcons(p);
         Util.getInstance().buildScoreboard(p);
+
     }
 
     @EventHandler
