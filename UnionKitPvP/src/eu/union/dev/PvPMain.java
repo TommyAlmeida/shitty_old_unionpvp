@@ -20,6 +20,7 @@ import eu.union.dev.listeners.ServerListeners;
 import eu.union.dev.listeners.mechanics.GiveKitInArea;
 import eu.union.dev.listeners.mechanics.JumpPad;
 import eu.union.dev.listeners.mechanics.SoupListener;
+import eu.union.dev.listeners.mechanics.signs.SoupSign;
 import eu.union.dev.listeners.menus.KitMenu;
 import eu.union.dev.listeners.menus.MainMenu;
 import eu.union.dev.listeners.menus.StatsMenu;
@@ -66,6 +67,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new JumpPad(), this);
         pm.registerEvents(new GiveKitInArea(), this);
         pm.registerEvents(new WarpsMenu(), this);
+        pm.registerEvents(new SoupSign(), this);
         pm.registerEvents(new AdminCMD(), this);
 
         //Commands

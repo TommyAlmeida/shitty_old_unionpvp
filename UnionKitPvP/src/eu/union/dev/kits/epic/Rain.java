@@ -34,6 +34,7 @@ public class Rain extends Kit implements Listener{
     }
 
     Ability cooldown = new Ability(1,15, TimeUnit.SECONDS);
+
     @EventHandler
     public void onclick(PlayerInteractEntityEvent e){
         Player p = e.getPlayer();

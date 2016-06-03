@@ -36,6 +36,7 @@ public class Spawn implements CommandExecutor {
                     if (km.usingKit(p))
                         km.removeKit(p);
                     p.teleport(loc);
+                    p.getInventory().clear();
                     Util.getInstance().readyPlayer(p);
                     Util.getInstance().buildJoinIcons(p);
                 }

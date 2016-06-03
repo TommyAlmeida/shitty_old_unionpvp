@@ -113,7 +113,6 @@ public class KitManager {
 
         if (!hasEnoughLevel(kPlayer, kit)) {
             player.sendMessage(Messages.PREFIX.toString() + " §7You dont have enough §alevel");
-            return;
         }else{
             if (usingKit(player)) {
                 player.sendMessage(Messages.PREFIX.toString() + " §7You already have a kit!");

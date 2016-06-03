@@ -13,6 +13,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -55,6 +56,17 @@ public class ServerListeners implements Listener {
             for (int i = 0; i < cinv.getSize(); i++) {
                 cinv.setItem(i, new ItemStack(Material.MUSHROOM_SOUP));
             }
+
+            Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < cinv.getSize(); i++) {
+                        if(cinv.getItem(i).getType() == Material.AIR){
+                            cinv.setItem(i, new ItemStack(Material.MUSHROOM_SOUP));
+                        }
+                    }
+                }
+            },20);
         }
     }
 
@@ -142,5 +154,28 @@ public class ServerListeners implements Listener {
                 drop.remove();
             }
         }, 20*4);
+    }
+
+
+    public void onCrop(PlayerInteractEvent event)
+    {
+        if(event.getAction() == Action.PHYSICAL)
+        {
+            Block block = event.getClickedBlock();
+
+            if(block == null)
+                return;
+
+            int blockType = block.getTypeId();
+
+            if(blockType == Material.SOIL.getId())
+            {
+                event.setUseInteractedBlock(org.bukkit.event.Event.Result.DENY);
+                event.setCancelled(true);
+
+                block.setTypeId(blockType);
+                block.setData(block.getData());
+            }
+        }
     }
 }

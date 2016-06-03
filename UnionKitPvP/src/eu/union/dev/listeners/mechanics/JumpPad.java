@@ -30,7 +30,7 @@ public class JumpPad implements Listener {
             players.add(p);
         }
         if (e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == Material.SPONGE) {
-            Vector v = new Vector(0.0D, 3.5D, 0.0D);
+            Vector v = new Vector(0.0D, 3D, 0.0D);
             p.setVelocity(v);
             p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 3.0F, 2.0F);
             p.getWorld().playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 4);
@@ -43,10 +43,9 @@ public class JumpPad implements Listener {
         if (e.getEntity() instanceof Player &&
                 e.getCause() == EntityDamageEvent.DamageCause.FALL) {
             if (players.contains(e.getEntity())) {
-                e.setCancelled(true);
-                for (int i = 0; i < 10; i++) {
-                    players.remove(e.getEntity());
-                }
+                if(!e.isCancelled())
+                    e.setCancelled(true);
+                players.remove(e.getEntity());
             }
         }
     }

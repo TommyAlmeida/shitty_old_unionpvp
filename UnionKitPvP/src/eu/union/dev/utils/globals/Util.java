@@ -105,9 +105,6 @@ public class Util {
         KitManager km = KitManager.getManager();
 
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective obj = board.registerNewObjective("dummy", "dummy");
-        obj.setDisplayName("§aLv.§e" + profile.getLevel());
-        obj.setDisplaySlot(DisplaySlot.BELOW_NAME);
 
         Objective stats = board.registerNewObjective("stats", "dummy");
         stats.setDisplaySlot(DisplaySlot.SIDEBAR);

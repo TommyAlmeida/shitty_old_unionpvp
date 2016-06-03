@@ -122,7 +122,6 @@ public class KPlayer {
 
 
     public void setLevel(int level){
-        int exp = getCurrentEXP();
         int needed = getNeededXP();
 
 
@@ -172,7 +171,7 @@ public class KPlayer {
     public int getNeededXP(){
         int level = getLevel();
 
-        if ( getLevel() == maximumlevelCapacity - 1 )
+        if (getLevel() == maximumlevelCapacity - 1 )
         {
             return 0;
         } else {
@@ -223,6 +222,7 @@ public class KPlayer {
         kills = 0;
         level = 0;
         kdr = 0;
+        current_exp = 0;
 
         if (cleanCoins) {
             coins = 0;

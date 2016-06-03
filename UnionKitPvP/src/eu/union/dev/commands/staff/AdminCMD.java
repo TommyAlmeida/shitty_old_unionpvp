@@ -21,9 +21,11 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.ArrayList;
+
 public class AdminCMD implements CommandExecutor, Listener {
 
-    private boolean admin = false;
+    private ArrayList<Player> admin = new ArrayList<>();
 
     Icon openInv = new Icon(Material.ANVIL, "§cOpen Inventory");
 
@@ -37,17 +39,19 @@ public class AdminCMD implements CommandExecutor, Listener {
         Player player = (Player) sender;
 
         if(Perms.isStaff(player)){
-            if(!admin){
+            if(admin.contains(player)){
                 for(Player online : Bukkit.getOnlinePlayers()){
                     online.showPlayer(player);
                 }
                 player.sendMessage(Messages.PREFIX.toString() + " §7You are no longer in §cadmin mode");
+                admin.remove(player);
             }else{
                 for(Player online : Bukkit.getOnlinePlayers()){
                     online.hidePlayer(player);
                 }
                 player.sendMessage(Messages.PREFIX.toString() + " §7You are now in §aadmin mode");
                 setItems(player.getInventory());
+                admin.add(player);
             }
         }
         return true;
@@ -59,7 +63,7 @@ public class AdminCMD implements CommandExecutor, Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent e){
-        if(admin){
+        if(admin.contains(e.getEntity())){
             e.setCancelled(true);
         }else{
             e.setCancelled(false);
@@ -68,7 +72,7 @@ public class AdminCMD implements CommandExecutor, Listener {
 
     @EventHandler
     public void onPickup(PlayerPickupItemEvent e){
-        if(admin){
+        if(admin.contains(e.getPlayer())){
             e.setCancelled(true);
         }else{
             e.setCancelled(false);
@@ -102,11 +106,8 @@ public class AdminCMD implements CommandExecutor, Listener {
             return;
         }
 
-        if(!admin){
-           return;
+        if(admin.contains(p)){
+            p.openInventory(clicked.getInventory());
         }
-
-        p.openInventory(clicked.getInventory());
-
     }
 }

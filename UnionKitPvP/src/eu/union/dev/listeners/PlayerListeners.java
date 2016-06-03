@@ -61,7 +61,6 @@ public class PlayerListeners implements Listener {
 
         e.setJoinMessage(null);
         PvPMain.getInstance().getSQL().createPlayerProfile(p.getUniqueId());
-
         if (km.usingKit(p))
             km.removeKit(p);
 
@@ -72,6 +71,7 @@ public class PlayerListeners implements Listener {
         Util.getInstance().buildJoinIcons(p);
         Util.getInstance().buildScoreboard(p);
 
+        Bukkit.broadcastMessage("§7[§a+§7] §7" + p.getDisplayName());
     }
 
     @EventHandler
