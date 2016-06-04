@@ -25,6 +25,8 @@ import eu.union.dev.listeners.menus.KitMenu;
 import eu.union.dev.listeners.menus.MainMenu;
 import eu.union.dev.listeners.menus.StatsMenu;
 import eu.union.dev.listeners.menus.WarpsMenu;
+import eu.union.dev.listeners.menus.MenuAdmin;
+import eu.union.dev.listeners.menus.StatsMenuAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
@@ -67,6 +69,8 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new JumpPad(), this);
         pm.registerEvents(new GiveKitInArea(), this);
         pm.registerEvents(new WarpsMenu(), this);
+        pm.registerEvents(new MenuAdmin(), this);
+        pm.registerEvents(new StatsMenuAPI(), this);
         pm.registerEvents(new SoupSign(), this);
         pm.registerEvents(new AdminCMD(), this);
 
