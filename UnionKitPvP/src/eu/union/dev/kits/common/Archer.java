@@ -13,7 +13,7 @@ public class Archer extends Kit {
     public Archer() {
         super("archer", Perms.KIT_FREE.toString(), Difficulty.PRO,
                 Rarity.COMMON, 0, new Icon(Material.BOW), Category.LONG_DISTANCE
-        );
+                , 1000L);
     }
 
     @Override

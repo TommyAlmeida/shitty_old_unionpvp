@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="kitpvp">
+    <output-path>$PROJECT_DIR$/out/artifacts/kitpvp</output-path>
+    <root id="archive" name="kitpvp.jar" />
+  </artifact>
+</component>

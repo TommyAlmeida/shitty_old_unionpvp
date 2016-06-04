@@ -14,8 +14,9 @@ public abstract class Kit {
     private String permission;
     private int level;
     private Icon icon;
+    private long price;
 
-    public Kit(String name, String permission, Difficulty difficulty, Rarity rarity, int level, Icon icon, Category category) {
+    public Kit(String name, String permission, Difficulty difficulty, Rarity rarity, int level, Icon icon, Category category, long price) {
         this.name = name;
         this.difficulty = difficulty;
         this.rarity = rarity;
@@ -23,6 +24,7 @@ public abstract class Kit {
         this.category = category;
         this.permission = permission;
         this.icon = icon;
+        this.price = price;
     }
 
     public String getName() {
@@ -58,6 +60,8 @@ public abstract class Kit {
     public Icon getIcon() {
         return icon;
     }
+
+    public long getPrice() { return price; }
 
     public enum Difficulty {
         LOW("Low"),

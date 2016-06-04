@@ -25,7 +25,7 @@ public class Switcher extends Kit implements Listener {
     Ability cooldown = new Ability(1, 3, TimeUnit.SECONDS);
 
     public Switcher() {
-        super("switcher", "unkit.switcher", Difficulty.MEDIUM, Rarity.RARE, 1, new Icon(Material.SNOW_BALL), Category.TELEPORT);
+        super("switcher", "unkit.switcher", Difficulty.MEDIUM, Rarity.RARE, 1, new Icon(Material.SNOW_BALL), Category.TELEPORT, 1000L);
     }
 
     @Override

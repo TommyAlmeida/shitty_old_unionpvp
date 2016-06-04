@@ -3,6 +3,7 @@ package eu.union.dev.engine.managers;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.utils.globals.Messages;
+import eu.union.dev.utils.globals.Perms;
 import eu.union.dev.utils.globals.Util;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -111,7 +112,7 @@ public class KitManager {
             return;
         }
 
-        if (!hasEnoughLevel(kPlayer, kit)) {
+        if (!hasEnoughLevel(kPlayer, kit) || !Perms.isStaff(player)) {
             player.sendMessage(Messages.PREFIX.toString() + " §7You dont have enough §alevel");
         }else{
             if (usingKit(player)) {

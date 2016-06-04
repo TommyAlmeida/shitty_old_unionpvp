@@ -21,7 +21,7 @@ public class Viper extends Kit implements Listener {
 
     public Viper() {
         super("viper", "unkit.viper", Difficulty.LOW, Rarity.COMMON, 1, new Icon(Material.SPIDER_EYE),
-                Category.CHANCE);
+                Category.CHANCE, 1000L);
     }
 
     @Override

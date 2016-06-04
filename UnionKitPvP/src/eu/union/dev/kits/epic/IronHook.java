@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class IronHook extends Kit implements Listener{
 
     public IronHook() {
-        super("ironhook", "unkit.ironhook", Difficulty.PRO, Rarity.EPIC, 6, new Icon(Material.TRIPWIRE_HOOK), Category.LONG_DISTANCE);
+        super("ironhook", "unkit.ironhook", Difficulty.PRO, Rarity.EPIC, 6, new Icon(Material.TRIPWIRE_HOOK), Category.LONG_DISTANCE, 1000L);
     }
 
     @Override
@@ -58,12 +58,15 @@ public class IronHook extends Kit implements Listener{
                         ParticleEffect.CRIT.display(0, 0, 0, 1, 0, item.getLocation(), 20);
                         for (Entity en : item.getNearbyEntities(1.5, 2.0, 1.5)){
                             if (en instanceof Player){
-                                status = false;
-                                ((Player)en).damage(2.5,p);
-                                Vector vec = en.getLocation().toVector().subtract(p.getLocation().toVector()).normalize();
-                                en.setVelocity(vec.multiply(-en.getLocation().distance(p.getLocation())/6).setY(0.5));
-                                item.remove();
-                                p.playSound(p.getLocation(), Sound.BAT_HURT, 1.0F, 1.0F);
+                                Player p2 = (Player)en;
+                                if (p!=p2){
+                                    status = false;
+                                    p2.damage(4.0,p);
+                                    Vector vec = en.getLocation().toVector().subtract(p.getLocation().toVector()).normalize();
+                                    en.setVelocity(vec.multiply(-en.getLocation().distance(p.getLocation())/6).setY(0.5));
+                                    item.remove();
+                                    p.playSound(p.getLocation(), Sound.BAT_HURT, 1.0F, 1.0F);
+                                }
                             }
                         }
                         if (!status || i >= 5*20 || item.getLocation().add(0, -0.2, 0).getBlock().getType() != Material.AIR){

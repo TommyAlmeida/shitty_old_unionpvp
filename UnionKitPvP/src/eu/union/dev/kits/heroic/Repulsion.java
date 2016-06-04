@@ -29,7 +29,7 @@ public class Repulsion extends Kit implements Listener {
     Ability cooldown = new Ability(1, 15, TimeUnit.SECONDS);
 
     public Repulsion() {
-        super("repulsion", "unkit.repulsion", Difficulty.LOW, Rarity.HEROIC, 4, new Icon(Material.SLIME_BLOCK), Category.SOCIAL);
+        super("repulsion", "unkit.repulsion", Difficulty.LOW, Rarity.HEROIC, 4, new Icon(Material.SLIME_BLOCK), Category.SOCIAL, 1000L);
     }
 
     @Override

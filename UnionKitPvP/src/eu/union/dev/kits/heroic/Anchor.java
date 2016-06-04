@@ -20,7 +20,7 @@ import org.bukkit.util.Vector;
 public class Anchor extends Kit implements Listener {
 
     public Anchor() {
-        super("anchor", "unkit.anchor", Difficulty.LOW, Rarity.HEROIC, 1, new Icon(Material.ANVIL), Category.PROTECTED);
+        super("anchor", "unkit.anchor", Difficulty.LOW, Rarity.HEROIC, 1, new Icon(Material.ANVIL), Category.PROTECTED, 1000L);
     }
 
     @Override

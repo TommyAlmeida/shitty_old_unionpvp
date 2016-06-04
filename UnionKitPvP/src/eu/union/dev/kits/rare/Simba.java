@@ -22,7 +22,7 @@ public class Simba extends Kit{
     * Created by Owen
     */
 	public Simba() {
-		super("simba", "unkit.simba", Difficulty.MEDIUM, Rarity.RARE, 6, new Icon(Material.DIAMOND_HELMET), Category.PROTECTED);
+		super("simba", "unkit.simba", Difficulty.MEDIUM, Rarity.RARE, 6, new Icon(Material.DIAMOND_HELMET), Category.PROTECTED, 1000L);
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class Fisherman extends Kit implements Listener {
 
     public Fisherman() {
         super("fisherman", "unkit.fisherman", Difficulty.LOW, Rarity.COMMON, 1, new Icon(Material.FISHING_ROD),
-                Category.CATCHER);
+                Category.CATCHER, 1000L);
     }
 
     @Override

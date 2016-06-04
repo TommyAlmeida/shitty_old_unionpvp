@@ -31,7 +31,7 @@ public class FireBoost extends Kit implements Listener {
     Ability cooldown = new Ability(1, 15, TimeUnit.SECONDS);
 
     public FireBoost() {
-        super("fireboost", "unkit.fireboost", Difficulty.MEDIUM, Rarity.BEAST, 8, new Icon(Material.BLAZE_POWDER), Category.CHARGER);
+        super("fireboost", "unkit.fireboost", Difficulty.MEDIUM, Rarity.BEAST, 8, new Icon(Material.BLAZE_POWDER), Category.CHARGER, 1000L);
     }
 
     @Override
