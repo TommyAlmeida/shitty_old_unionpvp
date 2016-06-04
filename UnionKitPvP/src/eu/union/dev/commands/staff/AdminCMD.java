@@ -23,11 +23,11 @@ import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.listeners.menus.MenuAdmin;
 import eu.union.dev.listeners.menus.StatsMenuAPI;
-import eu.union.dev.utils.Messages;
-import eu.union.dev.utils.Perms;
-import eu.union.dev.utils.Weapon;
+import eu.union.dev.utils.globals.Messages;
+import eu.union.dev.utils.globals.Perms;
+import eu.union.dev.utils.globals.Weapon;
 
-public class Admin implements Listener, CommandExecutor{
+public class AdminCMD implements Listener, CommandExecutor{
 
     public static ArrayList<Player> admin = new ArrayList<>();
     public static HashMap<Player, Player> affected = new HashMap<>();
