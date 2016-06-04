@@ -24,13 +24,13 @@ public class ReportCMD implements CommandExecutor {
             return true;
         }
 
-        String message = "";
+	    StringBuilder sb = new StringBuilder();
+		for (int i = 1; i < args.length; i++) {
+		     sb.append(args[i]).append(" ");
+		 }
+		 String allArgs = sb.toString().trim();
 
-        for(int i = 1; i != args.length; i++) {
-            message += args[i] + " ";
-        }
-
-        if(message.length() == 0) {
+        if(allArgs.lenght == 0) {
             player.sendMessage(Messages.PREFIX.toString() + " §cYour report must have more than 10 characters");
             return true;
         }
