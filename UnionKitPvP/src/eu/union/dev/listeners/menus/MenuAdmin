@@ -16,7 +16,7 @@ import org.bukkit.util.Vector;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Icon;
-import eu.union.dev.commands.staff.Admin;
+import eu.union.dev.commands.staff.AdminCMD;
 
 public class MenuAdmin implements Listener{
 	
@@ -51,7 +51,7 @@ public class MenuAdmin implements Listener{
         	e.setCancelled(true);
         	if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§eTest Nofall")){
             	
-        		Player p1 = (Player)Admin.affected.get(p);
+        		Player p1 = (Player)AdminCMD.affected.get(p);
         		p1.setVelocity(new Vector(0, 4,0));
         		new BukkitRunnable() {
 					
@@ -68,7 +68,7 @@ public class MenuAdmin implements Listener{
         	if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§eTest Killaura")){
         		
         		
-        		Player p1 = (Player)Admin.affected.get(p);
+        		Player p1 = (Player)AdminCMD.affected.get(p);
         		
         		p.closeInventory();
         		e.setCancelled(true);
