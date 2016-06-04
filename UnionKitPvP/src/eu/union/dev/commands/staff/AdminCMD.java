@@ -1,11 +1,10 @@
 package eu.union.dev.commands.staff;
 
-import eu.union.dev.api.Icon;
-import eu.union.dev.engine.Kit;
-import eu.union.dev.engine.managers.KitManager;
-import eu.union.dev.utils.globals.Messages;
-import eu.union.dev.utils.globals.Perms;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,101 +12,176 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityInteractEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
+import eu.union.dev.PvPMain;
+import eu.union.dev.engine.KPlayer;
+import eu.union.dev.engine.managers.PlayerManager;
+import eu.union.dev.listeners.menus.MenuAdmin;
+import eu.union.dev.listeners.menus.StatsMenuAPI;
+import eu.union.dev.utils.Messages;
+import eu.union.dev.utils.Perms;
+import eu.union.dev.utils.Weapon;
 
-public class AdminCMD implements CommandExecutor, Listener {
+public class Admin implements Listener, CommandExecutor{
 
-    private ArrayList<Player> admin = new ArrayList<>();
-
-    Icon openInv = new Icon(Material.ANVIL, "§cOpen Inventory");
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
-        if (!(sender instanceof Player)) {
-            return true; //Retorna
-        }
-
-        Player player = (Player) sender;
-
-        if(Perms.isStaff(player)){
-            if(admin.contains(player)){
-                for(Player online : Bukkit.getOnlinePlayers()){
-                    online.showPlayer(player);
-                }
-                player.sendMessage(Messages.PREFIX.toString() + " §7You are no longer in §cadmin mode");
-                admin.remove(player);
-            }else{
-                for(Player online : Bukkit.getOnlinePlayers()){
-                    online.hidePlayer(player);
-                }
-                player.sendMessage(Messages.PREFIX.toString() + " §7You are now in §aadmin mode");
-                setItems(player.getInventory());
-                admin.add(player);
-            }
-        }
-        return true;
+    public static ArrayList<Player> admin = new ArrayList<>();
+    public static HashMap<Player, Player> affected = new HashMap<>();
+    
+    public void onleave(Player p){
+    	p.setGameMode(GameMode.SURVIVAL);
+		admin.remove(p.getName());
+		affected.remove(p);
+		p.getInventory().clear();
+		for(Player all:Bukkit.getOnlinePlayers()){
+			all.showPlayer(p);
+		}
     }
-
-    private void setItems(PlayerInventory pi){
-        pi.setItem(0, openInv.build());
+    public void onenter(Player p){
+    	p.setGameMode(GameMode.SPECTATOR);
+		p.sendMessage(Messages.PREFIX+"§7 You now are in Administration Mode!");
+		p.getInventory().clear();
+		admin.add(p);
+		for(Player all:Bukkit.getOnlinePlayers()){
+			
+			if(Perms.isStaff(all)){
+	
+				all.showPlayer(p);
+			}else{
+				all.hidePlayer(p);
+			}
+		}
     }
+	public boolean onCommand(CommandSender sender, Command cmd, String Label, String[] args) {
+	
+		if(cmd.getName().equalsIgnoreCase("admin")){
+			
+			if(!(sender instanceof Player)){
+				return true;
+			}
+			
+			Player p = (Player)sender;
+	
+			
+			if(Perms.isStaff(p)){
+				if(admin.contains(p)){
 
-    @EventHandler
-    public void onDamage(EntityDamageEvent e){
-        if(admin.contains(e.getEntity())){
-            e.setCancelled(true);
-        }else{
-            e.setCancelled(false);
-        }
-    }
+					onleave(p);
+					p.sendMessage(Messages.PREFIX+" §7You leave the Administration Mode!");
+					
+				}else{
+					onenter(p);
+				
+					Weapon.giveWeapon(p, Weapon.MENU_ADMIN, 6);
+					Weapon.giveWeapon(p, Weapon.SWITCH_ADMIN, 2);
+					Weapon.giveWeapon(p, Weapon.STATUS_ADMIN, 4);
+					p.sendMessage(Messages.PREFIX+"§7 You now are in Administration Mode!");
+				}
+			}
+			
 
-    @EventHandler
-    public void onPickup(PlayerPickupItemEvent e){
-        if(admin.contains(e.getPlayer())){
-            e.setCancelled(true);
-        }else{
-            e.setCancelled(false);
-        }
-    }
+		}
+		return false;
+	}
 
-    @EventHandler
-    public void onInteract(PlayerInteractEntityEvent e){
-        Player p = e.getPlayer();
-        Player clicked = (Player) e.getRightClicked();
-
-        ItemStack item = p.getItemInHand();
-
-        if (item == null) {
-            return;
-        }
-
-        if (!(item.getType() == openInv.getMaterial())) {
-            return;
-        }
-
-        if (item.getItemMeta() == null) {
-            return;
-        }
-
-        if (!(item.getItemMeta().hasDisplayName())) {
-            return;
-        }
-
-        if (!(item.getItemMeta().getDisplayName() == openInv.getName())) {
-            return;
-        }
-
-        if(admin.contains(p)){
-            p.openInventory(clicked.getInventory());
-        }
-    }
+	@EventHandler
+	void drops(PlayerDropItemEvent e){
+		Player p = (Player) e.getPlayer();
+	
+		if(p.getItemInHand().getType() == Material.SLIME_BALL && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eSwitch Admin§7 (Right Click)")){
+			if(admin.contains(p)){
+				e.setCancelled(true);
+			}
+		}
+		if(p.getItemInHand().getType() == Material.BLAZE_POWDER && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eMenu Admin§7 (Right Click Player)")){
+			if(admin.contains(p)){
+				e.setCancelled(true);
+			}
+		}
+		if(p.getItemInHand().getType() == Material.SKULL_ITEM && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eStatus Player§7 (Right Click Player)")){
+			if(admin.contains(p)){
+				e.setCancelled(true);
+			}
+		}
+	}
+	@EventHandler
+	void pegar(PlayerPickupItemEvent e){
+		Player p = (Player) e.getPlayer();
+		
+		if(admin.contains(p)){
+			e.setCancelled(true);
+		}
+	}
+	@EventHandler
+	void interagirEntityMenu(PlayerInteractEntityEvent e){
+		if(e.getRightClicked() instanceof Player){
+			
+			if(e.getRightClicked() == null){
+				return;
+			}
+			
+			Player p = (Player) e.getPlayer();
+			Player vitima = (Player) e.getRightClicked();
+			if(p.getItemInHand().getType() == Material.BLAZE_POWDER && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eMenu Admin§7 (Right Click Player)")){
+				if(admin.contains(p)){
+					affected.put(p, vitima);
+					MenuAdmin.openInventoryAdmin(p);
+				}
+			}
+		}
+	}
+	@EventHandler
+	void interagirEntity(PlayerInteractEntityEvent  e){
+		if(e.getRightClicked() instanceof Player){
+			
+			
+			Player p = (Player) e.getPlayer();
+			Player vitima = (Player)e.getRightClicked();
+			
+			if(admin.contains(p)) {
+			
+				p.openInventory(vitima.getInventory());
+			}
+		}
+	}
+	@EventHandler
+	void interagirEntityStatus(PlayerInteractEntityEvent  e){
+		if(e.getRightClicked() instanceof Player){
+			
+			
+			Player p = (Player) e.getPlayer();
+			Player vitima = (Player)e.getRightClicked();
+			
+			if(p.getItemInHand().getType() == Material.SKULL_ITEM && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eStatus Player§7 (Right Click Player)")){
+				
+				if(admin.contains(p)){
+					
+					KPlayer vitima2 = PlayerManager.getPlayer(vitima.getUniqueId());
+					StatsMenuAPI.setItems(p,vitima2);
+					
+				}
+			}
+		}
+	}
+	@EventHandler
+	void interagirSwti(PlayerInteractEvent e){
+		Player p = (Player) e.getPlayer();
+		if(p.getItemInHand().getType() == Material.SLIME_BALL && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eSwitch Admin§7 (Right Click)")){
+			if(admin.contains(p)){
+				onleave(p);
+				
+				new BukkitRunnable() {
+					
+					public void run() {			
+						onenter(p);
+						
+					}
+				}.runTaskLater(PvPMain.getInstance(), 16L);
+			}
+		}
+	}
 }
