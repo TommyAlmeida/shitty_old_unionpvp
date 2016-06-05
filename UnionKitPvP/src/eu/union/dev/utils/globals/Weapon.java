@@ -9,7 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public enum Weapon {
 
 
-    MENU_ADMIN(Material.BLAZE_POWDER, "§eMenu Admin§7 (Right Click Player)"),
+    MENU_ADMIN(Material.BLAZE_POWDER, "§eMenu AdminÂ§7 (Right Click Player)"),
     STATUS_ADMIN(Material.SKULL_ITEM, "§eStatus Player§7 (Right Click Player)"),
     SWITCH_ADMIN(Material.SLIME_BALL, "§eSwitch Admin§7 (Right Click)"),
     DEFAULT_SWORD(Material.WOOD_SWORD, "§aDefault Sword"),
