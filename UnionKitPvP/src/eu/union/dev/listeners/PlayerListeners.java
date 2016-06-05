@@ -7,12 +7,14 @@ import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Util;
+import org.apache.logging.log4j.core.net.Priority;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -301,18 +303,12 @@ public class PlayerListeners implements Listener {
 
     }
 
-    @EventHandler
-    public void onDamage(EntityDamageByEntityEvent e) {
-        if (e.getEntity() instanceof Player && e.getDamager() instanceof Player){
-            Player en = (Player)e.getEntity();
-            Player da = (Player)e.getDamager();
-            if (Util.getInstance().inPvP(en)){
+    @EventHandler(priority= EventPriority.HIGH)
+    public void onDamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player){
+            Player p = (Player)e.getEntity();
+            if (Util.getInstance().inPvP(p)){
                 e.setCancelled(true);
-                da.sendMessage("§cThis player is not in pvp!");
-            }
-            if (Util.getInstance().inPvP(da)){
-                e.setCancelled(true);
-                da.sendMessage("§cYou are not in pvp!");
             }
         }
     }
