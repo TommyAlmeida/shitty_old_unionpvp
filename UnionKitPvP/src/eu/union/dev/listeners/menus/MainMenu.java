@@ -91,7 +91,7 @@ public class MainMenu implements Listener {
                     break;
                 case 13:
                     e.setCancelled(true);
-                    Inventory inv = Bukkit.createInventory(null, 3*9,"Shop");
+                    Inventory inv = Bukkit.createInventory(null, 6*9,"Shop");
                     new ShopMenu().setItems(p,inv,1);
                     p.openInventory(inv);
                     break;
