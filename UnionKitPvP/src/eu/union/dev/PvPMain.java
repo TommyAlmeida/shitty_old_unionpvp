@@ -21,6 +21,7 @@ import eu.union.dev.listeners.ServerListeners;
 import eu.union.dev.listeners.mechanics.GiveKitInArea;
 import eu.union.dev.listeners.mechanics.JumpPad;
 import eu.union.dev.listeners.mechanics.SoupListener;
+import eu.union.dev.listeners.mechanics.BlockListener;
 import eu.union.dev.listeners.menus.*;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -68,6 +69,7 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new StatsMenuAPI(), this);
         pm.registerEvents(new AdminCMD(), this);
         pm.registerEvents(new JumpPad(), this);
+        pm.registerEvents(new BlockListener(), this);
 
         //Commands
         getCommand("kit").setExecutor(new KitCMD());
