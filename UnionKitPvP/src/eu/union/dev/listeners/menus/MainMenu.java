@@ -3,6 +3,7 @@ package eu.union.dev.listeners.menus;
 import eu.union.dev.api.Icon;
 import eu.union.dev.utils.globals.Inv;
 import eu.union.dev.utils.globals.Messages;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -90,8 +91,9 @@ public class MainMenu implements Listener {
                     break;
                 case 13:
                     e.setCancelled(true);
-                    p.openInventory(Inv.getInstance().shop);
-                    e.getView().close();
+                    Inventory inv = Bukkit.createInventory(null, 3*9,"Shop");
+                    new ShopMenu().setItems(p,inv,1);
+                    p.openInventory(inv);
                     break;
                 case 15:
                     e.setCancelled(true);
