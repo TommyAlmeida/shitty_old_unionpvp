@@ -90,8 +90,7 @@ public class MainMenu implements Listener {
                     break;
                 case 13:
                     e.setCancelled(true);
-                    //p.openInventory(Inv.getInstance().shop);
-                    p.sendMessage(Messages.PREFIX.toString() + " §cComing soon!");
+                    p.openInventory(Inv.getInstance().shop);
                     e.getView().close();
                     break;
                 case 15:

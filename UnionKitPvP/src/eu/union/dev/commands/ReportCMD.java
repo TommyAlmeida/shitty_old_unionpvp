@@ -20,7 +20,7 @@ public class ReportCMD implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            player.sendMessage(Messages.PREFIX.toString() + " §cUse: /report <text>");
+            player.sendMessage(Messages.PREFIX.toString() + " §cUse: /report <text, specify the player name");
             return true;
         }
 
@@ -28,6 +28,7 @@ public class ReportCMD implements CommandExecutor {
 		for (int i = 1; i < args.length; i++) {
 		     sb.append(args[i]).append(" ");
 		 }
+
 		 String allArgs = sb.toString().trim();
 
         if(allArgs.length() == 0) {
@@ -35,11 +36,9 @@ public class ReportCMD implements CommandExecutor {
             return true;
         }
 
-        for(Player online : Bukkit.getOnlinePlayers()){
-            if(Perms.isStaff(online)){
-                online.sendMessage(Messages.PREFIX.toString() + " §a§ Report from §b" + player.getName() + ": §c" + message);
-            }
-        }
+        Bukkit.getOnlinePlayers().stream().filter(Perms::isStaff).forEach(online -> {
+            online.sendMessage(Messages.PREFIX.toString() + " §a§ Report from §b" + player.getName() + ": §c" + allArgs);
+        });
 
         return true;
 

@@ -42,6 +42,7 @@ public enum Weapon {
     GUARDIAN_SHARD(Material.PRISMARINE_SHARD, "§bGuardian Tower"),
     QUAKE_GUN(Material.IRON_HOE, "§bQuake Gun"),
     RAIN_ARROW(Material.ARROW, "§4Rain"),
+    HEALER_ITEM(Material.RED_ROSE, "§cHealer Item"),
     BLINK_STAR(Material.NETHER_STAR, "§bBlink Star"),
     IRON_HOOK(Material.TRIPWIRE_HOOK, "§7Iron §8Hook");
 

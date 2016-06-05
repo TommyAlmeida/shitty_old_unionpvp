@@ -21,25 +21,17 @@ public class ResetStatsCMD implements CommandExecutor {
         Player player = (Player) sender;
 
         if (cmd.getName().equalsIgnoreCase("reset")) {
-            if (args.length == 0) {
-                player.sendMessage(Messages.PREFIX.toString() + " §7Use: /reset <player>");
-                return true;
-            }
-
-            Player target = Bukkit.getPlayerExact(args[0]);
-            KPlayer kplayer = PlayerManager.getPlayer(target.getUniqueId());
-
-            if (!target.isOnline()) {
-                player.sendMessage(Messages.PREFIX.toString() + " §cSpecify an existing player");
-                return true;
-            }
+            KPlayer kplayer = PlayerManager.getPlayer(player.getUniqueId());
 
             if (kplayer != null) {
-                kplayer.clear(true);
+                if(kplayer.getCoins() >= 5000){
+                    kplayer.clear();
+                    player.sendMessage(Messages.PREFIX.toString() + " §7Your stats have been reseted with §e5000 coins");
+                }else{
+                    player.sendMessage(Messages.PREFIX.toString() + " §7You dont have §c5000 coins §7to reset your stats");
+                }
             }
         }
-
         return true;
-
     }
 }

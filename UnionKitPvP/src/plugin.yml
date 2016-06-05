@@ -15,6 +15,9 @@ commands:
   check:
   ready:
   level:
+  inv:
+  fake:
+  cc:
   admin:
   setfps:
   report:

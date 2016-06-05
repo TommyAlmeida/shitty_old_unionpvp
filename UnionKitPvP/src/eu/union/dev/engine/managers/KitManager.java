@@ -165,11 +165,7 @@ public class KitManager {
      * @return
      */
     public boolean hasEnoughLevel(KPlayer kPlayer, Kit kit) {
-        if (!(kPlayer.getLevel() >= kit.getLevel())) {
-            return false;
-        } else {
-            return true;
-        }
+        return kPlayer.getLevel() >= kit.getLevel();
     }
 
     public boolean usingKit(Player player) {

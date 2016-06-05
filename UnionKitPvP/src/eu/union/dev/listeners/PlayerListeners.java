@@ -51,7 +51,9 @@ public class PlayerListeners implements Listener {
         }
 
         e.setQuitMessage(null);
+        kplayer.clearKillstreak();
         Bukkit.broadcastMessage("§7[§c-§7] §7" + player.getDisplayName());
+
     }
 
     @EventHandler
@@ -67,6 +69,7 @@ public class PlayerListeners implements Listener {
         Location loc = ConfigManager.getInstance().getLocation("Spawn");
         p.teleport(loc);
 
+        PlayerManager.getPlayer(p.getUniqueId()).clearKillstreak();
         Util.getInstance().readyPlayer(p);
         Util.getInstance().buildJoinIcons(p);
         Util.getInstance().buildScoreboard(p);
@@ -157,11 +160,21 @@ public class PlayerListeners implements Listener {
                     exp = rand.nextInt(47);
                 }
 
+                if(killer.hasPermission("union.yt") || kPlayer_killer.isInKillstreak()){
+                    coins *= 2;
+                    exp *= 2;
+                }
+
                 kPlayer_killer.addCurrentEXP(exp);
                 kPlayer_killer.addCoins(coins);
 
                 kPlayer_killed.addDeaths(1);
                 kPlayer_killer.addKills(1);
+                kPlayer_killer.addKillstreak(1);
+            }
+
+            if(kPlayer_killer.getKillStreak() == 5){
+                Bukkit.broadcastMessage(Messages.PREFIX.toString() + " §e" + killer.getDisplayName() + " §7is domination §c" + killed.getDisplayName());
             }
 
             //Previne que a mensagem default do minecraft seja mandada
@@ -172,8 +185,10 @@ public class PlayerListeners implements Listener {
             killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
 
             killer.sendMessage("§e(+" + coins + " coins) §a(+" + exp + " EXP) §cFor killing: §b" + killed.getDisplayName());
-
+            Bukkit.broadcastMessage(Messages.PREFIX.toString() + " §e" + killer.getDisplayName() + " §7is in killstreak of §c" + kPlayer_killer.getKillStreak());
             killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
+            kPlayer_killed.clearKillstreak();
+
 
         }
 

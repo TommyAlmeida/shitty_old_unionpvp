@@ -86,7 +86,7 @@ public class ShopMenu implements Listener{
                         kplayer.setCoins(kplayer.getCoins()-km.getKitByName(kit).getPrice());
                     }
                     PermissionsEx.getUser(p).addPermission(km.getKitByName(kit).getPermission());
-                    p.sendMessage("§aCongratulations! You now got the "+kit+" kit!");
+                    p.sendMessage("§aCongratulations! You now got the " + kit + " kit!");
                     e.getView().close();
                 }else{
                     p.sendMessage("§4You do not have enough §6Coins§4!");
@@ -110,6 +110,7 @@ public class ShopMenu implements Listener{
         i.setItemMeta(im);
         return i;
     }
+
     public ItemStack createItem(Material m, int q, byte d, String name, List<String> desc) {
         ItemStack i = new ItemStack(m, q, d);
         ItemMeta im = i.getItemMeta();
@@ -118,12 +119,14 @@ public class ShopMenu implements Listener{
         i.setItemMeta(im);
         return i;
     }
+
     public ItemStack createItem(ItemStack i, List<String> desc){
         ItemMeta im = i.getItemMeta();
         im.setLore(desc);
         i.setItemMeta(im);
         return i;
     }
+
     public List<String> desc(String... list){
         List<String> lista = new ArrayList<>();
         for (int i = 0; i < list.length; i++) {

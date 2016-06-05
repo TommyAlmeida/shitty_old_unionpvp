@@ -8,6 +8,7 @@ import eu.union.dev.commands.ReportCMD;
 import eu.union.dev.commands.StatsCMD;
 import eu.union.dev.commands.location.*;
 import eu.union.dev.commands.staff.*;
+import eu.union.dev.commands.youtubers.FakeCMD;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.modules.AutoMessage;
@@ -21,12 +22,7 @@ import eu.union.dev.listeners.mechanics.GiveKitInArea;
 import eu.union.dev.listeners.mechanics.JumpPad;
 import eu.union.dev.listeners.mechanics.SoupListener;
 import eu.union.dev.listeners.mechanics.signs.SoupSign;
-import eu.union.dev.listeners.menus.KitMenu;
-import eu.union.dev.listeners.menus.MainMenu;
-import eu.union.dev.listeners.menus.StatsMenu;
-import eu.union.dev.listeners.menus.WarpsMenu;
-import eu.union.dev.listeners.menus.MenuAdmin;
-import eu.union.dev.listeners.menus.StatsMenuAPI;
+import eu.union.dev.listeners.menus.*;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
@@ -65,14 +61,16 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new KitMenu(), this);
         pm.registerEvents(new MainMenu(), this);
         pm.registerEvents(new StatsMenu(), this);
+        pm.registerEvents(new ShopMenu(), this);
         pm.registerEvents(new SoupListener(), this);
-        pm.registerEvents(new JumpPad(), this);
         pm.registerEvents(new GiveKitInArea(), this);
         pm.registerEvents(new WarpsMenu(), this);
         pm.registerEvents(new MenuAdmin(), this);
         pm.registerEvents(new StatsMenuAPI(), this);
         pm.registerEvents(new SoupSign(), this);
         pm.registerEvents(new AdminCMD(), this);
+        pm.registerEvents(new JumpPad(), this);
+        pm.registerEvents(new SkinChanger(), this);
 
         //Commands
         getCommand("kit").setExecutor(new KitCMD());
@@ -94,8 +92,11 @@ public class PvPMain extends JavaPlugin {
         getCommand("check").setExecutor(new CheckCMD());
         getCommand("ready").setExecutor(new ReadyPlayerCMD());
         getCommand("report").setExecutor(new ReportCMD());
+        getCommand("fake").setExecutor(new FakeCMD());
+        getCommand("cc").setExecutor(new ClearChatCMD());
         getCommand("level").setExecutor(new Level());
         getCommand("admin").setExecutor(new AdminCMD());
+        getCommand("inv").setExecutor(new InvCMD());
 
         /**
          * Kits with runnables (in seconds)
@@ -165,14 +166,12 @@ public class PvPMain extends JavaPlugin {
     }
 
     private void MemoryFix() {
-        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-            public void run() {
-                Iterator<?> localIterator2;
-                for (Iterator<?> localIterator1 = Bukkit.getWorlds().iterator(); localIterator1.hasNext(); localIterator2.hasNext()) {
-                    World world = (World) localIterator1.next();
+        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            Iterator<?> localIterator2;
+            for (Iterator<?> localIterator1 = Bukkit.getWorlds().iterator(); localIterator1.hasNext(); localIterator2.hasNext()) {
+                World world = (World) localIterator1.next();
 
-                    localIterator2 = ((CraftWorld) world).getHandle().tileEntityList.iterator();
-                }
+                localIterator2 = ((CraftWorld) world).getHandle().tileEntityList.iterator();
             }
         }, 100L, 100L);
     }

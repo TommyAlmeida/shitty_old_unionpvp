@@ -3,6 +3,7 @@ package eu.union.dev.engine;
 import eu.union.dev.PvPMain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -22,6 +23,7 @@ public class KPlayer {
 
     private int maximumlevelCapacity;
     private ArrayList<Integer> levelcurve = new ArrayList<>();
+    private HashMap<UUID, Integer> killstreak = new HashMap<>();
 
     public KPlayer(UUID uuid, int kills, int deaths, long coins, int level, int kdr, int current_exp) {
         this.uuid = uuid;
@@ -206,6 +208,62 @@ public class KPlayer {
     }
 
     /**
+     * Remove a certain value of coins
+     * @param coins
+     */
+    public void removeCoins(long coins){
+        this.coins -= coins;
+    }
+
+    /**
+     * Add a new value to player killstreak
+     * @param amount
+     */
+    public void addKillstreak(int amount){
+        killstreak.put(getUuid(), + amount);
+    }
+
+    /**
+     * Set a new value to player killstreak
+     * @param amount
+     */
+    public void setKillstreak(int amount){
+        killstreak.put(getUuid(), amount);
+    }
+
+    public int getKillStreak(){
+        return killstreak.get(1).intValue();
+    }
+
+    /**
+     * See if the player is in killstreak or if its not
+     * @return
+     */
+    public boolean isInKillstreak(){
+        if(killstreak.containsKey(getUuid())){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Clear killstreak mode
+     */
+    public void clearKillstreak(){
+        killstreak.clear();
+    }
+
+    /**
+     * Remove a certain value of killstreak
+     * @param amount
+     */
+    public void removeKillStreak(int amount){
+        killstreak.remove(amount);
+    }
+
+
+    /**
      * Retrieve the player KDR, Formula: kills / deaths
      * @return
      */
@@ -215,18 +273,10 @@ public class KPlayer {
 
     /**
      * Reset all player stats to 0
-     * @param cleanCoins
      */
-    public void clear(boolean cleanCoins) {
+    public void clear() {
         deaths = 0;
         kills = 0;
-        level = 0;
         kdr = 0;
-        current_exp = 0;
-
-        if (cleanCoins) {
-            coins = 0;
-        }
-
     }
 }
