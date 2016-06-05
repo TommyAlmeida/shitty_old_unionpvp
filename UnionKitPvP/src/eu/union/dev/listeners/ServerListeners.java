@@ -1,6 +1,7 @@
 package eu.union.dev.listeners;
 
 import eu.union.dev.PvPMain;
+import eu.union.dev.api.Icon;
 import eu.union.dev.commands.staff.BuildCMD;
 import eu.union.dev.utils.globals.Perms;
 import org.bukkit.Bukkit;
@@ -205,12 +206,10 @@ public class ServerListeners implements Listener {
 
                 e.getPlayer().openInventory(inv);
             }else if (s.getLine(0).equalsIgnoreCase("[Refill]")) {
-                Inventory inv = Bukkit.createInventory(null, 54, "Refill");
-                for(int i = 0; i < inv.getSize(); i++){
-                    inv.setItem(i, new ItemStack(Material.RED_MUSHROOM));
-                    inv.setItem(i, new ItemStack(Material.BROWN_MUSHROOM));
-                    inv.setItem(i, new ItemStack(Material.BOWL));
-                }
+                Inventory inv = Bukkit.createInventory(null, 9, "Refill");
+                inv.setItem(0, new ItemStack(Material.RED_MUSHROOM,64));
+                inv.setItem(1, new ItemStack(Material.BROWN_MUSHROOM,64));
+                inv.setItem(2, new ItemStack(Material.BOWL,64));
                 e.getPlayer().openInventory(inv);
             }
         }
