@@ -27,10 +27,9 @@ public class GiveKitInArea implements Listener {
                 if (region.getId().equalsIgnoreCase("givekit")) {
                     p.getInventory().clear();
                     Bukkit.dispatchCommand(p,"kit pvp");
-                    //Util.getInstance().randomKit(p);
-                }
-                if (!Util.getInstance().inPvP(p)) {
-                    Util.getInstance().addPlayerPvP(p);
+                    if (!Util.getInstance().inPvP(p)) {
+                        Util.getInstance().addPlayerPvP(p);
+                    }
                 }
             }
         }
