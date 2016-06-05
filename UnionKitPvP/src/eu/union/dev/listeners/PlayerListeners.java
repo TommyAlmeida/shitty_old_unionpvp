@@ -77,6 +77,8 @@ public class PlayerListeners implements Listener {
         Util.getInstance().buildScoreboard(p);
 
         Bukkit.broadcastMessage("§7[§a+§7] §7" + p.getDisplayName());
+        Util.getInstance().removePlayerPvP(p);
+        p.sendMessage(Messages.PREFIX+" §aYou gained the protection of the spawn");
     }
 
     @EventHandler
@@ -286,6 +288,8 @@ public class PlayerListeners implements Listener {
                     killed.setFireTicks(0);
                 }
                 System.out.println("Tirou o fire");
+                Util.getInstance().removePlayerPvP(killed);
+                killed.sendMessage(Messages.PREFIX+" §aYou gained the protection of the spawn");
             }
 
         }.runTaskLater(PvPMain.getInstance(), 5);
@@ -298,17 +302,17 @@ public class PlayerListeners implements Listener {
     }
 
     @EventHandler
-    public void ondamage(EntityDamageByEntityEvent e) {
-        if (e.getEntity() instanceof Player) {
-            Player p = (Player) e.getEntity();
-            if (!Util.getInstance().inPvP(p)) {
+    public void onDamage(EntityDamageByEntityEvent e) {
+        if (e.getEntity() instanceof Player && e.getDamager() instanceof Player){
+            Player en = (Player)e.getEntity();
+            Player da = (Player)e.getDamager();
+            if (Util.getInstance().inPvP(en)){
                 e.setCancelled(true);
+                da.sendMessage("§cThis player is not in pvp!");
             }
-        }
-        if (e.getDamager() instanceof Player) {
-            Player p = (Player) e.getDamager();
-            if (!Util.getInstance().inPvP(p)) {
+            if (Util.getInstance().inPvP(da)){
                 e.setCancelled(true);
+                da.sendMessage("§cYou are not in pvp!");
             }
         }
     }

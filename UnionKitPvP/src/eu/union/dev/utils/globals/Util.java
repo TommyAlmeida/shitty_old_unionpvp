@@ -193,18 +193,22 @@ public class Util {
 
     public boolean inPvP(Player p) {
         if (pvp.contains(p.getName())) {
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
 
     public void addPlayerPvP(Player p) {
-        pvp.remove(p.getName());
+        if (!inPvP(p)){
+            pvp.add(p.getName());
+        }
     }
 
     public void removePlayerPvP(Player p) {
-        pvp.add(p.getName());
+        if (inPvP(p)){
+            pvp.remove(p.getName());
+        }
     }
 
     public void addPermission(String playerName, String permission){

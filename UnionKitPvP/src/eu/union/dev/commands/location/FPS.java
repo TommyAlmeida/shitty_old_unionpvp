@@ -4,6 +4,7 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.storage.ConfigManager;
+import eu.union.dev.utils.globals.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -34,6 +35,7 @@ public class FPS implements CommandExecutor {
                 KitManager km = KitManager.getManager();
                 km.readyPlayer(p);
                 km.applyKit(p, km.getKitByName("pvp"));
+                Util.getInstance().removePlayerPvP(p);
             }, 20 * 5);
         }
         return false;

@@ -45,7 +45,7 @@ public class FireBoost extends Kit implements Listener {
         KitManager km = KitManager.getManager();
         if (km.getKitAmIUsing(p, "fireboost") &&
                 p.getItemInHand().getType().toString().contains("_SWORD") &&
-                p.isSneaking()) {
+                p.isSneaking() && Util.getInstance().inPvP(p)) {
             if (cooldown.tryUse(p)) {
                 new BukkitRunnable() {
                     int i = 0;
@@ -85,15 +85,17 @@ public class FireBoost extends Kit implements Listener {
             Player p = (Player) e.getEntity();
             KitManager km = KitManager.getManager();
             if (km.getKitAmIUsing(p, "fireboost") &&
-                    e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+                    e.getCause() == EntityDamageEvent.DamageCause.FALL && Util.getInstance().inPvP(p)) {
                 if (e.getDamage() >= 3.5) {
                     e.setDamage(3.5);
                     particles(p.getLocation());
                     for (Entity en : p.getNearbyEntities(10, 5, 10)) {
                         if (en instanceof Player) {
-                            Vector vec = en.getLocation().toVector().subtract(p.getLocation().toVector()).normalize();
-                            en.setVelocity(vec.multiply(2));
-                            en.setFireTicks((new Random().nextInt(3) + 7) * 20);
+                            if (Util.getInstance().inPvP((Player)en)){
+                                Vector vec = en.getLocation().toVector().subtract(p.getLocation().toVector()).normalize();
+                                en.setVelocity(vec.multiply(2));
+                                en.setFireTicks((new Random().nextInt(3) + 7) * 20);
+                            }
                         }
                     }
                 }

@@ -39,10 +39,11 @@ public class Hulk extends Kit implements Listener {
             Player pux = (Player) e.getRightClicked();
             KitManager km = KitManager.getManager();
             if (km.getKitAmIUsing(hulk, "hulk") &&
-                    hulk.getItemInHand().getType() == Material.SLIME_BALL) {
+                    hulk.getItemInHand().getType() == Material.SLIME_BALL && Util.getInstance().inPvP(hulk)) {
                 if (cooldown.tryUse(hulk)) {
                     if (hulk.getPassenger() == null &&
-                            hulk.getVehicle() != pux) {
+                            hulk.getVehicle() != pux &&
+                            Util.getInstance().inPvP(pux)) {
                         hulk.setPassenger(pux);
                         pux.sendMessage("§cYou were caught by a Hulk! Sneak out of it!");
                     }

@@ -4,6 +4,7 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.storage.ConfigManager;
+import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -39,6 +40,8 @@ public class Spawn implements CommandExecutor {
                     p.getInventory().clear();
                     Util.getInstance().readyPlayer(p);
                     Util.getInstance().buildJoinIcons(p);
+                    Util.getInstance().removePlayerPvP(p);
+                    p.sendMessage(Messages.PREFIX+" §aYou gained the protection of the spawn");
                 }
             }, 20 * 5);
         }
