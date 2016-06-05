@@ -30,8 +30,8 @@ public class MenuAdmin implements Listener{
 		inv.setItem(0, new ItemStack(Material.STAINED_GLASS_PANE));
 		inv.setItem(1, new ItemStack(Material.STAINED_GLASS_PANE));
 		inv.setItem(2, new ItemStack(Material.STAINED_GLASS_PANE));
-		inv.setItem(3, new ItemStack(Material.MONSTER_EGG));
-		inv.setItem(4, new ItemStack(Material.ANVIL));
+		inv.setItem(3, ff.build());
+		inv.setItem(4, nofall.build());
 		inv.setItem(5, new ItemStack(Material.STAINED_GLASS_PANE));
 		inv.setItem(6, new ItemStack(Material.STAINED_GLASS_PANE));
 		inv.setItem(7, new ItemStack(Material.STAINED_GLASS_PANE));
@@ -54,13 +54,8 @@ public class MenuAdmin implements Listener{
         		Player p1 = (Player)AdminCMD.affected.get(p);
         		p1.setVelocity(new Vector(0, 4,0));
         		new BukkitRunnable() {
-					
-					
 					public void run() {
-						
-						
 		        		p1.setVelocity(new Vector(0, -4,0));
-						
 					}
 				}.runTaskLater(PvPMain.getInstance(), 10L);
         	}

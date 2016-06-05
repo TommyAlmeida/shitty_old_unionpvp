@@ -51,7 +51,9 @@ public class PlayerListeners implements Listener {
         }
 
         e.setQuitMessage(null);
-        kplayer.clearKillstreak();
+        if (kplayer != null) {
+            kplayer.clearKillstreak();
+        }
         Bukkit.broadcastMessage("§7[§c-§7] §7" + player.getDisplayName());
 
     }
@@ -97,9 +99,9 @@ public class PlayerListeners implements Listener {
             }
             this.cooldown.put(e.getPlayer(), System.currentTimeMillis());
 
-            Bukkit.broadcastMessage(prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
+            Bukkit.broadcastMessage("§7[§bLvl.§e" + kPlayer.getLevel() + "§7]" + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
         } else {
-            Bukkit.broadcastMessage(prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
+            Bukkit.broadcastMessage("§7[§bLvl.§e" + kPlayer.getLevel() + "§7]" + prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
         }
 
 
@@ -160,7 +162,7 @@ public class PlayerListeners implements Listener {
                     exp = rand.nextInt(47);
                 }
 
-                if(killer.hasPermission("union.yt") || kPlayer_killer.isInKillstreak()){
+                if(killer.hasPermission("union.yt")){
                     coins *= 2;
                     exp *= 2;
                 }
@@ -170,12 +172,12 @@ public class PlayerListeners implements Listener {
 
                 kPlayer_killed.addDeaths(1);
                 kPlayer_killer.addKills(1);
-                kPlayer_killer.addKillstreak(1);
+                //kPlayer_killer.addKillstreak(1);
             }
 
-            if(kPlayer_killer.getKillStreak() == 5){
+            /*if(kPlayer_killer.getKillStreak() == 5){
                 Bukkit.broadcastMessage(Messages.PREFIX.toString() + " §e" + killer.getDisplayName() + " §7is domination §c" + killed.getDisplayName());
-            }
+            }*/
 
             //Previne que a mensagem default do minecraft seja mandada
             e.setDeathMessage(null);
@@ -185,7 +187,7 @@ public class PlayerListeners implements Listener {
             killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
 
             killer.sendMessage("§e(+" + coins + " coins) §a(+" + exp + " EXP) §cFor killing: §b" + killed.getDisplayName());
-            Bukkit.broadcastMessage(Messages.PREFIX.toString() + " §e" + killer.getDisplayName() + " §7is in killstreak of §c" + kPlayer_killer.getKillStreak());
+            //Bukkit.broadcastMessage(Messages.PREFIX.toString() + " §e" + killer.getDisplayName() + " §7is in killstreak of §c" + kPlayer_killer.killstreak.get(killer.getUniqueId()));
             killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
             kPlayer_killed.clearKillstreak();
 

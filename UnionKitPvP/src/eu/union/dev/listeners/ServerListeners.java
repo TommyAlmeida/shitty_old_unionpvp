@@ -9,8 +9,10 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -175,6 +177,41 @@ public class ServerListeners implements Listener {
 
                 block.setTypeId(blockType);
                 block.setData(block.getData());
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onSignChange(SignChangeEvent e) {
+        if (e.getLine(0).equalsIgnoreCase("[Soup]")) {
+            e.setLine(0, "[Soup]");
+            e.setLine(1, "§6Click here");
+        }else if (e.getLine(0).equalsIgnoreCase("[Refill]")) {
+            e.setLine(0, "[Refill]");
+            e.setLine(1, "§6Click here");
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerInteract(PlayerInteractEvent e) {
+        if (!(e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
+        if (e.getClickedBlock().getState() instanceof Sign) {
+            Sign s = (Sign) e.getClickedBlock().getState();
+            if (s.getLine(0).equalsIgnoreCase("[Soup]")) {
+                Inventory inv = Bukkit.createInventory(null, 54, "Soups");
+                for(int i = 0; i < inv.getSize(); i++){
+                    inv.setItem(i, new ItemStack(Material.MUSHROOM_SOUP));
+                }
+
+                e.getPlayer().openInventory(inv);
+            }else if (s.getLine(0).equalsIgnoreCase("[Refill]")) {
+                Inventory inv = Bukkit.createInventory(null, 54, "Refill");
+                for(int i = 0; i < inv.getSize(); i++){
+                    inv.setItem(i, new ItemStack(Material.RED_MUSHROOM));
+                    inv.setItem(i, new ItemStack(Material.BROWN_MUSHROOM));
+                    inv.setItem(i, new ItemStack(Material.BOWL));
+                }
+                e.getPlayer().openInventory(inv);
             }
         }
     }

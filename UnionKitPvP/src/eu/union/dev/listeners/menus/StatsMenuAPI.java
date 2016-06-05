@@ -23,7 +23,7 @@ public class StatsMenuAPI implements Listener{
 	    public static void setItems(Player p, KPlayer vitima){
 	    
 
-	   	    Inventory inv = Bukkit.createInventory(null, 9*3, "Stats");
+	   	    Inventory inv = Bukkit.createInventory(null, 9*3, "Check Stats");
 
 	        
 	        for(int i = 0; i < 27; i++){

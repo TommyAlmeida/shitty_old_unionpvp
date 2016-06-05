@@ -17,6 +17,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -34,17 +36,24 @@ public class AdminCMD implements Listener, CommandExecutor {
     public void onLeave(Player p) {
         p.setGameMode(GameMode.SURVIVAL);
         affected.remove(p);
+        admin.remove(p);
         p.getInventory().clear();
+
         for (Player all : Bukkit.getOnlinePlayers()) {
             all.showPlayer(p);
         }
-        admin.remove(p);
+
     }
 
     public void onEnter(Player p) {
+        admin.add(p);
+
         p.setGameMode(GameMode.CREATIVE);
         p.getInventory().clear();
-        admin.add(p);
+        Weapon.giveWeapon(p, Weapon.MENU_ADMIN, 6);
+        Weapon.giveWeapon(p, Weapon.SWITCH_ADMIN, 2);
+        Weapon.giveWeapon(p, Weapon.STATUS_ADMIN, 4);
+
         for (Player all : Bukkit.getOnlinePlayers()) {
 
             if (Perms.isStaff(all)) {
@@ -65,14 +74,9 @@ public class AdminCMD implements Listener, CommandExecutor {
 
             Player p = (Player) sender;
 
-
             if (Perms.isStaff(p)) {
                 if (!admin.contains(p)) {
                     onEnter(p);
-
-                    Weapon.giveWeapon(p, Weapon.MENU_ADMIN, 6);
-                    Weapon.giveWeapon(p, Weapon.SWITCH_ADMIN, 2);
-                    Weapon.giveWeapon(p, Weapon.STATUS_ADMIN, 4);
                     p.sendMessage(Messages.PREFIX + "§7 You now are in Administration Mode!");
 
                 } else {
@@ -87,8 +91,19 @@ public class AdminCMD implements Listener, CommandExecutor {
     }
 
     @EventHandler
+    public void onDamage(EntityDamageEvent e){
+        if(e.getEntity() instanceof Player){
+            if(admin.contains(e.getEntity())){
+                e.setCancelled(true);
+            }else{
+                e.setCancelled(false);
+            }
+        }
+    }
+
+    @EventHandler
     void drops(PlayerDropItemEvent e) {
-        Player p = (Player) e.getPlayer();
+        Player p = e.getPlayer();
 
         if (p.getItemInHand().getType() == Material.SLIME_BALL && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eSwitch Admin§7 (Right Click)")) {
             if (admin.contains(p)) {
@@ -109,7 +124,7 @@ public class AdminCMD implements Listener, CommandExecutor {
 
     @EventHandler
     void pegar(PlayerPickupItemEvent e) {
-        Player p = (Player) e.getPlayer();
+        Player p = e.getPlayer();
 
         if (admin.contains(p)) {
             e.setCancelled(true);
@@ -124,7 +139,7 @@ public class AdminCMD implements Listener, CommandExecutor {
                 return;
             }
 
-            Player p = (Player) e.getPlayer();
+            Player p = e.getPlayer();
             Player vitima = (Player) e.getRightClicked();
             if (p.getItemInHand().getType() == Material.BLAZE_POWDER && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eMenu Admin§7 (Right Click Player)")) {
                 if (admin.contains(p)) {
@@ -139,7 +154,7 @@ public class AdminCMD implements Listener, CommandExecutor {
     void interagirEntity(PlayerInteractEntityEvent e) {
         if (e.getRightClicked() instanceof Player) {
 
-            Player p = (Player) e.getPlayer();
+            Player p = e.getPlayer();
             Player vitima = (Player) e.getRightClicked();
 
             if (admin.contains(p)) {
@@ -153,7 +168,7 @@ public class AdminCMD implements Listener, CommandExecutor {
         if (e.getRightClicked() instanceof Player) {
 
 
-            Player p = (Player) e.getPlayer();
+            Player p = e.getPlayer();
             Player vitima = (Player) e.getRightClicked();
 
             if (p.getItemInHand().getType() == Material.SKULL_ITEM && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eStatus Player§7 (Right Click Player)")) {
@@ -168,7 +183,7 @@ public class AdminCMD implements Listener, CommandExecutor {
 
     @EventHandler
     void interagirSwti(PlayerInteractEvent e) {
-        Player p = (Player) e.getPlayer();
+        Player p = e.getPlayer();
         if (p.getItemInHand().getType() == Material.SLIME_BALL && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eSwitch Admin§7 (Right Click)")) {
             if (admin.contains(p)) {
                 onLeave(p);

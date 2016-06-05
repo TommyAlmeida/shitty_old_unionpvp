@@ -23,7 +23,7 @@ public class KPlayer {
 
     private int maximumlevelCapacity;
     private ArrayList<Integer> levelcurve = new ArrayList<>();
-    private HashMap<UUID, Integer> killstreak = new HashMap<>();
+    public HashMap<UUID, Integer> killstreak = new HashMap<>();
 
     public KPlayer(UUID uuid, int kills, int deaths, long coins, int level, int kdr, int current_exp) {
         this.uuid = uuid;
@@ -231,9 +231,6 @@ public class KPlayer {
         killstreak.put(getUuid(), amount);
     }
 
-    public int getKillStreak(){
-        return killstreak.get(1).intValue();
-    }
 
     /**
      * See if the player is in killstreak or if its not

@@ -112,7 +112,7 @@ public class KitManager {
             return;
         }
 
-        if (!hasEnoughLevel(kPlayer, kit) || !Perms.isStaff(player)) {
+        if (!hasEnoughLevel(kPlayer, kit) || (!Perms.isStaff(player))) {
             player.sendMessage(Messages.PREFIX.toString() + " §7You dont have enough §alevel");
         }else{
             if (usingKit(player)) {
