@@ -159,7 +159,7 @@ public class AdminCMD implements Listener, CommandExecutor {
             Player vitima = (Player) e.getRightClicked();
 
        	     if(p.getItemInHand().getType() == Material.AIR){
-				if(admin.contains(p.getName())){
+				if(admin.contains(p)){
 					p.openInventory(vitima.getInventory());
 				}
 			}

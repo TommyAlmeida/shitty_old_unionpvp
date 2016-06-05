@@ -23,12 +23,13 @@ import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class Util {
 
     private static Util instance = new Util();
-    private ArrayList<String> pvp = new ArrayList<>();
+    private ArrayList<UUID> pvp = new ArrayList<>();
 
     public static Util getInstance() {
         return instance;
@@ -192,22 +193,18 @@ public class Util {
     }
 
     public boolean inPvP(Player p) {
-        if (pvp.contains(p.getName())) {
-            return true;
-        } else {
-            return false;
-        }
+        return pvp.contains(p.getUniqueId());
     }
 
     public void addPlayerPvP(Player p) {
         if (!inPvP(p)){
-            pvp.add(p.getName());
+            pvp.add(p.getUniqueId());
         }
     }
 
     public void removePlayerPvP(Player p) {
         if (inPvP(p)){
-            pvp.remove(p.getName());
+            pvp.remove(p.getUniqueId());
         }
     }
 

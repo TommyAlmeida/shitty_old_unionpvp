@@ -16,7 +16,6 @@ import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.engine.storage.Database;
 import eu.union.dev.kits.heroic.Madman;
 import eu.union.dev.kits.rare.Simba;
-import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
 import eu.union.dev.listeners.mechanics.GiveKitInArea;
 import eu.union.dev.listeners.mechanics.JumpPad;

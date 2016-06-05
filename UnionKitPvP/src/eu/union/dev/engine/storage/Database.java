@@ -101,6 +101,10 @@ public class Database {
         }
     }
 
+    public synchronized void setupChallanges(){
+        try
+    }
+
     /**
      * Try to create a new player profile
      *
