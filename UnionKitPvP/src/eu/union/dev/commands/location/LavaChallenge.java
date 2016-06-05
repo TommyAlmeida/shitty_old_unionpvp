@@ -4,6 +4,7 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.utils.globals.Util;
+import eu.union.dev.listeners.mechanics.BlockListener;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -37,6 +38,7 @@ public class LavaChallenge implements CommandExecutor {
                     p.getInventory().clear();
                     p.getInventory().setArmorContents(null);
                     Util.getInstance().giveSoups(p);
+                    BlockListener.lc.add(p.getName());
                 }
             }, 20 * 5);
         }
