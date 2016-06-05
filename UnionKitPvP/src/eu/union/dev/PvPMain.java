@@ -70,7 +70,6 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new SoupSign(), this);
         pm.registerEvents(new AdminCMD(), this);
         pm.registerEvents(new JumpPad(), this);
-        pm.registerEvents(new SkinChanger(), this);
 
         //Commands
         getCommand("kit").setExecutor(new KitCMD());

@@ -33,17 +33,16 @@ public class AdminCMD implements Listener, CommandExecutor {
 
     public void onLeave(Player p) {
         p.setGameMode(GameMode.SURVIVAL);
-        admin.remove(p.getName());
         affected.remove(p);
         p.getInventory().clear();
         for (Player all : Bukkit.getOnlinePlayers()) {
             all.showPlayer(p);
         }
+        admin.remove(p);
     }
 
     public void onEnter(Player p) {
         p.setGameMode(GameMode.CREATIVE);
-        p.sendMessage(Messages.PREFIX + "§7 You now are in Administration Mode!");
         p.getInventory().clear();
         admin.add(p);
         for (Player all : Bukkit.getOnlinePlayers()) {
@@ -68,18 +67,17 @@ public class AdminCMD implements Listener, CommandExecutor {
 
 
             if (Perms.isStaff(p)) {
-                if (admin.contains(p)) {
-
-                    onLeave(p);
-                    p.sendMessage(Messages.PREFIX + " §7You leave the Administration Mode!");
-
-                } else {
+                if (!admin.contains(p)) {
                     onEnter(p);
 
                     Weapon.giveWeapon(p, Weapon.MENU_ADMIN, 6);
                     Weapon.giveWeapon(p, Weapon.SWITCH_ADMIN, 2);
                     Weapon.giveWeapon(p, Weapon.STATUS_ADMIN, 4);
                     p.sendMessage(Messages.PREFIX + "§7 You now are in Administration Mode!");
+
+                } else {
+                    onLeave(p);
+                    p.sendMessage(Messages.PREFIX + " §7You leave the Administration Mode!");
                 }
             }
 
