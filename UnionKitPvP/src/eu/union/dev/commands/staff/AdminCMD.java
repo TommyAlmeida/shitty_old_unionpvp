@@ -141,7 +141,8 @@ public class AdminCMD implements Listener, CommandExecutor {
 
             Player p = e.getPlayer();
             Player vitima = (Player) e.getRightClicked();
-            if (p.getItemInHand().getType() == Material.BLAZE_POWDER && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eMenu Admin§7 (Right Click Player)")) {
+            if (vitima != null && p.getItemInHand().getType() == Material.BLAZE_POWDER 
+            && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§eMenu Admin§7 (Right Click Player)")) {
                 if (admin.contains(p)) {
                     affected.put(p, vitima);
                     MenuAdmin.openInventoryAdmin(p);
