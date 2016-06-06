@@ -35,7 +35,8 @@ public class FPS implements CommandExecutor {
                 KitManager km = KitManager.getManager();
                 km.readyPlayer(p);
                 km.applyKit(p, km.getKitByName("pvp"));
-                Util.getInstance().removePlayerPvP(p);
+                Util.getInstance().addPlayerPvP(p);
+                p.sendMessage("§cYou lost the spawn protection!");
             }, 20 * 5);
         }
         return false;

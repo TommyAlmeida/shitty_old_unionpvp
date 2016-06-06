@@ -40,6 +40,7 @@ public class LavaChallenge implements CommandExecutor {
                     Util.getInstance().giveSoups(p);
                     BlockListener.lc.add(p.getName());
                     Util.getInstance().addPlayerPvP(p);
+                    p.sendMessage("§cYou lost the spawn protection!");
                 }
             }, 20 * 5);
         }
