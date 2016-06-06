@@ -40,7 +40,7 @@ public class Monk extends Kit implements Listener {
             Player monked = (Player) e.getRightClicked();
             KitManager km = KitManager.getManager();
             if (km.getKitAmIUsing(monk, "monk") &&
-                    monk.getItemInHand().getType() == Material.BLAZE_ROD) {
+                    monk.getItemInHand().getType() == Material.BLAZE_ROD && Util.getInstance().inPvP(monked)) {
                 if (cooldown.tryUse(monk)) {
                     int random = new Random().nextInt(17) + 8;
                     ItemStack i1 = monked.getItemInHand();

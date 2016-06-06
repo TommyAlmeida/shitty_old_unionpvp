@@ -3,6 +3,7 @@ package eu.union.dev.kits.common;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -34,7 +35,7 @@ public class Viper extends Kit implements Listener {
         if (e.getEntity() instanceof Player &&
                 e.getDamager() instanceof Player) {
             KitManager km = KitManager.getManager();
-            if (km.getKitAmIUsing((Player) e.getDamager(), "viper")) {
+            if (km.getKitAmIUsing((Player) e.getDamager(), "viper") && Util.getInstance().inPvP((Player)e.getEntity())) {
                 if (new Random().nextInt(100) <= 15) {
                     ((Player) e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.POISON, (new Random().nextInt(5) + 3) * 20, 0));
                 }

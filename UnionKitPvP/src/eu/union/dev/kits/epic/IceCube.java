@@ -122,7 +122,7 @@ public class IceCube extends Kit implements Listener {
 
             Player p1 = (Player) ((Snowball) e.getDamager()).getShooter();
             KitManager km = KitManager.getManager();
-            if (km.getKitAmIUsing(p1, "icecube")) {
+            if (km.getKitAmIUsing(p1, "icecube") && Util.getInstance().inPvP(c)) {
                 e.setDamage(e.getDamage() + 3.0D);
 
                 // CRIAR UMA ARENA DE GELO

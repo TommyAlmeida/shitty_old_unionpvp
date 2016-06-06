@@ -1,11 +1,13 @@
 package eu.union.dev.kits.epic;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Union;
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.ParticleEffect;
+import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -59,7 +61,7 @@ public class IronHook extends Kit implements Listener{
                         for (Entity en : item.getNearbyEntities(1.5, 2.0, 1.5)){
                             if (en instanceof Player){
                                 Player p2 = (Player)en;
-                                if (p!=p2){
+                                if (p!=p2 && Util.getInstance().inPvP(p2)){
                                     status = false;
                                     p2.damage(4.0,p);
                                     Vector vec = en.getLocation().toVector().subtract(p.getLocation().toVector()).normalize();
