@@ -307,7 +307,7 @@ public class PlayerListeners implements Listener {
     public void onDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player){
             Player p = (Player)e.getEntity();
-            if (Util.getInstance().inPvP(p)){
+            if (!Util.getInstance().inPvP(p)){
                 e.setCancelled(true);
             }
         }
