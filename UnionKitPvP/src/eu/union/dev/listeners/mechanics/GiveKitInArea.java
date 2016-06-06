@@ -25,11 +25,13 @@ public class GiveKitInArea implements Listener {
             ApplicableRegionSet set = getWorldGuard().getRegionManager(p.getWorld()).getApplicableRegions(p.getLocation());
             for (ProtectedRegion region : set) {
                 if (region.getId().equalsIgnoreCase("givekit")) {
-                    p.getInventory().clear();
-                    Bukkit.dispatchCommand(p,"kit pvp");
                     if (!Util.getInstance().inPvP(p)) {
                         Util.getInstance().addPlayerPvP(p);
                         p.sendMessage("§cYou lost the protection of the spawn!");
+                    }
+                    if (km.getKitByPlayer(p) == null){
+                        p.getInventory().clear();
+                        Bukkit.dispatchCommand(p,"kit pvp");
                     }
                 }
             }
