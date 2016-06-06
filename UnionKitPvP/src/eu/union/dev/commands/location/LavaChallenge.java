@@ -39,6 +39,7 @@ public class LavaChallenge implements CommandExecutor {
                     p.getInventory().setArmorContents(null);
                     Util.getInstance().giveSoups(p);
                     BlockListener.lc.add(p.getName());
+                    Util.getInstance().addPlayerPvP(p);
                 }
             }, 20 * 5);
         }
