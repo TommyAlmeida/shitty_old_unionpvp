@@ -29,6 +29,7 @@ public class GiveKitInArea implements Listener {
                     Bukkit.dispatchCommand(p,"kit pvp");
                     if (!Util.getInstance().inPvP(p)) {
                         Util.getInstance().addPlayerPvP(p);
+                        p.sendMessage("§cYou lost the protection of the spawn!");
                     }
                 }
             }
