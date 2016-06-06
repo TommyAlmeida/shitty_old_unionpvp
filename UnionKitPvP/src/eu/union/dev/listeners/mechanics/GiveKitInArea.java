@@ -21,7 +21,7 @@ public class GiveKitInArea implements Listener {
     public void onmove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
-        if (km.getKitByPlayer(p) == null && getWorldGuard() != null) {
+        if (getWorldGuard() != null) {
             ApplicableRegionSet set = getWorldGuard().getRegionManager(p.getWorld()).getApplicableRegions(p.getLocation());
             for (ProtectedRegion region : set) {
                 if (region.getId().equalsIgnoreCase("givekit")) {
