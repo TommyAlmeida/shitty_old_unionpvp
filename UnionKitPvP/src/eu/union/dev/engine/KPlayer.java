@@ -1,7 +1,5 @@
 package eu.union.dev.engine;
 
-import eu.union.dev.PvPMain;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -25,6 +23,7 @@ public class KPlayer {
     private ArrayList<Integer> levelcurve = new ArrayList<>();
     public HashMap<UUID, Integer> killstreak = new HashMap<>();
 
+
     public KPlayer(UUID uuid, int kills, int deaths, long coins, int level, int kdr, int current_exp) {
         this.uuid = uuid;
         this.current_exp = current_exp;
@@ -33,8 +32,8 @@ public class KPlayer {
         this.level = level;
         this.kdr = kdr;
         this.coins = coins;
-        this.baseCurve = 30;
-        this.difficulty = 6;
+        this.baseCurve = 40;
+        this.difficulty = 8;
         this.maximumlevelCapacity = 101; // = 1-100 YOU MUST ADD A EXTRA 1 for example 81 will give you 80
 
         //Initialize the level structure

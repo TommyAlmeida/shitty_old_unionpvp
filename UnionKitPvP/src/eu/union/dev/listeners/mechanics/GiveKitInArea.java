@@ -27,7 +27,7 @@ public class GiveKitInArea implements Listener {
                 if (region.getId().equalsIgnoreCase("givekit")) {
                     if (!Util.getInstance().inPvP(p)) {
                         Util.getInstance().addPlayerPvP(p);
-                        p.sendMessage("§cYou lost the protection of the spawn!");
+                        p.sendMessage("§cYou lost the spawn protection!");
                     }
                     if (km.getKitByPlayer(p) == null){
                         p.getInventory().clear();

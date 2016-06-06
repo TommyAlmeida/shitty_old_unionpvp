@@ -2,10 +2,7 @@ package eu.union.dev;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
-import eu.union.dev.commands.KitCMD;
-import eu.union.dev.commands.ListKitsCMD;
-import eu.union.dev.commands.ReportCMD;
-import eu.union.dev.commands.StatsCMD;
+import eu.union.dev.commands.*;
 import eu.union.dev.commands.location.*;
 import eu.union.dev.commands.staff.*;
 import eu.union.dev.commands.youtubers.FakeCMD;
@@ -16,11 +13,12 @@ import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.engine.storage.Database;
 import eu.union.dev.kits.heroic.Madman;
 import eu.union.dev.kits.rare.Simba;
+import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
+import eu.union.dev.listeners.mechanics.BlockListener;
 import eu.union.dev.listeners.mechanics.GiveKitInArea;
 import eu.union.dev.listeners.mechanics.JumpPad;
 import eu.union.dev.listeners.mechanics.SoupListener;
-import eu.union.dev.listeners.mechanics.BlockListener;
 import eu.union.dev.listeners.menus.*;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -36,7 +34,7 @@ import java.util.Iterator;
 public class PvPMain extends JavaPlugin {
 
     private static PvPMain instance;
-    Database sql = new Database("root", "Be2Cj16M790EcI", "Profiles", "3306", "localhost");
+    Database sql = new Database("root", "Be2Cj16M790EcI", "KitPvP", "3306", "localhost");
     private Connection c;
 
     public static PvPMain getInstance() {
@@ -81,6 +79,7 @@ public class PvPMain extends JavaPlugin {
         getCommand("recon").setExecutor(new ReconnectCMD());
         getCommand("setfps").setExecutor(new SetFPS());
         getCommand("fps").setExecutor(new FPS());
+        getCommand("coins").setExecutor(new CoinsCMD());
         getCommand("setlavachallenge").setExecutor(new SetLavaChallenge());
         getCommand("lavachallenge").setExecutor(new LavaChallenge());
         getCommand("setclick").setExecutor(new SetClick());
@@ -94,6 +93,7 @@ public class PvPMain extends JavaPlugin {
         getCommand("cc").setExecutor(new ClearChatCMD());
         getCommand("admin").setExecutor(new AdminCMD());
         getCommand("inv").setExecutor(new InvCMD());
+        getCommand("ping").setExecutor(new PingCMD());
 
         /**
          * Kits with runnables (in seconds)

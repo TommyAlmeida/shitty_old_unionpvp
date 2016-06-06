@@ -5,7 +5,6 @@ import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.layouts.KitLayout;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

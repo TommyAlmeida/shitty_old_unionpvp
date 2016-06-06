@@ -1,8 +1,10 @@
 package eu.union.dev.listeners.menus;
 
+import eu.union.dev.PvPMain;
+import eu.union.dev.api.Icon;
+import eu.union.dev.commands.staff.AdminCMD;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,10 +15,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-
-import eu.union.dev.PvPMain;
-import eu.union.dev.api.Icon;
-import eu.union.dev.commands.staff.AdminCMD;
 
 public class MenuAdmin implements Listener{
 	

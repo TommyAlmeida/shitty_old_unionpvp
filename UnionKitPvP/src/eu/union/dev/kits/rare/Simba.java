@@ -1,21 +1,18 @@
 package eu.union.dev.kits.rare;
 
+import eu.union.dev.PvPMain;
+import eu.union.dev.api.Icon;
+import eu.union.dev.engine.Kit;
+import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import eu.union.dev.PvPMain;
-import eu.union.dev.api.Icon;
-import eu.union.dev.engine.Kit;
-import eu.union.dev.engine.managers.KitManager;
 
 public class Simba extends Kit{
 

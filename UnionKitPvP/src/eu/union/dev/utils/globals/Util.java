@@ -58,9 +58,10 @@ public class Util {
     }
 
     public void giveSoups(Player player) {
+        Icon icon = new Icon(Material.MUSHROOM_SOUP, "§cSoup");
 
         for (int i = 0; i < 50; i++) {
-            player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
+            player.getInventory().addItem(icon.build());
         }
 
         player.getInventory().setItem(13, new ItemStack(Material.RED_MUSHROOM, 64));
@@ -110,9 +111,9 @@ public class Util {
         Objective stats = board.registerNewObjective("stats", "dummy");
         stats.setDisplaySlot(DisplaySlot.SIDEBAR);
         int index = 11;
-        stats.setDisplayName("      §e§lUNION KITPVP      ");
+        stats.setDisplayName("      §b§lUnion §3§lKitPvP      ");
         stats.getScore("§a").setScore(index--);
-        stats.getScore("§e[INFO] ").setScore(index--);
+        stats.getScore("§3[INFO] ").setScore(index--);
         stats.getScore("§1").setScore(index--);
         stats.getScore("§2").setScore(index--);
         stats.getScore("§3").setScore(index--);
@@ -127,7 +128,7 @@ public class Util {
         board.registerNewTeam("deaths").addEntry("§2");
         board.registerNewTeam("coins").addEntry("§3");
         board.registerNewTeam("level").addEntry("§4");
-        board.registerNewTeam("kdr").addEntry("§5");
+        board.registerNewTeam("online").addEntry("§5");
         board.registerNewTeam("exp").addEntry("§6");
 
         new BukkitRunnable() {
@@ -136,17 +137,17 @@ public class Util {
             final Team coins = board.getTeam("coins");
             final Team level = board.getTeam("level");
             final Team exp = board.getTeam("exp");
-            final Team kdr = board.getTeam("kdr");
+            final Team online = board.getTeam("online");
 
             public void run() {
                 final KPlayer profile = PlayerManager.getPlayer(p.getUniqueId());
 
-                deaths.setPrefix("§fDeaths: §e" + profile.getDeaths());
-                kills.setPrefix("§fKills: §e" + profile.getKills());
-                coins.setPrefix("§fCoins: §e" + profile.getCoins());
-                exp.setPrefix("§fEXP: §e" + profile.getCurrentEXP());
-                level.setPrefix("§fLevel: §e" + profile.getLevel());
-                kdr.setPrefix("§fKDR: §e" + profile.getKDR());
+                deaths.setPrefix("§fDeaths: §b" + profile.getDeaths());
+                kills.setPrefix("§fKills: §b" + profile.getKills());
+                coins.setPrefix("§fCoins: §b" + profile.getCoins());
+                exp.setPrefix("§fEXP: §b" + profile.getCurrentEXP());
+                level.setPrefix("§fLevel: §b" + profile.getLevel());
+                online.setPrefix("§fKDR: §b" + Bukkit.getOnlinePlayers().size());
             }
         }.runTaskTimer(PvPMain.getInstance(), 0, 2 * 20);
 
@@ -181,7 +182,6 @@ public class Util {
         }
 
 
-
     }
 
     public void randomKit(Player p) {
@@ -197,18 +197,18 @@ public class Util {
     }
 
     public void addPlayerPvP(Player p) {
-        if (!inPvP(p)){
+        if (!inPvP(p)) {
             pvp.add(p.getUniqueId());
         }
     }
 
     public void removePlayerPvP(Player p) {
-        if (inPvP(p)){
+        if (inPvP(p)) {
             pvp.remove(p.getUniqueId());
         }
     }
 
-    public void addPermission(String playerName, String permission){
+    public void addPermission(String playerName, String permission) {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "/pex user " + playerName + " add " + permission);
     }
 }

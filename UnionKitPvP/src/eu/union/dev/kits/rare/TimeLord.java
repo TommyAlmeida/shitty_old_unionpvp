@@ -30,7 +30,7 @@ public class TimeLord extends Kit implements Listener {
     ArrayList<String> congelados = new ArrayList<>();
 
     public TimeLord() {
-        super("timelord", "unkit.timelord", Difficulty.LOW, Rarity.RARE, 7, new Icon(Material.WATCH), Category.FREEZE, 1000L);
+        super("timelord", "unkit.timelord", Difficulty.LOW, Rarity.RARE, 7, new Icon(Material.WATCH), Category.FREEZE, 2200L);
     }
 
     @Override
@@ -51,12 +51,14 @@ public class TimeLord extends Kit implements Listener {
                         final Player p2 = (Player) en;
                         if (Util.getInstance().inPvP(p2)){
                             congelados.add(p2.getName());
+                            p2.setAllowFlight(true);
                             p2.getWorld().playEffect(p2.getLocation(), Effect.SNOWBALL_BREAK, 10);
                             p2.getWorld().playSound(p2.getLocation(), Sound.WITHER_SHOOT, 10.0F, 1.0F);
                             Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                                 @Override
                                 public void run() {
                                     congelados.remove(p2.getName());
+                                    p2.setAllowFlight(false);
                                 }
                             }, 5 * 20);
                         }

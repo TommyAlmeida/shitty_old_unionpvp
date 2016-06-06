@@ -212,6 +212,12 @@ public class KitMenu implements Listener {
                 offerKit(p, kit);
                 e.getView().close();
                 e.setCancelled(true);
+            }else{
+                try {
+                    throw new Exception();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
             }
 
             switch (e.getSlot()) {

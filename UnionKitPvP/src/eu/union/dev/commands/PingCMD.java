@@ -1,13 +1,13 @@
-package eu.union.dev.commands.staff;
+package eu.union.dev.commands;
 
-import eu.union.dev.utils.globals.Perms;
-import org.bukkit.Bukkit;
+import net.minecraft.server.v1_8_R3.EntityPlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-public class InvCMD implements CommandExecutor {
+public class PingCMD implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -18,13 +18,16 @@ public class InvCMD implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if(Perms.isStaff(player)){
-            Player target = Bukkit.getPlayer(args[0]);
-
-            player.openInventory(target.getInventory());
-        }
+        player.sendMessage("§7Ping: §a" + getPing(player));
 
         return true;
 
+    }
+
+    private int getPing(Player p){
+        CraftPlayer cp = (CraftPlayer) p;
+        EntityPlayer entityPlayer = cp.getHandle();
+
+        return entityPlayer.ping;
     }
 }

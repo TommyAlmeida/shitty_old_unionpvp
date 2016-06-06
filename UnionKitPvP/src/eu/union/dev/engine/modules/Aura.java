@@ -1,8 +1,6 @@
 package eu.union.dev.engine.modules;
 
-import eu.union.dev.PvPMain;
 import eu.union.dev.utils.ParticleEffect;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 

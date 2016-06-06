@@ -7,7 +7,7 @@ import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Util;
-import org.apache.logging.log4j.core.net.Priority;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,7 +16,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -56,7 +55,7 @@ public class PlayerListeners implements Listener {
         if (kplayer != null) {
             kplayer.clearKillstreak();
         }
-        Bukkit.broadcastMessage("§7[§c-§7] §7" + player.getDisplayName());
+        Bukkit.broadcastMessage("§7(§c-§7) §7" + player.getDisplayName());
 
     }
 
@@ -78,9 +77,9 @@ public class PlayerListeners implements Listener {
         Util.getInstance().buildJoinIcons(p);
         Util.getInstance().buildScoreboard(p);
 
-        Bukkit.broadcastMessage("§7[§a+§7] §7" + p.getDisplayName());
-        Util.getInstance().removePlayerPvP(p);
-        p.sendMessage(Messages.PREFIX+" §aYou gained the protection of the spawn");
+        Bukkit.broadcastMessage("§7(§a+§7) §7" + p.getDisplayName());
+       // Util.getInstance().removePlayerPvP(p);
+        p.sendMessage(Messages.PREFIX+" §aYou gained the spawn protection");
     }
 
     @EventHandler
@@ -103,7 +102,7 @@ public class PlayerListeners implements Listener {
             }
             this.cooldown.put(e.getPlayer(), System.currentTimeMillis());
 
-            Bukkit.broadcastMessage("§7[§bLvl.§e" + kPlayer.getLevel() + "§7]" + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
+            Bukkit.broadcastMessage("§7[§bLvl.§e" + kPlayer.getLevel() + "§7]" + prefix +" §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
         } else {
             Bukkit.broadcastMessage("§7[§bLvl.§e" + kPlayer.getLevel() + "§7]" + prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
         }
@@ -144,7 +143,8 @@ public class PlayerListeners implements Listener {
             //Variaveis para decidir quanto motante o player recebe de 0 a X
             Random rand = new Random();
             int coins = rand.nextInt(7);
-            int exp = rand.nextInt(16);
+            int lostCoins = rand.nextInt(5);
+            int exp = rand.nextInt(25);
 
             //Caso o jogador nao existir no player object irá ser kickado para que possa reconectar
             if (kPlayer_killed == null || kPlayer_killer == null) {
@@ -167,8 +167,8 @@ public class PlayerListeners implements Listener {
                 }
 
                 if(killer.hasPermission("union.yt")){
-                    coins *= 2;
-                    exp *= 2;
+                    coins *= 1.5;
+                    exp *= 1.5;
                 }
 
                 kPlayer_killer.addCurrentEXP(exp);
@@ -176,12 +176,8 @@ public class PlayerListeners implements Listener {
 
                 kPlayer_killed.addDeaths(1);
                 kPlayer_killer.addKills(1);
-                //kPlayer_killer.addKillstreak(1);
+                kPlayer_killed.removeCoins(lostCoins);
             }
-
-            /*if(kPlayer_killer.getKillStreak() == 5){
-                Bukkit.broadcastMessage(Messages.PREFIX.toString() + " §e" + killer.getDisplayName() + " §7is domination §c" + killed.getDisplayName());
-            }*/
 
             //Previne que a mensagem default do minecraft seja mandada
             e.setDeathMessage(null);
@@ -191,8 +187,10 @@ public class PlayerListeners implements Listener {
             killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
 
             killer.sendMessage("§e(+" + coins + " coins) §a(+" + exp + " EXP) §cFor killing: §b" + killed.getDisplayName());
-            //Bukkit.broadcastMessage(Messages.PREFIX.toString() + " §e" + killer.getDisplayName() + " §7is in killstreak of §c" + kPlayer_killer.killstreak.get(killer.getUniqueId()));
-            killed.sendMessage("§cYou have been killed by §b" + killer.getDisplayName());
+            killed.sendMessage("§8[§aEconomy§8] §aYou have lost §6" + lostCoins + " §acoins.");
+            killed.sendMessage("§8[§aDeath§8] §b" + killer.getDisplayName() + " §7had §b" + killer.getHealth() + " §c❤ §7left.");
+            killed.sendMessage("§8[§aDeath§8] §7You were killed by §b" + killer.getDisplayName());
+            killed.sendMessage("§8[§aDeath§8] §b" + killer.getDisplayName() + " §7was using §b" + StringUtils.capitalize(km.getKitByPlayer(killer).getName()) + " §7kit.");
             kPlayer_killed.clearKillstreak();
 
 
@@ -255,15 +253,11 @@ public class PlayerListeners implements Listener {
             }
         }
 
-        System.out.println("Passou o death message");
-
         if(km.usingKit(killed)){
             km.removeKit(killed);
         }else{
             km.readyPlayer(killed);
         }
-
-        System.out.println("Removeu o kit");
 
 
         e.getDrops().removeIf(k ->
@@ -283,15 +277,12 @@ public class PlayerListeners implements Listener {
             @Override
             public void run() {
                 killed.teleport(loc);
-                System.out.println("Teleportou para o spawn");
                 Util.getInstance().buildJoinIcons(killed);
-                System.out.println("Deu os join items");
                 for (int i = 0; i < 10; i++) {
                     killed.setFireTicks(0);
                 }
-                System.out.println("Tirou o fire");
                 Util.getInstance().removePlayerPvP(killed);
-                killed.sendMessage(Messages.PREFIX+" §aYou gained the protection of the spawn");
+                killed.sendMessage(Messages.PREFIX+" §aYou gained spawn protection");
             }
 
         }.runTaskLater(PvPMain.getInstance(), 5);
@@ -299,7 +290,6 @@ public class PlayerListeners implements Listener {
         for (int i = 0; i < 10; i++) {
             killed.setFireTicks(0);
         }
-        System.out.println("Tirou o fire");
 
     }
 

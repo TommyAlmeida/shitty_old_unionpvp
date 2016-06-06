@@ -31,6 +31,7 @@ public class AutoMessage {
         messages.add("§7How do i get level? §cBy killing players.");
         messages.add("§7Bugs? Sorry we are in §c§lOPEN-BETA");
         messages.add("§7Want to be TMOD? Apply for it on: §chttps://goo.gl/ciYLSc");
+        messages.add("§7Kit rotation: §eIron Hook, Kangaroo and Balestra");
     }
 
     private void pushMessages() {

@@ -13,7 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.TimeUnit;
@@ -24,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class Rain extends Kit implements Listener{
 
     public Rain() {
-        super("rain", "unkit.rain", Difficulty.MEDIUM, Rarity.EPIC, 7, new Icon(Material.ARROW), Category.SPAWNER, 1000L);
+        super("rain", "unkit.rain", Difficulty.MEDIUM, Rarity.EPIC, 10, new Icon(Material.ARROW), Category.SPAWNER, 800L);
     }
 
     @Override

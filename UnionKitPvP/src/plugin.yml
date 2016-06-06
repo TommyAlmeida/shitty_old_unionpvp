@@ -17,6 +17,8 @@ commands:
   level:
   inv:
   fake:
+  coins:
+  ping:
   cc:
   admin:
   setfps:

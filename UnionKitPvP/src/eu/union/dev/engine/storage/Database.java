@@ -85,7 +85,7 @@ public class Database {
     public synchronized void setupProfiles() {
         try {
             PreparedStatement profiles = c
-                    .prepareStatement("CREATE TABLE IF NOT EXISTS `KitPvP`(`id` int(11) NOT NULL auto_increment,"
+                    .prepareStatement("CREATE TABLE IF NOT EXISTS `Profiles`(`id` int(11) NOT NULL auto_increment,"
                             + " `UUID` varchar(255) NOT NULL,"
                             + " `Kills` int(10) NOT NULL,"
                             + " `Deaths` int(10) NOT NULL,"
@@ -101,9 +101,6 @@ public class Database {
         }
     }
 
-    public synchronized void setupChallanges(){
-        try
-    }
 
     /**
      * Try to create a new player profile
@@ -113,7 +110,7 @@ public class Database {
      */
     public synchronized boolean createPlayerProfile(UUID uuid) {
         try {
-            String PvPMainStatement = "SELECT * FROM KitPvP WHERE UUID = '" + uuid + "';";
+            String PvPMainStatement = "SELECT * FROM Profiles WHERE UUID = '" + uuid + "';";
             ResultSet result = this.c.createStatement().executeQuery(PvPMainStatement);
             if (result.next()) {
                 PlayerManager.addPlayerProfile(new KPlayer(uuid, result.getInt("Kills"),
@@ -138,10 +135,10 @@ public class Database {
      */
     public synchronized boolean updatePlayerProfileSQL(KPlayer playerProfile) {
         try {
-            String PvPMainStatement = "SELECT * FROM KitPvP WHERE UUID = '" + playerProfile.getUuid() + "'";
+            String PvPMainStatement = "SELECT * FROM Profiles WHERE UUID = '" + playerProfile.getUuid() + "'";
             ResultSet result = this.c.createStatement().executeQuery(PvPMainStatement);
             if (result.next()) {
-                String PvPMainUpdate = "UPDATE KitPvP SET Kills = " + playerProfile.getKills()
+                String PvPMainUpdate = "UPDATE Profiles SET Kills = " + playerProfile.getKills()
                         + ", Deaths = " + playerProfile.getDeaths()
                         + ", Coins = " + playerProfile.getCoins()
                         + ", Level = " + playerProfile.getLevel()
@@ -151,7 +148,7 @@ public class Database {
                         + playerProfile.getUuid() + "';";
                 this.c.createStatement().executeUpdate(PvPMainUpdate);
             } else {
-                String PvPMainUpdate = "INSERT INTO KitPvP (UUID, Kills, Deaths, Coins, Level, KDR, EXP) VALUES ('"
+                String PvPMainUpdate = "INSERT INTO Profiles (UUID, Kills, Deaths, Coins, Level, KDR, EXP) VALUES ('"
                         + playerProfile.getUuid() + "', "
                         + playerProfile.getKills() + ", "
                         + playerProfile.getDeaths() + ", "
@@ -175,7 +172,7 @@ public class Database {
         switch (type) {
             case KILLS:
                 if (s != null) {
-                    ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Kills`");
+                    ResultSet rs = s.executeQuery("SELECT UUID FROM `Profiles` ORDER BY `Kills`");
                     rs.findColumn("PlayerName");
                     if (rs.last()) {
                         result.add(rs.getString("PlayerName"));
@@ -190,7 +187,7 @@ public class Database {
                 break;
             case DEATHS:
                 if (s != null) {
-                    ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Deaths`");
+                    ResultSet rs = s.executeQuery("SELECT UUID FROM `Profiles` ORDER BY `Deaths`");
                     rs.findColumn("PlayerName");
                     if (rs.last()) {
                         result.add(rs.getString("PlayerName"));
@@ -205,7 +202,7 @@ public class Database {
                 break;
             case COINS:
                 if (s != null) {
-                    ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Coins`");
+                    ResultSet rs = s.executeQuery("SELECT UUID FROM `Profiles` ORDER BY `Coins`");
                     rs.findColumn("PlayerName");
                     if (rs.last()) {
                         result.add(rs.getString("PlayerName"));
@@ -220,7 +217,7 @@ public class Database {
                 break;
             case LEVEL:
                 if (s != null) {
-                    ResultSet rs = s.executeQuery("SELECT UUID FROM `KitPvP` ORDER BY `Level`");
+                    ResultSet rs = s.executeQuery("SELECT UUID FROM `Profiles` ORDER BY `Level`");
                     rs.findColumn("PlayerName");
                     if (rs.last()) {
                         result.add(rs.getString("PlayerName"));

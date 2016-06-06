@@ -1,6 +1,5 @@
 package eu.union.dev.commands;
 
-import eu.union.dev.PvPMain;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.PlayerManager;
 import org.bukkit.command.Command;

@@ -40,11 +40,15 @@ public class JumpPad implements Listener {
 
     @EventHandler
     public void onFallDamage(EntityDamageEvent e) {
-        if (e.getEntity() instanceof Player &&
-                e.getCause() == EntityDamageEvent.DamageCause.FALL) {
-            if (players.contains(e.getEntity())) {
+        Player p = (Player) e.getEntity();
+        if (e.getEntity() instanceof Player && e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+            if (players.contains(p)) {
                 if(!e.isCancelled())
                     e.setCancelled(true);
+                players.remove(e.getEntity());
+                players.remove(e.getEntity());
+                players.remove(e.getEntity());
+                players.remove(e.getEntity());
                 players.remove(e.getEntity());
             }
         }

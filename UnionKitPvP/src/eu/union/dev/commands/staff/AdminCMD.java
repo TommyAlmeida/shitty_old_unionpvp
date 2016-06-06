@@ -17,7 +17,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -196,7 +195,7 @@ public class AdminCMD implements Listener, CommandExecutor {
                     public void run() {
                         onEnter(p);
                     }
-                }.runTaskLater(PvPMain.getInstance(), 16L);
+                }.runTaskLater(PvPMain.getInstance(), 20L);
             }
         }
     }

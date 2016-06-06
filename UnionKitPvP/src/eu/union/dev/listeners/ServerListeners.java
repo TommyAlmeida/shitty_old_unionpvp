@@ -1,7 +1,6 @@
 package eu.union.dev.listeners;
 
 import eu.union.dev.PvPMain;
-import eu.union.dev.api.Icon;
 import eu.union.dev.commands.staff.BuildCMD;
 import eu.union.dev.utils.globals.Perms;
 import org.bukkit.Bukkit;
@@ -16,7 +15,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;

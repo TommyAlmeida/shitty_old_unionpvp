@@ -5,7 +5,6 @@ import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
-import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -21,7 +20,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Fentis on 01/06/2016.

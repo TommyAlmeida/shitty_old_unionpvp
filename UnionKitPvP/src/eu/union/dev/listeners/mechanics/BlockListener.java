@@ -1,7 +1,10 @@
 package eu.union.dev.listeners.mechanics;
 
-import java.util.ArrayList;
-
+import eu.union.dev.PvPMain;
+import eu.union.dev.engine.KPlayer;
+import eu.union.dev.engine.managers.PlayerManager;
+import eu.union.dev.engine.storage.ConfigManager;
+import eu.union.dev.utils.globals.Messages;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -11,11 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import eu.union.dev.PvPMain;
-import eu.union.dev.engine.KPlayer;
-import eu.union.dev.engine.managers.PlayerManager;
-import eu.union.dev.engine.storage.ConfigManager;
-import eu.union.dev.utils.globals.Messages;
+import java.util.ArrayList;
 
 public class BlockListener implements Listener{
 	
