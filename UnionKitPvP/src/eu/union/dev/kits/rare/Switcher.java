@@ -4,6 +4,7 @@ import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -61,7 +62,8 @@ public class Switcher extends Kit implements Listener {
                 Snowball snowball = (Snowball) e.getDamager();
                 if ((snowball.getShooter() instanceof Player)) {
                     Player ps = (Player) snowball.getShooter();
-                    if (km.getKitAmIUsing(ps, "switcher")) {
+                    if (km.getKitAmIUsing(ps, "switcher") &&
+                            Util.getInstance().inPvP(ph)) {
                         Location psloc = ps.getLocation();
                         Location phloc = ph.getLocation();
                         ps.teleport(phloc);

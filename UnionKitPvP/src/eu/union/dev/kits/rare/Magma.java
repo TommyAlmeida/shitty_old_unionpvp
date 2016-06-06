@@ -3,6 +3,7 @@ package eu.union.dev.kits.rare;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -33,7 +34,7 @@ public class Magma extends Kit implements Listener {
             Player magma = (Player) e.getEntity();
             Player damager = (Player) e.getDamager();
             KitManager km = KitManager.getManager();
-            if (km.getKitAmIUsing(magma, "magma")) {
+            if (km.getKitAmIUsing(magma, "magma") && Util.getInstance().inPvP(damager)) {
                 int porcentagem = new Random().nextInt(100);
                 if (porcentagem <= 15) {
                     damager.setFireTicks((new Random().nextInt(3) + 3) * 20);

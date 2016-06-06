@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.HashMap;
@@ -62,6 +63,13 @@ public class CheckPoint extends Kit implements Listener {
                     }
                 }
             }
+        }
+    }
+    @EventHandler
+    public void ondeath(PlayerDeathEvent e){
+        Player p = e.getEntity();
+        if (locs.containsKey(p)){
+            locs.remove(p);
         }
     }
 }

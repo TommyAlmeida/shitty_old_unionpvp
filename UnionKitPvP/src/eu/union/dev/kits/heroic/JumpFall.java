@@ -75,7 +75,7 @@ public class JumpFall extends Kit implements Listener {
                     e.setDamage(4.0D);
                     for (Entity en : p.getNearbyEntities(3.0, 3.0, 3.0)) {
                         if (en instanceof Player) {
-                            if (!((Player) en).isSneaking()) {
+                            if (!((Player) en).isSneaking() && Util.getInstance().inPvP((Player)en)) {
                                 en.setVelocity(new Vector(0, 10, 0));
                             }
                         }

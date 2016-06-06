@@ -3,6 +3,7 @@ package eu.union.dev.kits.heroic;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -38,17 +39,19 @@ public class Stomper extends Kit implements Listener {
                     for (Entity ent : p.getNearbyEntities(5.0D,2.0D,5.0D)){
                         if (ent instanceof Player){
                             Player plr = (Player)ent;
-                            double damage = e.getDamage();
-                            if (plr.isSneaking()){//Se estive no shift
-                                plr.damage(6.0, p);//Leva dano baixo 3 corações
-                                plr.sendMessage(prefix + " §7You were stomped by: §b" + p.getName());
-                            }else{
-                                plr.damage(damage,p);//O kit Somper da o dano q ele tomou para o plr
-                                plr.sendMessage(prefix + " §7You were stomped by: §b" + p.getName());
+                            if (Util.getInstance().inPvP(plr)){
+                                double damage = e.getDamage();
+                                if (plr.isSneaking()){//Se estive no shift
+                                    plr.damage(6.0, p);//Leva dano baixo 3 corações
+                                    plr.sendMessage(prefix + " §7You were stomped by: §b" + p.getName());
+                                }else{
+                                    plr.damage(damage,p);//O kit Somper da o dano q ele tomou para o plr
+                                    plr.sendMessage(prefix + " §7You were stomped by: §b" + p.getName());
+                                }
                             }
-                            e.setDamage(4.0);
                         }
                     }
+                    e.setDamage(4.0);
                 }
             }
             return;

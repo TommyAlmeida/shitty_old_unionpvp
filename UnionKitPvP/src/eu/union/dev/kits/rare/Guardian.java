@@ -71,7 +71,7 @@ public class Guardian extends Kit implements Listener {
         if (e.getEntity() instanceof org.bukkit.entity.Guardian &&
                 e.getTarget() instanceof Player) {
             KitManager km = KitManager.getManager();
-            if (km.getKitAmIUsing((Player) e.getTarget(), "guardian")) {
+            if (km.getKitAmIUsing((Player) e.getTarget(), "guardian") ||!Util.getInstance().inPvP((Player)e.getTarget())) {
                 e.setCancelled(true);
             }
         }

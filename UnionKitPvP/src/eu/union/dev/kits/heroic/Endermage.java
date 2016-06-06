@@ -4,6 +4,7 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.api.Icon;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -50,7 +51,8 @@ public class Endermage extends Kit implements Listener {
                         if ((Math.abs(bl.getX() - p2.getLocation().getX()) < 3.0D) &&
                                 (Math.abs(bl.getZ() - p2.getLocation().getZ()) < 3.0D) &&
                                 (Math.abs(bl.getY() - p2.getLocation().getY()) >= 5.0D) &&
-                                !p2.canSee(p)) {
+                                !p2.canSee(p) &&
+                                Util.getInstance().inPvP(p2)) {
                             players.add(p2);
                             p2.setNoDamageTicks(5 * 20);
                             p2.teleport(bl.add(0.5D, 1.0D, 0.5D));
@@ -83,7 +85,8 @@ public class Endermage extends Kit implements Listener {
                                         if ((Math.abs(bl.getX() - p2.getLocation().getX()) < 3.0D) &&
                                                 (Math.abs(bl.getZ() - p2.getLocation().getZ()) < 3.0D) &&
                                                 (Math.abs(bl.getY() - p2.getLocation().getY()) >= 5.0D) &&
-                                                p2.canSee(p)) {
+                                                !p2.canSee(p) &&
+                                                Util.getInstance().inPvP(p2)) {
                                             status = false;
                                             players.add(p2);
                                             p2.setNoDamageTicks(5 * 20);

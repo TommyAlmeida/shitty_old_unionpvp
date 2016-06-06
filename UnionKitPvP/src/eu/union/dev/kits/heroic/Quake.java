@@ -6,6 +6,7 @@ import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.ParticleEffect;
+import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftFirework;
@@ -74,7 +75,7 @@ public class Quake extends Kit implements Listener{
                     }
                     for (Entity en : loc.getChunk().getEntities()){
                         if (en.getLocation().distance(loc) <=2.0){
-                            if (en instanceof Player && !uuid.contains(en.getUniqueId()) && en != p){
+                            if (en instanceof Player && !uuid.contains(en.getUniqueId()) && en != p && Util.getInstance().inPvP((Player)en)){
                                 status = true;
                                 uuid.add(en.getUniqueId());
                                 FireworkEffect ef = FireworkEffect.builder().flicker(false).withColor(Color.YELLOW).withFade(Color.ORANGE).build();

@@ -59,8 +59,10 @@ public class Repulsion extends Kit implements Listener {
                                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1.0F, 1.0F);
                                 for (Entity en : p.getNearbyEntities(5.0, 5.0, 5.0)) {
                                     if (en instanceof Player) {
-                                        Vector v = en.getLocation().toVector().subtract(p.getLocation().toVector()).normalize().multiply(i);
-                                        en.setVelocity(v);
+                                        if (Util.getInstance().inPvP((Player)en)){
+                                            Vector v = en.getLocation().toVector().subtract(p.getLocation().toVector()).normalize().multiply(i);
+                                            en.setVelocity(v);
+                                        }
                                     }
                                 }
                                 cancel();
@@ -71,8 +73,10 @@ public class Repulsion extends Kit implements Listener {
                         } else {
                             for (Entity en : p.getNearbyEntities(5.0, 5.0, 5.0)) {
                                 if (en instanceof Player) {
-                                    Vector v = en.getLocation().toVector().subtract(p.getLocation().toVector()).normalize().multiply(i);
-                                    en.setVelocity(v);
+                                    if (Util.getInstance().inPvP((Player)en)){
+                                        Vector v = en.getLocation().toVector().subtract(p.getLocation().toVector()).normalize().multiply(i);
+                                        en.setVelocity(v);
+                                    }
                                 }
                             }
                             cancel();

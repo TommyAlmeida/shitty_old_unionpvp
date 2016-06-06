@@ -1,5 +1,6 @@
 package eu.union.dev.kits.rare;
 
+import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -44,10 +45,12 @@ public class Simba extends Kit{
 						
 						Player p2 = (Player)around;
 						
-						// Start Looking if someone is near....
-						p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 900, 0));
-						p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 900, 0));
-						p.removePotionEffect(PotionEffectType.WEAKNESS);
+						if (Util.getInstance().inPvP(p2)){
+							// Start Looking if someone is near....
+							p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 900, 0));
+							p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 900, 0));
+							p.removePotionEffect(PotionEffectType.WEAKNESS);
+						}
 						
 					}else{
 						
