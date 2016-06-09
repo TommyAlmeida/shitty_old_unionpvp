@@ -1,6 +1,7 @@
 package eu.union.dev.commands.youtubers;
 
 import eu.union.dev.utils.globals.Messages;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,6 +40,7 @@ public class FakeCMD implements CommandExecutor {
 
         if(p.hasPermission("fake.use")){
             if(args.length == 0){
+                Bukkit.broadcastMessage("§7(§c-§7) §7" + p.getDisplayName());
                 originalName.put(p.getUniqueId(), p.getName());
                 p.setDisplayName(nicks[r.nextInt(nicks.length)]);
                 p.setPlayerListName(p.getDisplayName());

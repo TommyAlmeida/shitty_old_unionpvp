@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="kitpvp:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/kitpvp_jar</output-path>
+  <artifact type="jar" name="kitpvp.jar">
+    <output-path>$USER_HOME$/Desktop/Plugins/kitpvp</output-path>
     <root id="archive" name="kitpvp.jar">
       <element id="module-output" name="kitpvp" />
     </root>
