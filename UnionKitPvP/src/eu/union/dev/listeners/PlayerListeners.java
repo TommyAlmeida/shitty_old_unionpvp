@@ -6,6 +6,7 @@ import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.utils.globals.Messages;
+import eu.union.dev.utils.globals.Perms;
 import eu.union.dev.utils.globals.Util;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
@@ -77,7 +78,9 @@ public class PlayerListeners implements Listener {
         Util.getInstance().buildJoinIcons(p);
         Util.getInstance().buildScoreboard(p);
 
-        Bukkit.broadcastMessage("§7(§a+§7) §7" + p.getDisplayName());
+        if (!Perms.isStaff(p)){
+            Bukkit.broadcastMessage("§7(§a+§7) §7" + p.getDisplayName());
+        }
        // Util.getInstance().removePlayerPvP(p);
         p.sendMessage(Messages.PREFIX+" §aYou gained the spawn protection");
     }
