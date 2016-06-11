@@ -4,8 +4,10 @@ import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Util;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,7 +125,7 @@ public class KitManager {
                 playerKit.put(player, kit);
 
                 Util.getInstance().giveSoups(player);
-
+                player.setPlayerListName(player.getName() + "  §e§l" + StringUtils.capitalize(kit.getName()));
                 player.sendMessage(Messages.PREFIX.toString() + " §7You are using kit: §a" + kit.getName());
             }
         }

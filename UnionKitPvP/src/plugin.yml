@@ -18,6 +18,7 @@ commands:
   inv:
   fake:
   coins:
+  tag:
   ping:
   cc:
   admin:
