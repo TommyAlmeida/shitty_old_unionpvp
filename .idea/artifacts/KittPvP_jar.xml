@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="KittPvP:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/KittPvP_jar</output-path>
-    <root id="archive" name="KittPvP.jar">
-      <element id="module-output" name="KittPvP" />
-    </root>
-  </artifact>
-</component>
