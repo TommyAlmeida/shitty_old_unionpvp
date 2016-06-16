@@ -37,8 +37,7 @@ public class Portal extends Kit implements Listener {
     @Override
     public void applyKit(Player player) {
         Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
-        Weapon.giveWeapon(player, Weapon.PORTAL_BLUE, 1);
-        Weapon.giveWeapon(player, Weapon.PORTAL_ORANGE, 2);
+        Weapon.giveWeapon(player, Weapon.PORTAL_GUN, 1);
     }
 
     @SuppressWarnings("deprecation")
@@ -48,40 +47,38 @@ public class Portal extends Kit implements Listener {
         KitManager km = KitManager.getManager();
         if (km.getKitAmIUsing(p, "portal")) {
             Block bloc = p.getTargetBlock((HashSet<Byte>) null, 100);
-            if (p.getItemInHand().getType() == Material.DIAMOND_BARDING &&
-                    (e.getAction() == Action.RIGHT_CLICK_BLOCK ||
-                            e.getAction() == Action.RIGHT_CLICK_AIR)) {
-                e.setCancelled(true);
-                p.updateInventory();
-                if (bloc.getType() != Material.AIR && bloc.getRelative(BlockFace.UP).getType() == Material.AIR) {
-                    Block b = bloc.getRelative(BlockFace.UP);
-                    if (blue.containsKey(p)) {
-                        p.sendBlockChange(blue.get(p), Material.AIR, (byte) 0);
-                    }
-                    blue.put(p, b.getLocation().add(0.5, 0, 0.5));
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
-                        public void run() {
-                            p.sendBlockChange(b.getLocation(), Material.CARPET, (byte) 11);
+            if (p.getItemInHand().getType() == Material.IRON_BARDING){
+                if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK){
+                    e.setCancelled(true);
+                    p.updateInventory();
+                    if (bloc.getType() != Material.AIR && bloc.getRelative(BlockFace.UP).getType() == Material.AIR) {
+                        Block b = bloc.getRelative(BlockFace.UP);
+                        if (blue.containsKey(p)) {
+                            p.sendBlockChange(blue.get(p), Material.AIR, (byte) 0);
                         }
-                    }, 1);
+                        blue.put(p, b.getLocation().add(0.5, 0, 0.5));
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
+                            public void run() {
+                                p.sendBlockChange(b.getLocation(), Material.CARPET, (byte) 11);
+                            }
+                        }, 1);
+                    }
                 }
-            }
-            if (p.getItemInHand().getType() == Material.GOLD_BARDING &&
-                    (e.getAction() == Action.RIGHT_CLICK_BLOCK ||
-                            e.getAction() == Action.RIGHT_CLICK_AIR)) {
-                e.setCancelled(true);
-                p.updateInventory();
-                if (bloc.getType() != Material.AIR && bloc.getRelative(BlockFace.UP).getType() == Material.AIR) {
-                    Block b = bloc.getRelative(BlockFace.UP);
-                    if (orange.containsKey(p)) {
-                        p.sendBlockChange(orange.get(p), Material.AIR, (byte) 0);
-                    }
-                    orange.put(p, b.getLocation().add(0.5, 0, 0.5));
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
-                        public void run() {
-                            p.sendBlockChange(b.getLocation(), Material.CARPET, (byte) 1);
+                if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK){
+                    e.setCancelled(true);
+                    p.updateInventory();
+                    if (bloc.getType() != Material.AIR && bloc.getRelative(BlockFace.UP).getType() == Material.AIR) {
+                        Block b = bloc.getRelative(BlockFace.UP);
+                        if (orange.containsKey(p)) {
+                            p.sendBlockChange(orange.get(p), Material.AIR, (byte) 0);
                         }
-                    }, 1);
+                        orange.put(p, b.getLocation().add(0.5, 0, 0.5));
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
+                            public void run() {
+                                p.sendBlockChange(b.getLocation(), Material.CARPET, (byte) 1);
+                            }
+                        }, 1);
+                    }
                 }
             }
         }

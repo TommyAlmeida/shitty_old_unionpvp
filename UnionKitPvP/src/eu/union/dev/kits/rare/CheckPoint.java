@@ -43,10 +43,12 @@ public class CheckPoint extends Kit implements Listener {
         KitManager km = KitManager.getManager();
         if (km.getKitAmIUsing(p, "checkpoint")) {
             if (p.getItemInHand().getType() == Material.NETHER_FENCE) {
-                locs.put(p, p.getLocation());
-                p.sendMessage("§aPosition saved!");
                 e.setCancelled(true);
                 p.updateInventory();
+                if (Util.getInstance().inPvP(p)){
+                    locs.put(p, p.getLocation());
+                    p.sendMessage("§aPosition saved!");
+                }
             }
             if (p.getItemInHand().getType() == Material.FLOWER_POT_ITEM) {
                 e.setCancelled(true);

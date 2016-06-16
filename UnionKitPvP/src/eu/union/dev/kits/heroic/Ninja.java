@@ -50,7 +50,8 @@ public class Ninja extends Kit implements Listener {
         final Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
         if (km.getKitAmIUsing(p, "ninja") &&
-                ninja.containsKey(p)) {
+                ninja.containsKey(p) &&
+                Util.getInstance().inPvP(p)) {
             Player t = ninja.get(p);
             if (t != null && !t.isDead()) {
                 if (cooldown.tryUse(p)) {

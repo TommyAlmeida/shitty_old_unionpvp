@@ -5,6 +5,7 @@ import eu.union.dev.api.Icon;
 import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
+import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -45,7 +46,7 @@ public class Blink extends Kit implements Listener{
         KitManager km = KitManager.getManager();
         if (km.getKitAmIUsing(p,"blink") &&
                 p.getItemInHand().getType() == Material.NETHER_STAR &&
-                e.getAction() == Action.RIGHT_CLICK_AIR){
+                e.getAction() == Action.RIGHT_CLICK_AIR && Util.getInstance().inPvP(p)){
             if (!cd.contains(p)){
                 Block b = p.getTargetBlock((HashSet<Byte>)null, 5);
                 if (blink.containsKey(p)){

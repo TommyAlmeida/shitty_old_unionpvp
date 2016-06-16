@@ -39,7 +39,8 @@ public class Hulk extends Kit implements Listener {
             Player pux = (Player) e.getRightClicked();
             KitManager km = KitManager.getManager();
             if (km.getKitAmIUsing(hulk, "hulk") &&
-                    hulk.getItemInHand().getType() == Material.SLIME_BALL && Util.getInstance().inPvP(pux)) {
+                    hulk.getItemInHand().getType() == Material.SLIME_BALL &&
+                    Util.getInstance().inPvP(pux)) {
                 if (cooldown.tryUse(hulk)) {
                     if (hulk.getPassenger() == null &&
                             hulk.getVehicle() != pux &&

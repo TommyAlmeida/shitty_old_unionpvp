@@ -49,7 +49,7 @@ public class Flash extends Kit implements Listener {
             if (km.getKitAmIUsing(p, "flash")) {
                 e.setCancelled(true);
                 p.updateInventory();
-                if (cooldown.tryUse(p)) {
+                if (cooldown.tryUse(p) && Util.getInstance().inPvP(p)) {
                     Block b = p.getTargetBlock((HashSet<Byte>) null, 100);
                     if (b.getType() != Material.AIR &&
                             b.getRelative(BlockFace.UP).getType() == Material.AIR &&
