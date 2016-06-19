@@ -25,13 +25,12 @@ public class AutoMessage {
     private void setMessages() {
         messages.add("§7Suggestions? §6www.unionnetwork.eu");
         messages.add("Follow us on twitter: §bhttps://twitter.com/UnionMcNetwork");
-        messages.add("Every week §anew kits §7are added.");
+        messages.add("§6Union-HG §7is coming very soon :D");
         messages.add("Are you a youtuber? §6TAG minimum: §e1k subs");
         messages.add("§7A new §dgameplay §7experience!");
         messages.add("§7How do i get level? §cBy killing players.");
-        messages.add("§7Bugs? Sorry we are in §c§lOPEN-BETA");
+        messages.add("§7Bugs? Sorry we are in §cearly development stage!");
         messages.add("§7Want to be TMOD? Apply for it on: §chttps://goo.gl/ciYLSc");
-        messages.add("§7Kit rotation: §eIron Hook, Kangaroo and Balestra");
     }
 
     private void pushMessages() {

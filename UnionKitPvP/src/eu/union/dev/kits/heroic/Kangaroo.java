@@ -7,9 +7,11 @@ import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 public class Kangaroo extends Kit implements Listener {
 
     ArrayList<String> cd = new ArrayList<>();
+    ArrayList<Player> hit = new ArrayList<>();
 
     public Kangaroo() {
         super("kangaroo", "unkit.kangaroo", Difficulty.MEDIUM, Rarity.HEROIC, 1, new Icon(Material.FIREWORK), Category.SOCIAL, 1000L);
@@ -72,7 +75,7 @@ public class Kangaroo extends Kit implements Listener {
         }
     }
 
-    @EventHandler
+    /*@EventHandler
     public void canceldamagefall(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player) {
             KitManager km = KitManager.getManager();
@@ -80,6 +83,23 @@ public class Kangaroo extends Kit implements Listener {
                     e.getCause() == EntityDamageEvent.DamageCause.FALL) {
                 if (e.getDamage() > 7.0D) {
                     e.setDamage(7.0D);
+                }
+            }
+        }
+    }*/
+
+    @EventHandler
+    public void onHit(EntityDamageByEntityEvent event){
+        Entity e = event.getEntity();
+        KitManager km = KitManager.getManager();
+
+        if (e instanceof Player) {
+            Player player = (Player) e;
+            if (event.getEntity() instanceof Player
+                    && event.getCause() == EntityDamageEvent.DamageCause.FALL
+                    && km.getKitAmIUsing((Player) player, "kangaroo")) {
+                if (event.getDamage() >= 7) {
+                    event.setDamage(7);
                 }
             }
         }

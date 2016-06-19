@@ -35,7 +35,7 @@ public class PlayerListeners implements Listener {
 
     KitManager km = KitManager.getManager();
     private Map<Player, Long> cooldown = new HashMap<>();
-
+    private Map<Player, Integer> streaks = new HashMap<>();
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
@@ -56,6 +56,8 @@ public class PlayerListeners implements Listener {
         if (kplayer != null) {
             kplayer.clearKillstreak();
         }
+        streaks.put(player, 0);
+
         Bukkit.broadcastMessage("§7(§c-§7) §7" + player.getDisplayName());
 
     }
@@ -73,10 +75,10 @@ public class PlayerListeners implements Listener {
         Location loc = ConfigManager.getInstance().getLocation("Spawn");
         p.teleport(loc);
 
-        PlayerManager.getPlayer(p.getUniqueId()).clearKillstreak();
         Util.getInstance().readyPlayer(p);
         Util.getInstance().buildJoinIcons(p);
         Util.getInstance().buildScoreboard(p);
+        streaks.put(p, 0);
 
         if (!Perms.isStaff(p)){
             Bukkit.broadcastMessage("§7(§a+§7) §7" + p.getDisplayName());
@@ -186,14 +188,56 @@ public class PlayerListeners implements Listener {
             e.setDeathMessage(null);
 
             //Envia as mensagens de o jogador ter sido morto e de receber X Stats ou de ser morto
-            Bukkit.broadcastMessage("§a" + killed.getDisplayName() + " §chas been slained by §b" + killer.getDisplayName());
+            Bukkit.broadcastMessage("§b" + killed.getDisplayName() + " §8has been killed by §b" + killer.getDisplayName());
             killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
 
             killer.sendMessage("§e(+" + coins + " coins) §a(+" + exp + " EXP) §cFor killing: §b" + killed.getDisplayName());
+            streaks.put(killer, streaks.get(killer) + 1);
+
+            //Killstreaks
+            if(streaks.get(killer) == 5){
+                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c5");
+                kPlayer_killer.addCoins(6);
+                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 6 + " §acoins.");
+                Util.getInstance().launchRandomFirework(killer.getLocation());
+            }else if(streaks.get(killer) == 8){
+                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c8");
+                kPlayer_killer.addCoins(10);
+                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 10 + " §acoins.");
+                Util.getInstance().launchRandomFirework(killer.getLocation());
+            }else if(streaks.get(killer) == 10){
+                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c10");
+                kPlayer_killer.addCoins(20);
+                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 20 + " §acoins.");
+                Util.getInstance().launchRandomFirework(killer.getLocation());
+            }else if(streaks.get(killer) == 14){
+                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c14");
+                kPlayer_killer.addCoins(40);
+                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 40 + " §acoins.");
+                Util.getInstance().launchRandomFirework(killer.getLocation());
+            }else if(streaks.get(killer) == 18){
+                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c18");
+                kPlayer_killer.addCoins(70);
+                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 70 + " §acoins.");
+                Util.getInstance().launchRandomFirework(killer.getLocation());
+            }else if(streaks.get(killer) == 20){
+                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c20");
+                kPlayer_killer.addCoins(90);
+                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 90 + " §acoins.");
+                Util.getInstance().launchRandomFirework(killer.getLocation());
+            }else if(streaks.get(killer) == 23){
+                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c23");
+                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 160 + " §acoins.");
+                Util.getInstance().launchRandomFirework(killer.getLocation());
+                kPlayer_killer.addCoins(160);
+            }
+
             killed.sendMessage("§8[§aEconomy§8] §aYou have lost §6" + lostCoins + " §acoins.");
             killed.sendMessage("§8[§aDeath§8] §b" + killer.getDisplayName() + " §7had §b" + killer.getHealth() + " §c❤ §7left.");
             killed.sendMessage("§8[§aDeath§8] §7You were killed by §b" + killer.getDisplayName());
             killed.sendMessage("§8[§aDeath§8] §b" + killer.getDisplayName() + " §7was using §b" + StringUtils.capitalize(km.getKitByPlayer(killer).getName()) + " §7kit.");
+            streaks.put(killed, 0);
+
             kPlayer_killed.clearKillstreak();
 
 

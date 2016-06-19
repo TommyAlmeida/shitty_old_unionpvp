@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="unionkitpvp:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/unionkitpvp_jar</output-path>
-    <root id="archive" name="unionkitpvp.jar">
-      <element id="module-output" name="unionkitpvp" />
-    </root>
-  </artifact>
-</component>

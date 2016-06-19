@@ -7,12 +7,12 @@ import eu.union.dev.api.Packets;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.SkullType;
+import org.bukkit.*;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -210,5 +210,73 @@ public class Util {
 
     public void addPermission(String playerName, String permission) {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "/pex user " + playerName + " add " + permission);
+    }
+
+    //Make the arraylists for the colors and types
+    ArrayList<Color> colors = new ArrayList<Color>();
+    ArrayList<FireworkEffect.Type> types = new ArrayList<FireworkEffect.Type>();
+
+    //MAKE SURE YOU PUT THIS IN YOUR ONENABLE!!!
+    public void addColors() {
+//ADD ALL THE COLORS
+        colors.add(Color.WHITE);
+        colors.add(Color.PURPLE);
+        colors.add(Color.RED);
+        colors.add(Color.GREEN);
+        colors.add(Color.AQUA);
+        colors.add(Color.BLUE);
+        colors.add(Color.FUCHSIA);
+        colors.add(Color.GRAY);
+        colors.add(Color.LIME);
+        colors.add(Color.MAROON);
+        colors.add(Color.YELLOW);
+        colors.add(Color.SILVER);
+        colors.add(Color.TEAL);
+        colors.add(Color.ORANGE);
+        colors.add(Color.OLIVE);
+        colors.add(Color.NAVY);
+        colors.add(Color.BLACK);
+//I think I added them all not sure though
+    }
+
+    //MAKE SURE YOU PUT THIS IN YOUR ONENABLE!!!
+    public void addTypes() {
+//ADD ALL THE TYPES
+        types.add(FireworkEffect.Type.BURST);
+        types.add(FireworkEffect.Type.BALL);
+        types.add(FireworkEffect.Type.BALL_LARGE);
+        types.add(FireworkEffect.Type.CREEPER);
+        types.add(FireworkEffect.Type.STAR);
+//Added all the types
+    }
+
+//Getting a random firework
+
+    public FireworkEffect.Type getRandomType() {
+        int size = types.size();
+        Random ran = new Random();
+        FireworkEffect.Type theType = types.get(ran.nextInt(size));
+
+        return theType;
+    }
+
+//Getting a random COLOR!!!
+
+    public Color getRandomColor() {
+        int size = colors.size();
+        Random ran = new Random();
+        Color color = colors.get(ran.nextInt(size));
+
+        return color;
+    }
+
+    public void launchRandomFirework(Location loc) {
+        Firework fw = loc.getWorld().spawn(loc, Firework.class);
+        FireworkMeta fm = fw.getFireworkMeta();
+        fm.setPower(1);
+//Adding all the effects to the firework meta
+        fm.addEffects(FireworkEffect.builder().with(getRandomType()).withColor(getRandomColor()).build());
+//set the firework meta to the firework!
+        fw.setFireworkMeta(fm);
     }
 }

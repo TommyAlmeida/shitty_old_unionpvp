@@ -19,8 +19,8 @@ public class ReportCMD implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if (args.length == 0) {
-            player.sendMessage(Messages.PREFIX.toString() + " §cUse: /report <text, specify the player name");
+        if (args.length <= 1) {
+            player.sendMessage(Messages.PREFIX.toString() + " §cUse: /report <player> <text>");
             return true;
         }
 
@@ -29,15 +29,20 @@ public class ReportCMD implements CommandExecutor {
 		     sb.append(args[i]).append(" ");
 		 }
 
-		 String allArgs = sb.toString().trim();
+        String allArgs = sb.toString().trim();
+        Player target = Bukkit.getPlayer(args[0]);
 
-        if(allArgs.length() == 0) {
-            player.sendMessage(Messages.PREFIX.toString() + " §cYour report must have more than 10 characters");
+        if(!target.isOnline()){
+            player.sendMessage(Messages.PREFIX.toString() + " §cYou cant report an offline player");
             return true;
         }
 
         Bukkit.getOnlinePlayers().stream().filter(Perms::isStaff).forEach(online -> {
-            online.sendMessage(Messages.PREFIX.toString() + " §a§ Report from §b" + player.getName() + ": §c" + allArgs);
+            //online.sendMessage(Messages.PREFIX.toString() + " §a§ Report from §b" + player.getName() + ": " + " Player R" "§c" + allArgs);
+            online.sendMessage(Messages.PREFIX.toString() + "§7:: §3Report §7::");
+            online.sendMessage(Messages.PREFIX.toString() + "§3By: §r" + player.getName());
+            online.sendMessage(Messages.PREFIX.toString() + "§3Player reported: §f" + target.getName());
+            online.sendMessage(Messages.PREFIX.toString() + "§3Message: §c" + allArgs);
         });
 
         return true;

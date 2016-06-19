@@ -15,10 +15,7 @@ public enum Weapon {
     DEFAULT_SWORD(Material.WOOD_SWORD, "§aDefault Sword"),
     DEFAULT_BOW(Material.BOW, "§aDefault Bow"),
     DEFAULT_ARROW(Material.ARROW, "§aArrow"),
-    GRANDPA_STICK(Material.STICK, "§eGrandPa Cane"),
-    PULSAR_SHOCK(Material.MAGMA_CREAM, "§ePulsar Shock"),
     ICECUBE_ITEM(Material.PACKED_ICE, "§aIceCube Item"),
-    EXPLODER_TNT(Material.BOW, "§eExploder TnT"),
     ENDERMAGE_PORTAL(Material.ENDER_PORTAL_FRAME, "§5Endermage Portal"),
     FISHERMAN_ROD(Material.FISHING_ROD, "§eFisherman Rod"),
     SWITCHER_SNOW_BALL(Material.SNOW_BALL, "§7Switcher Ball"),
@@ -44,6 +41,8 @@ public enum Weapon {
     HEALER_ITEM(Material.RED_ROSE, "§cHealer Item"),
     BLINK_STAR(Material.NETHER_STAR, "§bBlink Star"),
     TRAVELER_ARROW(Material.ARROW, "§bTraveller Item"),
+    MINDFORCE_REMOTE(Material.STICK, "§cMind Remote"),
+    PYRO_FIREBALL(Material.FIREBALL, "§cPyro FireBall"),
     IRON_HOOK(Material.TRIPWIRE_HOOK, "§7Iron §8Hook");
 
 

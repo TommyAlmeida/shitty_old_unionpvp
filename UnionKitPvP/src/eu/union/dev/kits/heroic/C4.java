@@ -65,7 +65,7 @@ public class C4 extends Kit implements Listener {
                         if (en instanceof Player) {
                             if (((Player) en).canSee(p) &&
                                     Util.getInstance().inPvP(((Player) en))) {
-                                ((Player) en).damage(19 - en.getLocation().distance(loc), p);
+                                ((Player) en).damage(10 - en.getLocation().distance(loc), p);
                             }
                         }
                     }
