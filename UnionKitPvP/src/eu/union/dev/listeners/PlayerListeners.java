@@ -1,6 +1,7 @@
 package eu.union.dev.listeners;
 
 import eu.union.dev.PvPMain;
+import eu.union.dev.api.Hologram;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
@@ -9,10 +10,7 @@ import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Perms;
 import eu.union.dev.utils.globals.Util;
 import org.apache.commons.lang3.StringUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -24,6 +22,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
@@ -179,6 +178,23 @@ public class PlayerListeners implements Listener {
                 kPlayer_killer.addCurrentEXP(exp);
                 kPlayer_killer.addCoins(coins);
 
+                /*com.gmail.filoghost.holograms.api.Hologram hologram  = HolographicDisplaysAPI.createHologram(PvPMain.getInstance(),
+                        killer.getLocation().add(0, 2, 0),
+                        "§7+" + coins + "§b coins" + "  §7+" + exp + "§b EXP",
+                        "§7You killed: §b" + killed.getDisplayName()
+                );*/
+
+                final Hologram holo = new Hologram(ChatColor.RED + "+ " + exp + " EXP", ChatColor.GRAY + "[" + kPlayer_killer.getCurrentEXP() + "/" + kPlayer_killer.getNeededXP() + "]");
+                holo.show(killed, loc);
+                Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new BukkitRunnable() {
+
+                    @Override
+                    public void run() {
+                        holo.destroy();
+                    }
+                }, 20*3);
+
+
                 kPlayer_killed.addDeaths(1);
                 kPlayer_killer.addKills(1);
                 kPlayer_killed.removeCoins(lostCoins);
@@ -188,7 +204,7 @@ public class PlayerListeners implements Listener {
             e.setDeathMessage(null);
 
             //Envia as mensagens de o jogador ter sido morto e de receber X Stats ou de ser morto
-            Bukkit.broadcastMessage("§b" + killed.getDisplayName() + " §8has been killed by §b" + killer.getDisplayName());
+            Bukkit.broadcastMessage("§b" + killed.getDisplayName() + " §7has been killed by §b" + killer.getDisplayName());
             killer.playSound(killer.getLocation(), Sound.ORB_PICKUP, 10f, 10f);
 
             killer.sendMessage("§e(+" + coins + " coins) §a(+" + exp + " EXP) §cFor killing: §b" + killed.getDisplayName());
@@ -196,37 +212,37 @@ public class PlayerListeners implements Listener {
 
             //Killstreaks
             if(streaks.get(killer) == 5){
-                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c5");
+                Bukkit.broadcastMessage("§8[§aKill§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
                 kPlayer_killer.addCoins(6);
                 killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 6 + " §acoins.");
                 Util.getInstance().launchRandomFirework(killer.getLocation());
             }else if(streaks.get(killer) == 8){
-                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c8");
+                Bukkit.broadcastMessage("§8[§aKill§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
                 kPlayer_killer.addCoins(10);
                 killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 10 + " §acoins.");
                 Util.getInstance().launchRandomFirework(killer.getLocation());
             }else if(streaks.get(killer) == 10){
-                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c10");
+                Bukkit.broadcastMessage("§8[§aKill§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
                 kPlayer_killer.addCoins(20);
                 killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 20 + " §acoins.");
                 Util.getInstance().launchRandomFirework(killer.getLocation());
             }else if(streaks.get(killer) == 14){
-                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c14");
+                Bukkit.broadcastMessage("§8[§aKillStreak§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
                 kPlayer_killer.addCoins(40);
                 killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 40 + " §acoins.");
                 Util.getInstance().launchRandomFirework(killer.getLocation());
             }else if(streaks.get(killer) == 18){
-                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c18");
+                Bukkit.broadcastMessage("§8[§aKillStreak§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
                 kPlayer_killer.addCoins(70);
                 killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 70 + " §acoins.");
                 Util.getInstance().launchRandomFirework(killer.getLocation());
             }else if(streaks.get(killer) == 20){
-                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c20");
+                Bukkit.broadcastMessage("§8[§aKill§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
                 kPlayer_killer.addCoins(90);
                 killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 90 + " §acoins.");
                 Util.getInstance().launchRandomFirework(killer.getLocation());
             }else if(streaks.get(killer) == 23){
-                Bukkit.broadcastMessage("§e" + killed.getDisplayName() + " §cis in KillStreak of §c23");
+                Bukkit.broadcastMessage("§8[§aKill§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
                 killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 160 + " §acoins.");
                 Util.getInstance().launchRandomFirework(killer.getLocation());
                 kPlayer_killer.addCoins(160);
@@ -237,10 +253,6 @@ public class PlayerListeners implements Listener {
             killed.sendMessage("§8[§aDeath§8] §7You were killed by §b" + killer.getDisplayName());
             killed.sendMessage("§8[§aDeath§8] §b" + killer.getDisplayName() + " §7was using §b" + StringUtils.capitalize(km.getKitByPlayer(killer).getName()) + " §7kit.");
             streaks.put(killed, 0);
-
-            kPlayer_killed.clearKillstreak();
-
-
         }
 
         if ((killer == null) || (e.getEntity().getKiller() == null)) {

@@ -147,7 +147,7 @@ public class Util {
                 coins.setPrefix("§fCoins: §b" + profile.getCoins());
                 exp.setPrefix("§fEXP: §b" + profile.getCurrentEXP());
                 level.setPrefix("§fLevel: §b" + profile.getLevel());
-                online.setPrefix("§fKDR: §b" + Bukkit.getOnlinePlayers().size());
+                online.setPrefix("§fOnline: §b" + Bukkit.getOnlinePlayers().size());
             }
         }.runTaskTimer(PvPMain.getInstance(), 0, 2 * 20);
 

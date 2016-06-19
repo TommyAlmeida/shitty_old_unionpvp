@@ -158,6 +158,16 @@ public class ServerListeners implements Listener {
     }
 
 
+    @EventHandler
+    public void onLeafDecay(BlockFadeEvent e){
+        e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onLeavesDecay(LeavesDecayEvent e){
+        e.setCancelled(true);
+    }
+
     public void onCrop(PlayerInteractEvent event)
     {
         if(event.getAction() == Action.PHYSICAL)

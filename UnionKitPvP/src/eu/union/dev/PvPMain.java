@@ -75,7 +75,7 @@ public class PvPMain extends JavaPlugin {
         getCommand("build").setExecutor(new BuildCMD());
         getCommand("setspawn").setExecutor(new SetSpawn());
         getCommand("spawn").setExecutor(new Spawn());
-        getCommand("´tag").setExecutor(new TagCMD());
+        getCommand("tag").setExecutor(new TagCMD());
         getCommand("stats").setExecutor(new StatsCMD());
         getCommand("recon").setExecutor(new ReconnectCMD());
         getCommand("setfps").setExecutor(new SetFPS());
