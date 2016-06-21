@@ -3,7 +3,6 @@ package eu.union.dev.kits.beast;
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
-import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.ParticleEffect;
@@ -116,7 +115,7 @@ public class FireBoost extends Kit implements Listener {
         for (int i = 0; i < maxtime - time; i++) {
             msg = msg + type;
         }
-        Packets.getAPI().sendActionBar(p, msg);
+        //Packets.getAPI().sendActionBar(p, msg);
     }
 
     public void particles(final Location loc) {

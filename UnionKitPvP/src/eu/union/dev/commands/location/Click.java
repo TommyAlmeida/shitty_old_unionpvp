@@ -1,7 +1,6 @@
 package eu.union.dev.commands.location;
 
 import eu.union.dev.PvPMain;
-import eu.union.dev.api.Packets;
 import eu.union.dev.engine.storage.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -26,13 +25,13 @@ public class Click implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("click")) {
             Location loc = ConfigManager.getInstance().getLocation("Click");
 
-            Packets.getAPI().sendActionBar(p, "§9You need to wait §c" + 5 + " seconds §9to teleport.");
+            p.sendMessage("§9You need to wait §c" + 5 + " seconds §9to teleport.");
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                 @Override
                 public void run() {
                     p.teleport(loc);
-                    Packets.getAPI().sendTitle(p, "§aWelcome to Click", "", 3, 4, 5);
+                    p.sendMessage("§bWelcome to click warp.");
                     //Adicionar items ao player etc...
                 }
             }, 20 * 5);

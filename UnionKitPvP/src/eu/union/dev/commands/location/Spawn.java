@@ -1,7 +1,6 @@
 package eu.union.dev.commands.location;
 
 import eu.union.dev.PvPMain;
-import eu.union.dev.api.Packets;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.utils.globals.Messages;
@@ -26,7 +25,7 @@ public class Spawn implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("spawn")) {
             Location loc = ConfigManager.getInstance().getLocation("Spawn");
 
-            Packets.getAPI().sendActionBar(p, "§9You need to wait §c" + 5 + " seconds §9to teleport.");
+            p.sendMessage("§9You need to wait §c" + 5 + " seconds §9to teleport.");
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                 int seconds = 0;

@@ -1,7 +1,6 @@
 package eu.union.dev.commands.location;
 
 import eu.union.dev.PvPMain;
-import eu.union.dev.api.Packets;
 import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.listeners.mechanics.BlockListener;
 import eu.union.dev.utils.globals.Util;
@@ -28,13 +27,13 @@ public class LavaChallenge implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("lavachallenge")) {
             Location loc = ConfigManager.getInstance().getLocation("LavaChallenge");
 
-            Packets.getAPI().sendActionBar(p, "§9You need to wait §c" + 5 + " seconds §9to teleport.");
+            p.sendMessage("§9You need to wait §c" + 5 + " seconds §9to teleport.");
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new Runnable() {
                 @Override
                 public void run() {
                     p.teleport(loc);
-                    Packets.getAPI().sendTitle(p, "§aWelcome to LavaChallenge", "", 3, 4, 5);
+                    p.sendMessage("§aWelcome to Lava Challange");
                     p.getInventory().clear();
                     p.getInventory().setArmorContents(null);
                     Util.getInstance().giveSoups(p);

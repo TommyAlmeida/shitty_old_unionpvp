@@ -2,7 +2,6 @@ package eu.union.dev.kits.rare;
 
 import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
-import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.globals.Weapon;
@@ -44,7 +43,7 @@ public class Balestra extends Kit implements Listener {
                     a.setCritical(true);
                     a.setVelocity(a.getVelocity().multiply(2));
                 } else {
-                    Packets.getAPI().sendActionBar(p, "§a§lRELOADING...");
+                    p.sendMessage("§a§lRELOADING...");
                 }
             }
         }

@@ -23,7 +23,7 @@ public class CoinsCMD implements CommandExecutor {
         }
         Player target = Bukkit.getPlayer(args[0]);
         KPlayer kPlayer = PlayerManager.getPlayer(target.getUniqueId());
-        if (args.length < 1) {
+        if (args.length <= 1) {
             player.sendMessage(Messages.PREFIX.toString() + " §cUse: /coins <player> <amount>");
             return true;
         }

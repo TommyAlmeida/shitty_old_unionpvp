@@ -25,7 +25,7 @@ public class WarpsMenu implements Listener {
         }
 
         {
-            Icon umxum = new Icon(Material.BARRIER, "§7» §cSoon §7«");
+            Icon umxum = new Icon(Material.GLASS, "§7» §cSoon §7«");
             inv.setItem(10, umxum.build());
         }
 
@@ -40,7 +40,7 @@ public class WarpsMenu implements Listener {
         }
 
         {
-            Icon click = new Icon(Material.BARRIER, "§7» §cSoon §7«");
+            Icon click = new Icon(Material.GLASS, "§7» §cSoon §7«");
             inv.setItem(16, click.build());
         }
     }

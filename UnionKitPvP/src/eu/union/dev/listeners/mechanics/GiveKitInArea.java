@@ -1,5 +1,6 @@
 package eu.union.dev.listeners.mechanics;
 
+import com.sk89q.worldguard.bukkit.WGBukkit;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -22,9 +23,22 @@ public class GiveKitInArea implements Listener {
         Player p = e.getPlayer();
         KitManager km = KitManager.getManager();
         if (getWorldGuard() != null) {
-            ApplicableRegionSet set = getWorldGuard().getRegionManager(p.getWorld()).getApplicableRegions(p.getLocation());
+            /*ApplicableRegionSet set = getWorldGuard().getRegionManager(p.getWorld()).getApplicableRegions(p.getLocation());
             for (ProtectedRegion region : set) {
-                if (region.getId().equalsIgnoreCase("givekit")) {
+                if (region.getId().startsWith("givekit")) {
+                    if (!Util.getInstance().inPvP(p)) {
+                        Util.getInstance().addPlayerPvP(p);
+                        p.sendMessage("§cYou lost the spawn protection!");
+                    }
+                    if (km.getKitByPlayer(p) == null){
+                        p.getInventory().clear();
+                        Bukkit.dispatchCommand(p,"kit pvp");
+                    }
+                }
+            }*/
+
+            for(ProtectedRegion r : WGBukkit.getRegionManager(p.getWorld()).getApplicableRegions(p.getLocation())) {
+                if (r.getId().startsWith("givekit")) {
                     if (!Util.getInstance().inPvP(p)) {
                         Util.getInstance().addPlayerPvP(p);
                         p.sendMessage("§cYou lost the spawn protection!");

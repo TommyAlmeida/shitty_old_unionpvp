@@ -37,13 +37,12 @@ public class ReportCMD implements CommandExecutor {
             return true;
         }
 
-        Bukkit.getOnlinePlayers().stream().filter(Perms::isStaff).forEach(online -> {
-            //online.sendMessage(Messages.PREFIX.toString() + " §a§ Report from §b" + player.getName() + ": " + " Player R" "§c" + allArgs);
-            online.sendMessage(Messages.PREFIX.toString() + "§7:: §3Report §7::");
-            online.sendMessage(Messages.PREFIX.toString() + "§3By: §r" + player.getName());
-            online.sendMessage(Messages.PREFIX.toString() + "§3Player reported: §f" + target.getName());
-            online.sendMessage(Messages.PREFIX.toString() + "§3Message: §c" + allArgs);
-        });
+        for(Player online : Bukkit.getOnlinePlayers()){
+            online.sendMessage(Messages.PREFIX.toString() + " §7:: §bReport §7::");
+            online.sendMessage(Messages.PREFIX.toString() + " §bBy: §r" + player.getName());
+            online.sendMessage(Messages.PREFIX.toString() + " §bPlayer reported: §f" + target.getName());
+            online.sendMessage(Messages.PREFIX.toString() + " §bMessage: §c" + allArgs);
+        }
 
         return true;
 

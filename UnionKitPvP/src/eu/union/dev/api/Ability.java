@@ -1,6 +1,7 @@
 package eu.union.dev.api;
 
 
+import com.google.common.collect.Maps;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 public class Ability {
     private final int defaultCharges;
     private final long defaultDelay;
-    private Map<String, Status> playerStatus = new HashMap();
+    private Map<String, Status> playerStatus = Maps.newHashMap();
     public Ability(int defaultCharges) {
         this(defaultCharges, 5, TimeUnit.SECONDS);
     }

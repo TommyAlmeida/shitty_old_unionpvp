@@ -3,7 +3,6 @@ package eu.union.dev.kits.heroic;
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
-import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.globals.Util;
@@ -29,7 +28,7 @@ public class Repulsion extends Kit implements Listener {
     Ability cooldown = new Ability(1, 15, TimeUnit.SECONDS);
 
     public Repulsion() {
-        super("repulsion", "unkit.repulsion", Difficulty.LOW, Rarity.HEROIC, 4, new Icon(Material.SLIME_BLOCK), Category.SOCIAL, 1000L);
+        super("repulsion", "unkit.repulsion", Difficulty.LOW, Rarity.HEROIC, 4, new Icon(Material.SLIME_BALL), Category.SOCIAL, 1000L);
     }
 
     @Override
@@ -99,6 +98,6 @@ public class Repulsion extends Kit implements Listener {
         for (int i = 0; i < maxtime - time; i++) {
             msg = msg + type;
         }
-        Packets.getAPI().sendActionBar(p, msg);
+        //Packets.getAPI().sendActionBar(p, msg);
     }
 }

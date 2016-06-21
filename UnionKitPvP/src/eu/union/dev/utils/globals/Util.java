@@ -3,7 +3,6 @@ package eu.union.dev.utils.globals;
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
-import eu.union.dev.api.Packets;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
@@ -53,7 +52,6 @@ public class Util {
             player.sendMessage(Messages.PREFIX.toString() + " §7You're in cooldown of §c{time} §7seconds".replace("{time}", String.valueOf(cooldown.getStatus(player).getRemainingTime(timeUnit))));
         } else {
             player.sendMessage(Messages.PREFIX.toString() + " §7You're in cooldown of §c{time} §7seconds".replace("{time}", String.valueOf(cooldown.getStatus(player).getRemainingTime(timeUnit))));
-            Packets.getAPI().sendActionBar(player, "§7You're in cooldown of §c{time} §7seconds".replace("{time}", String.valueOf(cooldown.getStatus(player).getRemainingTime(timeUnit))));
         }
     }
 
@@ -110,7 +108,7 @@ public class Util {
 
         Objective stats = board.registerNewObjective("stats", "dummy");
         stats.setDisplaySlot(DisplaySlot.SIDEBAR);
-        int index = 11;
+        int index = 10;
         stats.setDisplayName("      §b§lUnion §3§lKitPvP      ");
         stats.getScore("§a").setScore(index--);
         stats.getScore("§3[INFO] ").setScore(index--);
@@ -119,16 +117,13 @@ public class Util {
         stats.getScore("§3").setScore(index--);
         stats.getScore("§4").setScore(index--);
         stats.getScore("§6").setScore(index--);
-        stats.getScore("§5").setScore(index--);
         stats.getScore("§b").setScore(index--);
         stats.getScore("§7/stats").setScore(index);
-        stats.getScore("§fwww.unionnetwork.eu").setScore(index);
 
         board.registerNewTeam("kills").addEntry("§1");
         board.registerNewTeam("deaths").addEntry("§2");
         board.registerNewTeam("coins").addEntry("§3");
         board.registerNewTeam("level").addEntry("§4");
-        board.registerNewTeam("online").addEntry("§5");
         board.registerNewTeam("exp").addEntry("§6");
 
         new BukkitRunnable() {
@@ -137,7 +132,6 @@ public class Util {
             final Team coins = board.getTeam("coins");
             final Team level = board.getTeam("level");
             final Team exp = board.getTeam("exp");
-            final Team online = board.getTeam("online");
 
             public void run() {
                 final KPlayer profile = PlayerManager.getPlayer(p.getUniqueId());
@@ -147,7 +141,6 @@ public class Util {
                 coins.setPrefix("§fCoins: §b" + profile.getCoins());
                 exp.setPrefix("§fEXP: §b" + profile.getCurrentEXP());
                 level.setPrefix("§fLevel: §b" + profile.getLevel());
-                online.setPrefix("§fOnline: §b" + Bukkit.getOnlinePlayers().size());
             }
         }.runTaskTimer(PvPMain.getInstance(), 0, 2 * 20);
 

@@ -1,7 +1,6 @@
 package eu.union.dev;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.reflect.ClassPath;
 import eu.union.dev.commands.*;
 import eu.union.dev.commands.location.*;
 import eu.union.dev.commands.staff.*;
@@ -20,9 +19,10 @@ import eu.union.dev.listeners.mechanics.GiveKitInArea;
 import eu.union.dev.listeners.mechanics.JumpPad;
 import eu.union.dev.listeners.mechanics.SoupListener;
 import eu.union.dev.listeners.menus.*;
+import net.minecraft.util.com.google.common.reflect.ClassPath;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_7_R4.CraftWorld;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -136,7 +136,7 @@ public class PvPMain extends JavaPlugin {
 
         try {
             /* Pega todas as classes do pacote de kits */
-            ImmutableSet<ClassPath.ClassInfo> kitClasses = ClassPath.from(getClassLoader())
+            net.minecraft.util.com.google.common.collect.ImmutableSet<ClassPath.ClassInfo> kitClasses = ClassPath.from(getClassLoader())
                     .getTopLevelClassesRecursive("eu.union.dev.kits");
 
             kitClasses.forEach(classInfo -> {

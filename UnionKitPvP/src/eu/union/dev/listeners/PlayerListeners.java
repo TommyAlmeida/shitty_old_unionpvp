@@ -1,7 +1,6 @@
 package eu.union.dev.listeners;
 
 import eu.union.dev.PvPMain;
-import eu.union.dev.api.Hologram;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
@@ -9,20 +8,17 @@ import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Perms;
 import eu.union.dev.utils.globals.Util;
-import org.apache.commons.lang3.StringUtils;
+import me.confuser.barapi.BarAPI;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
@@ -84,6 +80,28 @@ public class PlayerListeners implements Listener {
         }
        // Util.getInstance().removePlayerPvP(p);
         p.sendMessage(Messages.PREFIX+" §aYou gained the spawn protection");
+    }
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent e){
+        Player p = e.getPlayer();
+        KPlayer kPlayer = PlayerManager.getPlayer(p.getUniqueId());
+
+        if(kPlayer == null){
+            PvPMain.getInstance().getSQL().createPlayerProfile(p.getUniqueId());
+        }
+    }
+
+    @EventHandler
+    public void onKitShow(EntityDamageByEntityEvent e){
+        Player p = (Player) e.getDamager();
+        Player v = (Player) e.getEntity();
+
+        KitManager km = KitManager.getManager();
+
+        if(e.getDamager() instanceof Player || e.getEntity() instanceof Player){
+            //BarAPI.setMessage(p, "§b" + v.getDisplayName() + " §ris using the kit: §b" + km.getKitByPlayer(v).getName(), 10);
+        }
     }
 
     @EventHandler
@@ -178,23 +196,6 @@ public class PlayerListeners implements Listener {
                 kPlayer_killer.addCurrentEXP(exp);
                 kPlayer_killer.addCoins(coins);
 
-                /*com.gmail.filoghost.holograms.api.Hologram hologram  = HolographicDisplaysAPI.createHologram(PvPMain.getInstance(),
-                        killer.getLocation().add(0, 2, 0),
-                        "§7+" + coins + "§b coins" + "  §7+" + exp + "§b EXP",
-                        "§7You killed: §b" + killed.getDisplayName()
-                );*/
-
-                final Hologram holo = new Hologram(ChatColor.RED + "+ " + exp + " EXP", ChatColor.GRAY + "[" + kPlayer_killer.getCurrentEXP() + "/" + kPlayer_killer.getNeededXP() + "]");
-                holo.show(killed, loc);
-                Bukkit.getScheduler().scheduleSyncDelayedTask(PvPMain.getInstance(), new BukkitRunnable() {
-
-                    @Override
-                    public void run() {
-                        holo.destroy();
-                    }
-                }, 20*3);
-
-
                 kPlayer_killed.addDeaths(1);
                 kPlayer_killer.addKills(1);
                 kPlayer_killed.removeCoins(lostCoins);
@@ -251,7 +252,7 @@ public class PlayerListeners implements Listener {
             killed.sendMessage("§8[§aEconomy§8] §aYou have lost §6" + lostCoins + " §acoins.");
             killed.sendMessage("§8[§aDeath§8] §b" + killer.getDisplayName() + " §7had §b" + killer.getHealth() + " §c❤ §7left.");
             killed.sendMessage("§8[§aDeath§8] §7You were killed by §b" + killer.getDisplayName());
-            killed.sendMessage("§8[§aDeath§8] §b" + killer.getDisplayName() + " §7was using §b" + StringUtils.capitalize(km.getKitByPlayer(killer).getName()) + " §7kit.");
+            killed.sendMessage("§8[§aDeath§8] §b" + killer.getDisplayName() + " §7was using §b" + km.getKitByPlayer(killer).getName() + " §7kit.");
             streaks.put(killed, 0);
         }
 

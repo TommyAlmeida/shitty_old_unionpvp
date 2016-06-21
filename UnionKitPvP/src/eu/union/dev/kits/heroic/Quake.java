@@ -2,14 +2,13 @@ package eu.union.dev.kits.heroic;
 
 import eu.union.dev.api.Ability;
 import eu.union.dev.api.Icon;
-import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.ParticleEffect;
 import eu.union.dev.utils.globals.Util;
 import eu.union.dev.utils.globals.Weapon;
 import org.bukkit.*;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftFirework;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftFirework;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -91,7 +90,7 @@ public class Quake extends Kit implements Listener{
                     loc.subtract(x,y,z);
                 }
             }else{
-                Packets.getAPI().sendActionBar(p,"§aRELOADING...");
+                p.sendMessage("§aRELOADING...");
             }
         }
     }

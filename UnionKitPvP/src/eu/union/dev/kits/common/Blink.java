@@ -2,7 +2,6 @@ package eu.union.dev.kits.common;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Icon;
-import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.globals.Util;
@@ -106,7 +105,7 @@ public class Blink extends Kit implements Listener{
                     p.teleport(loc);
                 }
             }else{
-                Packets.getAPI().sendActionBar(p,"§aIn Cooldown!");
+                p.sendMessage("§9In Cooldown!");
             }
         }
     }

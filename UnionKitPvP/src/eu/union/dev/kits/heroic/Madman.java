@@ -2,7 +2,6 @@ package eu.union.dev.kits.heroic;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.api.Icon;
-import eu.union.dev.api.Packets;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.utils.globals.Util;
@@ -29,7 +28,7 @@ public class Madman extends Kit implements Listener {
     HashMap<String, Integer> vitimas = new HashMap<>();
 
     public Madman() {
-        super("madman", "unkit.madman", Difficulty.LOW, Rarity.HEROIC, 6, new Icon(Material.BARRIER), Category.CHARGER, 1000L);
+        super("madman", "unkit.madman", Difficulty.LOW, Rarity.HEROIC, 6, new Icon(Material.FIRE), Category.CHARGER, 1000L);
     }
 
     public void start() {//Time in Seconds
@@ -78,7 +77,7 @@ public class Madman extends Kit implements Listener {
                     if (ps.getLocation().distance(p.getLocation()) > 20) {
                         if (vitimas.containsKey(ps.getName())) {
                             vitimas.remove(ps.getName());
-                            Packets.getAPI().sendActionBar(ps, "§aMadman is too far away! The effect has passed!");
+                            //Packets.getAPI().sendActionBar(ps, "§aMadman is too far away! The effect has passed!");
                         }
                     }
                 }
@@ -100,7 +99,7 @@ public class Madman extends Kit implements Listener {
             msg = msg + type;
         }
         msg = msg + " §f" + timereal + "%";
-        Packets.getAPI().sendActionBar(p, msg);
+        //Packets.getAPI().sendActionBar(p, msg);
     }
 
     @EventHandler
