@@ -4,7 +4,7 @@ import eu.union.dev.PvPMain;
 import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.listeners.menus.MenuAdmin;
-import eu.union.dev.listeners.menus.StatsMenuAPI;
+import eu.union.dev.listeners.menus.submenus.StatsMenuAPI;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Perms;
 import eu.union.dev.utils.globals.Weapon;

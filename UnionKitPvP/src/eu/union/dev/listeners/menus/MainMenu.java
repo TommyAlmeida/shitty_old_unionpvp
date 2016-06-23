@@ -1,6 +1,7 @@
 package eu.union.dev.listeners.menus;
 
 import eu.union.dev.api.Icon;
+import eu.union.dev.listeners.menus.submenus.WarpsMenu;
 import eu.union.dev.utils.globals.Inv;
 import eu.union.dev.utils.globals.Messages;
 import org.bukkit.Bukkit;

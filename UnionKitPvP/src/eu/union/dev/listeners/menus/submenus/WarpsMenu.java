@@ -1,4 +1,4 @@
-package eu.union.dev.listeners.menus;
+package eu.union.dev.listeners.menus.submenus;
 
 import eu.union.dev.api.Icon;
 import eu.union.dev.utils.globals.Inv;

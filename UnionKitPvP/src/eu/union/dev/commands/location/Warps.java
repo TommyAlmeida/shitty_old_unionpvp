@@ -1,6 +1,6 @@
 package eu.union.dev.commands.location;
 
-import eu.union.dev.listeners.menus.WarpsMenu;
+import eu.union.dev.listeners.menus.submenus.WarpsMenu;
 import eu.union.dev.utils.globals.Inv;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

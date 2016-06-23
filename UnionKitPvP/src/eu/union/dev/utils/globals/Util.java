@@ -68,6 +68,19 @@ public class Util {
 
     }
 
+    public void giveMilk(Player player) {
+        Icon icon = new Icon(Material.MILK_BUCKET, "§cMilk");
+
+        for (int i = 0; i < 50; i++) {
+            player.getInventory().addItem(icon.build());
+        }
+
+        player.getInventory().setItem(13, new ItemStack(Material.LEATHER, 64));
+        player.getInventory().setItem(15, new ItemStack(Material.EGG, 64));
+        player.getInventory().setItem(14, new ItemStack(Material.BUCKET, 64));
+    }
+
+
     public void buildJoinIcons(Player player) {
         Inventory inv = player.getInventory();
         inv.clear();
@@ -248,6 +261,7 @@ public class Util {
     public FireworkEffect.Type getRandomType() {
         int size = types.size();
         Random ran = new Random();
+
         FireworkEffect.Type theType = types.get(ran.nextInt(size));
 
         return theType;
@@ -258,7 +272,13 @@ public class Util {
     public Color getRandomColor() {
         int size = colors.size();
         Random ran = new Random();
-        Color color = colors.get(ran.nextInt(size));
+        int rand = ran.nextInt(size);
+
+        if(rand <= 0){
+            return Color.AQUA;
+        }
+
+        Color color = colors.get(rand);
 
         return color;
     }

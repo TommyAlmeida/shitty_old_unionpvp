@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class Ninja extends Kit implements Listener {
 
     HashMap<Player, Player> ninja = new HashMap<>();
-    Ability cooldown = new Ability(1, 15, TimeUnit.SECONDS);
+    Ability cooldown = new Ability(1, 10, TimeUnit.SECONDS);
 
     public Ninja() {
         super("ninja", "unkit.ninja", Difficulty.LOW, Rarity.HEROIC, 3, new Icon(Material.COAL_BLOCK), Category.TELEPORT, 1000L);

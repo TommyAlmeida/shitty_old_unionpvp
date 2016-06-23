@@ -23,6 +23,9 @@ public class KPlayer {
     private ArrayList<Integer> levelcurve = new ArrayList<>();
     public HashMap<UUID, Integer> killstreak = new HashMap<>();
 
+    //Referencias non-sql
+    public boolean chat;
+
 
     public KPlayer(UUID uuid, int kills, int deaths, long coins, int level, int kdr, int current_exp) {
         this.uuid = uuid;
