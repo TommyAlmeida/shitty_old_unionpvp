@@ -122,7 +122,7 @@ public class Kangaroo extends Kit implements Listener {
                     hit.remove(p.getName());
                     p.sendMessage(Messages.PREFIX+" §aYou can use the kit!");
                 }
-            },15);
+            },8*20);
         }
     }
 }
