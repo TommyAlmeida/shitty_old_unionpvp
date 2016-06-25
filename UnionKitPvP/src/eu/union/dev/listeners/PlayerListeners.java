@@ -8,7 +8,6 @@ import eu.union.dev.engine.storage.ConfigManager;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Perms;
 import eu.union.dev.utils.globals.Util;
-import me.confuser.barapi.BarAPI;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,6 +19,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.inventivetalent.bossbar.BossBarAPI;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 import java.util.HashMap;
@@ -99,7 +99,8 @@ public class PlayerListeners implements Listener {
 
         KitManager km = KitManager.getManager();
 
-        if(e.getDamager() instanceof Player || e.getEntity() instanceof Player){
+        if(e.getDamager() instanceof Player && e.getEntity() instanceof Player){
+            BossBarAPI.setMessage(p, "§b" + v.getDisplayName() + " §ris using the kit: §b" + km.getKitByPlayer(v).getName(),100,3);
             //BarAPI.setMessage(p, "§b" + v.getDisplayName() + " §ris using the kit: §b" + km.getKitByPlayer(v).getName(), 10);
         }
     }

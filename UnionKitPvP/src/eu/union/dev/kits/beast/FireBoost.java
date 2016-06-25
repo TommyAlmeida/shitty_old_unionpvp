@@ -18,6 +18,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import org.inventivetalent.bossbar.BossBarAPI;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -115,6 +116,7 @@ public class FireBoost extends Kit implements Listener {
         for (int i = 0; i < maxtime - time; i++) {
             msg = msg + type;
         }
+        BossBarAPI.setMessage(p,msg,100,3);
         //Packets.getAPI().sendActionBar(p, msg);
     }
 

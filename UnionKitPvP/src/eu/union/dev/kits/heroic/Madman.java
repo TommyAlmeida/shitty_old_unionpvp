@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.inventivetalent.bossbar.BossBarAPI;
 
 import java.util.HashMap;
 
@@ -77,6 +78,7 @@ public class Madman extends Kit implements Listener {
                     if (ps.getLocation().distance(p.getLocation()) > 20) {
                         if (vitimas.containsKey(ps.getName())) {
                             vitimas.remove(ps.getName());
+                            BossBarAPI.setMessage(ps,"§aMadman is too far away! The effect has passed!",100,3);
                             //Packets.getAPI().sendActionBar(ps, "§aMadman is too far away! The effect has passed!");
                         }
                     }
@@ -99,6 +101,7 @@ public class Madman extends Kit implements Listener {
             msg = msg + type;
         }
         msg = msg + " §f" + timereal + "%";
+        BossBarAPI.setMessage(p,msg,100,3);
         //Packets.getAPI().sendActionBar(p, msg);
     }
 
