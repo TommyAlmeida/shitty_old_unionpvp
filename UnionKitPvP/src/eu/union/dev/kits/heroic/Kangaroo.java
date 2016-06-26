@@ -42,7 +42,8 @@ public class Kangaroo extends Kit implements Listener {
 
     @Override
     public void applyKit(Player player) {
-        Weapon.giveWeapon(player, Weapon.KANGAROO_FIREWORK);
+        Weapon.giveWeapon(player, Weapon.DEFAULT_SWORD);
+        Weapon.giveWeapon(player, Weapon.KANGAROO_FIREWORK,1);
     }
 
     @EventHandler
@@ -57,12 +58,12 @@ public class Kangaroo extends Kit implements Listener {
                     if (!hit.contains(p.getName())){
                         cd.add(p.getName());
                         if (!p.isSneaking()) {
-                            p.setFallDistance(-1.0F);
+                            p.setFallDistance(-3.0F);
                             v.multiply(0.5F);
                             v.setY(1.0D);
                             p.setVelocity(v);
                         } else {
-                            p.setFallDistance(-1.0F);
+                            p.setFallDistance(-3.0F);
                             v.multiply(1.5F);
                             v.setY(0.5D);
                             p.setVelocity(v);
@@ -103,7 +104,7 @@ public class Kangaroo extends Kit implements Listener {
     public void ondamage(EntityDamageByEntityEvent e){
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player){
             Player p1 = (Player)e.getEntity();
-            Player p2 = (Player)e.getEntity();
+            Player p2 = (Player)e.getDamager();
             KitManager km = KitManager.getManager();
             if (km.getKitAmIUsing(p1,"kangaroo")){
                 onhit(p1);

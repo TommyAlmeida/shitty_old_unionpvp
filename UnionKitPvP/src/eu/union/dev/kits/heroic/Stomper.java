@@ -79,7 +79,7 @@ public class Stomper extends Kit implements Listener {
             if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK){
                 if(item.getItemMeta().getDisplayName() == "§bStomper Jump" && item.getType() == Material.FEATHER){
                     if(cd.tryUse(p)){
-                        p.setVelocity(new Vector(0,p.getLocation().getY() + 7, 0));
+                        p.setVelocity(new Vector(0,4,0));
                     }else{
                        Util.getInstance().sendCooldownMessage(p, cd, TimeUnit.SECONDS, true);
                     }
