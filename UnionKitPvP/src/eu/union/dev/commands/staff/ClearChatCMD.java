@@ -18,7 +18,7 @@ public class ClearChatCMD implements CommandExecutor {
 
         if(Perms.isStaff(p)){
             for(int i = 0; i < 100; i++){
-                Bukkit.broadcastMessage(" ");
+                Bukkit.broadcastMessage("§7 ");
             }
             Bukkit.broadcastMessage("§aChat has been cleared by " + p.getName());
         }
