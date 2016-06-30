@@ -48,13 +48,10 @@ public class PlayerListeners implements Listener {
         }
 
         e.setQuitMessage(null);
-        if (kplayer != null) {
-            kplayer.clearKillstreak();
-        }
+
         streaks.put(player, 0);
 
         Bukkit.broadcastMessage("§7(§c-§7) §7" + player.getDisplayName());
-
     }
 
     @EventHandler
@@ -92,18 +89,6 @@ public class PlayerListeners implements Listener {
         }
     }
 
-    @EventHandler
-    public void onKitShow(EntityDamageByEntityEvent e){
-        Player p = (Player) e.getDamager();
-        Player v = (Player) e.getEntity();
-
-        KitManager km = KitManager.getManager();
-
-        if(e.getDamager() instanceof Player && e.getEntity() instanceof Player){
-            BossBarAPI.setMessage(p, "§b" + v.getDisplayName() + " §ris using the kit: §b" + km.getKitByPlayer(v).getName(),100,3);
-            //BarAPI.setMessage(p, "§b" + v.getDisplayName() + " §ris using the kit: §b" + km.getKitByPlayer(v).getName(), 10);
-        }
-    }
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
@@ -167,6 +152,7 @@ public class PlayerListeners implements Listener {
             Random rand = new Random();
             int coins = rand.nextInt(7);
             int lostCoins = rand.nextInt(5);
+            int lostEXP = rand.nextInt(56);
             int exp = rand.nextInt(25);
 
             //Caso o jogador nao existir no player object irá ser kickado para que possa reconectar
@@ -189,10 +175,11 @@ public class PlayerListeners implements Listener {
                     exp = rand.nextInt(47);
                 }
 
-                if(killer.hasPermission("union.yt")){
-                    coins *= 1.5;
-                    exp *= 1.5;
+                if(kPlayer_killed.getMultiplier() > 0){
+                    int multiplier = kPlayer_killed.getMultiplier();
+                    coins *= multiplier;
                 }
+
 
                 kPlayer_killer.addCurrentEXP(exp);
                 kPlayer_killer.addCoins(coins);
@@ -200,6 +187,7 @@ public class PlayerListeners implements Listener {
                 kPlayer_killed.addDeaths(1);
                 kPlayer_killer.addKills(1);
                 kPlayer_killed.removeCoins(lostCoins);
+                kPlayer_killed.subtractEXP(lostEXP);
             }
 
             //Previne que a mensagem default do minecraft seja mandada
@@ -213,45 +201,35 @@ public class PlayerListeners implements Listener {
             streaks.put(killer, streaks.get(killer) + 1);
 
             //Killstreaks
-            if(streaks.get(killer) == 5){
-                Bukkit.broadcastMessage("§8[§aKill§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
-                kPlayer_killer.addCoins(6);
-                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 6 + " §acoins.");
-                Util.getInstance().launchRandomFirework(killer.getLocation());
-            }else if(streaks.get(killer) == 8){
-                Bukkit.broadcastMessage("§8[§aKill§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
-                kPlayer_killer.addCoins(10);
-                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 10 + " §acoins.");
-                Util.getInstance().launchRandomFirework(killer.getLocation());
-            }else if(streaks.get(killer) == 10){
-                Bukkit.broadcastMessage("§8[§aKill§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
-                kPlayer_killer.addCoins(20);
-                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 20 + " §acoins.");
-                Util.getInstance().launchRandomFirework(killer.getLocation());
-            }else if(streaks.get(killer) == 14){
-                Bukkit.broadcastMessage("§8[§aKillStreak§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
-                kPlayer_killer.addCoins(40);
-                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 40 + " §acoins.");
-                Util.getInstance().launchRandomFirework(killer.getLocation());
-            }else if(streaks.get(killer) == 18){
-                Bukkit.broadcastMessage("§8[§aKillStreak§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
-                kPlayer_killer.addCoins(70);
-                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 70 + " §acoins.");
-                Util.getInstance().launchRandomFirework(killer.getLocation());
-            }else if(streaks.get(killer) == 20){
-                Bukkit.broadcastMessage("§8[§aKill§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
-                kPlayer_killer.addCoins(90);
-                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 90 + " §acoins.");
-                Util.getInstance().launchRandomFirework(killer.getLocation());
-            }else if(streaks.get(killer) == 23){
-                Bukkit.broadcastMessage("§8[§aKill§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
-                killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + 160 + " §acoins.");
-                Util.getInstance().launchRandomFirework(killer.getLocation());
-                kPlayer_killer.addCoins(160);
+            switch (streaks.get(killer)){
+                case 5:
+                    killstreakMessage(kPlayer_killer, killer, 6);
+                    break;
+                case 8:
+                    killstreakMessage(kPlayer_killer, killer, 10);
+                    break;
+                case 10:
+                    killstreakMessage(kPlayer_killer, killer, 20);
+                    break;
+                case 14:
+                    killstreakMessage(kPlayer_killer, killer, 40);
+                    break;
+                case 18:
+                    killstreakMessage(kPlayer_killer, killer, 70);
+                    break;
+                case 20:
+                    killstreakMessage(kPlayer_killer, killer, 90);
+                    break;
+                case 23:
+                    killstreakMessage(kPlayer_killer, killer, 140);
+                    break;
+                default:
+                    break;
             }
 
-            killed.sendMessage("§8[§aEconomy§8] §aYou have lost §6" + lostCoins + " §acoins.");
-            killed.sendMessage("§8[§aDeath§8] §b" + killer.getDisplayName() + " §7had §b" + killer.getHealth() + " §c❤ §7left.");
+
+            killed.sendMessage("§8[§aDeath§8] §7-" + lostCoins + " §bcoins §7and §b-" + lostEXP + " §bEXP");
+            killed.sendMessage("§8[§aDeath§8] §b" + killer.getDisplayName() + " §7had §b" + (int) killer.getHealth() + " §c❤ §7left.");
             killed.sendMessage("§8[§aDeath§8] §7You were killed by §b" + killer.getDisplayName());
             killed.sendMessage("§8[§aDeath§8] §b" + killer.getDisplayName() + " §7was using §b" + km.getKitByPlayer(killer).getName() + " §7kit.");
             streaks.put(killed, 0);
@@ -259,58 +237,71 @@ public class PlayerListeners implements Listener {
 
         if ((killer == null) || (e.getEntity().getKiller() == null)) {
             EntityDamageEvent.DamageCause damage = e.getEntity().getLastDamageCause().getCause();
-            if (damage == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION ||
-                    damage == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by explosion");
-                e.setDeathMessage(null);
-            }
-            if (damage == EntityDamageEvent.DamageCause.LAVA) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by lava");
-                e.setDeathMessage(null);
-            }
-            if (damage == EntityDamageEvent.DamageCause.FALL) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c thought it was a bird and died");
-                e.setDeathMessage(null);
-            }
-            if (damage == EntityDamageEvent.DamageCause.FIRE ||
-                    damage == EntityDamageEvent.DamageCause.FIRE_TICK) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by fire");
-                e.setDeathMessage(null);
-            }
-            if (damage == EntityDamageEvent.DamageCause.MAGIC) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by magic");
-                e.setDeathMessage(null);
-            }
-            if (damage == EntityDamageEvent.DamageCause.DROWNING) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c thought it was a fish and died");
-                e.setDeathMessage(null);
-            }
-            if (damage == EntityDamageEvent.DamageCause.WITHER) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by wither");
-                e.setDeathMessage(null);
-            }if (damage == EntityDamageEvent.DamageCause.POISON) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by poison");
-                e.setDeathMessage(null);
-            }
-            if (damage == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by falling block");
-                e.setDeathMessage(null);
-            }
-            if (damage == EntityDamageEvent.DamageCause.LIGHTNING) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by lightning");
-                e.setDeathMessage(null);
-            }
-            if (damage == EntityDamageEvent.DamageCause.PROJECTILE) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by projectile");
-                e.setDeathMessage(null);
-            }
-            if (damage == EntityDamageEvent.DamageCause.VOID) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by void");
-                e.setDeathMessage(null);
-            }
-            if (damage == EntityDamageEvent.DamageCause.SUICIDE) {
-                Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by suicide");
-                e.setDeathMessage(null);
+            switch (damage){
+                case PROJECTILE:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by projectile");
+                    e.setDeathMessage(null);
+                    break;
+                case SUFFOCATION:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c thought he was a fish and died");
+                    e.setDeathMessage(null);
+                    break;
+                case FALL:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c thought he was a bird and died");
+                    e.setDeathMessage(null);
+                    break;
+                case FIRE:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by fire");
+                    e.setDeathMessage(null);
+                    break;
+                case FIRE_TICK:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by fire");
+                    e.setDeathMessage(null);
+                    break;
+                case LAVA:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by lava");
+                    e.setDeathMessage(null);
+                    break;
+                case DROWNING:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c thought it was a fish and died");
+                    e.setDeathMessage(null);
+                    break;
+                case BLOCK_EXPLOSION:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by explosion");
+                    e.setDeathMessage(null);
+                    break;
+                case ENTITY_EXPLOSION:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by explosion");
+                    e.setDeathMessage(null);
+                    break;
+                case VOID:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by void");
+                    e.setDeathMessage(null);
+                    break;
+                case LIGHTNING:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by lightning");
+                    e.setDeathMessage(null);
+                    break;
+                case SUICIDE:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by suicide");
+                    e.setDeathMessage(null);
+                    break;
+                case POISON:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by poison");
+                    e.setDeathMessage(null);
+                    break;
+                case MAGIC:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by magic");
+                    e.setDeathMessage(null);
+                    break;
+                case WITHER:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by wither");
+                    e.setDeathMessage(null);
+                    break;
+                case FALLING_BLOCK:
+                    Bukkit.broadcastMessage("§a" + killed.getName() + "§c has died by falling block");
+                    e.setDeathMessage(null);
+                    break;
             }
         }
 
@@ -362,6 +353,13 @@ public class PlayerListeners implements Listener {
                 e.setCancelled(true);
             }
         }
+    }
+
+    private void killstreakMessage(KPlayer kPlayer_killer, Player killer, int coins){
+        Bukkit.broadcastMessage("§8[§aKill§8] §b" + killer.getDisplayName() + " §6is in KillStreak of §b5");
+        kPlayer_killer.addCoins(coins);
+        killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + coins + " §acoins.");
+        Util.getInstance().launchRandomFirework(killer.getLocation());
     }
 
 }

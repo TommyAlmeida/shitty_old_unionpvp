@@ -2,7 +2,6 @@ package eu.union.dev.commands.location;
 
 import eu.union.dev.PvPMain;
 import eu.union.dev.engine.storage.ConfigManager;
-import eu.union.dev.listeners.mechanics.BlockListener;
 import eu.union.dev.utils.globals.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -37,7 +36,6 @@ public class LavaChallenge implements CommandExecutor {
                     p.getInventory().clear();
                     p.getInventory().setArmorContents(null);
                     Util.getInstance().giveSoups(p);
-                    BlockListener.lc.add(p.getName());
                     Util.getInstance().addPlayerPvP(p);
                     p.sendMessage("§cYou lost the spawn protection!");
                 }

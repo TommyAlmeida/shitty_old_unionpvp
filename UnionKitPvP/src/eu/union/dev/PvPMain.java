@@ -13,10 +13,7 @@ import eu.union.dev.kits.heroic.Madman;
 import eu.union.dev.kits.rare.Simba;
 import eu.union.dev.listeners.PlayerListeners;
 import eu.union.dev.listeners.ServerListeners;
-import eu.union.dev.listeners.mechanics.BlockListener;
-import eu.union.dev.listeners.mechanics.GiveKitInArea;
-import eu.union.dev.listeners.mechanics.JumpPad;
-import eu.union.dev.listeners.mechanics.SoupListener;
+import eu.union.dev.listeners.mechanics.*;
 import eu.union.dev.listeners.menus.*;
 import eu.union.dev.listeners.menus.submenus.StatsMenu;
 import eu.union.dev.listeners.menus.submenus.StatsMenuAPI;
@@ -68,7 +65,6 @@ public class PvPMain extends JavaPlugin {
         pm.registerEvents(new StatsMenuAPI(), this);
         pm.registerEvents(new AdminCMD(), this);
         pm.registerEvents(new JumpPad(), this);
-        pm.registerEvents(new BlockListener(), this);
 
         //Commands
         getCommand("kit").setExecutor(new KitCMD());

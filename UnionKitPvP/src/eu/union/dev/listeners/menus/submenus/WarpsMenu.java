@@ -40,7 +40,7 @@ public class WarpsMenu implements Listener {
         }
 
         {
-            Icon click = new Icon(Material.GLASS, "§7» §cSoon §7«");
+            Icon click = new Icon(Material.POTION, "§7» §cPotPvP §7«");
             inv.setItem(16, click.build());
         }
     }
@@ -57,6 +57,7 @@ public class WarpsMenu implements Listener {
             if (item.getType() == Material.STAINED_GLASS_PANE) {
                 e.setCancelled(true);
             }
+
             switch (e.getSlot()) {
                 case 10:
                     e.setCancelled(true);
@@ -76,7 +77,7 @@ public class WarpsMenu implements Listener {
                 case 16:
                     e.setCancelled(true);
                     e.getView().close();
-                    //Bukkit.dispatchCommand(p, "click");
+                    Bukkit.dispatchCommand(p, "potpvp");
                     break;
             }
         }
