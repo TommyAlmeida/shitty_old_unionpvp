@@ -1,7 +1,5 @@
 package eu.union.dev.listeners;
 
-import eu.union.dev.PvPMain;
-import eu.union.dev.utils.globals.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,21 +10,20 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-import java.util.HashMap;
+import pt.josegamerpt.unionhub.Main;
+import pt.josegamerpt.unionhub.config.ConfigYML;
+import pt.josegamerpt.unionhub.utils.Color;
 
 public class MysteryBox implements Listener {
 
-    private HashMap<String, Boolean> mysterycase = new HashMap<String, Boolean>();
     private int TimerID;
-
 
     @EventHandler
     public void onOpenCase(PlayerInteractEvent event) {
         Block b = event.getClickedBlock();
-        Player player = event.getPlayer();
+        Player p = event.getPlayer();
 
         if (b == null) {
             return;
@@ -40,27 +37,28 @@ public class MysteryBox implements Listener {
             return;
         }
 
-        if (mysterycase.get("USING")) {
-
-            player.sendMessage(Messages.PREFIX.toString() + " §7The case is alread in use. Wait a few moments.");
-
+        if (State.getState(b) == 1) {
+            p.sendMessage(Color.color(" &7This case is already in use!"));
+            event.setCancelled(true);
+            return;
         } else {
-
-            mysterycase.put("USING", true);
-            caseEngine(b);
-
+            ConfigYML.ficheiro().set("MysteryBoxes." + b.toString(), true);
+            ConfigYML.salvar();
+            caseEngine(b, p);
         }
 
     }
 
-    public void caseEngine(Block block) {
+    public void caseEngine(Block b, Player p) {
 
-        Location lb = new Location(block.getWorld(), block.getLocation().getX(), block.getLocation().getY(), block.getLocation().getZ());
+        Location lb = new Location(b.getWorld(), b.getLocation().getX(), b.getLocation().getY(),
+                b.getLocation().getZ());
 
-        TimerID = Bukkit.getScheduler().scheduleSyncRepeatingTask((Plugin) PvPMain.getInstance(), new Runnable() {
+        TimerID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.pl, new Runnable() {
 
             int timer = 10;
 
+            @SuppressWarnings("deprecation")
             public void run() {
 
                 if (timer > 0) {
@@ -69,24 +67,36 @@ public class MysteryBox implements Listener {
 
                 if (timer == 8) {
 
-                    FallingBlock b = block.getWorld().spawnFallingBlock(lb,
-                            Material.ENDER_PORTAL_FRAME, (byte) 0);
-                    b.setVelocity(new Vector(0D, 0.7D, 0D));
+                    FallingBlock f = b.getWorld().spawnFallingBlock(lb, Material.ENDER_PORTAL_FRAME, (byte) 6);
+                    f.setDropItem(false);
+                    f.setVelocity(new Vector(0D, 0.7D, 0D));
+
+                }
+
+                if (timer == 6) {
+
+                    FallingBlock f = b.getWorld().spawnFallingBlock(lb, Material.OBSIDIAN, (byte) 0);
+                    f.setDropItem(false);
+                    f.setVelocity(new Vector(0D, 0.7D, 0D));
 
                 }
 
                 if (timer == 4) {
 
-                    FallingBlock b = block.getWorld().spawnFallingBlock(lb,
-                            Material.ENDER_PORTAL_FRAME, (byte) 0);
-                    b.setVelocity(new Vector(0D, 0.7D, 0D));
+                    FallingBlock f = b.getWorld().spawnFallingBlock(lb, Material.ENDER_PORTAL_FRAME, (byte) 0);
+                    f.setDropItem(false);
+                    f.setVelocity(new Vector(0D, 0.7D, 0D));
 
                 }
 
                 if (timer == 0) {
+
                     Bukkit.getScheduler().cancelTask(TimerID);
 
-                    mysterycase.remove("USING");
+                    p.sendMessage("You won nothing! Wow!");
+
+                    ConfigYML.ficheiro().set("MysteryBoxes." + b.toString(), false);
+                    ConfigYML.salvar();
                 }
 
             }
@@ -94,5 +104,4 @@ public class MysteryBox implements Listener {
         }, 0, 20 * 1);
 
     }
-
 }
