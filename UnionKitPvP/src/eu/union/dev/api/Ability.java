@@ -22,7 +22,7 @@ public class Ability {
     }
 
     public Status getStatus(Player player) {
-        Status status = (Status) this.playerStatus.get(player.getName());
+        Status status = this.playerStatus.get(player.getName());
         if (status == null) {
             status = createStatus(player);
             this.playerStatus.put(player.getName(), status);

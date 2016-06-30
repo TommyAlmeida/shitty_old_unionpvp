@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
- * Level formula: L = (25 + sqrt(25 * 25 - 4 * 25 * (-X) ))/ (2 * 25)
+ * Level formula: L = (25 + sqrt(25 * 25 - 4 * 25 * (-X) ))/ (2 * 25) * Sqrt(25) *  X * Subtract
+ * BRB
  * <p>
  * TODO: Transform level formula to actual exp system
  */
@@ -24,7 +25,7 @@ public class KPlayer {
     public HashMap<UUID, Integer> killstreak = new HashMap<>();
 
     //Referencias non-sql
-    public boolean chat;
+    private int multiplier;
 
 
     public KPlayer(UUID uuid, int kills, int deaths, long coins, int level, int kdr, int current_exp) {
@@ -37,13 +38,16 @@ public class KPlayer {
         this.coins = coins;
         this.baseCurve = 40;
         this.difficulty = 8;
-        this.maximumlevelCapacity = 101; // = 1-100 YOU MUST ADD A EXTRA 1 for example 81 will give you 80
+        this.maximumlevelCapacity = 501; // = 1-100 YOU MUST ADD A EXTRA 1 for example 81 will give you 80
+
 
         //Initialize the level structure
         for(int i = starterlevel; i < this.maximumlevelCapacity - 1; i++){
             int formula = i * difficulty;
             levelcurve.add(baseCurve * formula);
         }
+
+        this.multiplier = 0;
     }
 
     public UUID getUuid() {
@@ -115,8 +119,8 @@ public class KPlayer {
                 return maximumlevelCapacity - 1;
             }
 
-            if (exp < levelcurve.get(i) && exp >= levelcurve.get(i - 1)) {
-                returnValue = (i - 1);
+            if (exp < levelcurve.get(i) && exp >= levelcurve.get(i - 1)  ) {
+                returnValue=(i - 1);
                 return returnValue;
             }
         }
@@ -157,6 +161,10 @@ public class KPlayer {
      * @return
      */
     public int getCurrentEXP(){
+        if(current_exp < 0){
+            setCurrentEXP(0);
+        }
+
         return current_exp;
     }
 
@@ -190,6 +198,9 @@ public class KPlayer {
      * @return
      */
     public long getCoins() {
+        if(coins < 0){
+            setCoins(0);
+        }
         return coins;
     }
 
@@ -218,56 +229,36 @@ public class KPlayer {
     }
 
     /**
-     * Add a new value to player killstreak
-     * @param amount
-     */
-    public void addKillstreak(int amount){
-        killstreak.put(getUuid(), + amount);
-    }
-
-    /**
-     * Set a new value to player killstreak
-     * @param amount
-     */
-    public void setKillstreak(int amount){
-        killstreak.put(getUuid(), amount);
-    }
-
-
-    /**
-     * See if the player is in killstreak or if its not
-     * @return
-     */
-    public boolean isInKillstreak(){
-        if(killstreak.containsKey(getUuid())){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    /**
-     * Clear killstreak mode
-     */
-    public void clearKillstreak(){
-        killstreak.clear();
-    }
-
-    /**
-     * Remove a certain value of killstreak
-     * @param amount
-     */
-    public void removeKillStreak(int amount){
-        killstreak.remove(amount);
-    }
-
-
-    /**
      * Retrieve the player KDR, Formula: kills / deaths
      * @return
      */
     public int getKDR() {
-        return deaths == 0 ? kills : kills / deaths;
+        if(kills == 0 || deaths == 0)
+            return 0;
+
+        return kills / deaths;
+    }
+
+
+    public int getMultiplier(){
+        return multiplier;
+    }
+
+    public void setMultiplier(int value){
+        this.multiplier = value;
+    }
+
+    public void addMultiplier(int value){
+        this.multiplier += value;
+    }
+
+    public void subtractMultiplier(int value){
+        if(multiplier == 0){
+            System.out.println("[Multiplier] Cant be a null value(0)");
+            return;
+        }
+
+        this.multiplier -= value;
     }
 
     /**

@@ -13,8 +13,11 @@ public enum Weapon {
     STATUS_ADMIN(Material.SKULL_ITEM, "§eStatus Player§7 (Right Click Player)"),
     SWITCH_ADMIN(Material.SLIME_BALL, "§eSwitch Admin§7 (Right Click)"),
     DEFAULT_SWORD(Material.WOOD_SWORD, "§aDefault Sword"),
+    DEFAULT_CHESTPLATE(Material.LEATHER_CHESTPLATE, "§aChestplate"),
+    DEFAULT_BOOTS(Material.LEATHER_BOOTS, "§aBoots"),
     DEFAULT_BOW(Material.BOW, "§aDefault Bow"),
     DEFAULT_ARROW(Material.ARROW, "§aArrow"),
+    ONEVSONE_ROD(Material.BLAZE_ROD, "§6Duel a player"),
     STOMPER_JUMP(Material.FEATHER, "§bStomper Jump"),
     ICECUBE_ITEM(Material.PACKED_ICE, "§aIceCube Item"),
     ENDERMAGE_PORTAL(Material.ENDER_PORTAL_FRAME, "§5Endermage Portal"),
@@ -24,7 +27,6 @@ public enum Weapon {
     FLASH_TORCH(Material.REDSTONE_TORCH_ON, "§4Flash Torch"),
     PHANTOM_FEATHER(Material.FEATHER, "§7Phantom Feather"),
     THOR_HAMMER(Material.GOLD_AXE, "§6Thor Hammer"),
-    SPECIALIST_BOOK(Material.ENCHANTED_BOOK, "§9Specialist Book"),
     TIMELORD_CLOCK(Material.WATCH, "§6TimeLord Clock"),
     HULK_SLIME(Material.SLIME_BALL, "§aHulk Catch"),
     MONK_ROD(Material.BLAZE_ROD, "§6Monk's Rod"),
@@ -35,13 +37,9 @@ public enum Weapon {
     C4_SLIME(Material.SLIME_BALL, "§4C4"),
     RIDER_SADDLE(Material.SADDLE, "§6Rider"),
     PORTAL_GUN(Material.DIAMOND_BARDING, "§6Portal §1Gun"),
-    WEATHERLORD_TORNADO(Material.WATCH, "§bWeather Controller"),
     QUAKE_GUN(Material.IRON_HOE, "§bQuake Gun"),
     RAIN_ARROW(Material.ARROW, "§4Rain"),
-    HEALER_ITEM(Material.RED_ROSE, "§cHealer Item"),
     BLINK_STAR(Material.NETHER_STAR, "§bBlink Star"),
-    TRAVELER_ARROW(Material.ARROW, "§bTraveller Item"),
-    MINDFORCE_REMOTE(Material.STICK, "§cMind Remote"),
     PYRO_FIREBALL(Material.FIREBALL, "§cPyro FireBall"),
     IRON_HOOK(Material.TRIPWIRE_HOOK, "§7Iron §8Hook");
 
@@ -95,6 +93,16 @@ public enum Weapon {
         ItemStack item = Weapon.makeWeapon(weapon);
         p.getInventory().setItem(0, item);
         p.getInventory().getItem(0).addEnchantment(enchant, level);
+    }
+
+    public static void giveChestplate(Player p, Weapon weapon) {
+        ItemStack item = Weapon.makeWeapon(weapon);
+        p.getInventory().setChestplate(item);
+    }
+
+    public static void giveBoost(Player p, Weapon weapon) {
+        ItemStack item = Weapon.makeWeapon(weapon);
+        p.getInventory().setBoots(item);
     }
 
     public String getName() {

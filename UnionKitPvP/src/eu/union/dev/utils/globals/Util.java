@@ -162,6 +162,7 @@ public class Util {
 
     public void readyPlayer(Player player) {
         player.getInventory().clear();
+        player.getInventory().setArmorContents(null);
         player.setHealth(player.getMaxHealth());
         player.setFoodLevel(20);
         player.setExhaustion(0f);
@@ -172,21 +173,6 @@ public class Util {
         for (PotionEffect pE : player.getActivePotionEffects()) {
             player.removePotionEffect(pE.getType());
         }
-
-    }
-
-    public void readyPlayerNoHealth(Player player) {
-        player.getInventory().clear();
-        player.setFoodLevel(20);
-        player.setExhaustion(0f);
-        player.setFallDistance(0f);
-        player.setFireTicks(0);
-        player.setAllowFlight(false);
-
-        for (PotionEffect pE : player.getActivePotionEffects()) {
-            player.removePotionEffect(pE.getType());
-        }
-
 
     }
 

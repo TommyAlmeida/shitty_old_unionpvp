@@ -5,7 +5,10 @@ import eu.union.dev.engine.Kit;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Perms;
 import eu.union.dev.utils.globals.Util;
+import eu.union.dev.utils.globals.Weapon;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.StringUtil;
 
@@ -85,6 +88,7 @@ public class KitManager {
      */
     public void readyPlayer(Player player) {
         player.getInventory().clear();
+        player.getInventory().setArmorContents(null);
         player.setHealth(player.getMaxHealth());
         player.setFoodLevel(20);
         player.setExhaustion(0f);
@@ -129,6 +133,10 @@ public class KitManager {
             playerKit.put(player, kit);
 
             Util.getInstance().giveSoups(player);
+
+            Weapon.giveChestplate(player, Weapon.DEFAULT_CHESTPLATE);
+            Weapon.giveBoost(player, Weapon.DEFAULT_BOOTS);
+
             player.sendMessage(Messages.PREFIX.toString() + " §7You are using kit: §a" + kit.getName());
         }
     }
