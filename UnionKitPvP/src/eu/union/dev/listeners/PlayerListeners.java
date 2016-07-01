@@ -52,6 +52,7 @@ public class PlayerListeners implements Listener {
         streaks.put(player, 0);
 
         Bukkit.broadcastMessage("§7(§c-§7) §7" + player.getDisplayName());
+        Util.getInstance().removePlayerPvP(player);
     }
 
     @EventHandler
@@ -75,7 +76,7 @@ public class PlayerListeners implements Listener {
         if (!Perms.isStaff(p)){
             Bukkit.broadcastMessage("§7(§a+§7) §7" + p.getDisplayName());
         }
-       // Util.getInstance().removePlayerPvP(p);
+        Util.getInstance().removePlayerPvP(p);
         p.sendMessage(Messages.PREFIX+" §aYou gained the spawn protection");
     }
 
