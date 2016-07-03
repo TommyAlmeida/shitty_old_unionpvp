@@ -43,7 +43,8 @@ public enum Weapon {
     PYRO_FIREBALL(Material.FIREBALL, "§cPyro FireBall"),
     IRON_HOOK(Material.TRIPWIRE_HOOK, "§7Iron §8Hook"),
     GLADIATOR_BARS(Material.IRON_FENCE, "§7Gladiator Bars"),
-    GRAPPLER_HOOK(Material.LEASH, "§7Grappler Hook");
+    GRAPPLER_HOOK(Material.LEASH, "§7Grappler Hook"),
+    COMPASS(Material.COMPASS, "§aCompass");
 
 
     Material mat;

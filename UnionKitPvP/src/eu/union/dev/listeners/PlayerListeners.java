@@ -5,6 +5,7 @@ import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.engine.storage.ConfigManager;
+import eu.union.dev.utils.globals.CompassCompare;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Perms;
 import eu.union.dev.utils.globals.Util;
@@ -17,14 +18,13 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.inventivetalent.bossbar.BossBarAPI;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class PlayerListeners implements Listener {
 
@@ -361,6 +361,34 @@ public class PlayerListeners implements Listener {
         kPlayer_killer.addCoins(coins);
         killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + coins + " §acoins.");
         Util.getInstance().launchRandomFirework(killer.getLocation());
+    }
+
+    @EventHandler
+    public void onCompass(PlayerInteractEvent e){
+        Player p = e.getPlayer();
+        if (p.getItemInHand().getType() == Material.COMPASS){
+            String message = "§c§lNo Players Nearby!";
+            List<Player> players = new ArrayList<>();
+            for (Player ps : p.getWorld().getPlayers()){
+                if (!(ps.getUniqueId().equals(p.getUniqueId())) &&
+                        ps.getGameMode() == GameMode.SURVIVAL &&
+                        ps.getLocation().distance(p.getLocation()) >=10.0){
+                    players.add(ps);
+                }
+            }
+            Collections.sort(players, new CompassCompare(p));
+            Player nearest = null;
+
+            try {
+                nearest = players.get(0);
+            }catch (IndexOutOfBoundsException ex){}
+            if (nearest != null){
+                message = "§aPlayer: §7"+nearest.getName()+" " +
+                        "§aDistance: §7"+((int)nearest.getLocation().distance(p.getLocation()));
+                p.setCompassTarget(nearest.getLocation());
+            }
+            p.sendMessage(Messages.PREFIX+" "+message);
+        }
     }
 
 }
