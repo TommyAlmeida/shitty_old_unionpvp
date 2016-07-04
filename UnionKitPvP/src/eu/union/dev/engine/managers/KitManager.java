@@ -136,7 +136,7 @@ public class KitManager {
 
             Weapon.giveChestplate(player, Weapon.DEFAULT_CHESTPLATE);
             Weapon.giveBoost(player, Weapon.DEFAULT_BOOTS);
-
+            Weapon.giveWeapon(player, Weapon.COMPASS,8);
             player.sendMessage(Messages.PREFIX.toString() + " §7You are using kit: §a" + kit.getName());
         }
     }

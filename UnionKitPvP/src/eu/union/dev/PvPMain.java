@@ -91,6 +91,9 @@ public class PvPMain extends JavaPlugin {
         getCommand("fake").setExecutor(new FakeCMD());
         getCommand("cc").setExecutor(new ClearChatCMD());
         getCommand("admin").setExecutor(new AdminCMD());
+        getCommand("fly").setExecutor(new FlyCMD());
+        getCommand("tp").setExecutor(new TpCMD());
+        getCommand("fly").setExecutor(new FlyCMD());
         getCommand("inv").setExecutor(new InvCMD());
         getCommand("ping").setExecutor(new PingCMD());
 

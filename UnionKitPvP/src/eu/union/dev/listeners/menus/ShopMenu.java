@@ -5,6 +5,8 @@ import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.layouts.KitLayout;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
+import net.alpenblock.bungeeperms.BungeePerms;
+import net.alpenblock.bungeeperms.User;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +16,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +85,9 @@ public class ShopMenu implements Listener{
                     }else{
                         kplayer.setCoins(kplayer.getCoins()-km.getKitByName(kit).getPrice());
                     }
-                    PermissionsEx.getUser(p).addPermission(km.getKitByName(kit).getPermission());
+
+                    User user = BungeePerms.getInstance().getPermissionsManager().getUser(p.getUniqueId());
+                    BungeePerms.getInstance().getPermissionsManager().addUserPerm(user, km.getKitByName(kit).getPermission());
                     p.sendMessage("§aCongratulations! You now got the " + kit + " kit!");
                     e.getView().close();
                 }else{

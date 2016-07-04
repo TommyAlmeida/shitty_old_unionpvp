@@ -5,9 +5,13 @@ import eu.union.dev.engine.KPlayer;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.managers.PlayerManager;
 import eu.union.dev.engine.storage.ConfigManager;
+import eu.union.dev.utils.globals.CompassCompare;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Perms;
 import eu.union.dev.utils.globals.Util;
+import net.alpenblock.bungeeperms.BungeePerms;
+import net.alpenblock.bungeeperms.Group;
+import net.alpenblock.bungeeperms.User;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,14 +21,12 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.inventivetalent.bossbar.BossBarAPI;
-import ru.tehkode.permissions.bukkit.PermissionsEx;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class PlayerListeners implements Listener {
 
@@ -52,6 +54,7 @@ public class PlayerListeners implements Listener {
         streaks.put(player, 0);
 
         Bukkit.broadcastMessage("§7(§c-§7) §7" + player.getDisplayName());
+        Util.getInstance().removePlayerPvP(player);
     }
 
     @EventHandler
@@ -75,7 +78,7 @@ public class PlayerListeners implements Listener {
         if (!Perms.isStaff(p)){
             Bukkit.broadcastMessage("§7(§a+§7) §7" + p.getDisplayName());
         }
-       // Util.getInstance().removePlayerPvP(p);
+        Util.getInstance().removePlayerPvP(p);
         p.sendMessage(Messages.PREFIX+" §aYou gained the spawn protection");
     }
 
@@ -92,13 +95,16 @@ public class PlayerListeners implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
-        String prefix = PermissionsEx.getUser(e.getPlayer()).getGroups()[0].getPrefix();
+        //String prefix = String.valueOf(BungeePerms.getInstance().getPermissionsManager().getUser(e.getPlayer().getUniqueId()).buildPrefix());
+        User user = BungeePerms.getInstance().getPermissionsManager().getUser(e.getPlayer().getName());
+        Group group = BungeePerms.getInstance().getPermissionsManager().getMainGroup(user);
+
         KPlayer kPlayer = PlayerManager.getPlayer(e.getPlayer().getUniqueId());
 
         e.setCancelled(true);
 
         //Anti-Spam
-        if(!(e.getPlayer().hasPermission("union.bypass"))) {
+        /*if(!(e.getPlayer().hasPermission("union.bypass"))) {
             if (this.cooldown.containsKey(e.getPlayer())) {
                 int cooldownTime = 5;
                 long timeLeft = this.cooldown.get(e.getPlayer()) / 1000L + cooldownTime - System.currentTimeMillis() / 1000L;
@@ -111,9 +117,9 @@ public class PlayerListeners implements Listener {
             this.cooldown.put(e.getPlayer(), System.currentTimeMillis());
 
             Bukkit.broadcastMessage("§7[§bLvl.§e" + kPlayer.getLevel() + "§7]" + prefix +" §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
-        } else {
-            Bukkit.broadcastMessage("§7[§bLvl.§e" + kPlayer.getLevel() + "§7]" + prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
-        }
+        }*/
+
+        Bukkit.broadcastMessage("§7[§bLvl.§e" + kPlayer.getLevel() + "§7]" + ChatColor.translateAlternateColorCodes('&',group.getPrefix()) +" §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
 
 
     }
@@ -305,13 +311,6 @@ public class PlayerListeners implements Listener {
             }
         }
 
-        if(km.usingKit(killed)){
-            km.removeKit(killed);
-        }else{
-            km.readyPlayer(killed);
-        }
-
-
         e.getDrops().removeIf(k ->
                 k != null && !(
                         k.getType() == Material.MUSHROOM_SOUP ||
@@ -320,7 +319,7 @@ public class PlayerListeners implements Listener {
                                 k.getType() == Material.BOWL
                 )
         );
-
+        killed.setHealth(20.0);
         /*
             Delay para teleportar, pois senão os items
             são dropados no spawn.
@@ -329,6 +328,11 @@ public class PlayerListeners implements Listener {
             @Override
             public void run() {
                 killed.teleport(loc);
+                if(km.usingKit(killed)){
+                    km.removeKit(killed);
+                }else{
+                    km.readyPlayer(killed);
+                }
                 Util.getInstance().buildJoinIcons(killed);
                 for (int i = 0; i < 10; i++) {
                     killed.setFireTicks(0);
@@ -360,6 +364,35 @@ public class PlayerListeners implements Listener {
         kPlayer_killer.addCoins(coins);
         killer.sendMessage("§8[§aEconomy§8] §aYou have been rewarded with §6" + coins + " §acoins.");
         Util.getInstance().launchRandomFirework(killer.getLocation());
+    }
+
+    @EventHandler
+    public void onCompass(PlayerInteractEvent e){
+        Player p = e.getPlayer();
+        if (p.getItemInHand().getType() == Material.COMPASS && p.getItemInHand().getItemMeta().getDisplayName() == "§aCompass"){
+            String message = "§c§lNo Players Nearby!";
+            List<Player> players = new ArrayList<>();
+            for (Player ps : p.getWorld().getPlayers()){
+                if (!(ps.getUniqueId().equals(p.getUniqueId())) &&
+                        ps.getGameMode() == GameMode.SURVIVAL &&
+                        Util.getInstance().inPvP(ps) &&
+                        ps.getLocation().distance(p.getLocation()) >=10.0){
+                    players.add(ps);
+                }
+            }
+            Collections.sort(players, new CompassCompare(p));
+            Player nearest = null;
+
+            try {
+                nearest = players.get(0);
+            }catch (IndexOutOfBoundsException ex){}
+            if (nearest != null){
+                message = "§aPlayer: §7"+nearest.getName()+" " +
+                        "§aDistance: §7"+((int)nearest.getLocation().distance(p.getLocation()));
+                p.setCompassTarget(nearest.getLocation());
+            }
+            p.sendMessage(Messages.PREFIX+" "+message);
+        }
     }
 
 }
