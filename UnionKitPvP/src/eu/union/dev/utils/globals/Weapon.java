@@ -36,7 +36,7 @@ public enum Weapon {
     SPECTRE_SUGAR(Material.SUGAR, "§7Spectre"),
     C4_SLIME(Material.SLIME_BALL, "§4C4"),
     RIDER_SADDLE(Material.SADDLE, "§6Rider"),
-    PORTAL_GUN(Material.DIAMOND_BARDING, "§6Portal §1Gun"),
+    PORTAL_GUN(Material.IRON_BARDING, "§6Portal §1Gun"),
     QUAKE_GUN(Material.IRON_HOE, "§bQuake Gun"),
     RAIN_ARROW(Material.ARROW, "§4Rain"),
     BLINK_STAR(Material.NETHER_STAR, "§bBlink Star"),
