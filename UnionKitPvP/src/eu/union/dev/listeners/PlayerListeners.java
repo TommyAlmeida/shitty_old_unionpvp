@@ -319,7 +319,7 @@ public class PlayerListeners implements Listener {
                                 k.getType() == Material.BOWL
                 )
         );
-
+        killed.setHealth(20.0);
         /*
             Delay para teleportar, pois senão os items
             são dropados no spawn.
@@ -328,17 +328,17 @@ public class PlayerListeners implements Listener {
             @Override
             public void run() {
                 killed.teleport(loc);
+                if(km.usingKit(killed)){
+                    km.removeKit(killed);
+                }else{
+                    km.readyPlayer(killed);
+                }
                 Util.getInstance().buildJoinIcons(killed);
                 for (int i = 0; i < 10; i++) {
                     killed.setFireTicks(0);
                 }
                 Util.getInstance().removePlayerPvP(killed);
                 killed.sendMessage(Messages.PREFIX+" §aYou gained spawn protection");
-                if(km.usingKit(killed)){
-                    km.removeKit(killed);
-                }else{
-                    km.readyPlayer(killed);
-                }
             }
 
         }.runTaskLater(PvPMain.getInstance(), 5);
