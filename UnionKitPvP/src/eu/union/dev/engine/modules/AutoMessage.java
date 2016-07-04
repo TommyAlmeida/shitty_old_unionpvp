@@ -25,12 +25,11 @@ public class AutoMessage {
     private void setMessages() {
         messages.add("§7Suggestions? §6www.unionnetwork.eu");
         messages.add("Ask us some questions: §bhttps://twitter.com/UnionMcNetwork");
-        messages.add("§6Union-HG §7is coming very soon :D");
+        messages.add("§7Come play §6HG §7with us, do /hub");
         messages.add("Are you a youtuber? §6TAG minimum: §e1k subs");
         messages.add("§7A new §dgameplay §7experience!");
         messages.add("§7How do i get level? §cBy killing players.");
         messages.add("§7Bugs? Sorry we are in §cearly development stage!");
-        messages.add("§7Want to be TMOD? Apply for it on: §chttps://goo.gl/ciYLSc");
     }
 
     private void pushMessages() {

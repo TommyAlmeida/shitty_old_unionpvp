@@ -9,6 +9,9 @@ import eu.union.dev.utils.globals.CompassCompare;
 import eu.union.dev.utils.globals.Messages;
 import eu.union.dev.utils.globals.Perms;
 import eu.union.dev.utils.globals.Util;
+import net.alpenblock.bungeeperms.BungeePerms;
+import net.alpenblock.bungeeperms.Group;
+import net.alpenblock.bungeeperms.User;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +25,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.inventivetalent.bossbar.BossBarAPI;
-import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 import java.util.*;
 
@@ -93,13 +95,16 @@ public class PlayerListeners implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
-        String prefix = PermissionsEx.getUser(e.getPlayer()).getGroups()[0].getPrefix();
+        //String prefix = String.valueOf(BungeePerms.getInstance().getPermissionsManager().getUser(e.getPlayer().getUniqueId()).buildPrefix());
+        User user = BungeePerms.getInstance().getPermissionsManager().getUser(e.getPlayer().getName());
+        Group group = BungeePerms.getInstance().getPermissionsManager().getMainGroup(user);
+
         KPlayer kPlayer = PlayerManager.getPlayer(e.getPlayer().getUniqueId());
 
         e.setCancelled(true);
 
         //Anti-Spam
-        if(!(e.getPlayer().hasPermission("union.bypass"))) {
+        /*if(!(e.getPlayer().hasPermission("union.bypass"))) {
             if (this.cooldown.containsKey(e.getPlayer())) {
                 int cooldownTime = 5;
                 long timeLeft = this.cooldown.get(e.getPlayer()) / 1000L + cooldownTime - System.currentTimeMillis() / 1000L;
@@ -112,9 +117,9 @@ public class PlayerListeners implements Listener {
             this.cooldown.put(e.getPlayer(), System.currentTimeMillis());
 
             Bukkit.broadcastMessage("§7[§bLvl.§e" + kPlayer.getLevel() + "§7]" + prefix +" §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
-        } else {
-            Bukkit.broadcastMessage("§7[§bLvl.§e" + kPlayer.getLevel() + "§7]" + prefix + " §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
-        }
+        }*/
+
+        Bukkit.broadcastMessage("§7[§bLvl.§e" + kPlayer.getLevel() + "§7]" + ChatColor.translateAlternateColorCodes('&',group.getPrefix()) +" §r§7" + e.getPlayer().getName() + ": §f" + e.getMessage());
 
 
     }
@@ -366,7 +371,7 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onCompass(PlayerInteractEvent e){
         Player p = e.getPlayer();
-        if (p.getItemInHand().getType() == Material.COMPASS){
+        if (p.getItemInHand().getType() == Material.COMPASS && p.getItemInHand().getItemMeta().getDisplayName() == "§aCompass"){
             String message = "§c§lNo Players Nearby!";
             List<Player> players = new ArrayList<>();
             for (Player ps : p.getWorld().getPlayers()){

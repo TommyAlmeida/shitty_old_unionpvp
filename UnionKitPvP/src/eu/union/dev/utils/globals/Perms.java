@@ -7,7 +7,7 @@ public enum Perms {
     UNION_ADMIN("union.admin"),
     UNION_HELPER("union.helper"),
     UNION_OWNER("union.owner"),
-    UNION_TMOD("union.owner"),
+    UNION_TMOD("union.tmod"),
     UNION_MOD("union.mod"),
     UNION_YT("union.yt"),
     UNION_YT_PLUS("union.yt+"),

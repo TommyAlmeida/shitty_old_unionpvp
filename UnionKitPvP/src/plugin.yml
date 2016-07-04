@@ -18,8 +18,10 @@ commands:
   inv:
   fake:
   coins:
+  tp:
   tag:
   ping:
+  fly:
   cc:
   admin:
   setfps:
