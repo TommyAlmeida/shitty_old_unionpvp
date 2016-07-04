@@ -375,6 +375,7 @@ public class PlayerListeners implements Listener {
             for (Player ps : p.getWorld().getPlayers()){
                 if (!(ps.getUniqueId().equals(p.getUniqueId())) &&
                         ps.getGameMode() == GameMode.SURVIVAL &&
+                        Util.getInstance().inPvP(ps) &&
                         ps.getLocation().distance(p.getLocation()) >=10.0){
                     players.add(ps);
                 }
