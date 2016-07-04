@@ -311,13 +311,6 @@ public class PlayerListeners implements Listener {
             }
         }
 
-        if(km.usingKit(killed)){
-            km.removeKit(killed);
-        }else{
-            km.readyPlayer(killed);
-        }
-
-
         e.getDrops().removeIf(k ->
                 k != null && !(
                         k.getType() == Material.MUSHROOM_SOUP ||
@@ -341,6 +334,11 @@ public class PlayerListeners implements Listener {
                 }
                 Util.getInstance().removePlayerPvP(killed);
                 killed.sendMessage(Messages.PREFIX+" §aYou gained spawn protection");
+                if(km.usingKit(killed)){
+                    km.removeKit(killed);
+                }else{
+                    km.readyPlayer(killed);
+                }
             }
 
         }.runTaskLater(PvPMain.getInstance(), 5);
