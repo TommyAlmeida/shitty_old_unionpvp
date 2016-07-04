@@ -65,7 +65,10 @@ public class Gladiator extends Kit implements Listener{
                     km.getKitAmIUsing(p,"gladiator")){
                 e.setCancelled(true);
                 p.updateInventory();
-                if (!Util.getInstance().inPvP(p)){//
+                if (!Util.getInstance().inPvP(r)){
+                    return;
+                }
+                if (!Util.getInstance().inPvP(p)){
                     return;
                 }
                 int camada = 125;
