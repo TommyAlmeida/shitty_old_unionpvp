@@ -1,6 +1,5 @@
 package eu.union.dev.commands.oneVersusOne;
 
-import eu.union.dev.engine.ConfigYML;
 import eu.union.dev.engine.Kit;
 import eu.union.dev.engine.managers.KitManager;
 import eu.union.dev.engine.storage.ConfigManager;
