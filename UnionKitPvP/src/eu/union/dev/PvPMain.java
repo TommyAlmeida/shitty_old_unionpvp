@@ -2,6 +2,8 @@ package eu.union.dev;
 
 import eu.union.dev.commands.*;
 import eu.union.dev.commands.location.*;
+import eu.union.dev.commands.oneVersusOne.OneVSOne;
+import eu.union.dev.commands.oneVersusOne.SetSpawnPointCMD;
 import eu.union.dev.commands.staff.*;
 import eu.union.dev.commands.youtubers.FakeCMD;
 import eu.union.dev.engine.Kit;
@@ -96,6 +98,8 @@ public class PvPMain extends JavaPlugin {
         getCommand("fly").setExecutor(new FlyCMD());
         getCommand("inv").setExecutor(new InvCMD());
         getCommand("ping").setExecutor(new PingCMD());
+        getCommand("1v1spawnpoint").setExecutor(new SetSpawnPointCMD());
+        getCommand("1v1").setExecutor(new OneVSOne());
 
         /**
          * Kits with runnables (in seconds)

@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="kitpvp:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/kitpvp_jar</output-path>
+    <root id="archive" name="kitpvp.jar">
+      <element id="module-output" name="kitpvp" />
+      <element id="file-copy" path="$PROJECT_DIR$/UnionKitPvP/src/plugin.yml" />
+    </root>
+  </artifact>
+</component>
