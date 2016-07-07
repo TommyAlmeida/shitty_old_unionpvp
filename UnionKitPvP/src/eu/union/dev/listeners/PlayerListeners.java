@@ -23,6 +23,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.inventivetalent.bossbar.BossBarAPI;
 
@@ -138,6 +139,12 @@ public class PlayerListeners implements Listener {
             player.sendMessage(Messages.PREFIX.toString() + " §7You cannot drop this item");
             event.setCancelled(true);
             event.getItemDrop().remove();
+        }
+        if (event.getItemDrop().getItemStack().hasItemMeta()){
+            ItemMeta im = event.getItemDrop().getItemStack().getItemMeta();
+            if (im.spigot().isUnbreakable()){
+                event.setCancelled(true);
+            }
         }
 
     }

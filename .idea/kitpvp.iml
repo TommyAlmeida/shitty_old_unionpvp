@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://D:/" />
-    <output-test url="file://D:/" />
+    <output url="file:///production/kitpvp" />
+    <output-test url="file:///test/kitpvp" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/UnionKitPvP/src" isTestSource="false" />
@@ -12,18 +12,18 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../UnionNetworkHub/spigot.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/Apis/spigot-1.8-1.7.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/../UnionNetworkHub/spigot.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/Apis/spigot-1.8-1.7.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/worldguard-6.0.0-beta-03.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/Apis/Apis/Union/BungeePerms-3.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -32,16 +32,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/BossBarAPI.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/BungeePerms-3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/UnionKitPvP/lib/worldguard-5.9.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

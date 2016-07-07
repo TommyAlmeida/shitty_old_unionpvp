@@ -200,12 +200,15 @@ public class KitMenu implements Listener {
     @EventHandler
     public void onInvClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        ItemStack item = e.getCurrentItem();
+
         if (e.getInventory().getName().equalsIgnoreCase("Kits")) {
             if (e.getSlot() < 0) {
                 return;
             }
-
+            if (e.getCurrentItem() == null || e.getCurrentItem().getType() == Material.AIR){
+                return;
+            }
+            ItemStack item = e.getCurrentItem();
             String kit = item.getItemMeta().getDisplayName().replace("§7Kit » ", "").replace("§7", "").replace("§b", "").replace("§d", "").replace("§6", "").replace("§5", "");
 
             if (KitManager.getManager().getKitByName(kit) != null) {

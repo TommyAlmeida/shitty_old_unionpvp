@@ -83,4 +83,15 @@ public class Icon {
         return item;
     }
 
+    public ItemStack buildNoDrop() {
+        ItemStack item = new ItemStack(mat, amount);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(name);
+        meta.setLore(Arrays.asList(lore));
+        meta.spigot().setUnbreakable(true);
+        item.setItemMeta(meta);
+
+        return item;
+    }
+
 }

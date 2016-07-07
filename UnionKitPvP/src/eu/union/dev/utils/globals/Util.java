@@ -86,19 +86,19 @@ public class Util {
         inv.clear();
         {
             Icon kits = new Icon(Material.NETHER_STAR, "§aKits §7(Right-Click)", "§7Choose your kit");
-            inv.setItem(0, kits.build());
+            inv.setItem(0, kits.buildNoDrop());
         }
 
 
         {
             Icon warps = new Icon(Material.VINE, " ", " ");
-            inv.setItem(3, warps.build());
-            inv.setItem(5, warps.build());
+            inv.setItem(3, warps.buildNoDrop());
+            inv.setItem(5, warps.buildNoDrop());
         }
 
         {
             Icon menu = new Icon(Material.COMPASS, "§bMenu §7(Right-Click)", "§7All you need.");
-            inv.setItem(4, menu.build());
+            inv.setItem(4, menu.buildNoDrop());
         }
 
         {
@@ -107,6 +107,7 @@ public class Util {
             SkullMeta meta = (SkullMeta) skull.getItemMeta();
             meta.setOwner(player.getName());
             meta.setDisplayName("§9Stats §7(Right-Click)");
+            meta.spigot().setUnbreakable(true);
             skull.setItemMeta(meta);
 
             inv.setItem(8, skull);
